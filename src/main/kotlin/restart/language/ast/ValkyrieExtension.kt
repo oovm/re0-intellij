@@ -1,21 +1,21 @@
 package restart.language.ast
 
-import restart.ide.formatter.FormatSpace
-import restart.language.psi.RestartNormalPattern
-import restart.language.psi.RestartIdentifier
 import com.intellij.formatting.Block
 import com.intellij.formatting.Spacing
 import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiElement
 import com.intellij.psi.TokenType
 import com.intellij.psi.util.elementType
+import restart.ide.formatter.FormatSpace
+import restart.language.psi.RestartIdentifier
+import restart.language.psi.RestartNormalPattern
 import restart.language.psi.RestartNumber
 import restart.language.psi.RestartTypes
 
 
 val RestartNumber?.identifier: PsiElement?
     get() {
-        val last = this?.lastChild ?: return null;
+        val last = this?.lastChild ?: return null
         return when (last.elementType) {
             RestartTypes.NUMBER_SUFFIX -> last
             else -> null

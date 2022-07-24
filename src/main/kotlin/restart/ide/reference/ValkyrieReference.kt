@@ -14,7 +14,7 @@ class RestartReference(private val target: PsiElement) : PsiReference {
         return element.textRange
     }
 
-    override fun resolve(): PsiElement? {
+    override fun resolve(): PsiElement {
         return element
     }
 

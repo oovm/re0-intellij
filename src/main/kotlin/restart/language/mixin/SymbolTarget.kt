@@ -5,7 +5,7 @@ import com.intellij.model.psi.PsiSymbolReference
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 
-class SymbolTarget(val target: PsiElement): PsiSymbolReference {
+class SymbolTarget(val target: PsiElement) : PsiSymbolReference {
     override fun getElement(): PsiElement = target
 
     override fun getRangeInElement(): TextRange {

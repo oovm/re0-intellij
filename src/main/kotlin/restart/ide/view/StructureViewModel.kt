@@ -1,14 +1,14 @@
 package restart.ide.view
 
 
-import restart.ide.view.filter.MainInfoFilter
-import restart.ide.view.filter.PublicElementsFilter
-import restart.ide.view.grouper.PropertiesGrouper
 import com.intellij.ide.structureView.StructureViewModel.ElementInfoProvider
 import com.intellij.ide.structureView.StructureViewModelBase
 import com.intellij.ide.structureView.StructureViewTreeElement
 import com.intellij.ide.util.treeView.smartTree.Sorter
 import com.intellij.psi.PsiFile
+import restart.ide.view.filter.MainInfoFilter
+import restart.ide.view.filter.PublicElementsFilter
+import restart.ide.view.grouper.PropertiesGrouper
 
 
 class StructureViewModel(psiFile: PsiFile?) : StructureViewModelBase(psiFile!!, RestartViewElement(psiFile)),

@@ -1,8 +1,8 @@
 package restart.language.lexer
 
-import restart.language.psi.RestartTypes
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
+import restart.language.psi.RestartTypes
 
 @Suppress("MemberVisibilityCanBePrivate")
 class StackItem {
@@ -58,7 +58,5 @@ class StackItem {
         return tokenIs(RestartTypes.INTEGER, RestartTypes.DECIMAL, RestartTypes.BYTE)
     }
 
-    companion object {
-
-    }
+    companion object
 }

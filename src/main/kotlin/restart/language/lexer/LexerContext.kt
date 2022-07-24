@@ -10,7 +10,7 @@ enum class LexerContext(val id: Int) {
 
     companion object {
         fun fromID(id: Int): LexerContext {
-            val out = values().firstOrNull { it.id == id };
+            val out = values().firstOrNull { it.id == id }
             return out!!
         }
     }

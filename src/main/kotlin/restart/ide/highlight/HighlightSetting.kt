@@ -1,10 +1,9 @@
 package restart.ide.highlight
 
-import restart.RestartBundle
-import restart.ide.file.RestartIconProvider
-
 import com.intellij.openapi.options.colors.ColorDescriptor
 import com.intellij.openapi.options.colors.ColorSettingsPage
+import restart.RestartBundle
+import restart.ide.file.RestartIconProvider
 
 class HighlightSetting : ColorSettingsPage {
     private val annotatorTags = RestartHighlightColor

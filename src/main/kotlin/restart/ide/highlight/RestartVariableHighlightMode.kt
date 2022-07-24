@@ -1,8 +1,8 @@
 package restart.ide.highlight
 
 import restart.language.ast.hasModifier
-import restart.language.psi.RestartPatternItem
 import restart.language.psi.RestartIdentifier
+import restart.language.psi.RestartPatternItem
 import restart.ide.highlight.RestartHighlightColor as Color
 
 enum class RestartVariableHighlightMode {
@@ -23,7 +23,7 @@ enum class RestartVariableHighlightMode {
         o: RestartPatternItem,
         force_mut: Boolean = false,
     ) {
-        this.highlightMaybeMutable(visitor, o.identifierList, force_mut,true)
+        this.highlightMaybeMutable(visitor, o.identifierList, force_mut, true)
         visitor.visitPatternItem(o)
     }
 
@@ -37,7 +37,7 @@ enum class RestartVariableHighlightMode {
             true -> true
             false -> hasModifier(symbols, "mut", skip_last)
         }
-        var first = true;
+        var first = true
         for (symbol in symbols.reversed()) {
             if (first) {
                 first = false

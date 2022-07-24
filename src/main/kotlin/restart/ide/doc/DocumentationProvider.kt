@@ -1,19 +1,14 @@
 package restart.ide.doc
 
-import restart.ide.file.RestartFileNode
-import restart.language.ast.DocumentNode
-import restart.language.psi.RestartTypes
-import restart.language.psi.RestartTypes.*
 import com.intellij.lang.documentation.DocumentationProvider
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.util.TextRange
-import com.intellij.psi.PsiComment
-import com.intellij.psi.PsiDocCommentBase
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiFile
-import com.intellij.psi.TokenType
+import com.intellij.psi.*
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.util.elementType
+import restart.ide.file.RestartFileNode
+import restart.language.ast.DocumentNode
+import restart.language.psi.RestartTypes.*
 import java.util.function.Consumer
 
 
@@ -61,9 +56,11 @@ class DocumentationProvider : DocumentationProvider {
             OP_ADD, OP_ADD_ASSIGN, OP_ARROW, OP_ARROW2 -> {
                 contextElement
             }
-            TokenType.WHITE_SPACE, -> {
+
+            TokenType.WHITE_SPACE -> {
                 null
             }
+
             else -> {
                 null
             }

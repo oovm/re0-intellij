@@ -1,12 +1,10 @@
 package restart.language.ast
 
-import restart.ide.file.RestartIconProvider
-import restart.ide.highlight.RestartHighlightColor
-import restart.ide.view.RestartViewElement
-import restart.language.psi.*
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.psi.NavigatablePsiElement
 import com.intellij.psi.util.PsiTreeUtil
+import restart.ide.view.RestartViewElement
+import restart.language.psi.RestartModifiers
 
 
 fun RestartModifiers?.addChildrenView(list: MutableList<RestartViewElement>) {

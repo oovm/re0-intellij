@@ -1,9 +1,9 @@
 package restart.ide.codeStyle
 
-import restart.RestartLanguage
 import com.intellij.application.options.GenerationCodeStylePanel
 import com.intellij.application.options.TabbedLanguageCodeStylePanel
 import com.intellij.psi.codeStyle.CodeStyleSettings
+import restart.RestartLanguage
 
 class RestartCodeStyleMainPanel(currentSettings: CodeStyleSettings?, settings: CodeStyleSettings) :
     TabbedLanguageCodeStylePanel(RestartLanguage, currentSettings, settings) {

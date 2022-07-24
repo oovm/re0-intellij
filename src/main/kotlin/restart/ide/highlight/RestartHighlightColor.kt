@@ -6,9 +6,9 @@ import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.options.OptionsBundle
 import com.intellij.openapi.options.colors.AttributesDescriptor
 import com.intellij.openapi.util.NlsContexts.AttributeDescriptor
+import restart.RestartBundle
 import java.util.function.Supplier
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors as Default
-import restart.RestartBundle;
 
 @Suppress("UnstableApiUsage")
 enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String>, default: TextAttributesKey? = null) {
@@ -27,6 +27,7 @@ enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String
     TEXT(RestartBundle.messagePointer("color.token.text"), STRING.textAttributesKey),
     STRING_ESCAPED(RestartBundle.messagePointer("color.token.text"), Default.VALID_STRING_ESCAPE),
     STRING_BAD(RestartBundle.messagePointer("color.token.text"), Default.INVALID_STRING_ESCAPE),
+
     // 标识符
     IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
     SYM_HERO(RestartBundle.messagePointer("color.token.symbol.trait"), Default.CONSTANT),
@@ -47,6 +48,7 @@ enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String
     SYM_CONSTANT(RestartBundle.messagePointer("color.token.symbol.constant"), Default.CONSTANT),
     SYM_FUNCTION_SELF(RestartBundle.messagePointer("color.token.symbol.function.self"), Default.INSTANCE_METHOD),
     SYM_FUNCTION_FREE(RestartBundle.messagePointer("color.token.symbol.function.free"), Default.STATIC_METHOD),
+
     //
     TYPE_HINT(RestartBundle.messagePointer("color.token.symbol.type"), Default.CLASS_NAME),
 
@@ -70,7 +72,7 @@ enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String
     DOC_COMMENT_HINT(OptionsBundle.messagePointer("options.language.defaults.doc.markup"), Default.LINE_COMMENT),
     DOC_COMMENT_WARN(OptionsBundle.messagePointer("options.language.defaults.doc.markup"), Default.LINE_COMMENT),
     DOC_COMMENT_TODO(OptionsBundle.messagePointer("options.language.defaults.doc.markup"), Default.LINE_COMMENT),
-    
+
     // 错误
     BAD_CHARACTER(
         OptionsBundle.messagePointer("options.java.attribute.descriptor.bad.character"),

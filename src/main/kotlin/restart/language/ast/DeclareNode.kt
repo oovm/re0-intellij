@@ -1,15 +1,11 @@
 package restart.language.ast
 
 
-import restart.ide.view.RestartViewElement
 import com.intellij.ide.projectView.PresentationData
-import com.intellij.ide.util.treeView.smartTree.TreeElement
 import com.intellij.lang.ASTNode
 import com.intellij.navigation.ItemPresentation
-import com.intellij.psi.NavigatablePsiElement
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNameIdentifierOwner
-import com.intellij.psi.util.PsiTreeUtil
 import javax.swing.Icon
 
 /// 一定是可以 view 的节点

@@ -13,8 +13,10 @@ class RestartClass(namespace: String) : RestartSymbol() {
     init {
         this.fullName = namespace.split(".")
     }
+
     val presentation: TargetPresentation = TargetPresentation
         .builder("aa").presentation()
+
     //    constructor(editor: Editor) : this(name) {
 //
 //    }

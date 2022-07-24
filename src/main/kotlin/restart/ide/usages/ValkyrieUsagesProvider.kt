@@ -1,12 +1,12 @@
 package restart.ide.usages
 
-import restart.language.lexer.RestartLexerAdapter
-import restart.language.psi.RestartTypes
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner
 import com.intellij.lang.cacheBuilder.WordsScanner
 import com.intellij.lang.findUsages.FindUsagesProvider
 import com.intellij.psi.PsiElement
 import com.intellij.psi.tree.TokenSet
+import restart.language.lexer.RestartLexerAdapter
+import restart.language.psi.RestartTypes
 
 class RestartUsagesProvider : FindUsagesProvider {
     override fun getWordsScanner(): WordsScanner {
@@ -21,7 +21,7 @@ class RestartUsagesProvider : FindUsagesProvider {
     }
 
     override fun canFindUsagesFor(psiElement: PsiElement): Boolean {
-       // return psiElement is PsiNamedElement
+        // return psiElement is PsiNamedElement
         return true
     }
 

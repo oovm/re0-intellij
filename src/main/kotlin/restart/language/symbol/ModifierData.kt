@@ -3,10 +3,9 @@
 package restart.language.symbol
 
 
+import com.intellij.psi.PsiElement
 import restart.ide.doc.DocumentationRenderer
 import restart.ide.highlight.RestartHighlightColor
-import com.intellij.psi.PsiElement
-
 
 
 class ModifierData(

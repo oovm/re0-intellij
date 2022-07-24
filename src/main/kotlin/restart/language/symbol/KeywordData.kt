@@ -2,21 +2,23 @@
 
 package restart.language.symbol
 
-import restart.ide.doc.DocumentationRenderer
-import restart.ide.highlight.RestartHighlightColor
-import restart.language.psi.RestartTypes
 import com.intellij.model.Pointer
 import com.intellij.model.Symbol
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.elementType
+import restart.ide.doc.DocumentationRenderer
+import restart.ide.highlight.RestartHighlightColor
+import restart.language.psi.RestartTypes
 
 class KeywordData : Symbol, Pointer<KeywordData> {
     val name: String
     val detail: String
+
     constructor(name: String, detail: String = "") {
         this.name = name
         this.detail = detail
     }
+
     override fun createPointer(): Pointer<out KeywordData> = this
     override fun dereference(): KeywordData = this
     fun documentation(doc: DocumentationRenderer) {
@@ -35,12 +37,14 @@ class KeywordData : Symbol, Pointer<KeywordData> {
                 class A()
                 """.trimIndent()
             )
+
             RestartTypes.KW_EVENT -> KeywordData(
                 "trait",
                 """
                 trait A()
                 """.trimIndent()
             )
+
             else -> null
         }
     }

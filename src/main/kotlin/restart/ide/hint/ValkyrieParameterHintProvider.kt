@@ -1,19 +1,18 @@
 package restart.ide.hint
 
-import restart.RestartBundle
-import restart.language.psi.startOffset
-import restart.language.psi_node.RestartCallSuffixNode
 import com.intellij.codeInsight.hints.HintInfo
 import com.intellij.codeInsight.hints.InlayInfo
 import com.intellij.codeInsight.hints.InlayParameterHintsProvider
 import com.intellij.codeInsight.hints.Option
 import com.intellij.psi.PsiElement
+import restart.RestartBundle
+import restart.language.psi_node.RestartCallSuffixNode
 
 @Suppress("UnstableApiUsage")
 class RestartParameterHintProvider : InlayParameterHintsProvider {
     var context = ""
 
-    override fun getHintInfo(element: PsiElement): HintInfo? {
+    override fun getHintInfo(element: PsiElement): HintInfo {
         return HintInfo.MethodInfo("aaa", listOf("bbb"))
     }
 
@@ -39,6 +38,7 @@ class RestartParameterHintProvider : InlayParameterHintsProvider {
     override fun getDescription(): String {
         return "Shows parameter names at function/macro call sites."
     }
+
     /// 显示在
     /// Editor > Inlay Hints > Parameter Names
     override fun getDefaultBlackList(): Set<String> = setOf(
@@ -47,6 +47,7 @@ class RestartParameterHintProvider : InlayParameterHintsProvider {
         "org.gradle.api.Project.hasProperty(propertyName)",
         "org.gradle.api.Project.findProperty(propertyName)",
     )
+
     /// 显示在
     /// Editor > Inlay Hints > Parameter Names > Restart
     override fun getSupportedOptions(): MutableList<Option> {
@@ -57,7 +58,7 @@ class RestartParameterHintProvider : InlayParameterHintsProvider {
     }
 
     private fun RestartCallSuffixNode.resolveParameterName(caller: PsiElement): MutableList<InlayInfo> {
-        val out = mutableListOf<InlayInfo>();
+        val out = mutableListOf<InlayInfo>()
         return out
 //        var id = 0;
 //        for (i in this.expressionList) {

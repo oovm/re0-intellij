@@ -1,10 +1,10 @@
 package restart.ide.hint
 
-import restart.RestartBundle
 import com.intellij.codeInsight.hints.*
 import com.intellij.openapi.editor.Editor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
+import restart.RestartBundle
 import javax.swing.JComponent
 import javax.swing.JTextField
 
@@ -26,6 +26,7 @@ class InlayHintProvider : InlayHintsProvider<InlayHintProvider.Settings> {
     override val name: String = RestartBundle.message("view.PropertiesGrouper")
     override val group: InlayGroup = InlayGroup.TYPES_GROUP
     override fun createSettings(): Settings = Settings()
+
     /// 显示在
     /// Editor > Inlay Hints > Types
     override val previewText: String = """
@@ -34,6 +35,7 @@ class InlayHintProvider : InlayHintsProvider<InlayHintProvider.Settings> {
             let foo = Foo { x: 1, y: "abc", z: true };
         }
         """.trimIndent()
+
     /// 不知道干嘛的 显示在
     /// Editor > Inlay Hints > Types
     override fun createConfigurable(settings: Settings): ImmediateConfigurable {
@@ -43,7 +45,8 @@ class InlayHintProvider : InlayHintsProvider<InlayHintProvider.Settings> {
             }
         }
     }
-    override fun getCollectorFor(file: PsiFile, editor: Editor, settings: Settings, sink: InlayHintsSink): InlayHintsCollector? {
+
+    override fun getCollectorFor(file: PsiFile, editor: Editor, settings: Settings, sink: InlayHintsSink): InlayHintsCollector {
         return object : InlayHintsCollector {
             override fun collect(element: PsiElement, editor: Editor, sink: InlayHintsSink): Boolean {
                 return true

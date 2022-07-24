@@ -1,10 +1,7 @@
 package restart.language.mixin
 
-import restart.language.ast.RestartASTBase
 import com.intellij.lang.ASTNode
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiNamedElement
-import com.intellij.psi.PsiQualifiedNamedElement
+import restart.language.ast.RestartASTBase
 
 // PsiReference
 open class MixinKeyword(node: ASTNode) : RestartASTBase(node) {

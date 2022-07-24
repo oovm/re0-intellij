@@ -2,21 +2,22 @@
 
 package restart.language.mixin
 
+import com.intellij.lang.ASTNode
+import com.intellij.model.psi.PsiCompletableReference
+import com.intellij.navigation.ItemPresentation
+import com.intellij.psi.PsiReference
 import restart.ide.file.RestartIconProvider
 import restart.ide.view.RestartViewElement
 import restart.language.ast.RestartASTBase
 import restart.language.psi_node.RestartDeclareStatementNode
 import restart.language.symbol.ImportData
-import com.intellij.lang.ASTNode
-import com.intellij.model.psi.PsiCompletableReference
-import com.intellij.navigation.ItemPresentation
-import com.intellij.psi.PsiReference
 import javax.swing.Icon
 
 open class MixinDeclare(node: ASTNode) : RestartASTBase(node) {
     override fun getOriginalElement(): RestartDeclareStatementNode {
         return this as RestartDeclareStatementNode
     }
+
     override fun getIcon(flags: Int): Icon = RestartIconProvider.PROPERTY
 
     override fun getPresentation(): ItemPresentation? {
@@ -35,7 +36,7 @@ open class MixinDeclare(node: ASTNode) : RestartASTBase(node) {
     }
 
     override fun getReferences(): Array<PsiReference> {
-        return  ownReferences.map { it as PsiReference }.toTypedArray()
+        return ownReferences.map { it as PsiReference }.toTypedArray()
     }
 
     override fun getOwnDeclarations(): MutableCollection<out ImportData> {

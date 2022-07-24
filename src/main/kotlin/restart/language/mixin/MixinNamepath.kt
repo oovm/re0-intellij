@@ -1,11 +1,11 @@
 package restart.language.mixin
 
-import restart.language.ast.RestartASTBase
-import restart.language.psi.RestartTypes
-import restart.language.psi_node.RestartIdentifierNode
 import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.elementType
+import restart.language.ast.RestartASTBase
+import restart.language.psi.RestartTypes
+import restart.language.psi_node.RestartIdentifierNode
 
 open class MixinNamepath(node: ASTNode) : RestartASTBase(node) {
 //    override fun getOriginalElement(): PsiElement = this

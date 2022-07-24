@@ -1,6 +1,5 @@
 package restart.ide.hint
 
-import restart.language.psi_node.*
 import com.intellij.codeInsight.hints.VcsCodeVisionLanguageContext
 import com.intellij.openapi.editor.Editor
 import com.intellij.psi.PsiElement

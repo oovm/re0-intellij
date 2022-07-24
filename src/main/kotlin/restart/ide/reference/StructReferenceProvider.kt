@@ -3,7 +3,6 @@ package restart.ide.reference
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiFileSystemItem
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.FileReferenceHelper
 
 class RestartFileReference : FileReferenceHelper() {

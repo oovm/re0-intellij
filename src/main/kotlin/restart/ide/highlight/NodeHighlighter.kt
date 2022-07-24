@@ -1,16 +1,16 @@
 package restart.ide.highlight
 
 
-import restart.ide.file.RestartFileNode
-import restart.language.ast.isMutable
-import restart.language.psi.*
 import com.intellij.codeInsight.daemon.impl.HighlightInfo
 import com.intellij.codeInsight.daemon.impl.HighlightInfoType
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
+import restart.ide.file.RestartFileNode
 import restart.language.ast.identifier
+import restart.language.ast.isMutable
+import restart.language.psi.*
 import restart.ide.highlight.RestartHighlightColor as Color
 
 class NodeHighlighter : RestartVisitor(), HighlightVisitor {
@@ -53,8 +53,8 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     }
 
     override fun visitNormalPattern(o: RestartNormalPattern) {
-        val mut = o.isMutable();
-        val mode = RestartVariableHighlightMode.Local;
+        val mut = o.isMutable()
+        val mode = RestartVariableHighlightMode.Local
         highlightSymbolList(o.identifierList, Color.KEYWORD)
 //        o.patternItemList.forEach {
 //            mode.highlightPatternItem(this, it, mut)
@@ -108,7 +108,7 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
         last: Color,
         rest: Color = Color.KEYWORD,
     ) {
-        var first = true;
+        var first = true
         for (symbol in symbols.reversed()) {
             if (first) {
                 first = false

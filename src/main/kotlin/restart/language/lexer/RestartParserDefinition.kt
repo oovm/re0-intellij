@@ -1,11 +1,6 @@
 package restart.language.lexer
 
 
-import restart.RestartLanguage
-import restart.ide.file.RestartFileNode
-import restart.language.parser.RestartParser
-import restart.language.psi.RestartTypes
-
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
 import com.intellij.lang.ParserDefinition.SpaceRequirements
@@ -17,6 +12,10 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.tree.IFileElementType
 import com.intellij.psi.tree.TokenSet
+import restart.RestartLanguage
+import restart.ide.file.RestartFileNode
+import restart.language.parser.RestartParser
+import restart.language.psi.RestartTypes
 
 
 object RestartParserDefinition : ParserDefinition {
@@ -25,10 +24,6 @@ object RestartParserDefinition : ParserDefinition {
     override fun createParser(project: Project): PsiParser = RestartParser()
 
     override fun getFileNodeType(): IFileElementType = IFileElementType(RestartLanguage)
-
-    override fun getWhitespaceTokens(): TokenSet {
-        return super.getWhitespaceTokens()
-    }
 
     override fun getCommentTokens(): TokenSet = TokenSet.create(RestartTypes.COMMENT_SL, RestartTypes.COMMENT_TEXT)
 

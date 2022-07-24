@@ -1,12 +1,10 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 package restart.ide.view.grouper
 
-import restart.RestartBundle
 import com.intellij.ide.util.treeView.AbstractTreeNode
 import com.intellij.ide.util.treeView.smartTree.*
-import com.intellij.psi.PsiElement
 import com.intellij.util.PlatformIcons
-import org.jetbrains.annotations.NonNls
+import restart.RestartBundle
 
 object PropertiesGrouper : Grouper {
     override fun getPresentation(): ActionPresentation = ActionPresentationData(

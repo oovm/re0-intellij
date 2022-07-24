@@ -13,6 +13,7 @@ class RestartIconProvider : IconProvider() {
             file != null && file.name.endsWith(".vk") -> {
                 FILE
             }
+
             else -> {
                 null
             }

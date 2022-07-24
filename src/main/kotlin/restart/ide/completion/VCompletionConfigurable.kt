@@ -1,9 +1,9 @@
 package restart.ide.completion
 
-import restart.RestartBundle
-import restart.settings.VCodeInsightSettings
 import com.intellij.application.options.CodeCompletionOptionsCustomSection
 import com.intellij.openapi.options.ConfigurableBuilder
+import restart.RestartBundle
+import restart.settings.VCodeInsightSettings
 
 class VCompletionConfigurable : ConfigurableBuilder(RestartBundle.message("settings.completion.title")),
     CodeCompletionOptionsCustomSection {

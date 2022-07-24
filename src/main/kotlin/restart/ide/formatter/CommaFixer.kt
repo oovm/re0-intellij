@@ -1,15 +1,15 @@
 package restart.ide.formatter
 
-import restart.language.psi.endOffset
-import restart.language.psi.getNextNonCommentSibling
-import restart.language.psi.getPrevNonCommentSibling
-import restart.language.psi.getPrevNonWhitespaceSibling
 import com.intellij.lang.SmartEnterProcessorWithFixers.Fixer
 import com.intellij.openapi.editor.Editor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.impl.source.tree.LeafPsiElement
+import restart.language.psi.endOffset
+import restart.language.psi.getNextNonCommentSibling
+import restart.language.psi.getPrevNonCommentSibling
+import restart.language.psi.getPrevNonWhitespaceSibling
 
 class CommaFixer : Fixer<SmartEnter>() {
     override fun apply(editor: Editor, processor: SmartEnter, element: PsiElement) {

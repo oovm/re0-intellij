@@ -6,7 +6,7 @@ import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiFile
 
 
-class CodeBlockProvider: CodeBlockProvider {
+class CodeBlockProvider : CodeBlockProvider {
     override fun getCodeBlockRange(editor: Editor?, psiFile: PsiFile?): TextRange? {
         return null
     }

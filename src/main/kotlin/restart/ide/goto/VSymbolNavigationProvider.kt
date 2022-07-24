@@ -1,10 +1,10 @@
 package restart.ide.goto
 
-import restart.language.symbol.RestartSymbol
 import com.intellij.model.Symbol
 import com.intellij.navigation.NavigationTarget
 import com.intellij.navigation.SymbolNavigationProvider
 import com.intellij.openapi.project.Project
+import restart.language.symbol.RestartSymbol
 
 @Suppress("UnstableApiUsage")
 class VSymbolNavigationProvider : SymbolNavigationProvider {

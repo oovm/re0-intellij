@@ -2,11 +2,11 @@
 
 package restart.language.lexer
 
-import restart.language.lexer.LexerContext.Coding
-import restart.language.psi.RestartTypes
 import com.intellij.psi.TokenType.BAD_CHARACTER
 import com.intellij.psi.TokenType.WHITE_SPACE
 import com.intellij.psi.tree.IElementType
+import restart.language.lexer.LexerContext.Coding
+import restart.language.psi.RestartTypes
 
 private val OPERATORS = """(?x)
       [.]{1,3}
@@ -260,6 +260,7 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
             "∅", "⤇", "|=>", "⤃", "!=>" -> {
                 pushToken(RestartTypes.OP_EMPTY, r)
             }
+
             else -> pushToken(BAD_CHARACTER, r)
         }
         return true

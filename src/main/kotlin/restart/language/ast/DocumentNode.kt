@@ -1,10 +1,10 @@
 package restart.language.ast
 
-import restart.language.psi.RestartTypes
 import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiDocCommentBase
 import com.intellij.psi.PsiElement
 import com.intellij.psi.tree.IElementType
+import restart.language.psi.RestartTypes
 
 class DocumentNode(comment: PsiComment, rawText: String? = null) : RestartASTBase(comment.node),
     PsiDocCommentBase {
@@ -29,11 +29,13 @@ class DocumentNode(comment: PsiComment, rawText: String? = null) : RestartASTBas
             is PsiComment -> tryBuild(comment)
             else -> null
         }
+
         fun tryBuild(node: PsiComment): DocumentNode? {
             return when (node.prevSibling.text) {
                 "///" -> {
                     DocumentNode(node, node.text)
                 }
+
                 else -> {
                     null
                 }

@@ -1,8 +1,8 @@
 package restart.ide.file
 
+import com.intellij.openapi.fileTypes.LanguageFileType
 import restart.RestartBundle
 import restart.RestartLanguage
-import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.Icon
 
 object RestartFileType : LanguageFileType(RestartLanguage) {

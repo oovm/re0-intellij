@@ -1,24 +1,24 @@
 package restart.ide.doc
 
-import restart.RestartLanguage
-import restart.ide.highlight.RestartHighlightColor
-import restart.ide.highlight.RestartHighlightColor.*
-import restart.language.symbol.KeywordData
-import restart.language.symbol.ModifierData
-import restart.language.symbol.OperatorData
 import com.intellij.openapi.editor.colors.EditorColorsManager
 import com.intellij.openapi.editor.richcopy.HtmlSyntaxInfoUtil
 import com.intellij.psi.PsiElement
 import com.intellij.ui.ColorUtil
+import restart.RestartLanguage
+import restart.ide.highlight.RestartHighlightColor
+import restart.language.symbol.KeywordData
+import restart.language.symbol.ModifierData
+import restart.language.symbol.OperatorData
 
 class DocumentationRenderer(var element: PsiElement, private var original: PsiElement?) {
     private val doc = StringBuilder()
     fun onHover(): String {
-        val keyword = KeywordData.builtinData(element);
+        val keyword = KeywordData.builtinData(element)
         when {
             keyword != null -> {
                 keyword.documentation(this)
             }
+
             else -> {
                 when (element) {
 //                    is RestartTraitStatementNode -> buildShort(element as RestartTraitStatementNode)
@@ -100,7 +100,7 @@ class DocumentationRenderer(var element: PsiElement, private var original: PsiEl
     /// get the path relative to the project root
     /// FIXME: get real declare module
     private fun appendNamespace() {
-        val file = element.containingFile;
+        val file = element.containingFile
         // fake module path
         val path = file.virtualFile.path.substringAfter("src/").replace("/", "::").replace(".vk", "")
         append(path)

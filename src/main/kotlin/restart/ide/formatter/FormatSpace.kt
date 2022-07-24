@@ -1,11 +1,11 @@
 package restart.ide.formatter
 
-import restart.RestartLanguage
-import restart.language.psi.RestartTypes.*
 import com.intellij.formatting.SpacingBuilder
 import com.intellij.psi.codeStyle.CodeStyleSettings
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings
 import com.intellij.psi.tree.TokenSet
+import restart.RestartLanguage
+import restart.language.psi.RestartTypes.*
 
 data class FormatSpace(val commonSettings: CommonCodeStyleSettings, val spacingBuilder: SpacingBuilder) {
     companion object {

@@ -1,13 +1,13 @@
 package restart.ide.highlight
 
 
-import restart.language.lexer.RestartLexerAdapter
-import restart.language.psi.RestartTypes.*
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
+import restart.language.lexer.RestartLexerAdapter
+import restart.language.psi.RestartTypes.*
 import restart.ide.highlight.RestartHighlightColor as Color
 
 class TokenHighlight : SyntaxHighlighterBase() {

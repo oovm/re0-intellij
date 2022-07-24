@@ -33,15 +33,18 @@ class RestartCodeStyleSetting : LanguageCodeStyleSettingsProvider() {
                     CodeStyleSettingsCustomizable.CommenterOption.LINE_COMMENT_AT_FIRST_COLUMN.name
                 )
             }
+
             SettingsType.WRAPPING_AND_BRACES_SETTINGS -> {
                 consumer.showStandardOptions(
                     CodeStyleSettingsCustomizable.WrappingOrBraceOption.RIGHT_MARGIN.name,
                     CodeStyleSettingsCustomizable.WrappingOrBraceOption.KEEP_LINE_BREAKS.name
                 )
             }
+
             SettingsType.LANGUAGE_SPECIFIC -> {
                 consumer.showStandardOptions()
             }
+
             else -> {}
         }
     }

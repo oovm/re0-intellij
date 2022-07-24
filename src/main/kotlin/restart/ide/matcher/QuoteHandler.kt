@@ -5,7 +5,7 @@ import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.highlighter.HighlighterIterator
 
 
-class QuoteHandler: QuoteHandler {
+class QuoteHandler : QuoteHandler {
     override fun isClosingQuote(iterator: HighlighterIterator?, offset: Int): Boolean {
         return true
     }

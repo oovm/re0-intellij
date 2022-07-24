@@ -6,13 +6,14 @@ class FunctionKind(
     val isMethod: Boolean = false,
     val isStatic: Boolean = false,
     val isConstructor: Boolean = false,
-    val isMutable: Boolean = false
+    val isMutable: Boolean = false,
 ) {
     val color: RestartHighlightColor
         get() = when {
             isMethod -> {
                 RestartHighlightColor.SYM_FUNCTION_SELF
             }
+
             else -> {
                 RestartHighlightColor.SYM_FUNCTION_FREE
             }

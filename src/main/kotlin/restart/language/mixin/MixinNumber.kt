@@ -1,7 +1,7 @@
 package restart.language.mixin
 
-import restart.language.ast.RestartASTBase
 import com.intellij.lang.ASTNode
+import restart.language.ast.RestartASTBase
 
 // PsiReference
 open class MixinNumber(node: ASTNode) : RestartASTBase(node) {

@@ -1,13 +1,13 @@
 package restart.ide.matcher
 
-import restart.language.lexer.RestartParserDefinition
-import restart.language.psi.RestartTypes.*
 import com.intellij.lang.BracePair
 import com.intellij.lang.PairedBraceMatcher
 import com.intellij.psi.PsiFile
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
+import restart.language.lexer.RestartParserDefinition
+import restart.language.psi.RestartTypes.*
 
 class BraceMatchPair : PairedBraceMatcher {
     override fun getPairs(): Array<BracePair> = arrayOf(

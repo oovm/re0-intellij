@@ -13,8 +13,7 @@ class RestartLexerAdapter : LexerBase() {
     override fun start(buffer: CharSequence, startOffset: Int, endOffset: Int, initialState: Int) {
         if (this.buffer == buffer && this.startOffset == startOffset && this.endOffset == endOffset) {
             this.index = 0
-        }
-        else {
+        } else {
             this.buffer = buffer
             this.startOffset = startOffset
             this.endOffset = endOffset

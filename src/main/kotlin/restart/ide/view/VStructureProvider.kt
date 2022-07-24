@@ -1,7 +1,6 @@
 package restart.ide.view
 
 
-import restart.ide.file.RestartFileNode
 import com.intellij.ide.projectView.SelectableTreeStructureProvider
 import com.intellij.ide.projectView.ViewSettings
 import com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode
@@ -13,6 +12,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiWhiteSpace
 import com.intellij.psi.impl.source.tree.LeafPsiElement
 import com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
+import restart.ide.file.RestartFileNode
 
 
 class VStructureProvider : SelectableTreeStructureProvider, DumbAware {
@@ -33,24 +33,28 @@ class VStructureProvider : SelectableTreeStructureProvider, DumbAware {
         is PsiWhiteSpaceImpl, is PsiWhiteSpace, is LeafPsiElement -> {
             null
         }
+
         is RestartFileNode -> {
             null
         }
+
         else -> null
     }
 
     private class CustomFileWrapper(var original: PsiFileNode, viewSettings: ViewSettings?) :
         PsiFileNode(original.project, original.value, viewSettings) {
         override fun getSortKey(): Int {
-            val file = original.value;
+            val file = original.value
             return when {
                 file.name == "readme.md" -> {
                     -9
                 }
+
                 file is RestartFileNode && file.isIndexFile() -> {
                     -8
                 }
-                else -> 0;
+
+                else -> 0
             }
         }
     }

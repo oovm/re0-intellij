@@ -11,10 +11,9 @@ class Commenter : Commenter {
     override fun getCommentedBlockCommentPrefix(): String? {
         return null
     }
+
     override fun getCommentedBlockCommentSuffix(): String? {
         return null
     }
-    override fun getLineCommentPrefixes(): MutableList<String> {
-        return super.getLineCommentPrefixes()
-    }
+
 }

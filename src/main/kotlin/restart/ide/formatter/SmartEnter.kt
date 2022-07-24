@@ -1,11 +1,11 @@
 package restart.ide.formatter
 
-import restart.ide.file.RestartFileNode
 import com.intellij.lang.SmartEnterProcessorWithFixers
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
+import restart.ide.file.RestartFileNode
 
 class SmartEnter : SmartEnterProcessorWithFixers() {
     init {

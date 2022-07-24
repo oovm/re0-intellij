@@ -1,13 +1,13 @@
 package restart.ide.view
 
-import restart.ide.file.RestartFileNode
-import restart.language.ast.RestartASTBase
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.ide.structureView.StructureViewTreeElement
 import com.intellij.ide.util.treeView.smartTree.SortableTreeElement
 import com.intellij.ide.util.treeView.smartTree.TreeElement
 import com.intellij.navigation.ItemPresentation
 import com.intellij.psi.NavigatablePsiElement
+import restart.ide.file.RestartFileNode
+import restart.language.ast.RestartASTBase
 
 class RestartViewElement(private val self: NavigatablePsiElement, var view: ItemPresentation? = null) :
     StructureViewTreeElement,

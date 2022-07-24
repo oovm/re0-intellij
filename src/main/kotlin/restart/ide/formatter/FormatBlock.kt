@@ -1,13 +1,15 @@
 package restart.ide.formatter
 
-import restart.language.ast.computeSpacing
-import restart.language.ast.isWhitespaceOrEmpty
-import restart.language.psi.*
 import com.intellij.formatting.*
 import com.intellij.lang.ASTNode
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.formatter.FormatterUtil
+import restart.language.ast.computeSpacing
+import restart.language.ast.isWhitespaceOrEmpty
+import restart.language.psi.RestartBraceBlock
+import restart.language.psi.RestartBracketFree
+import restart.language.psi.RestartDeclareBlock
 
 class FormatBlock(
     private val node: ASTNode,
@@ -63,8 +65,8 @@ class FormatBlock(
     }
 
     private fun computeIndent(child: ASTNode): Indent? {
-        val firstLine = node.firstChildNode == child;
-        val lastLine = node.lastChildNode == child;
+        val firstLine = node.firstChildNode == child
+        val lastLine = node.lastChildNode == child
         val isCornerChild = firstLine || lastLine
         return when (node.psi) {
             is RestartBracketFree,
