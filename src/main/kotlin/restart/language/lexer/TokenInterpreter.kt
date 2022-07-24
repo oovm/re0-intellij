@@ -15,8 +15,8 @@ private val KEYWORDS_SP = """(?x)
       namespace[*!?]?
     | using[*!?]?
     | \bas[*!?]?\b
-    | \bif\b
-    | \bwhile\b | \bfor\b | \bin\b
+    | \b(?<if>if|若|如果)\b
+    | \b(?<when>当)\b
     | \bcatch\b
     | \bis\b | \bnot\b
     """.toRegex(setOf(RegexOption.COMMENTS, RegexOption.DOT_MATCHES_ALL))
@@ -159,30 +159,18 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
 
     private fun codeKeywords(): Boolean {
         val r = tryMatch(KEYWORDS_SP) ?: return false
-        when (r.value) {
-            "namespace", "namespace!", "namespace*", "namespace?" -> {
-                pushToken(RestartTypes.OP_NAMESAPCE, r)
-            }
-            "as", "as?", "as!", "as*" -> {
-                pushToken(RestartTypes.OP_AS, r)
-            }
-            "is" -> {
-                pushToken(RestartTypes.OP_IS_A, r)
-            }
-            "in" -> {
-                pushToken(RestartTypes.OP_IN, r)
-            }
-            "not" -> {
-                pushToken(RestartTypes.OP_NOT, r)
-            }
-            "if" -> {
+        when {
+            r.groups["if"] != null -> {
                 pushToken(RestartTypes.KW_IF, r)
             }
-            "for" -> {
-                pushToken(RestartTypes.KW_FOR, r)
+            r.groups["s2"] != null -> {
+                pushToken(RestartTypes.DECIMAL, r)
             }
-            else -> {
-                pushToken(BAD_CHARACTER, r)
+            r.groups["s3"] != null -> {
+                pushToken(RestartTypes.INTEGER, r)
+            }
+            r.groups["s4"] != null -> {
+                pushToken(RestartTypes.BYTE, r)
             }
         }
         return true

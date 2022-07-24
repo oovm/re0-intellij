@@ -10,10 +10,22 @@ public interface RestartDeclareItem extends PsiElement {
   @Nullable
   RestartBraceBlock getBraceBlock();
 
+  @Nullable
+  RestartBracketFree getBracketFree();
+
   @NotNull
   RestartDeclareKey getDeclareKey();
 
   @Nullable
   RestartExpression getExpression();
+
+  @Nullable
+  RestartForStatement getForStatement();
+
+  @Nullable
+  RestartIfStatement getIfStatement();
+
+  @Nullable
+  RestartWhileStatement getWhileStatement();
 
 }

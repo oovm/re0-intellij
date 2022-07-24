@@ -110,7 +110,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // kw_award identifier [modifiers] <<brace_block kw_declare COMMA>>
+  // kw_award identifier [modifiers] <<brace_block declare_item COMMA>>
   public static boolean award_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "award_statement")) return false;
     boolean r;
@@ -118,7 +118,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
     r = kw_award(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && award_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, RestartParser::kw_declare, COMMA_parser_);
+    r = r && brace_block(b, l + 1, RestartParser::declare_item, COMMA_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -247,65 +247,39 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // BRACKET_L [<<item>> (<<sp>> <<item>>)* [<<sp>>]] BRACKET_R
-  static boolean bracket_block(PsiBuilder b, int l, Parser _item, Parser _sp) {
-    if (!recursion_guard_(b, l, "bracket_block")) return false;
+  // BRACKET_L (<<item>>|<<sp>>)* BRACKET_R
+  public static boolean bracket_free(PsiBuilder b, int l, Parser _item, Parser _sp) {
+    if (!recursion_guard_(b, l, "bracket_free")) return false;
     if (!nextTokenIs(b, BRACKET_L)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, BRACKET_L);
-    r = r && bracket_block_1(b, l + 1, _item, _sp);
+    r = r && bracket_free_1(b, l + 1, _item, _sp);
     r = r && consumeToken(b, BRACKET_R);
-    exit_section_(b, m, null, r);
+    exit_section_(b, m, BRACKET_FREE, r);
     return r;
   }
 
-  // [<<item>> (<<sp>> <<item>>)* [<<sp>>]]
-  private static boolean bracket_block_1(PsiBuilder b, int l, Parser _item, Parser _sp) {
-    if (!recursion_guard_(b, l, "bracket_block_1")) return false;
-    bracket_block_1_0(b, l + 1, _item, _sp);
-    return true;
-  }
-
-  // <<item>> (<<sp>> <<item>>)* [<<sp>>]
-  private static boolean bracket_block_1_0(PsiBuilder b, int l, Parser _item, Parser _sp) {
-    if (!recursion_guard_(b, l, "bracket_block_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = _item.parse(b, l);
-    r = r && bracket_block_1_0_1(b, l + 1, _sp, _item);
-    r = r && bracket_block_1_0_2(b, l + 1, _sp);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // (<<sp>> <<item>>)*
-  private static boolean bracket_block_1_0_1(PsiBuilder b, int l, Parser _sp, Parser _item) {
-    if (!recursion_guard_(b, l, "bracket_block_1_0_1")) return false;
+  // (<<item>>|<<sp>>)*
+  private static boolean bracket_free_1(PsiBuilder b, int l, Parser _item, Parser _sp) {
+    if (!recursion_guard_(b, l, "bracket_free_1")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!bracket_block_1_0_1_0(b, l + 1, _sp, _item)) break;
-      if (!empty_element_parsed_guard_(b, "bracket_block_1_0_1", c)) break;
+      if (!bracket_free_1_0(b, l + 1, _item, _sp)) break;
+      if (!empty_element_parsed_guard_(b, "bracket_free_1", c)) break;
     }
     return true;
   }
 
-  // <<sp>> <<item>>
-  private static boolean bracket_block_1_0_1_0(PsiBuilder b, int l, Parser _sp, Parser _item) {
-    if (!recursion_guard_(b, l, "bracket_block_1_0_1_0")) return false;
+  // <<item>>|<<sp>>
+  private static boolean bracket_free_1_0(PsiBuilder b, int l, Parser _item, Parser _sp) {
+    if (!recursion_guard_(b, l, "bracket_free_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = _sp.parse(b, l);
-    r = r && _item.parse(b, l);
+    r = _item.parse(b, l);
+    if (!r) r = _sp.parse(b, l);
     exit_section_(b, m, null, r);
     return r;
-  }
-
-  // [<<sp>>]
-  private static boolean bracket_block_1_0_2(PsiBuilder b, int l, Parser _sp) {
-    if (!recursion_guard_(b, l, "bracket_block_1_0_2")) return false;
-    _sp.parse(b, l);
-    return true;
   }
 
   /* ********************************************************** */
@@ -395,8 +369,8 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // declare_key COLON expression
-  //   | declare_key COLON? <<bracket_block expression delimiter>>
+  // declare_key COLON normal_statements
+  //   | declare_key COLON? <<bracket_free normal_statements delimiter>>
   //   | declare_key COLON? <<brace_block declare_item delimiter>>
   public static boolean declare_item(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declare_item")) return false;
@@ -409,26 +383,26 @@ public class RestartParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // declare_key COLON expression
+  // declare_key COLON normal_statements
   private static boolean declare_item_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declare_item_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = declare_key(b, l + 1);
     r = r && consumeToken(b, COLON);
-    r = r && expression(b, l + 1);
+    r = r && normal_statements(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // declare_key COLON? <<bracket_block expression delimiter>>
+  // declare_key COLON? <<bracket_free normal_statements delimiter>>
   private static boolean declare_item_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declare_item_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = declare_key(b, l + 1);
     r = r && declare_item_1_1(b, l + 1);
-    r = r && bracket_block(b, l + 1, RestartParser::expression, RestartParser::delimiter);
+    r = r && bracket_free(b, l + 1, RestartParser::normal_statements, RestartParser::delimiter);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -550,7 +524,28 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // kw_event identifier [modifiers] <<brace_block kw_declare COMMA>>
+  // kw_enum identifier [modifiers] <<bracket_free identifier COMMA>>
+  public static boolean enum_statement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum_statement")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, ENUM_STATEMENT, "<enum statement>");
+    r = kw_enum(b, l + 1);
+    r = r && identifier(b, l + 1);
+    r = r && enum_statement_2(b, l + 1);
+    r = r && bracket_free(b, l + 1, RestartParser::identifier, COMMA_parser_);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // [modifiers]
+  private static boolean enum_statement_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum_statement_2")) return false;
+    modifiers(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // kw_event identifier [modifiers] <<brace_block declare_item COMMA>>
   public static boolean event_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "event_statement")) return false;
     boolean r;
@@ -558,7 +553,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
     r = kw_event(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && event_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, RestartParser::kw_declare, COMMA_parser_);
+    r = r && brace_block(b, l + 1, RestartParser::declare_item, COMMA_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -691,7 +686,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // kw_hero identifier [modifiers] <<brace_block kw_declare COMMA>>
+  // kw_hero identifier [modifiers] <<brace_block declare_item COMMA>>
   public static boolean hero_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "hero_statement")) return false;
     boolean r;
@@ -699,7 +694,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
     r = kw_hero(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && hero_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, RestartParser::kw_declare, COMMA_parser_);
+    r = r && brace_block(b, l + 1, RestartParser::declare_item, COMMA_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -846,6 +841,19 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // "enum" | "tagged" | "枚举"
+  public static boolean kw_enum(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "kw_enum")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, KW_ENUM, "<kw enum>");
+    r = consumeToken(b, "enum");
+    if (!r) r = consumeToken(b, "tagged");
+    if (!r) r = consumeToken(b, "枚举");
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // "event" | "事件"
   public static boolean kw_event(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "kw_event")) return false;
@@ -885,13 +893,13 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // <<bracket_block expression COMMA>>
+  // <<bracket_free expression COMMA>>
   public static boolean list(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "list")) return false;
     if (!nextTokenIs(b, BRACKET_L)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = bracket_block(b, l + 1, RestartParser::expression, COMMA_parser_);
+    r = bracket_free(b, l + 1, RestartParser::expression, COMMA_parser_);
     exit_section_(b, m, LIST, r);
     return r;
   }
@@ -1556,6 +1564,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
   //   | event_statement
   //   | hero_statement
   //   | award_statement
+  //   | enum_statement
   //   | declare_statement
   static boolean top_statements(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "top_statements")) return false;
@@ -1564,6 +1573,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
     if (!r) r = event_statement(b, l + 1);
     if (!r) r = hero_statement(b, l + 1);
     if (!r) r = award_statement(b, l + 1);
+    if (!r) r = enum_statement(b, l + 1);
     if (!r) r = declare_statement(b, l + 1);
     return r;
   }
@@ -1581,7 +1591,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // kw_variable identifier [modifiers] <<brace_block kw_declare COMMA>>
+  // kw_variable identifier [modifiers] <<brace_block declare_item COMMA>>
   public static boolean variable_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "variable_statement")) return false;
     boolean r;
@@ -1589,7 +1599,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
     r = kw_variable(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && variable_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, RestartParser::kw_declare, COMMA_parser_);
+    r = r && brace_block(b, l + 1, RestartParser::declare_item, COMMA_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

@@ -19,6 +19,10 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitBracketFree(@NotNull RestartBracketFree o) {
+    visitPsiElement(o);
+  }
+
   public void visitCallSuffix(@NotNull RestartCallSuffix o) {
     visitPsiElement(o);
   }
@@ -48,6 +52,10 @@ public class RestartVisitor extends PsiElementVisitor {
   }
 
   public void visitElseStatement(@NotNull RestartElseStatement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitEnumStatement(@NotNull RestartEnumStatement o) {
     visitPsiElement(o);
   }
 
@@ -88,6 +96,10 @@ public class RestartVisitor extends PsiElementVisitor {
   }
 
   public void visitKwElseIf(@NotNull RestartKwElseIf o) {
+    visitPsiElement(o);
+  }
+
+  public void visitKwEnum(@NotNull RestartKwEnum o) {
     visitPsiElement(o);
   }
 

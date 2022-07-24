@@ -35,6 +35,12 @@ public class RestartDeclareItemNode extends RestartASTBase implements RestartDec
   }
 
   @Override
+  @Nullable
+  public RestartBracketFree getBracketFree() {
+    return findChildByClass(RestartBracketFree.class);
+  }
+
+  @Override
   @NotNull
   public RestartDeclareKey getDeclareKey() {
     return findNotNullChildByClass(RestartDeclareKey.class);
@@ -44,6 +50,24 @@ public class RestartDeclareItemNode extends RestartASTBase implements RestartDec
   @Nullable
   public RestartExpression getExpression() {
     return findChildByClass(RestartExpression.class);
+  }
+
+  @Override
+  @Nullable
+  public RestartForStatement getForStatement() {
+    return findChildByClass(RestartForStatement.class);
+  }
+
+  @Override
+  @Nullable
+  public RestartIfStatement getIfStatement() {
+    return findChildByClass(RestartIfStatement.class);
+  }
+
+  @Override
+  @Nullable
+  public RestartWhileStatement getWhileStatement() {
+    return findChildByClass(RestartWhileStatement.class);
   }
 
 }

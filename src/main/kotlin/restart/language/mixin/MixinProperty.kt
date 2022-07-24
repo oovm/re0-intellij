@@ -15,6 +15,8 @@ import com.intellij.model.psi.*
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNameIdentifierOwner
 import com.intellij.psi.util.PsiTreeUtil
+import restart.language.psi.RestartIdentifier
+import restart.language.psi_node.RestartIdentifierNode
 import javax.swing.Icon
 
 open class MixinProperty(node: ASTNode) : DeclareNode(node),
@@ -22,18 +24,17 @@ open class MixinProperty(node: ASTNode) : DeclareNode(node),
     override fun getOriginalElement(): RestartVariableStatementNode {
         return this as RestartVariableStatementNode
     }
+    override fun getNameIdentifier(): RestartIdentifierNode {
+        return originalElement.identifier as RestartIdentifierNode
+    }
+
+    override fun getIcon(flags: Int): Icon = RestartIconProvider.IMPORT
+
 
     override fun setName(name: String): PsiElement {
         TODO("Not yet implemented")
     }
 
-    override fun getNameIdentifier(): PsiElement {
-        TODO("Not yet implemented")
-    }
-
-    override fun getIcon(flags: Int): Icon {
-        TODO("Not yet implemented")
-    }
 
 
     override fun getChildrenView(): Array<RestartViewElement> {

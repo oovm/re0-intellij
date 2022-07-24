@@ -22,7 +22,7 @@ class TokenHighlight : SyntaxHighlighterBase() {
     private fun getTokenColor(tokenType: IElementType): Color? {
         return when (tokenType) {
             // Keywords
-             OP_AS -> Color.KEYWORD
+            OP_AS -> Color.KEYWORD
             KW_IF, KW_FOR, WHILE -> Color.KEYWORD
             // ANNOTATION -> JssColor.ANNOTATION
             //

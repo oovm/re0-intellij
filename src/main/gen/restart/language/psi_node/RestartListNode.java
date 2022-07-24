@@ -30,8 +30,8 @@ public class RestartListNode extends RestartASTBase implements RestartList {
 
   @Override
   @NotNull
-  public List<RestartExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartExpression.class);
+  public RestartBracketFree getBracketFree() {
+    return findNotNullChildByClass(RestartBracketFree.class);
   }
 
 }

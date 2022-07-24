@@ -1,16 +1,14 @@
 package restart.language.mixin
 
-import restart.ide.view.RestartViewElement
 import restart.language.ast.DeclareNode
 import restart.language.psi_node.RestartAwardStatementNode
 
 import com.intellij.icons.AllIcons
-import com.intellij.ide.util.treeView.smartTree.TreeElement
 import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiElement
 import javax.swing.Icon
 
-open class MixinAward(node: ASTNode) : DeclareNode(node) {
+open class MixinTagged(node: ASTNode) : DeclareNode(node) {
     override fun getOriginalElement(): RestartAwardStatementNode {
         return this as RestartAwardStatementNode
     }

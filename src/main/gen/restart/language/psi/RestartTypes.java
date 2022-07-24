@@ -11,6 +11,7 @@ public interface RestartTypes {
   IElementType AWARD_STATEMENT = new RestartTokenType("AWARD_STATEMENT");
   IElementType BOOLEAN = new RestartTokenType("BOOLEAN");
   IElementType BRACE_BLOCK = new RestartTokenType("BRACE_BLOCK");
+  IElementType BRACKET_FREE = new RestartTokenType("BRACKET_FREE");
   IElementType CALL_SUFFIX = new RestartTokenType("CALL_SUFFIX");
   IElementType CASE_PATTERN = new RestartTokenType("CASE_PATTERN");
   IElementType CONDITION = new RestartTokenType("CONDITION");
@@ -19,6 +20,7 @@ public interface RestartTypes {
   IElementType DECLARE_STATEMENT = new RestartTokenType("DECLARE_STATEMENT");
   IElementType EF_STATEMENT = new RestartTokenType("EF_STATEMENT");
   IElementType ELSE_STATEMENT = new RestartTokenType("ELSE_STATEMENT");
+  IElementType ENUM_STATEMENT = new RestartTokenType("ENUM_STATEMENT");
   IElementType EVENT_STATEMENT = new RestartTokenType("EVENT_STATEMENT");
   IElementType EXPRESSION = new RestartTokenType("EXPRESSION");
   IElementType FOR_STATEMENT = new RestartTokenType("FOR_STATEMENT");
@@ -29,6 +31,7 @@ public interface RestartTypes {
   IElementType KW_AWARD = new RestartTokenType("KW_AWARD");
   IElementType KW_DECLARE = new RestartTokenType("KW_DECLARE");
   IElementType KW_ELSE_IF = new RestartTokenType("KW_ELSE_IF");
+  IElementType KW_ENUM = new RestartTokenType("KW_ENUM");
   IElementType KW_EVENT = new RestartTokenType("KW_EVENT");
   IElementType KW_HERO = new RestartTokenType("KW_HERO");
   IElementType KW_VARIABLE = new RestartTokenType("KW_VARIABLE");
@@ -141,6 +144,9 @@ public interface RestartTypes {
       else if (type == BRACE_BLOCK) {
         return new RestartBraceBlockNode(node);
       }
+      else if (type == BRACKET_FREE) {
+        return new RestartBracketFreeNode(node);
+      }
       else if (type == CALL_SUFFIX) {
         return new RestartCallSuffixNode(node);
       }
@@ -164,6 +170,9 @@ public interface RestartTypes {
       }
       else if (type == ELSE_STATEMENT) {
         return new RestartElseStatementNode(node);
+      }
+      else if (type == ENUM_STATEMENT) {
+        return new RestartEnumStatementNode(node);
       }
       else if (type == EVENT_STATEMENT) {
         return new RestartEventStatementNode(node);
@@ -194,6 +203,9 @@ public interface RestartTypes {
       }
       else if (type == KW_ELSE_IF) {
         return new RestartKwElseIfNode(node);
+      }
+      else if (type == KW_ENUM) {
+        return new RestartKwEnumNode(node);
       }
       else if (type == KW_EVENT) {
         return new RestartKwEventNode(node);

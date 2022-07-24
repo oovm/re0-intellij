@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface RestartList extends PsiElement {
 
   @NotNull
-  List<RestartExpression> getExpressionList();
+  RestartBracketFree getBracketFree();
 
 }
