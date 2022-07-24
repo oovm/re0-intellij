@@ -10,121 +10,121 @@
 			name="Valkyrie"
 			language="Valkyrie"
 			extensions="vk;"
-			implementationClass="com.github.valkyrie.ide.file.ValkyrieFileType"
+			implementationClass="restart.ide.file.ValkyrieFileType"
 			fieldName="INSTANCE"
 		/>
 		<lang.parserDefinition
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.language.lexer.ValkyrieParserDefinition"
+			implementationClass="restart.language.lexer.ValkyrieParserDefinition"
 		/>
 		<!-- Project -->
-		<indexedRootsProvider implementation="com.github.valkyrie.ide.project.ExtraIndexContributor"/>
-		<additionalLibraryRootsProvider implementation="com.github.valkyrie.ide.project.LibraryRootsProvider"/>
+		<indexedRootsProvider implementation="restart.ide.project.ExtraIndexContributor"/>
+		<additionalLibraryRootsProvider implementation="restart.ide.project.LibraryRootsProvider"/>
 		<!-- StructureView -->
-		<iconProvider implementation="com.github.valkyrie.ide.file.ValkyrieIconProvider"/>
-		<projectViewNestingRulesProvider implementation="com.github.valkyrie.ide.file.ValkyrieFileGroup"/>
-		<treeStructureProvider implementation="com.github.valkyrie.ide.view.VStructureProvider"/>
-		<lang.structureViewExtension implementation="com.github.valkyrie.ide.view.VStructureViewExtension"/>
+		<iconProvider implementation="restart.ide.file.ValkyrieIconProvider"/>
+		<projectViewNestingRulesProvider implementation="restart.ide.file.ValkyrieFileGroup"/>
+		<treeStructureProvider implementation="restart.ide.view.VStructureProvider"/>
+		<lang.structureViewExtension implementation="restart.ide.view.VStructureViewExtension"/>
 		<lang.psiStructureViewFactory
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.view.StructureViewFactory"/>
+			implementationClass="restart.ide.view.StructureViewFactory"/>
 		<typeHierarchyProvider
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.reference.hierarchy.TypeHierarchyProvider"/>
+			implementationClass="restart.ide.reference.hierarchy.TypeHierarchyProvider"/>
 		<methodHierarchyProvider
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.reference.hierarchy.MethodHierarchyProvider"/>
+			implementationClass="restart.ide.reference.hierarchy.MethodHierarchyProvider"/>
 		<callHierarchyProvider
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.reference.hierarchy.CallHierarchyProvider"/>
+			implementationClass="restart.ide.reference.hierarchy.CallHierarchyProvider"/>
 		<!-- Highlight -->
-		<colorSettingsPage implementation="com.github.valkyrie.settings.VHighlightSetting"/>
-		<highlightVisitor implementation="com.github.valkyrie.ide.highlight.NodeHighlighter"/>
+		<colorSettingsPage implementation="restart.settings.VHighlightSetting"/>
+		<highlightVisitor implementation="restart.ide.highlight.NodeHighlighter"/>
 		<lang.syntaxHighlighter
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.highlight.TokenHighlight"
+			implementationClass="restart.ide.highlight.TokenHighlight"
 		/>
 		<!-- Formatter -->
 		<lang.formatter
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.formatter.FormatBuilder"
+			implementationClass="restart.ide.formatter.FormatBuilder"
 		/>
 		<lang.commenter
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.formatter.Commenter"
+			implementationClass="restart.ide.formatter.Commenter"
 		/>
 		<lang.smartEnterProcessor
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.formatter.SmartEnter"
+			implementationClass="restart.ide.formatter.SmartEnter"
 		/>
 		<!-- Goto -->
-		<navbar implementation="com.github.valkyrie.ide.goto.VNavigationBarExtension"/>
-		<lang.directNavigationProvider implementation="com.github.valkyrie.ide.goto.VDirectNavigationProvider"/>
+		<navbar implementation="restart.ide.goto.VNavigationBarExtension"/>
+		<lang.directNavigationProvider implementation="restart.ide.goto.VDirectNavigationProvider"/>
 		<symbolNavigation
-			forClass="com.github.valkyrie.language.symbol.ValkyrieSymbol"
-			implementationClass="com.github.valkyrie.ide.goto.VSymbolNavigationProvider"/>
+			forClass="restart.language.symbol.ValkyrieSymbol"
+			implementationClass="restart.ide.goto.VSymbolNavigationProvider"/>
 		<!-- Hint -->
 		<codeInsight.parameterNameHints
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.hint.ValkyrieParameterHintProvider"/>
+			implementationClass="restart.ide.hint.ValkyrieParameterHintProvider"/>
 		<codeInsight.inlayProvider
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.hint.InlayHintProvider"/>
+			implementationClass="restart.ide.hint.InlayHintProvider"/>
 		<vcs.codeVisionLanguageContext
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.hint.ValkyrieInlayVSCProvider"/>
-		<!--		<psi.fileReferenceHelper implementation="com.github.valkyrie.ide.reference.ValkyrieFileReference"/>-->
-		<psi.referenceContributor implementation="com.github.valkyrie.ide.reference.ValkyrieReferenceContributor"/>
+			implementationClass="restart.ide.hint.ValkyrieInlayVSCProvider"/>
+		<!--		<psi.fileReferenceHelper implementation="restart.ide.reference.ValkyrieFileReference"/>-->
+		<psi.referenceContributor implementation="restart.ide.reference.ValkyrieReferenceContributor"/>
 		<psi.symbolReferenceProvider
 			anyReferenceClass="true"
-			implementationClass="com.github.valkyrie.ide.reference.ValkyrieReferenceProvider"
+			implementationClass="restart.ide.reference.ValkyrieReferenceProvider"
 			hostLanguage="Valkyrie"
 			hostElementClass="com.intellij.psi.xml.XmlAttributeValue"
-			targetClass="com.github.valkyrie.language.symbol.ValkyrieSymbol"/>
+			targetClass="restart.language.symbol.ValkyrieSymbol"/>
 		<!-- Declaration -->
-		<typeDeclarationProvider implementation="com.github.valkyrie.ide.reference.DeclarationProvider"/>
-		<psi.declarationProvider implementation="com.github.valkyrie.ide.reference.ValkyrieDeclarationProvider"/>
-		<findUsagesHandlerFactory implementation="com.github.valkyrie.ide.usages.ValkyrieUsagesFactory"/>
+		<typeDeclarationProvider implementation="restart.ide.reference.DeclarationProvider"/>
+		<psi.declarationProvider implementation="restart.ide.reference.ValkyrieDeclarationProvider"/>
+		<findUsagesHandlerFactory implementation="restart.ide.usages.ValkyrieUsagesFactory"/>
 		<lang.findUsagesProvider
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.usages.ValkyrieUsagesProvider"/>
+			implementationClass="restart.ide.usages.ValkyrieUsagesProvider"/>
 		<!-- Completion -->
-		<codeCompletionConfigurable instance="com.github.valkyrie.ide.completion.VCompletionConfigurable"/>
+		<codeCompletionConfigurable instance="restart.ide.completion.VCompletionConfigurable"/>
 		<completion.contributor
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.completion.VCompletionContributor"/>
+			implementationClass="restart.ide.completion.VCompletionContributor"/>
 		<lang.braceMatcher
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.matcher.BraceMatchAdapter"/>
+			implementationClass="restart.ide.matcher.BraceMatchAdapter"/>
 		<lang.quoteHandler
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.matcher.QuoteHandler"/>
+			implementationClass="restart.ide.matcher.QuoteHandler"/>
 		<lang.foldingBuilder
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.folding.ValkyrieFoldingBuilder"/>
-		<codeFoldingOptionsProvider instance="com.github.valkyrie.ide.folding.ValkyrieFoldingOptions"/>
+			implementationClass="restart.ide.folding.ValkyrieFoldingBuilder"/>
+		<codeFoldingOptionsProvider instance="restart.ide.folding.ValkyrieFoldingOptions"/>
 		<!-- Document -->
 		<lang.documentationProvider
 			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.doc.DocumentationProvider"
+			implementationClass="restart.ide.doc.DocumentationProvider"
 		/>
 		<!--		<indexPatternBuilder-->
-		<!--				implementation="com.github.valkyrie.ide.todo.VomlTodoIndexPatternBuilder"-->
+		<!--				implementation="restart.ide.todo.VomlTodoIndexPatternBuilder"-->
 		<!--		/>-->
 		<!--		<todoIndexer-->
 		<!--				filetype="Fluent"-->
-		<!--				implementationClass="com.github.valkyrie.ide.todo.VomlTodoIndexer"-->
+		<!--				implementationClass="restart.ide.todo.VomlTodoIndexer"-->
 		<!--		/>-->
-		<annotator language="Valkyrie" implementationClass="com.github.valkyrie.ide.annotator.LiteralChecker"/>
+		<annotator language="Valkyrie" implementationClass="restart.ide.annotator.LiteralChecker"/>
 		<langCodeStyleSettingsProvider
-			implementation="com.github.valkyrie.ide.codeStyle.ValkyrieCodeStyleSetting"
+			implementation="restart.ide.codeStyle.ValkyrieCodeStyleSetting"
 		/>
 	</extensions>
 	<actions>
-		<action id="NewFluentFile" class="com.github.valkyrie.ide.actions.ValkyrieCreateFile">
+		<action id="NewFluentFile" class="restart.ide.actions.ValkyrieCreateFile">
 			<add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewHtmlFile"/>
 		</action>
-		<!--		<action id="jss.JssConvertJson" class="com.github.valkyrie.ide.actions.FluentConvertMo"/>-->
+		<!--		<action id="jss.JssConvertJson" class="restart.ide.actions.FluentConvertMo"/>-->
 		<!--		<group id="jss.JssGenerator" popup="true" text="JssGenerator">-->
 		<!--			<reference ref="NewFluentFile"/>-->
 		<!--			<reference ref="jss.JssConvertJson"/>-->
