@@ -55,10 +55,6 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitEnumStatement(@NotNull RestartEnumStatement o) {
-    visitPsiElement(o);
-  }
-
   public void visitEventStatement(@NotNull RestartEventStatement o) {
     visitPsiElement(o);
   }
@@ -95,19 +91,15 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitKwElseIf(@NotNull RestartKwElseIf o) {
-    visitPsiElement(o);
-  }
-
-  public void visitKwEnum(@NotNull RestartKwEnum o) {
-    visitPsiElement(o);
-  }
-
   public void visitKwEvent(@NotNull RestartKwEvent o) {
     visitPsiElement(o);
   }
 
   public void visitKwHero(@NotNull RestartKwHero o) {
+    visitPsiElement(o);
+  }
+
+  public void visitKwTalent(@NotNull RestartKwTalent o) {
     visitPsiElement(o);
   }
 
@@ -152,6 +144,10 @@ public class RestartVisitor extends PsiElementVisitor {
   }
 
   public void visitString(@NotNull RestartString o) {
+    visitPsiElement(o);
+  }
+
+  public void visitTalentStatement(@NotNull RestartTalentStatement o) {
     visitPsiElement(o);
   }
 

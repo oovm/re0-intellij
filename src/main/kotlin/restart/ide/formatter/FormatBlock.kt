@@ -67,10 +67,12 @@ class FormatBlock(
         val lastLine = node.lastChildNode == child;
         val isCornerChild = firstLine || lastLine
         return when (node.psi) {
-            is RestartBraceBlock,   -> when {
+            is RestartBracketFree,
+            is RestartBraceBlock -> when {
                 isCornerChild -> Indent.getNoneIndent()
                 else -> Indent.getNormalIndent()
             }
+
             else -> Indent.getNoneIndent()
         }
     }

@@ -124,7 +124,8 @@ private top_statements ::=
   | event_statement
   | hero_statement
   | award_statement
-  | declare_statement
+  | talent_statement
+//  | declare_statement
   ;
 private normal_statements ::=
     if_statement
@@ -160,15 +161,19 @@ hero_statement     ::= kw_hero identifier [modifiers] <<brace_block declare_item
 };
 kw_hero            ::= "character" | "hero" | "人物" | "英雄";
 // ---------------------------------------------------------------------------------------------------------------------
+talent_statement     ::= kw_talent identifier [modifiers] <<brace_block declare_item COMMA>> {
+    mixin="restart.language.mixin.MixinHero"
+};
+kw_talent            ::= "talent" | "skill" | "装备" | "道具" | "天赋" | "技能";
+// ---------------------------------------------------------------------------------------------------------------------
 award_statement    ::= kw_award identifier [modifiers] <<brace_block declare_item COMMA>> {
     mixin="restart.language.mixin.MixinAward"
 }
 kw_award           ::= "award" | "成就";
 // ---------------------------------------------------------------------------------------------------------------------
 if_statement      ::= (KW_IF condition block) [ef_statement* [else_statement]]
-ef_statement      ::= kw_else_if condition block;
-kw_else_if        ::= "else" KW_IF | "ef"
-else_statement    ::= "else" block;
+ef_statement      ::= KW_ELSE_IF condition block;
+else_statement    ::= KW_ELSE block;
 condition         ::= case_pattern OP_SET expression | expression;
 case_pattern      ::= CASE [identifier* [namepath]] declare_item;
 private block     ::= <<brace_block expression SEMICOLON>>;

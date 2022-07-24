@@ -17,7 +17,7 @@ open class MixinDeclare(node: ASTNode) : RestartASTBase(node) {
     override fun getOriginalElement(): RestartDeclareStatementNode {
         return this as RestartDeclareStatementNode
     }
-    override fun getIcon(flags: Int): Icon = RestartIconProvider.IMPORT
+    override fun getIcon(flags: Int): Icon = RestartIconProvider.PROPERTY
 
     override fun getPresentation(): ItemPresentation? {
         return null

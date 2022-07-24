@@ -12,32 +12,20 @@ import restart.language.ast.RestartASTBase;
 import restart.language.psi.*;
 import restart.language.ast.ASTMethods;
 
-public class RestartEfStatementNode extends RestartASTBase implements RestartEfStatement {
+public class RestartBracketFreeNode extends RestartASTBase implements RestartBracketFree {
 
-  public RestartEfStatementNode(@NotNull ASTNode node) {
+  public RestartBracketFreeNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RestartVisitor visitor) {
-    visitor.visitEfStatement(this);
+    visitor.visitBracketFree(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof RestartVisitor) accept((RestartVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public RestartBraceBlock getBraceBlock() {
-    return findNotNullChildByClass(RestartBraceBlock.class);
-  }
-
-  @Override
-  @NotNull
-  public RestartCondition getCondition() {
-    return findNotNullChildByClass(RestartCondition.class);
   }
 
 }

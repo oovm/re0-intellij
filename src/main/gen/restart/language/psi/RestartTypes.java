@@ -20,7 +20,6 @@ public interface RestartTypes {
   IElementType DECLARE_STATEMENT = new RestartTokenType("DECLARE_STATEMENT");
   IElementType EF_STATEMENT = new RestartTokenType("EF_STATEMENT");
   IElementType ELSE_STATEMENT = new RestartTokenType("ELSE_STATEMENT");
-  IElementType ENUM_STATEMENT = new RestartTokenType("ENUM_STATEMENT");
   IElementType EVENT_STATEMENT = new RestartTokenType("EVENT_STATEMENT");
   IElementType EXPRESSION = new RestartTokenType("EXPRESSION");
   IElementType FOR_STATEMENT = new RestartTokenType("FOR_STATEMENT");
@@ -30,10 +29,9 @@ public interface RestartTypes {
   IElementType IF_STATEMENT = new RestartTokenType("IF_STATEMENT");
   IElementType KW_AWARD = new RestartTokenType("KW_AWARD");
   IElementType KW_DECLARE = new RestartTokenType("KW_DECLARE");
-  IElementType KW_ELSE_IF = new RestartTokenType("KW_ELSE_IF");
-  IElementType KW_ENUM = new RestartTokenType("KW_ENUM");
   IElementType KW_EVENT = new RestartTokenType("KW_EVENT");
   IElementType KW_HERO = new RestartTokenType("KW_HERO");
+  IElementType KW_TALENT = new RestartTokenType("KW_TALENT");
   IElementType KW_VARIABLE = new RestartTokenType("KW_VARIABLE");
   IElementType LIST = new RestartTokenType("LIST");
   IElementType MODIFIERS = new RestartTokenType("MODIFIERS");
@@ -45,6 +43,7 @@ public interface RestartTypes {
   IElementType SLICE = new RestartTokenType("SLICE");
   IElementType SLICE_ITEM = new RestartTokenType("SLICE_ITEM");
   IElementType STRING = new RestartTokenType("STRING");
+  IElementType TALENT_STATEMENT = new RestartTokenType("TALENT_STATEMENT");
   IElementType TUPLE = new RestartTokenType("TUPLE");
   IElementType VARIABLE_STATEMENT = new RestartTokenType("VARIABLE_STATEMENT");
   IElementType WHILE_STATEMENT = new RestartTokenType("WHILE_STATEMENT");
@@ -67,6 +66,8 @@ public interface RestartTypes {
   IElementType DOT_EQ = new RestartTokenType("DOT_EQ");
   IElementType DOT_LESS = new RestartTokenType("DOT_LESS");
   IElementType INTEGER = new RestartTokenType("INTEGER");
+  IElementType KW_ELSE = new RestartTokenType("KW_ELSE");
+  IElementType KW_ELSE_IF = new RestartTokenType("KW_ELSE_IF");
   IElementType KW_FOR = new RestartTokenType("KW_FOR");
   IElementType KW_IF = new RestartTokenType("KW_IF");
   IElementType OP_ADD = new RestartTokenType("+");
@@ -171,9 +172,6 @@ public interface RestartTypes {
       else if (type == ELSE_STATEMENT) {
         return new RestartElseStatementNode(node);
       }
-      else if (type == ENUM_STATEMENT) {
-        return new RestartEnumStatementNode(node);
-      }
       else if (type == EVENT_STATEMENT) {
         return new RestartEventStatementNode(node);
       }
@@ -201,17 +199,14 @@ public interface RestartTypes {
       else if (type == KW_DECLARE) {
         return new RestartKwDeclareNode(node);
       }
-      else if (type == KW_ELSE_IF) {
-        return new RestartKwElseIfNode(node);
-      }
-      else if (type == KW_ENUM) {
-        return new RestartKwEnumNode(node);
-      }
       else if (type == KW_EVENT) {
         return new RestartKwEventNode(node);
       }
       else if (type == KW_HERO) {
         return new RestartKwHeroNode(node);
+      }
+      else if (type == KW_TALENT) {
+        return new RestartKwTalentNode(node);
       }
       else if (type == KW_VARIABLE) {
         return new RestartKwVariableNode(node);
@@ -245,6 +240,9 @@ public interface RestartTypes {
       }
       else if (type == STRING) {
         return new RestartStringNode(node);
+      }
+      else if (type == TALENT_STATEMENT) {
+        return new RestartTalentStatementNode(node);
       }
       else if (type == TUPLE) {
         return new RestartTupleNode(node);

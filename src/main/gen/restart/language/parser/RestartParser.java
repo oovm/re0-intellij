@@ -479,27 +479,29 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // kw_else_if condition block
+  // KW_ELSE_IF condition block
   public static boolean ef_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ef_statement")) return false;
+    if (!nextTokenIs(b, KW_ELSE_IF)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, EF_STATEMENT, "<ef statement>");
-    r = kw_else_if(b, l + 1);
+    Marker m = enter_section_(b);
+    r = consumeToken(b, KW_ELSE_IF);
     r = r && condition(b, l + 1);
     r = r && block(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, EF_STATEMENT, r);
     return r;
   }
 
   /* ********************************************************** */
-  // "else" block
+  // KW_ELSE block
   public static boolean else_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "else_statement")) return false;
+    if (!nextTokenIs(b, KW_ELSE)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ELSE_STATEMENT, "<else statement>");
-    r = consumeToken(b, "else");
+    Marker m = enter_section_(b);
+    r = consumeToken(b, KW_ELSE);
     r = r && block(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, ELSE_STATEMENT, r);
     return r;
   }
 
@@ -521,27 +523,6 @@ public class RestartParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, OP_EQ);
     if (!r) r = consumeToken(b, DOT);
     return r;
-  }
-
-  /* ********************************************************** */
-  // kw_enum identifier [modifiers] <<bracket_free identifier COMMA>>
-  public static boolean enum_statement(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "enum_statement")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ENUM_STATEMENT, "<enum statement>");
-    r = kw_enum(b, l + 1);
-    r = r && identifier(b, l + 1);
-    r = r && enum_statement_2(b, l + 1);
-    r = r && bracket_free(b, l + 1, RestartParser::identifier, COMMA_parser_);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // [modifiers]
-  private static boolean enum_statement_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "enum_statement_2")) return false;
-    modifiers(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */
@@ -818,42 +799,6 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "else" KW_IF | "ef"
-  public static boolean kw_else_if(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "kw_else_if")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, KW_ELSE_IF, "<kw else if>");
-    r = kw_else_if_0(b, l + 1);
-    if (!r) r = consumeToken(b, "ef");
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // "else" KW_IF
-  private static boolean kw_else_if_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "kw_else_if_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, "else");
-    r = r && consumeToken(b, KW_IF);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // "enum" | "tagged" | "枚举"
-  public static boolean kw_enum(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "kw_enum")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, KW_ENUM, "<kw enum>");
-    r = consumeToken(b, "enum");
-    if (!r) r = consumeToken(b, "tagged");
-    if (!r) r = consumeToken(b, "枚举");
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // "event" | "事件"
   public static boolean kw_event(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "kw_event")) return false;
@@ -875,6 +820,22 @@ public class RestartParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, "hero");
     if (!r) r = consumeToken(b, "人物");
     if (!r) r = consumeToken(b, "英雄");
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // "talent" | "skill" | "装备" | "道具" | "天赋" | "技能"
+  public static boolean kw_talent(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "kw_talent")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, KW_TALENT, "<kw talent>");
+    r = consumeToken(b, "talent");
+    if (!r) r = consumeToken(b, "skill");
+    if (!r) r = consumeToken(b, "装备");
+    if (!r) r = consumeToken(b, "道具");
+    if (!r) r = consumeToken(b, "天赋");
+    if (!r) r = consumeToken(b, "技能");
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -1548,6 +1509,27 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // kw_talent identifier [modifiers] <<brace_block declare_item COMMA>>
+  public static boolean talent_statement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "talent_statement")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, TALENT_STATEMENT, "<talent statement>");
+    r = kw_talent(b, l + 1);
+    r = r && identifier(b, l + 1);
+    r = r && talent_statement_2(b, l + 1);
+    r = r && brace_block(b, l + 1, RestartParser::declare_item, COMMA_parser_);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // [modifiers]
+  private static boolean talent_statement_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "talent_statement_2")) return false;
+    modifiers(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
   // range | list | tuple | atoms
   static boolean term(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "term")) return false;
@@ -1564,8 +1546,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
   //   | event_statement
   //   | hero_statement
   //   | award_statement
-  //   | enum_statement
-  //   | declare_statement
+  //   | talent_statement
   static boolean top_statements(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "top_statements")) return false;
     boolean r;
@@ -1573,8 +1554,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
     if (!r) r = event_statement(b, l + 1);
     if (!r) r = hero_statement(b, l + 1);
     if (!r) r = award_statement(b, l + 1);
-    if (!r) r = enum_statement(b, l + 1);
-    if (!r) r = declare_statement(b, l + 1);
+    if (!r) r = talent_statement(b, l + 1);
     return r;
   }
 

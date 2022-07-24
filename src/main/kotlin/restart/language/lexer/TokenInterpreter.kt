@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalStdlibApi::class, ExperimentalStdlibApi::class)
+@file:OptIn(ExperimentalStdlibApi::class)
 
 package restart.language.lexer
 
@@ -12,14 +12,11 @@ import com.intellij.psi.tree.IElementType
  * keywords in any case, except for macros
  */
 private val KEYWORDS_SP = """(?x)
-      namespace[*!?]?
-    | using[*!?]?
-    | \bas[*!?]?\b
-    | \b(?<if>if|若|如果)\b
+      \b(?<if>if|若|如果)\b
     | \b(?<when>当)\b
-    | \bcatch\b
-    | \bis\b | \bnot\b
-    """.toRegex(setOf(RegexOption.COMMENTS, RegexOption.DOT_MATCHES_ALL))
+    | \b(?<elseif>ef|或者|又若)\b
+    | \b(?<else>else|否则)\b
+""".toRegex()
 private val PUNCTUATIONS = """(?x)
       [.]{1,3}
     | [{}\[\]()]
@@ -158,19 +155,25 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
     }
 
     private fun codeKeywords(): Boolean {
-        val r = tryMatch(KEYWORDS_SP) ?: return false
+        val keywords = """(?x)
+              \b(?<if>if|若|如果)\b
+            | \b(?<when>当)\b
+            | \b(?<else>else|否则)\b
+            | \b(?<elseif>ef|或者|又若)\b
+        """.toRegex()
+        val r = tryMatch(keywords) ?: return false
         when {
             r.groups["if"] != null -> {
                 pushToken(RestartTypes.KW_IF, r)
             }
-            r.groups["s2"] != null -> {
+            r.groups["elseif"] != null -> {
+                pushToken(RestartTypes.KW_ELSE_IF, r)
+            }
+            r.groups["else"] != null -> {
+                pushToken(RestartTypes.KW_IF, r)
+            }
+            r.groups["when"] != null -> {
                 pushToken(RestartTypes.DECIMAL, r)
-            }
-            r.groups["s3"] != null -> {
-                pushToken(RestartTypes.INTEGER, r)
-            }
-            r.groups["s4"] != null -> {
-                pushToken(RestartTypes.BYTE, r)
             }
         }
         return true
@@ -320,6 +323,7 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
         }
     }
 
+    @OptIn(ExperimentalStdlibApi::class)
     private fun tryMatch(pattern: Regex): MatchResult? {
         val r = pattern.matchAt(buffer, startOffset)
         return when {

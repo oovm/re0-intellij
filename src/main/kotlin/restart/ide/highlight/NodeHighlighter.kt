@@ -21,19 +21,27 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
 
     override fun visitVariableStatement(o: RestartVariableStatement) {
         highlight(o.kwVariable, Color.KEYWORD)
+        highlight(o.identifier, Color.SYM_PROPERTY)
+        highlightBraceKey(o.braceBlock, Color.MODIFIER)
     }
 
     override fun visitHeroStatement(o: RestartHeroStatement) {
         highlight(o.kwHero, Color.KEYWORD)
+        highlight(o.identifier, Color.SYM_HERO)
+        highlightBraceKey(o.braceBlock, Color.MODIFIER)
     }
 
     override fun visitAwardStatement(o: RestartAwardStatement) {
         highlight(o.kwAward, Color.KEYWORD)
+        highlight(o.identifier, Color.SYM_AWARD)
+        highlightBraceKey(o.braceBlock, Color.MODIFIER)
     }
 
 
     override fun visitEventStatement(o: RestartEventStatement) {
         highlight(o.kwEvent, Color.KEYWORD)
+        highlight(o.identifier, Color.SYM_EVENT)
+        highlightBraceKey(o.braceBlock, Color.MODIFIER)
     }
 
     override fun visitNormalPattern(o: RestartNormalPattern) {
@@ -54,7 +62,7 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
 
     private fun visitCasePattern(o: RestartCasePattern, mode: RestartVariableHighlightMode, force_mut: Boolean) {
         o.namepath?.let {
-            highlight(it.lastChild, Color.SYM_CLASS)
+            highlight(it.lastChild, Color.SYM_EVENT)
         }
 //        o.patternTuple?.let {
 //            this.visitPatternTuple(it, mode, force_mut)
@@ -63,18 +71,11 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     }
 
 
-
     override fun visitModifiers(o: RestartModifiers) {
         o.identifierList.forEach {
             highlight(it, Color.MODIFIER)
         }
     }
-
-    // TODO: real syntax resolve
-    override fun visitIdentifier(o: RestartIdentifier) {
-        highlightWithText(o)
-    }
-
 
     override fun visitNumber(o: RestartNumber) {
         o.identifier?.let {
@@ -104,8 +105,7 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
             if (first) {
                 first = false
                 highlight(symbol, last)
-            }
-            else {
+            } else {
                 highlight(symbol, rest)
             }
         }
@@ -140,62 +140,12 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     override fun visit(element: PsiElement) = element.accept(this)
 }
 
-
-private fun NodeHighlighter.highlightWithText(o: PsiElement) {
-    if (o.text.startsWith("_")) {
-        highlight(o, Color.SYM_FIELD)
-        return
-    }
-    else if (o.text.uppercase() == o.text) {
-        if (o.text.length == 1) {
-            highlight(o, Color.SYM_GENERIC)
+private fun NodeHighlighter.highlightBraceKey(o: RestartBraceBlock?, color: Color) {
+    if (o == null) return
+    for (i in o.children) {
+        if (i is RestartDeclareItem) {
+            highlight(i.declareKey, color)
         }
-        else {
-            highlight(o, Color.SYM_CONSTANT)
-        }
-        return
-    }
-
-    when (o.text) {
-        "Default", "Debug", "Clone", "Copy", "Serialize", "Deserialize",
-        "SemiGroup", "Monoid", "HKT", "Functor", "Shape"
-        -> {
-            highlight(o, Color.SYM_TRAIT)
-        }
-        "u8", "u16", "u32", "u64", "u128", "u256",
-        "i8", "i16", "i32", "i64", "i128", "i256",
-        "int", "bool", "str", "string", "f32", "f64", "char", "byte", "void"
-        -> {
-            highlight(o, Color.KEYWORD)
-        }
-        "get", "set", "value", "extends", "self"
-        -> {
-            highlight(o, Color.KEYWORD)
-        }
-        "_" -> {
-            highlight(o, Color.SYM_GENERIC)
-        }
-        "map", "or" -> {
-            highlight(o, Color.SYM_FUNCTION_SELF)
-        }
-        "unit", "default" -> {
-            highlight(o, Color.SYM_FUNCTION_FREE)
-        }
-        "Point", "Ellipse", "Circle" -> {
-            highlight(o, Color.SYM_CLASS)
-        }
-        "center", "minor_axis", "major_axis", "radius" -> {
-            highlight(o, Color.SYM_FUNCTION_SELF)
-        }
-        "x", "y", "v" -> {
-            highlight(o, Color.SYM_FIELD)
-        }
-        "Option", "Result", "Current", "Target" -> {
-            highlight(o, Color.SYM_CLASS)
-        }
-        "None", "Some", "Success", "Failure" -> {
-            highlight(o, Color.SYM_VARIANT)
-        }
-        else -> {}
     }
 }
+

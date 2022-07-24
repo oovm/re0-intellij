@@ -20,13 +20,15 @@ data class FormatSpace(val commonSettings: CommonCodeStyleSettings, val spacingB
             COMMA,
             SEMICOLON
         )
+        private val one_space_before = TokenSet.create(
+            BRACE_L,
+        )
         private val remove_space_after = TokenSet.create(
             PARENTHESIS_L,
             BRACKET_L,
             COLON,
         )
         private val remove_space_newline_after = TokenSet.create(
-            BRACKET_L,
             DOT,
             OP_MUL,
             OP_SUB,
@@ -35,9 +37,9 @@ data class FormatSpace(val commonSettings: CommonCodeStyleSettings, val spacingB
         private val remove_space_newline_before = TokenSet.create(
             BRACKET_R,
         )
+
         private val newline_indent_after = TokenSet.create()
         private val binary_operator = TokenSet.create(OP_EQ, OP_TO)
-        private val left_bracket = TokenSet.create(PARENTHESIS_L, BRACKET_L)
 
         private fun createSpacingBuilder(commonSettings: CommonCodeStyleSettings): SpacingBuilder {
             val custom = SpacingBuilder(commonSettings)
@@ -47,10 +49,9 @@ data class FormatSpace(val commonSettings: CommonCodeStyleSettings, val spacingB
                 .after(COLON).spacing(1, 1, 0, false, 0)
                 // k = v
                 .around(binary_operator).spacing(1, 1, 0, commonSettings.KEEP_LINE_BREAKS, 0)
-                .after(left_bracket).spacing(0, 0, 0, false, 0)
-                .before(left_bracket).spacing(1, 1, 0, false, 0)
 
             return custom
+                .before(one_space_before).spacing(1, 1, 0, true, 0)
                 .before(remove_space_before).spaceIf(false)
                 .after(remove_space_after).spaceIf(false)
                 .before(remove_space_newline_before).spacing(0, 0, 0, false, 0)

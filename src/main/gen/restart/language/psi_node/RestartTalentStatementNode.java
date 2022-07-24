@@ -8,18 +8,18 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static restart.language.psi.RestartTypes.*;
-import restart.language.ast.RestartASTBase;
+import restart.language.mixin.MixinHero;
 import restart.language.psi.*;
 import restart.language.ast.ASTMethods;
 
-public class RestartEfStatementNode extends RestartASTBase implements RestartEfStatement {
+public class RestartTalentStatementNode extends MixinHero implements RestartTalentStatement {
 
-  public RestartEfStatementNode(@NotNull ASTNode node) {
+  public RestartTalentStatementNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RestartVisitor visitor) {
-    visitor.visitEfStatement(this);
+    visitor.visitTalentStatement(this);
   }
 
   @Override
@@ -36,8 +36,20 @@ public class RestartEfStatementNode extends RestartASTBase implements RestartEfS
 
   @Override
   @NotNull
-  public RestartCondition getCondition() {
-    return findNotNullChildByClass(RestartCondition.class);
+  public RestartIdentifier getIdentifier() {
+    return findNotNullChildByClass(RestartIdentifier.class);
+  }
+
+  @Override
+  @NotNull
+  public RestartKwTalent getKwTalent() {
+    return findNotNullChildByClass(RestartKwTalent.class);
+  }
+
+  @Override
+  @Nullable
+  public RestartModifiers getModifiers() {
+    return findChildByClass(RestartModifiers.class);
   }
 
 }

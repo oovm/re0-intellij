@@ -5,12 +5,18 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface RestartEfStatement extends PsiElement {
+public interface RestartTalentStatement extends PsiElement {
 
   @NotNull
   RestartBraceBlock getBraceBlock();
 
   @NotNull
-  RestartCondition getCondition();
+  RestartIdentifier getIdentifier();
+
+  @NotNull
+  RestartKwTalent getKwTalent();
+
+  @Nullable
+  RestartModifiers getModifiers();
 
 }

@@ -14,7 +14,8 @@ import restart.RestartBundle;
 enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String>, default: TextAttributesKey? = null) {
     // 特殊关键词
     KEYWORD(OptionsBundle.messagePointer("options.language.defaults.keyword"), Default.KEYWORD),
-    MODIFIER(RestartBundle.messagePointer("Restart.highlight.modifier"), Default.KEYWORD),
+    METADATA(OptionsBundle.messagePointer("options.language.defaults.meta.data"), Default.METADATA),
+    MODIFIER(RestartBundle.messagePointer("Restart.highlight.modifier"), Default.METADATA),
 
     // 字面量
     NULL(RestartBundle.messagePointer("color.token.null"), Default.KEYWORD),
@@ -28,10 +29,10 @@ enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String
     STRING_BAD(RestartBundle.messagePointer("color.token.text"), Default.INVALID_STRING_ESCAPE),
     // 标识符
     IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
-    SYM_TYPE(RestartBundle.messagePointer("color.token.symbol.trait"), Default.CLASS_REFERENCE),
+    SYM_HERO(RestartBundle.messagePointer("color.token.symbol.trait"), Default.CLASS_REFERENCE),
     SYM_GENERIC(RestartBundle.messagePointer("color.token.symbol.trait"), Default.METADATA),
-    SYM_TRAIT(RestartBundle.messagePointer("color.token.symbol.trait"), Default.INTERFACE_NAME),
-    SYM_CLASS(RestartBundle.messagePointer("color.token.symbol.class"), Default.CLASS_NAME),
+    SYM_AWARD(RestartBundle.messagePointer("color.token.symbol.trait"), Default.INTERFACE_NAME),
+    SYM_EVENT(RestartBundle.messagePointer("color.token.symbol.class"), Default.CLASS_NAME),
     SYM_VARIANT(RestartBundle.messagePointer("color.token.symbol.variant"), Default.STATIC_FIELD),
     SYM_MACRO(RestartBundle.messagePointer("color.token.symbol.macro"), Default.METADATA),
     SYM_LOCAL(RestartBundle.messagePointer("color.token.symbol.local"), Default.LOCAL_VARIABLE),
@@ -42,7 +43,7 @@ enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String
     SYM_ARG_MUT(RestartBundle.messagePointer("color.token.symbol.parameter.mutable"), Default.REASSIGNED_PARAMETER),
     SYM_ARG_SELF(RestartBundle.messagePointer("color.token.symbol.self"), Default.KEYWORD),
     SYM_ARG_SELF_MUT(RestartBundle.messagePointer("color.token.symbol.self.mutable"), Default.KEYWORD),
-    SYM_FIELD(RestartBundle.messagePointer("color.token.symbol.field"), Default.INSTANCE_FIELD),
+    SYM_PROPERTY(RestartBundle.messagePointer("color.token.symbol.field"), Default.INSTANCE_FIELD),
     SYM_CONSTANT(RestartBundle.messagePointer("color.token.symbol.constant"), Default.CONSTANT),
     SYM_FUNCTION_SELF(RestartBundle.messagePointer("color.token.symbol.function.self"), Default.INSTANCE_METHOD),
     SYM_FUNCTION_FREE(RestartBundle.messagePointer("color.token.symbol.function.free"), Default.STATIC_METHOD),
