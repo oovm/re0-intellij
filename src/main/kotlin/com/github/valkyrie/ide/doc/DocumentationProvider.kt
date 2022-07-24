@@ -58,9 +58,6 @@ class DocumentationProvider : DocumentationProvider {
 
     override fun getCustomDocumentationElement(editor: Editor, file: PsiFile, contextElement: PsiElement?, targetOffset: Int): PsiElement? {
         return when (contextElement.elementType) {
-            KW_CLASS, KW_DEFINE -> {
-                contextElement
-            }
             OP_ADD, OP_ADD_ASSIGN, OP_ARROW, OP_ARROW2 -> {
                 contextElement
             }

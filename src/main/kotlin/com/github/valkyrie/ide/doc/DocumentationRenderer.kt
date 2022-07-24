@@ -3,8 +3,6 @@ package com.github.valkyrie.ide.doc
 import com.github.valkyrie.ValkyrieLanguage
 import com.github.valkyrie.ide.highlight.ValkyrieHighlightColor
 import com.github.valkyrie.ide.highlight.ValkyrieHighlightColor.*
-import com.github.valkyrie.language.psi_node.ValkyrieClassStatementNode
-import com.github.valkyrie.language.psi_node.ValkyrieTraitStatementNode
 import com.github.valkyrie.language.symbol.KeywordData
 import com.github.valkyrie.language.symbol.ModifierData
 import com.github.valkyrie.language.symbol.OperatorData
@@ -23,8 +21,8 @@ class DocumentationRenderer(var element: PsiElement, private var original: PsiEl
             }
             else -> {
                 when (element) {
-                    is ValkyrieTraitStatementNode -> buildShort(element as ValkyrieTraitStatementNode)
-                    is ValkyrieClassStatementNode -> buildShort(element as ValkyrieClassStatementNode)
+//                    is ValkyrieTraitStatementNode -> buildShort(element as ValkyrieTraitStatementNode)
+//                    is ValkyrieClassStatementNode -> buildShort(element as ValkyrieClassStatementNode)
                     else -> doc.append("onHover: ${element.text}")
                 }
             }
@@ -56,8 +54,8 @@ class DocumentationRenderer(var element: PsiElement, private var original: PsiEl
         }
 
         when (element) {
-            is ValkyrieTraitStatementNode -> buildDetail(element as ValkyrieTraitStatementNode)
-            is ValkyrieClassStatementNode -> buildShort(element as ValkyrieClassStatementNode)
+//            is ValkyrieTraitStatementNode -> buildDetail(element as ValkyrieTraitStatementNode)
+//            is ValkyrieClassStatementNode -> buildShort(element as ValkyrieClassStatementNode)
             else -> {
                 doc.append(element)
                 doc.append("<br/>")
@@ -69,34 +67,34 @@ class DocumentationRenderer(var element: PsiElement, private var original: PsiEl
         return doc.toString()
     }
 
-    private fun buildShort(element: ValkyrieTraitStatementNode) {
-        append(KEYWORD, "crate ")
-        appendNamespace()
-        doc.append("<br/>")
-        append(KEYWORD, "public ")
-        append(KEYWORD, "native ")
-        append(KEYWORD, "trait ")
-        append(SYM_TRAIT, element.name)
-    }
+//    private fun buildShort(element: ValkyrieTraitStatementNode) {
+//        append(KEYWORD, "crate ")
+//        appendNamespace()
+//        doc.append("<br/>")
+//        append(KEYWORD, "public ")
+//        append(KEYWORD, "native ")
+//        append(KEYWORD, "trait ")
+//        append(SYM_TRAIT, element.name)
+//    }
 
-    private fun buildDetail(element: ValkyrieTraitStatementNode) {
-        this.buildShort(element)
-    }
-
-    private fun buildShort(element: ValkyrieClassStatementNode) {
-        append(KEYWORD, "crate ")
-        appendNamespace()
-        doc.append("<br/>")
-        append(KEYWORD, "public ")
-        append(KEYWORD, "native ")
-        append(KEYWORD, "class ")
-        append(SYM_CLASS, element.name)
-//        appendNewline()
-//        append(KEYWORD, "implements ")
-//        append(SYM_TRAIT, "Eq")
-//        appendAdd()
-//        append(SYM_TRAIT, "Hash")
-    }
+//    private fun buildDetail(element: ValkyrieTraitStatementNode) {
+//        this.buildShort(element)
+//    }
+//
+//    private fun buildShort(element: ValkyrieClassStatementNode) {
+//        append(KEYWORD, "crate ")
+//        appendNamespace()
+//        doc.append("<br/>")
+//        append(KEYWORD, "public ")
+//        append(KEYWORD, "native ")
+//        append(KEYWORD, "class ")
+//        append(SYM_CLASS, element.name)
+////        appendNewline()
+////        append(KEYWORD, "implements ")
+////        append(SYM_TRAIT, "Eq")
+////        appendAdd()
+////        append(SYM_TRAIT, "Hash")
+//    }
 
 
     /// get the path relative to the project root

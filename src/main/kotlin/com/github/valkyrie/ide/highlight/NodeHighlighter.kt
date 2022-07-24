@@ -4,7 +4,6 @@ package com.github.valkyrie.ide.highlight
 import com.github.valkyrie.ide.file.ValkyrieFileNode
 import com.github.valkyrie.language.ast.isMutable
 import com.github.valkyrie.language.psi.*
-import com.github.valkyrie.language.psi_node.ValkyrieDefineStatementNode
 import com.intellij.codeInsight.daemon.impl.HighlightInfo
 import com.intellij.codeInsight.daemon.impl.HighlightInfoType
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
@@ -16,16 +15,25 @@ import com.github.valkyrie.ide.highlight.ValkyrieHighlightColor as Color
 class NodeHighlighter : ValkyrieVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null
 
-    override fun visitNamespaceStatement(o: ValkyrieNamespaceStatement) {
-        highlight(o.kwNamespace, Color.KEYWORD)
+    override fun visitDeclareStatement(o: ValkyrieDeclareStatement) {
+        highlight(o.kwDeclare, Color.KEYWORD)
     }
 
-    override fun visitImportStatement(o: ValkyrieImportStatement) {
-        highlight(o.kwImport, Color.KEYWORD)
+    override fun visitVariableStatement(o: ValkyrieVariableStatement) {
+        highlight(o.kwVariable, Color.KEYWORD)
     }
 
-    override fun visitImportItem(o: ValkyrieImportItem) {
-        //TODO: get real symbol color
+    override fun visitHeroStatement(o: ValkyrieHeroStatement) {
+        highlight(o.kwHero, Color.KEYWORD)
+    }
+
+    override fun visitAwardStatement(o: ValkyrieAwardStatement) {
+        highlight(o.kwAward, Color.KEYWORD)
+    }
+
+
+    override fun visitEventStatement(o: ValkyrieEventStatement) {
+        highlight(o.kwEvent, Color.KEYWORD)
     }
 
     override fun visitNormalPattern(o: ValkyrieNormalPattern) {
@@ -54,66 +62,7 @@ class NodeHighlighter : ValkyrieVisitor(), HighlightVisitor {
         super.visitCasePattern(o)
     }
 
-    override fun visitDefineStatement(o: ValkyrieDefineStatement) {
-        val node = o as ValkyrieDefineStatementNode;
-        highlight(o.kwDefine, Color.KEYWORD)
-        highlight(node.nameIdentifier, node.kind.color)
-    }
 
-    override fun visitDefineItem(o: ValkyrieDefineItem) {
-//        highlight(o.symbol, o.symbolColor)
-//        highlightModifiers(o.modifiers)
-    }
-
-
-    override fun visitForallStatement(o: ValkyrieForallStatement) {
-//        o.identifierList.forEach {
-//            highlight(it, Color.SYM_GENERIC)
-//        }
-//        super.visitForallStatement(o)
-    }
-
-    override fun visitClassStatement(o: ValkyrieClassStatement) {
-        highlight(o.kwClass, Color.KEYWORD)
-        highlight(o.identifier, Color.SYM_CLASS)
-    }
-
-//    override fun visitClassBraceItem(o: ValkyrieClassBraceItem) {
-//        o.modifierSymbols?.let { highlightSymbolList(it.identifierList, Color.SYM_FIELD) }
-//        super.visitClassBraceItem(o)
-//    }
-//
-//    override fun visitClassNumericKey(o: ValkyrieClassNumericKey) {
-//        o.modifierSymbols?.let { highlightSymbolList(it.identifierList, Color.KEYWORD) }
-//        super.visitClassNumericKey(o)
-//    }
-
-    override fun visitTraitStatement(o: ValkyrieTraitStatement) {
-//        highlight(o.symbol, Color.SYM_TRAIT)
-//        highlightModifiers(o.modifiers)
-    }
-
-    override fun visitExtendsStatement(o: ValkyrieExtendsStatement) {
-        highlight(o.kwExtends, Color.KEYWORD)
-    }
-
-    override fun visitTaggedStatement(o: ValkyrieTaggedStatement) {
-//        highlight(o.symbol, Color.SYM_CLASS)
-//        highlightModifiers(o.modifiers)
-    }
-
-    override fun visitTaggedItem(o: ValkyrieTaggedItem) {
-        highlight(o.identifier, Color.SYM_VARIANT)
-    }
-
-    override fun visitBitflagStatement(o: ValkyrieBitflagStatement) {
-//        highlight(o.symbol, Color.SYM_CLASS)
-//        highlightModifiers(o.modifiers)
-    }
-
-    override fun visitBitflagItem(o: ValkyrieBitflagItem) {
-        highlight(o.identifier, Color.SYM_VARIANT)
-    }
 
     override fun visitMacro(o: ValkyrieMacro) {
         highlight(o.firstChild, Color.SYM_MACRO)
@@ -131,20 +80,6 @@ class NodeHighlighter : ValkyrieVisitor(), HighlightVisitor {
     // TODO: real syntax resolve
     override fun visitIdentifier(o: ValkyrieIdentifier) {
         highlightWithText(o)
-    }
-
-    override fun visitObjectKey(o: ValkyrieObjectKey) {
-        when (o.text) {
-            "get", "set" -> {
-                highlight(o, Color.KEYWORD)
-                return
-            }
-        }
-
-        if (!o.text.first().isDigit()) {
-            highlight(o, Color.SYM_FIELD)
-        }
-
     }
 
 

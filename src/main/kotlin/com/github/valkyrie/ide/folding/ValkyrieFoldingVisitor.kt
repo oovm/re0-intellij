@@ -15,29 +15,10 @@ class ValkyrieFoldingVisitor(private val descriptors: MutableList<FoldingDescrip
 //        fold(o.node, o.firstChild.endOffset, o.lastChild.startOffset)
 //    }
 
-    override fun visitTaggedStatement(o: ValkyrieTaggedStatement) {
-        val block = o.taggedBlock
-        fold(block.node, block.firstChild.endOffset, block.lastChild.startOffset)
-        super.visitTaggedStatement(o)
+    override fun visitBraceBlock(o: ValkyrieBraceBlock) {
+        fold(o.node, o.firstChild.endOffset, o.lastChild.startOffset)
     }
 
-    override fun visitExtendsStatement(o: ValkyrieExtendsStatement) {
-        val block = o.traitBlock
-        fold(block.node, block.firstChild.endOffset, block.lastChild.startOffset)
-        // super.visitExtendsStatement(o)
-    }
-
-    override fun visitTraitStatement(o: ValkyrieTraitStatement) {
-        val block = o.traitBlock
-        fold(block.node, block.firstChild.endOffset, block.lastChild.startOffset)
-        super.visitTraitStatement(o)
-    }
-
-    override fun visitBitflagStatement(o: ValkyrieBitflagStatement) {
-        val block = o.bitflagBlock
-        fold(block.node, block.firstChild.endOffset, block.lastChild.startOffset)
-        super.visitBitflagStatement(o)
-    }
 
 
     override fun visitMatchStatement(o: ValkyrieMatchStatement) {
@@ -46,12 +27,6 @@ class ValkyrieFoldingVisitor(private val descriptors: MutableList<FoldingDescrip
         super.visitMatchStatement(o)
     }
 
-    override fun visitDefineStatement(o: ValkyrieDefineStatement) {
-        val block = o.defineBlock
-        if (block != null) {
-            fold(block.node, block.firstChild.endOffset, block.lastChild.startOffset)
-        }
-    }
 
     private fun fold(element: PsiElement) {
         descriptors += FoldingDescriptor(element.node, element.textRange)

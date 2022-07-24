@@ -118,24 +118,19 @@
     ]
 }
 
-valkyrie ::= ((top_statements|normal_statements) [SEMICOLON])*
+re0 ::= ((top_statements|normal_statements) [SEMICOLON])*
 private top_statements ::=
     variable_statement
   | event_statement
   | hero_statement
+  | award_statement
   | declare_statement
   ;
 private normal_statements ::=
     if_statement
   | for_statement
   | while_statement
-  | match_statement
-  | let_statement
   | new_statement
-  | type_statement
-  | forall_statement
-//  | macro_list
-//  | macro_call
   | expression
   ;
 // ---------------------------------------------------------------------------------------------------------------------
@@ -159,17 +154,11 @@ hero_statement     ::= kw_hero identifier [modifiers] <<brace_block kw_declare C
 };
 kw_hero            ::= "character" | "hero" | "人物" | "英雄";
 // ---------------------------------------------------------------------------------------------------------------------
-let_statement     ::=
-    LET normal_pattern [let_type_hint] [OP_SET expression]
-  | LET case_pattern OP_SET expression;
-let_type_hint     ::= COLON <<sequence type_expression COMMA>>;
-// ---------------------------------------------------------------------------------------------------------------------
-type_statement    ::= KW_TYPE identifier [[OP_PROPORTION] type_generic] [OP_SET type_expr] {
+award_statement    ::= kw_award identifier [modifiers] <<brace_block kw_declare COMMA>> {
     mixin="com.github.valkyrie.language.mixin.MixinType"
-};
+}
+kw_award           ::= "award"|"成就";
 // ---------------------------------------------------------------------------------------------------------------------
-forall_statement  ::= FORALL <<sequence identifier COMMA>> [forall_block];
-forall_block      ::= <<brace_block (type_expression COLON type_expression) (COMMA|SEMICOLON)>>;
 trait_block       ::= <<brace_free top_statements SEMICOLON>>;
 // ---------------------------------------------------------------------------------------------------------------------
 if_statement      ::= (KW_IF condition block) [ef_statement* [else_statement]]
@@ -196,10 +185,6 @@ pattern_item      ::= identifier* (DOT3|DOT2) identifier | identifier+;
 pattern_value     ::= identifier | pattern;
 // ---------------------------------------------------------------------------------------------------------------------
 while_statement   ::= WHILE condition block;
-// ---------------------------------------------------------------------------------------------------------------------
-match_statement   ::= MATCH identifier* match_block;
-match_block       ::= <<brace_block match_expression SEMICOLON>>;
-match_expression  ::= case_pattern COLON (normal_statements [SEMICOLON])+
 // -------------- -------------------------------------------------------------------------------------------------------
 new_statement     ::= NEW modifiers [type_generic] [COLON type_expression] trait_block;
 // ---------------------------------------------------------------------------------------------------------------------
@@ -227,16 +212,6 @@ call_suffix       ::= <<parenthesis expression COMMA>>;
 type_expression   ::= type_expr (op_binary type_expr)*;
 private type_expr ::= op_prefix* term (op_suffix|call_suffix|type_generic|slice)*;
 type_generic      ::= <<bracket_block ([identifier COLON] type_expression) COMMA>>;
-type_instance     ::= identifier type_generic?
-// ---------------------------------------------------------------------------------------------------------------------
-macro             ::= AT namepath_free;
-// ---------------------------------------------------------------------------------------------------------------------
-macro_call        ::= macro [macro_item];
-macro_item        ::=
-    <<parenthesis expression COMMA>>
-  | <<brace_block pair COMMA>>
-  | <<brace_block expression SEMICOLON>>;
-macro_list ::= [AT|HASH] <<bracket_block (namepath macro_item) COMMA>>;
 // ---------------------------------------------------------------------------------------------------------------------
 private term   ::= range | list | tuple | atoms;
 tuple          ::= <<parenthesis expression COMMA>>
@@ -250,7 +225,6 @@ slice_item     ::=
   | expression;
 // ---------------------------------------------------------------------------------------------------------------------
 private atoms  ::= number | string | boolean | namepath;
-pair           ::= atoms COLON expression;
 boolean        ::= "true" | "false";
 number         ::= (BYTE | INTEGER | DECIMAL) [identifier] {
     mixin="com.github.valkyrie.language.mixin.MixinNumber"
@@ -259,9 +233,6 @@ string         ::= [identifier] STRING_START STRING_TEXT STRING_END {
     mixin="com.github.valkyrie.language.mixin.MixinString"
 }
 // ---------------------------------------------------------------------------------------------------------------------
-namepath_free  ::= identifier ((DOT|OP_PROPORTION) identifier)* {
-    mixin="com.github.valkyrie.language.mixin.MixinNamepath"
-}
 namepath       ::= identifier (OP_PROPORTION identifier)* {
     mixin="com.github.valkyrie.language.mixin.MixinNamepath"
 }
