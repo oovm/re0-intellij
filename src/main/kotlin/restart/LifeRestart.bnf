@@ -100,8 +100,6 @@ private top_statements ::=
   ;
 private normal_statements ::=
     if_statement
-  | for_statement
-  | while_statement
   | expression
   ;
 // ---------------------------------------------------------------------------------------------------------------------
@@ -115,7 +113,9 @@ declare_item       ::=
   | declare_key COLON? <<bracket_free normal_statements delimiter>>
   | declare_key COLON normal_statements
   ;
-declare_key        ::= identifier|number|KW_IF
+declare_key        ::= identifier|number|KW_IF {
+    mixin="restart.language.mixin.MixinKey"
+}
 pattern_item       ::= identifier* (DOT3|DOT2) identifier | identifier+;
 // ---------------------------------------------------------------------------------------------------------------------
 property_statement ::= kw_property identifier [modifiers] declare_block {
@@ -143,20 +143,10 @@ archive_statement  ::= kw_archive identifier [modifiers] declare_block {
 }
 kw_archive       ::= "award" | "成就";
 // ---------------------------------------------------------------------------------------------------------------------
-if_statement      ::= (KW_IF condition block) [ef_statement* [else_statement]]
-ef_statement      ::= KW_ELSE_IF condition block;
+if_statement      ::= (KW_IF expression block) [ef_statement* [else_statement]]
+ef_statement      ::= KW_ELSE_IF expression block;
 else_statement    ::= KW_ELSE block;
-condition         ::= case_pattern OP_SET expression | expression;
-case_pattern      ::= CASE [identifier* [namepath]] declare_item;
 block             ::= <<brace_free normal_statements SEMICOLON>>;
-// ---------------------------------------------------------------------------------------------------------------------
-for_statement     ::= KW_FOR (case_pattern|normal_pattern) KW_IF expression [if_guard] block [else_statement];
-if_guard          ::= KW_IF condition;
-normal_pattern    ::= identifier* declare_item | <<sequence pattern_item COMMA>> {
-    mixin="restart.language.mixin.MixinNormalPattern"
-};
-// ---------------------------------------------------------------------------------------------------------------------
-while_statement   ::= WHILE condition block;
 // ---------------------------------------------------------------------------------------------------------------------
 expression        ::= expr (op_binary expr)*;
 private expr      ::= op_prefix* term (op_suffix|call_suffix|slice)*;
@@ -189,7 +179,7 @@ slice_item     ::=
   | [expression] OP_PROPORTION [expression]
   | expression;
 // ---------------------------------------------------------------------------------------------------------------------
-private atoms  ::= number | string | boolean | namepath;
+private atoms  ::= number | string | boolean;
 boolean        ::= "true" | "false";
 number         ::= (BYTE | INTEGER | DECIMAL) [NUMBER_SUFFIX] {
     mixin="restart.language.mixin.MixinNumber"
@@ -198,9 +188,6 @@ string         ::= [identifier] STRING_START STRING_TEXT STRING_END {
     mixin="restart.language.mixin.MixinString"
 }
 // ---------------------------------------------------------------------------------------------------------------------
-namepath       ::= identifier (OP_PROPORTION identifier)* {
-    mixin="restart.language.mixin.MixinNamepath"
-}
 identifier     ::= SYMBOL_XID | SYMBOL_RAW {
     mixin="restart.language.mixin.MixinIdentifier"
 }

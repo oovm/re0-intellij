@@ -4,15 +4,12 @@ package restart.language.psi_node;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
-import static restart.language.psi.RestartTypes.*;
-import restart.language.mixin.MixinNamepath;
+import restart.language.mixin.MixinKey;
 import restart.language.psi.*;
-import restart.language.ast.ASTMethods;
 
-public class RestartNamepathNode extends MixinNamepath implements RestartNamepath {
+public class RestartNamepathNode extends MixinKey implements RestartNamepath {
 
   public RestartNamepathNode(@NotNull ASTNode node) {
     super(node);

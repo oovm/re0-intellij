@@ -13,6 +13,7 @@ import restart.language.ast.DeclareNode
 import restart.language.psi.RestartIdentifier
 import restart.language.psi_node.RestartIdentifierNode
 import restart.language.psi_node.RestartPropertyStatementNode
+import restart.language.symbol.RestartSymbolKind
 import javax.swing.Icon
 
 open class MixinProperty(node: ASTNode) : DeclareNode(node),
@@ -23,8 +24,7 @@ open class MixinProperty(node: ASTNode) : DeclareNode(node),
     override fun getNameIdentifier(): RestartIdentifierNode {
         return originalElement.identifier as RestartIdentifierNode
     }
-    override fun getIcon(flags: Int): Icon = RestartIconProvider.PROPERTY
-
+    override fun getKind() = RestartSymbolKind.Property
     override fun setName(name: String): PsiElement {
         return ASTFactory(this.project).replaceID(nameIdentifier, name)
     }
@@ -35,6 +35,8 @@ open class MixinProperty(node: ASTNode) : DeclareNode(node),
 //        }
         return views.toTypedArray()
     }
+
+
 }
 
 

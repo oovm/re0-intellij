@@ -16,14 +16,6 @@ open class MixinModifier(node: ASTNode) : ViewableNode(node) {
 
     override fun getIcon(flags: Int): Icon = RestartIconProvider.MODIFIER
     override fun getNavigationElement(): PsiElement = this
-    fun hasMutable(): Boolean {
-        for (i in originalElement.children) {
-            if (i.text == "mutable" || i.text == "mut") {
-                return true
-            }
-        }
-        return false
-    }
 
     override fun getPresentation(): PresentationData {
         return PresentationData("[MODIFIERS]", "", this.getIcon(0), null)

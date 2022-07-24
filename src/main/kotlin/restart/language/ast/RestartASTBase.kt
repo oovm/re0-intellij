@@ -6,14 +6,15 @@ import com.intellij.psi.NavigatablePsiElement
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 import restart.ide.view.RestartViewElement
+import restart.language.symbol.RestartSymbolKind
 
 open class RestartASTBase(node: ASTNode) : ASTWrapperPsiElement(node) {
     fun collectDocuments(): List<PsiElement> {
         return listOf()
     }
 
-    fun getKind(): String {
-        return this.javaClass.simpleName
+   open fun getKind(): RestartSymbolKind {
+        return RestartSymbolKind.Unknown
     }
 
     fun collectAnnotations(): List<PsiElement> {

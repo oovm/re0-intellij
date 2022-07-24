@@ -36,7 +36,7 @@ enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String
     SYM_EVENT(RestartBundle.messagePointer("color.token.symbol.class"), Default.CLASS_NAME),
     SYM_VARIANT(RestartBundle.messagePointer("color.token.symbol.variant"), Default.STATIC_FIELD),
     SYM_MACRO(RestartBundle.messagePointer("color.token.symbol.macro"), Default.METADATA),
-    SYM_LOCAL(RestartBundle.messagePointer("color.token.symbol.local"), Default.LOCAL_VARIABLE),
+    SYM_TALENT(RestartBundle.messagePointer("color.token.symbol.local"), Default.LOCAL_VARIABLE),
     SYM_LOCAL_MUT(RestartBundle.messagePointer("color.token.symbol.local.mutable"), Default.REASSIGNED_LOCAL_VARIABLE),
     SYM_GLOBAL(RestartBundle.messagePointer("color.token.symbol.global"), Default.GLOBAL_VARIABLE),
     SYM_GLOBAL_MUT(RestartBundle.messagePointer("color.token.symbol.global.mut"), Default.GLOBAL_VARIABLE),

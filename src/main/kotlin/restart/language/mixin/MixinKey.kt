@@ -7,7 +7,7 @@ import restart.language.ast.RestartASTBase
 import restart.language.psi.RestartTypes
 import restart.language.psi_node.RestartIdentifierNode
 
-open class MixinNamepath(node: ASTNode) : RestartASTBase(node) {
+open class MixinKey(node: ASTNode) : RestartASTBase(node) {
 //    override fun getOriginalElement(): PsiElement = this
 //    override fun getIcon(flags: Int): Icon {
 //        TODO("Not yet implemented")

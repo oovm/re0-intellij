@@ -8,8 +8,8 @@ import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import restart.ide.file.RestartFileNode
+import restart.language.ast.RestartASTBase
 import restart.language.ast.identifier
-import restart.language.ast.isMutable
 import restart.language.psi.*
 import restart.ide.highlight.RestartHighlightColor as Color
 
@@ -52,33 +52,6 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
         highlightBraceKey(o.declareBlock, Color.MODIFIER)
     }
 
-    override fun visitNormalPattern(o: RestartNormalPattern) {
-        val mut = o.isMutable()
-        val mode = RestartVariableHighlightMode.Local
-        highlightSymbolList(o.identifierList, Color.KEYWORD)
-//        o.patternItemList.forEach {
-//            mode.highlightPatternItem(this, it, mut)
-//        }
-//        o.patternPairList.forEach {
-//            mode.highlightPatternPair(this, it, mut)
-//        }
-    }
-
-    override fun visitCasePattern(o: RestartCasePattern) {
-        visitCasePattern(o, RestartVariableHighlightMode.Local, false)
-    }
-
-    private fun visitCasePattern(o: RestartCasePattern, mode: RestartVariableHighlightMode, force_mut: Boolean) {
-        o.namepath?.let {
-            highlight(it.lastChild, Color.SYM_EVENT)
-        }
-//        o.patternTuple?.let {
-//            this.visitPatternTuple(it, mode, force_mut)
-//        }
-        super.visitCasePattern(o)
-    }
-
-
     override fun visitModifiers(o: RestartModifiers) {
         o.identifierList.forEach {
             highlight(it, Color.MODIFIER)
@@ -99,6 +72,11 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
 
     override fun visitBoolean(o: RestartBoolean) {
         highlight(o, Color.KEYWORD)
+    }
+
+    override fun visitIdentifier(o: RestartIdentifier) {
+        val node = o.reference?.resolve() as RestartASTBase
+        highlight(o, node.getKind().color)
     }
 
     // =================================================================================================================
