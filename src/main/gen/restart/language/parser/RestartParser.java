@@ -110,7 +110,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // kw_award identifier [modifiers] <<brace_block declare_item COMMA>>
+  // kw_award identifier [modifiers] declare_block
   public static boolean award_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "award_statement")) return false;
     boolean r;
@@ -118,7 +118,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
     r = kw_award(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && award_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, RestartParser::declare_item, COMMA_parser_);
+    r = r && declare_block(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -369,9 +369,21 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // declare_key COLON normal_statements
+  // <<brace_free declare_item delimiter>>
+  public static boolean declare_block(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "declare_block")) return false;
+    if (!nextTokenIs(b, BRACE_L)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = brace_free(b, l + 1, RestartParser::declare_item, RestartParser::delimiter);
+    exit_section_(b, m, DECLARE_BLOCK, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // declare_key COLON? <<brace_free declare_item delimiter>>
   //   | declare_key COLON? <<bracket_free normal_statements delimiter>>
-  //   | declare_key COLON? <<brace_block declare_item delimiter>>
+  //   | declare_key COLON (if_statement|for_statement|while_statement|atoms)
   public static boolean declare_item(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declare_item")) return false;
     boolean r;
@@ -383,16 +395,23 @@ public class RestartParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // declare_key COLON normal_statements
+  // declare_key COLON? <<brace_free declare_item delimiter>>
   private static boolean declare_item_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declare_item_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = declare_key(b, l + 1);
-    r = r && consumeToken(b, COLON);
-    r = r && normal_statements(b, l + 1);
+    r = r && declare_item_0_1(b, l + 1);
+    r = r && brace_free(b, l + 1, RestartParser::declare_item, RestartParser::delimiter);
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  // COLON?
+  private static boolean declare_item_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "declare_item_0_1")) return false;
+    consumeToken(b, COLON);
+    return true;
   }
 
   // declare_key COLON? <<bracket_free normal_statements delimiter>>
@@ -414,39 +433,44 @@ public class RestartParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // declare_key COLON? <<brace_block declare_item delimiter>>
+  // declare_key COLON (if_statement|for_statement|while_statement|atoms)
   private static boolean declare_item_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declare_item_2")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = declare_key(b, l + 1);
-    r = r && declare_item_2_1(b, l + 1);
-    r = r && brace_block(b, l + 1, RestartParser::declare_item, RestartParser::delimiter);
+    r = r && consumeToken(b, COLON);
+    r = r && declare_item_2_2(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // COLON?
-  private static boolean declare_item_2_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "declare_item_2_1")) return false;
-    consumeToken(b, COLON);
-    return true;
+  // if_statement|for_statement|while_statement|atoms
+  private static boolean declare_item_2_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "declare_item_2_2")) return false;
+    boolean r;
+    r = if_statement(b, l + 1);
+    if (!r) r = for_statement(b, l + 1);
+    if (!r) r = while_statement(b, l + 1);
+    if (!r) r = atoms(b, l + 1);
+    return r;
   }
 
   /* ********************************************************** */
-  // identifier|number
+  // identifier|number|KW_IF
   public static boolean declare_key(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declare_key")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, DECLARE_KEY, "<declare key>");
     r = identifier(b, l + 1);
     if (!r) r = number(b, l + 1);
+    if (!r) r = consumeToken(b, KW_IF);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // kw_declare identifier [modifiers] <<brace_block declare_item COMMA>>
+  // kw_declare identifier [modifiers] declare_block
   public static boolean declare_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declare_statement")) return false;
     if (!nextTokenIs(b, "<declare statement>", SYMBOL_RAW, SYMBOL_XID)) return false;
@@ -455,7 +479,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
     r = kw_declare(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && declare_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, RestartParser::declare_item, COMMA_parser_);
+    r = r && declare_block(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -526,7 +550,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // kw_event identifier [modifiers] <<brace_block declare_item COMMA>>
+  // kw_event identifier [modifiers] declare_block
   public static boolean event_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "event_statement")) return false;
     boolean r;
@@ -534,7 +558,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
     r = kw_event(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && event_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, RestartParser::declare_item, COMMA_parser_);
+    r = r && declare_block(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -667,7 +691,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // kw_hero identifier [modifiers] <<brace_block declare_item COMMA>>
+  // kw_hero identifier [modifiers] declare_block
   public static boolean hero_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "hero_statement")) return false;
     boolean r;
@@ -675,7 +699,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
     r = kw_hero(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && hero_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, RestartParser::declare_item, COMMA_parser_);
+    r = r && declare_block(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -1509,7 +1533,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // kw_talent identifier [modifiers] <<brace_block declare_item COMMA>>
+  // kw_talent identifier [modifiers] declare_block
   public static boolean talent_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "talent_statement")) return false;
     boolean r;
@@ -1517,7 +1541,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
     r = kw_talent(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && talent_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, RestartParser::declare_item, COMMA_parser_);
+    r = r && declare_block(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -1571,7 +1595,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // kw_variable identifier [modifiers] <<brace_block declare_item COMMA>>
+  // kw_variable identifier [modifiers] declare_block
   public static boolean variable_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "variable_statement")) return false;
     boolean r;
@@ -1579,7 +1603,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
     r = kw_variable(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && variable_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, RestartParser::declare_item, COMMA_parser_);
+    r = r && declare_block(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

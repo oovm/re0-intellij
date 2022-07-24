@@ -30,8 +30,8 @@ public class RestartHeroStatementNode extends MixinHero implements RestartHeroSt
 
   @Override
   @NotNull
-  public RestartBraceBlock getBraceBlock() {
-    return findNotNullChildByClass(RestartBraceBlock.class);
+  public RestartDeclareBlock getDeclareBlock() {
+    return findNotNullChildByClass(RestartDeclareBlock.class);
   }
 
   @Override

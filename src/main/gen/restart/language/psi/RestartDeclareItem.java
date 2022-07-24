@@ -8,22 +8,31 @@ import com.intellij.psi.PsiElement;
 public interface RestartDeclareItem extends PsiElement {
 
   @Nullable
-  RestartBraceBlock getBraceBlock();
+  RestartBoolean getBoolean();
 
   @Nullable
   RestartBracketFree getBracketFree();
 
   @NotNull
-  RestartDeclareKey getDeclareKey();
+  List<RestartDeclareItem> getDeclareItemList();
 
-  @Nullable
-  RestartExpression getExpression();
+  @NotNull
+  RestartDeclareKey getDeclareKey();
 
   @Nullable
   RestartForStatement getForStatement();
 
   @Nullable
   RestartIfStatement getIfStatement();
+
+  @Nullable
+  RestartNamepath getNamepath();
+
+  @Nullable
+  RestartNumber getNumber();
+
+  @Nullable
+  RestartString getString();
 
   @Nullable
   RestartWhileStatement getWhileStatement();

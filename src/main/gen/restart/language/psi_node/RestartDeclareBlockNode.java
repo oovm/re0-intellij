@@ -8,18 +8,18 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static restart.language.psi.RestartTypes.*;
-import restart.language.mixin.MixinAward;
+import restart.language.ast.RestartASTBase;
 import restart.language.psi.*;
 import restart.language.ast.ASTMethods;
 
-public class RestartAwardStatementNode extends MixinAward implements RestartAwardStatement {
+public class RestartDeclareBlockNode extends RestartASTBase implements RestartDeclareBlock {
 
-  public RestartAwardStatementNode(@NotNull ASTNode node) {
+  public RestartDeclareBlockNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RestartVisitor visitor) {
-    visitor.visitAwardStatement(this);
+    visitor.visitDeclareBlock(this);
   }
 
   @Override
@@ -30,26 +30,8 @@ public class RestartAwardStatementNode extends MixinAward implements RestartAwar
 
   @Override
   @NotNull
-  public RestartDeclareBlock getDeclareBlock() {
-    return findNotNullChildByClass(RestartDeclareBlock.class);
-  }
-
-  @Override
-  @NotNull
-  public RestartIdentifier getIdentifier() {
-    return findNotNullChildByClass(RestartIdentifier.class);
-  }
-
-  @Override
-  @NotNull
-  public RestartKwAward getKwAward() {
-    return findNotNullChildByClass(RestartKwAward.class);
-  }
-
-  @Override
-  @Nullable
-  public RestartModifiers getModifiers() {
-    return findChildByClass(RestartModifiers.class);
+  public List<RestartDeclareItem> getDeclareItemList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartDeclareItem.class);
   }
 
 }

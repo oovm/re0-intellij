@@ -22,26 +22,32 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     override fun visitVariableStatement(o: RestartVariableStatement) {
         highlight(o.kwVariable, Color.KEYWORD)
         highlight(o.identifier, Color.SYM_PROPERTY)
-        highlightBraceKey(o.braceBlock, Color.MODIFIER)
+        highlightBraceKey(o.braceFree, Color.MODIFIER)
     }
 
     override fun visitHeroStatement(o: RestartHeroStatement) {
         highlight(o.kwHero, Color.KEYWORD)
         highlight(o.identifier, Color.SYM_HERO)
-        highlightBraceKey(o.braceBlock, Color.MODIFIER)
+        highlightBraceKey(o.declareBlock, Color.MODIFIER)
+    }
+
+    override fun visitTalentStatement(o: RestartTalentStatement) {
+        highlight(o.kwTalent, Color.KEYWORD)
+        highlight(o.identifier, Color.SYM_AWARD)
+        highlightBraceKey(o.braceFree, Color.MODIFIER)
     }
 
     override fun visitAwardStatement(o: RestartAwardStatement) {
         highlight(o.kwAward, Color.KEYWORD)
         highlight(o.identifier, Color.SYM_AWARD)
-        highlightBraceKey(o.braceBlock, Color.MODIFIER)
+        highlightBraceKey(o.braceFree, Color.MODIFIER)
     }
 
 
     override fun visitEventStatement(o: RestartEventStatement) {
         highlight(o.kwEvent, Color.KEYWORD)
         highlight(o.identifier, Color.SYM_EVENT)
-        highlightBraceKey(o.braceBlock, Color.MODIFIER)
+        highlightBraceKey(o.braceFree, Color.MODIFIER)
     }
 
     override fun visitNormalPattern(o: RestartNormalPattern) {
@@ -140,12 +146,10 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     override fun visit(element: PsiElement) = element.accept(this)
 }
 
-private fun NodeHighlighter.highlightBraceKey(o: RestartBraceBlock?, color: Color) {
+private fun NodeHighlighter.highlightBraceKey(o: RestartDeclareBlock?, color: Color) {
     if (o == null) return
-    for (i in o.children) {
-        if (i is RestartDeclareItem) {
-            highlight(i.declareKey, color)
-        }
+    for (i in o.declareItemList) {
+        highlight(i.declareKey, color)
     }
 }
 

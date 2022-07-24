@@ -15,6 +15,7 @@ public interface RestartTypes {
   IElementType CALL_SUFFIX = new RestartTokenType("CALL_SUFFIX");
   IElementType CASE_PATTERN = new RestartTokenType("CASE_PATTERN");
   IElementType CONDITION = new RestartTokenType("CONDITION");
+  IElementType DECLARE_BLOCK = new RestartTokenType("DECLARE_BLOCK");
   IElementType DECLARE_ITEM = new RestartTokenType("DECLARE_ITEM");
   IElementType DECLARE_KEY = new RestartTokenType("DECLARE_KEY");
   IElementType DECLARE_STATEMENT = new RestartTokenType("DECLARE_STATEMENT");
@@ -156,6 +157,9 @@ public interface RestartTypes {
       }
       else if (type == CONDITION) {
         return new RestartConditionNode(node);
+      }
+      else if (type == DECLARE_BLOCK) {
+        return new RestartDeclareBlockNode(node);
       }
       else if (type == DECLARE_ITEM) {
         return new RestartDeclareItemNode(node);

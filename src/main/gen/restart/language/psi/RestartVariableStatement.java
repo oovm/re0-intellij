@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface RestartVariableStatement extends PsiElement {
 
   @NotNull
-  RestartBraceBlock getBraceBlock();
+  RestartDeclareBlock getDeclareBlock();
 
   @NotNull
   RestartIdentifier getIdentifier();

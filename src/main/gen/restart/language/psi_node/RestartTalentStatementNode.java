@@ -8,11 +8,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static restart.language.psi.RestartTypes.*;
-import restart.language.mixin.MixinHero;
+import restart.language.mixin.MixinTalent;
 import restart.language.psi.*;
 import restart.language.ast.ASTMethods;
 
-public class RestartTalentStatementNode extends MixinHero implements RestartTalentStatement {
+public class RestartTalentStatementNode extends MixinTalent implements RestartTalentStatement {
 
   public RestartTalentStatementNode(@NotNull ASTNode node) {
     super(node);
@@ -30,8 +30,8 @@ public class RestartTalentStatementNode extends MixinHero implements RestartTale
 
   @Override
   @NotNull
-  public RestartBraceBlock getBraceBlock() {
-    return findNotNullChildByClass(RestartBraceBlock.class);
+  public RestartDeclareBlock getDeclareBlock() {
+    return findNotNullChildByClass(RestartDeclareBlock.class);
   }
 
   @Override

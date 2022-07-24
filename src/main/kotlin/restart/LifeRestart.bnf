@@ -134,39 +134,40 @@ private normal_statements ::=
   | expression
   ;
 // ---------------------------------------------------------------------------------------------------------------------
-declare_statement  ::= kw_declare identifier [modifiers] <<brace_block declare_item COMMA>> {
+declare_statement  ::= kw_declare identifier [modifiers] declare_block {
     mixin="restart.language.mixin.MixinDeclare"
 }
 kw_declare         ::= identifier
+declare_block      ::= <<brace_free declare_item delimiter>>
 declare_item       ::=
-    declare_key COLON normal_statements
+    declare_key COLON? <<brace_free declare_item delimiter>>
   | declare_key COLON? <<bracket_free normal_statements delimiter>>
-  | declare_key COLON? <<brace_block declare_item delimiter>>
+  | declare_key COLON (if_statement|for_statement|while_statement|atoms)
   ;
-declare_key       ::= identifier|number
+declare_key       ::= identifier|number|KW_IF
 pattern_item      ::= identifier* (DOT3|DOT2) identifier | identifier+;
 // ---------------------------------------------------------------------------------------------------------------------
-variable_statement ::= kw_variable identifier [modifiers] <<brace_block declare_item COMMA>> {
+variable_statement ::= kw_variable identifier [modifiers] declare_block {
     mixin="restart.language.mixin.MixinProperty"
 };
 kw_variable        ::= "variable" | "property" | "属性"
 // ---------------------------------------------------------------------------------------------------------------------
-event_statement    ::= kw_event identifier [modifiers] <<brace_block declare_item COMMA>> {
+event_statement    ::= kw_event identifier [modifiers] declare_block {
     mixin="restart.language.mixin.MixinEvent"
 }
 kw_event           ::= "event" | "事件"
 // ---------------------------------------------------------------------------------------------------------------------
-hero_statement     ::= kw_hero identifier [modifiers] <<brace_block declare_item COMMA>> {
+hero_statement     ::= kw_hero identifier [modifiers] declare_block {
     mixin="restart.language.mixin.MixinHero"
 };
 kw_hero            ::= "character" | "hero" | "人物" | "英雄";
 // ---------------------------------------------------------------------------------------------------------------------
-talent_statement     ::= kw_talent identifier [modifiers] <<brace_block declare_item COMMA>> {
-    mixin="restart.language.mixin.MixinHero"
+talent_statement     ::= kw_talent identifier [modifiers] declare_block {
+    mixin="restart.language.mixin.MixinTalent"
 };
 kw_talent            ::= "talent" | "skill" | "装备" | "道具" | "天赋" | "技能";
 // ---------------------------------------------------------------------------------------------------------------------
-award_statement    ::= kw_award identifier [modifiers] <<brace_block declare_item COMMA>> {
+award_statement    ::= kw_award identifier [modifiers] declare_block {
     mixin="restart.language.mixin.MixinAward"
 }
 kw_award           ::= "award" | "成就";
@@ -250,7 +251,7 @@ private meta parenthesis   ::= PARENTHESIS_L [<<item>> (<<sp>> <<item>>)* [<<sp>
 // bracket [ ]
 meta bracket_free          ::= BRACKET_L (<<item>>|<<sp>>)* BRACKET_R;
 // brace { }
-meta brace_block   ::= BRACE_L [<<item>> (<<sp>> <<item>>)* [<<sp>>]] BRACE_R;
+meta brace_block           ::= BRACE_L [<<item>> (<<sp>> <<item>>)* [<<sp>>]] BRACE_R;
 // brace { }
 private meta brace_free    ::= BRACE_L (<<item>>|<<sp>>)* BRACE_R;
 // angle ::< >::

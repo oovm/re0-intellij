@@ -14,7 +14,7 @@ import restart.RestartBundle;
 enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String>, default: TextAttributesKey? = null) {
     // 特殊关键词
     KEYWORD(OptionsBundle.messagePointer("options.language.defaults.keyword"), Default.KEYWORD),
-    METADATA(OptionsBundle.messagePointer("options.language.defaults.meta.data"), Default.METADATA),
+    METADATA(OptionsBundle.messagePointer("options.language.defaults.metadata"), Default.METADATA),
     MODIFIER(RestartBundle.messagePointer("Restart.highlight.modifier"), Default.METADATA),
 
     // 字面量
