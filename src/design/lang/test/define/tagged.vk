@@ -1,0 +1,28 @@
+/// Option
+tagged Option<T> {
+    /// Some value of type `T`.
+    Some(T),
+    /// No value.
+    None,
+}
+
+
+
+tagged Validation<T, E> {
+    Fine(T, [E]),
+    Fail(E, [E]),
+}
+
+tagged Validation<T, E> {
+    AA {
+        a: A
+    },
+    BB {
+        b: B
+    },
+}
+
+#override
+def external test_function() {
+    Option::Some()
+}

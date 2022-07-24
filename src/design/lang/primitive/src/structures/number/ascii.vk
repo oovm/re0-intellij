@@ -1,0 +1,16 @@
+trait AsciiEncoding {
+
+}
+
+
+class Ascii {
+
+}
+
+extends UTF8: AsciiEncoding {
+
+}
+
+extends u8: AsciiEncoding {
+
+}

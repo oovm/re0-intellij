@@ -1,0 +1,20 @@
+[*]
+charset = utf-8
+end_of_line = lf
+
+[*.{kt, kts}]
+indent_style = space
+indent_size = 4
+max_line_length = 144
+
+[*.{json, json5}]
+indent_style = space
+indent_size = 4
+
+[*.{bnf, flex, toml}]
+indent_style = space
+indent_size = 4
+
+[*.{xml, yaml}]
+indent_style = tab
+indent_size = 4

@@ -1,0 +1,12 @@
+#derive(Copy, Clone, Display)
+class Span<T> {
+    start: T,
+    end: T,
+}
+
+
+#test
+def one test() {
+    Span(0, 1)
+    @include("a/")
+}

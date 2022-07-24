@@ -1,0 +1,7 @@
+#allow(non_camel_case_types)
+
+#primitive class i8 {}
+#primitive class i16 {}
+#primitive class i32 {}
+#primitive class i64 {}
+#primitive class i128 {}

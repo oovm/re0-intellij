@@ -1,0 +1,5 @@
+///
+tagged Either<L, R> {
+    Left(T),
+    Right(E),
+}

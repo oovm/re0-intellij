@@ -1,0 +1,7 @@
+.gradle
+.idea
+.qodana
+build
+
+time-travel.*
+*.log

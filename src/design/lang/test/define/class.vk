@@ -1,0 +1,42 @@
+class A1(int = 1)
+
+/// 测试
+class serde A2 {
+    public readonly 0: int,
+    public readonly 1: int,
+}
+
+/// 测试
+class class A3<T: Default> {
+    ref x: T = Default::default(),
+    ref y: T = Default::default(),
+    ref z: T = Default::default(),
+}
+
+class A4<T: Sized> {
+    ref x: &int = 0,
+    ref y: &int = 0,
+}
+
+∀ T, U {T: Debug, U: Debug} class A5<T, U>(T, U)
+
+// https://crates.io/crates/custom_debug_derive
+// #[Copy, Clone, Debug(rename=UpperCase)]
+// class A3<T: Debug> {
+//     #debug(rename="new_name")
+//     name: u32,
+//     #debug(skip)
+//     skip: u32
+// }
+//
+// #[Serialize, Deserialize]
+// #Serialize
+// #Deserialize
+// class B {
+// a: int,
+// b: int,
+// }
+//
+// define type A {
+//
+// }

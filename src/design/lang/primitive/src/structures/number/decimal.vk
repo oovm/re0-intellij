@@ -1,0 +1,9 @@
+#external class String {
+
+}
+
+#external extends String {
+    def f() {
+
+    }
+}

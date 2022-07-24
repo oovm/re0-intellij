@@ -1,0 +1,13 @@
+match cond {
+    case A:
+        print("a")
+    case B:
+        print("b")
+    case _:
+        print("other")
+}
+
+
+match n? {
+
+}
