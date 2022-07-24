@@ -45,12 +45,8 @@
         OP_MOD_ASSIGN = "%="
         OP_MOD = "%"
 
-        OP_AND_ASSIGN = "&="
         OP_AND = "&"
-        OP_AND2 = "&&"
-        OP_OR_ASSIGN = "|="
         OP_OR = "|"
-        OP_OR2 = "||"
         OP_POW = "^"
         // DOTS
         OP_ARROW = "->"
@@ -90,32 +86,6 @@
         BRACKET_R = ']'
         BRACE_L = '{'
         BRACE_R = '}'
-        SLICE_L = '[['
-        SLICE_R = ']]'
-
-        OP_NAMESAPCE = "namespace"
-
-//        KW_NAMESPACE = "namespace"
-//        KW_IMPORT = "using"
-//        KW_EXTENSION = "extension"
-//        KW_AS = "as"
-//
-//        KW_LET = "let"
-//        KW_DEFINE = "def"
-//        KW_NEW = 'new'
-//
-//        KW_IF = "if"
-//        KW_ELSE = "else"
-//        KW_FOR = "for"
-//        KW_WHILE = "while"
-//        KW_MATCH = 'match'
-//        KW_CATCH = 'catch'
-//
-//        KW_CLASS = 'class'
-//        KW_TRAIT = 'trait'
-//        KW_TAGGED = 'tagged'
-//        KW_BITFLAG = 'bitset'
-//        KW_EXTENDS = 'extends'
     ]
 }
 
@@ -199,7 +169,7 @@ private op_binary ::=
     | OP_DIV | OP_DIV_ASSIGN | OP_MOD | OP_MOD_ASSIGN
     | OP_POW | OP_POW_ASSIGN
     | OP_GT | OP_LT | DOT_LESS | DOT_EQ | DOT2 | DOT
-    | OP_TO
+    | OP_TO | OP_OR | OP_AND
     | OP_AND_THEN | OP_OR_ELSE
     // is | is not
     | OP_NOT_A | OP_IS_A OP_NOT | OP_IS_A | OP_NOT OP_IS_A
@@ -211,11 +181,9 @@ private op_suffix ::= BANG | QUESTION;
 call_suffix       ::= <<parenthesis expression COMMA>>;
 private delimiter ::= COMMA|SEMICOLON
 // ---------------------------------------------------------------------------------------------------------------------
-private term   ::= range | list | tuple | atoms;
+private term   ::= list | tuple | atoms;
 tuple          ::= <<parenthesis expression COMMA>>
 list           ::= <<bracket_free expression COMMA>>
-range          ::= <<slice_block slice_item COMMA>>;
-slice          ::= <<slice_block slice_item COMMA>>;
 slice_item     ::=
     [expression] COLON [expression] COLON [expression]
   | [expression] COLON [expression]
@@ -255,7 +223,3 @@ meta bracket_free          ::= BRACKET_L (<<item>>|<<sp>>)* BRACKET_R;
 meta brace_block           ::= BRACE_L [<<item>> (<<sp>> <<item>>)* [<<sp>>]] BRACE_R;
 // brace { }
 private meta brace_free    ::= BRACE_L (<<item>>|<<sp>>)* BRACE_R;
-// angle ::< >::
-private meta angle_block   ::= OP_LT [<<item>> (<<sp>> <<item>>)* [<<sp>>]] OP_GT;
-// angle ⟦ ⟧
-private meta slice_block   ::= SLICE_L [<<item>> (<<sp>> <<item>>)* [<<sp>>]] SLICE_R;

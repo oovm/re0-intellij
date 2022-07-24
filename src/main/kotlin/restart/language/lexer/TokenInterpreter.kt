@@ -8,14 +8,14 @@ import com.intellij.psi.TokenType.BAD_CHARACTER
 import com.intellij.psi.TokenType.WHITE_SPACE
 import com.intellij.psi.tree.IElementType
 
-private val PUNCTUATIONS = """(?x)
+private val OPERATORS = """(?x)
       [.]{1,3}
     | [{}\[\]()]
     | [,;$^]
     | @[*!?@]?
     # start with < >
-    | >= | /> | ≥ | ⩾ | >{1,3}
-    | <= | </ | ≤ | ⩽ | <: | <! | <{1,3}
+    | >= | ≥ | ⩾ | > | \b大于\b | \b大于等于\b
+    | <= | ≤ | ⩽ | < | \b小于\b | \b小于等于\b
     # start with :
     | ∷ | :: | :> | :
     # start with -
@@ -31,8 +31,8 @@ private val PUNCTUATIONS = """(?x)
     | ÷=?
     | %=?
     # start with &
-    | &> | &{1,2} | ≻
-    | [|]> | [|]{1,2} | ⊁
+    | &{1,2} | \b且\b
+    | [|]{1,2} | \b或\b
     | ⊻=? | ⊼=? | ⊽=?
     # start with !
     | != | ≠ | !
@@ -45,10 +45,6 @@ private val PUNCTUATIONS = """(?x)
     | [∈∊∉⊑⋢⨳∀∁∂∃∄¬±√∛∜⊹⋗]
     | [⟦⟧⁅⁆⟬⟭]
     #
-    """.toRegex()
-private val COMMENTS = """(?x)
-      (?<s1>\#{3,})(?<t1>[^\00]*?)(?<e1>\k<s1>)
-    | (?<s2>\#)(?<t2>[^\n\r]*)
     """.toRegex()
 private val STRINGS = """(?x)
       (?<s1>"{3,}|'{3,})(?<t1>[^\00]*?)(?<e1>\k<s1>)
@@ -90,7 +86,7 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
     }
 
     private fun codeComment(): Boolean {
-        val comment = """(//)([^\r\n]*)""".toRegex()
+        val comment = """(/{2,})([^\r\n]*)""".toRegex()
         val r = tryMatch(comment) ?: return false
         pushToken(RestartTypes.COMMENT_SL, r.groups[1]!!)
         pushToken(RestartTypes.COMMENT_TEXT, r.groups[2]!!)
@@ -180,25 +176,24 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
 
     private fun codeIdentifier(): Boolean {
         val xid = """(?x)
-        [\p{L}_][\p{L}_\d]*
-        | (`)((?:[^`\\]|\\.)*)(\1)
+            [\p{L}_][\p{L}_\d]*
+          | (`)((?:[^`\\]|\\.)*)(\1)
         """.toRegex()
         val r = tryMatch(xid) ?: return false
         when {
             lastIs(RestartTypes.DECIMAL, RestartTypes.INTEGER, RestartTypes.BYTE, skipWS = false) -> {
                 pushToken(RestartTypes.NUMBER_SUFFIX, r)
             }
+
             else -> {
                 pushToken(RestartTypes.SYMBOL_XID, r)
             }
         }
-
-
         return true
     }
 
     private fun codePunctuations(): Boolean {
-        val r = tryMatch(PUNCTUATIONS) ?: return false
+        val r = tryMatch(OPERATORS) ?: return false
         when (r.value) {
             // DOT
             ":=", "≔" -> pushToken(RestartTypes.OP_BIND, r)
@@ -242,66 +237,21 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
             "/" -> pushToken(RestartTypes.OP_DIV, r)
             // start with &
             "&&=" -> pushToken(RestartTypes.OP_AND_ASSIGN, r)
-            "&&" -> pushToken(RestartTypes.OP_AND, r)
+            "&", "&&", "且" -> pushToken(RestartTypes.OP_AND, r)
             "&=" -> pushToken(RestartTypes.OP_AND_ASSIGN, r)
-            "&" -> pushToken(RestartTypes.OP_AND, r)
             //
             // start with !
             "!!" -> pushToken(RestartTypes.OP_NE, r)
             "!=" -> pushToken(RestartTypes.OP_NE, r)
             "!" -> pushToken(RestartTypes.OP_NOT, r)
-            "|" -> pushToken(RestartTypes.OP_OR, r)
+            "|", "||", "或" -> pushToken(RestartTypes.OP_OR, r)
             "^" -> pushToken(RestartTypes.OP_POW, r)
-            // start with =
-            "∈", "∊" -> {
-                pushToken(RestartTypes.OP_IN, r)
-            }
-
-            "∉" -> {
-                pushToken(RestartTypes.OP_NOT_IN, r)
-            }
-
-            "≻", "&>" -> {
-                pushToken(RestartTypes.OP_AND_THEN, r)
-            }
-
-            "⊁", "|>" -> {
-                pushToken(RestartTypes.OP_OR_ELSE, r)
-            }
-
-            "⟦" -> {
-                pushToken(RestartTypes.SLICE_L, r)
-            }
-
-            "⟧" -> {
-                pushToken(RestartTypes.SLICE_R, r)
-            }
             // start with >
-            ">>>", "⋙" -> pushToken(RestartTypes.OP_GGG, r)
-            ">>", "≫" -> pushToken(RestartTypes.OP_GG, r)
-            ">=", "≥", "⩾" -> pushToken(RestartTypes.OP_GEQ, r)
-            "/>" -> {
-                pushToken(RestartTypes.OP_GS, r)
-            }
-
-            ">" -> pushToken(RestartTypes.OP_GT, r)
+            ">=", "≥", "⩾", "大于等于" -> pushToken(RestartTypes.OP_GEQ, r)
+            ">", "大于" -> pushToken(RestartTypes.OP_GT, r)
             // start with <
-            "<<<", "⋘" -> pushToken(RestartTypes.OP_LLL, r)
-            "<<", "≪" -> pushToken(RestartTypes.OP_LL, r)
-            "<=", "≤", "⩽" -> pushToken(RestartTypes.OP_LEQ, r)
-            "</" -> {
-                pushToken(RestartTypes.OP_LS, r)
-            }
-
-            "<:", "⊑" -> {
-                pushToken(RestartTypes.OP_IS_A, r)
-            }
-
-            "<!", "⋢" -> {
-                pushToken(RestartTypes.OP_NOT_A, r)
-            }
-
-            "<" -> pushToken(RestartTypes.OP_LT, r)
+            "<=", "≤", "⩽", "小于等于" -> pushToken(RestartTypes.OP_LEQ, r)
+            "<", "小于" -> pushToken(RestartTypes.OP_LT, r)
             // surround with ( )
             "(" -> {
                 pushToken(RestartTypes.PARENTHESIS_L, r)
