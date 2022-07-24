@@ -4,36 +4,41 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ContentIterator
 import com.intellij.openapi.roots.ProjectFileIndex
 import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import restart.ide.file.RestartFileNode
+import restart.language.psi_node.RestartPropertyStatementNode
 
 class RestartProject() {
     companion object {
-        fun getFiles(project: Project): MutableList<PsiFile> {
-            val iter = ProjectFileIterator(project);
+        fun getFiles(project: Project?): RestartInfoStorage {
+            val store = RestartInfoStorage(project);
+            project ?: return store;
             ProjectFileIndex.getInstance(project).iterateContent {
-                iter.processFile(it)
+                store.processFile(it)
             }
-            return iter.files
+            return store
         }
     }
 }
 
-class ProjectFileIterator(val project: Project) : ContentIterator {
-    var files: MutableList<PsiFile> = mutableListOf()
+// TODO: cache
+class RestartInfoStorage(val project: Project?) : ContentIterator {
+    private var files: MutableList<RestartFileNode> = mutableListOf()
     override fun processFile(fileInProject: VirtualFile): Boolean {
+        project ?: return false
         val file = PsiManager.getInstance(project).findFile(fileInProject) as? RestartFileNode
-        analizeFile(file)
         if (file != null) {
             files.add(file)
         }
         return true
     }
 
-    private fun analizeFile(file: RestartFileNode?) {
-        if (file is RestartFileNode) {
-            files.add(file)
+    fun analyzeProperty(): MutableMap<String, RestartPropertyStatementNode> {
+        val map = mutableMapOf<String, RestartPropertyStatementNode>()
+        for (file in files) {
+
+            file.findProperty(map)
         }
+        return map
     }
 }

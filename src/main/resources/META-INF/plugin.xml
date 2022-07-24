@@ -58,11 +58,12 @@
 			implementationClass="restart.ide.formatter.SmartEnter"
 		/>
 		<!-- Goto -->
-		<navbar implementation="restart.ide.goto.VNavigationBarExtension"/>
-		<lang.directNavigationProvider implementation="restart.ide.goto.VDirectNavigationProvider"/>
-		<symbolNavigation
-			forClass="restart.language.symbol.RestartSymbol"
-			implementationClass="restart.ide.goto.VSymbolNavigationProvider"/>
+		<navbar implementation="restart.ide.goto.NavigationBarExtension"/>
+		<gotoSymbolContributor implementation="restart.ide.goto.GotoNameContributor"/>
+		<!--		<lang.directNavigationProvider implementation="restart.ide.goto.VDirectNavigationProvider"/>-->
+		<!--		<symbolNavigation-->
+		<!--			forClass="restart.language.symbol.RestartSymbol"-->
+		<!--			implementationClass="restart.ide.goto.VSymbolNavigationProvider"/>-->
 		<!-- Hint -->
 		<codeInsight.parameterNameHints
 			language="Restart"
@@ -74,13 +75,13 @@
 			language="Restart"
 			implementationClass="restart.ide.hint.RestartInlayVSCProvider"/>
 		<!--		<psi.fileReferenceHelper implementation="restart.ide.reference.RestartFileReference"/>-->
-		<psi.referenceContributor implementation="restart.ide.reference.RestartReferenceContributor"/>
-		<psi.symbolReferenceProvider
-			anyReferenceClass="true"
-			implementationClass="restart.ide.reference.RestartReferenceProvider"
-			hostLanguage="Restart"
-			hostElementClass="com.intellij.psi.xml.XmlAttributeValue"
-			targetClass="restart.language.symbol.RestartSymbol"/>
+<!--		<psi.referenceContributor implementation="restart.ide.reference.RestartReferenceContributor"/>-->
+<!--		<psi.symbolReferenceProvider-->
+<!--			anyReferenceClass="true"-->
+<!--			implementationClass="restart.ide.reference.RestartReferenceProvider"-->
+<!--			hostLanguage="Restart"-->
+<!--			hostElementClass="com.intellij.psi.xml.XmlAttributeValue"-->
+<!--			targetClass="restart.language.symbol.RestartSymbol"/>-->
 		<!-- Declaration -->
 		<typeDeclarationProvider implementation="restart.ide.reference.DeclarationProvider"/>
 		<psi.declarationProvider implementation="restart.ide.reference.RestartDeclarationProvider"/>

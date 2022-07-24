@@ -1,6 +1,10 @@
 package restart.ide.reference
 
+import com.intellij.navigation.ChooseByNameContributor
+import com.intellij.navigation.NavigationItem
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.TextRange
+import com.intellij.pom.PsiDeclaredTarget
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiReference
 
@@ -19,7 +23,7 @@ class RestartReference(private val target: PsiElement) : PsiReference {
     }
 
     override fun getCanonicalText(): String {
-        TODO("Not yet implemented")
+        return element.text
     }
 
     override fun handleElementRename(newElementName: String): PsiElement {
@@ -27,15 +31,16 @@ class RestartReference(private val target: PsiElement) : PsiReference {
     }
 
     override fun bindToElement(element: PsiElement): PsiElement {
-        TODO("Not yet implemented")
+        return target
     }
 
     override fun isReferenceTo(element: PsiElement): Boolean {
-        TODO("Not yet implemented")
+        return target == element
     }
 
     override fun isSoft(): Boolean {
         return false
     }
 }
+
 
