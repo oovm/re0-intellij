@@ -10,6 +10,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
+import restart.language.ast.identifier
 import restart.ide.highlight.RestartHighlightColor as Color
 
 class NodeHighlighter : RestartVisitor(), HighlightVisitor {
@@ -22,7 +23,7 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     override fun visitVariableStatement(o: RestartVariableStatement) {
         highlight(o.kwVariable, Color.KEYWORD)
         highlight(o.identifier, Color.SYM_PROPERTY)
-        highlightBraceKey(o.braceFree, Color.MODIFIER)
+        highlightBraceKey(o.declareBlock, Color.MODIFIER)
     }
 
     override fun visitHeroStatement(o: RestartHeroStatement) {
@@ -34,20 +35,20 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     override fun visitTalentStatement(o: RestartTalentStatement) {
         highlight(o.kwTalent, Color.KEYWORD)
         highlight(o.identifier, Color.SYM_AWARD)
-        highlightBraceKey(o.braceFree, Color.MODIFIER)
+        highlightBraceKey(o.declareBlock, Color.MODIFIER)
     }
 
     override fun visitAwardStatement(o: RestartAwardStatement) {
         highlight(o.kwAward, Color.KEYWORD)
         highlight(o.identifier, Color.SYM_AWARD)
-        highlightBraceKey(o.braceFree, Color.MODIFIER)
+        highlightBraceKey(o.declareBlock, Color.MODIFIER)
     }
 
 
     override fun visitEventStatement(o: RestartEventStatement) {
         highlight(o.kwEvent, Color.KEYWORD)
         highlight(o.identifier, Color.SYM_EVENT)
-        highlightBraceKey(o.braceFree, Color.MODIFIER)
+        highlightBraceKey(o.declareBlock, Color.MODIFIER)
     }
 
     override fun visitNormalPattern(o: RestartNormalPattern) {
@@ -85,7 +86,7 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
 
     override fun visitNumber(o: RestartNumber) {
         o.identifier?.let {
-            highlight(it, Color.OP_NUMBER)
+            highlight(it, Color.MODIFIER)
         }
     }
 

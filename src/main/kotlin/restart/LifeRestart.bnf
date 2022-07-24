@@ -17,7 +17,8 @@
     generateTokenAccessors = false
 
     tokens = [
-        COMMENT = "Comment"
+        COMMENT_SL = "//"
+        COMMENT_TEXT = "Comment"
         // literal
         SYMBOL_XID = "Symbol"
         SYMBOL_RAW = "Symbol"
@@ -140,9 +141,9 @@ declare_statement  ::= kw_declare identifier [modifiers] declare_block {
 kw_declare         ::= identifier
 declare_block      ::= <<brace_free declare_item delimiter>>
 declare_item       ::=
-    declare_key COLON? <<brace_free declare_item delimiter>>
+    declare_key COLON? declare_block
   | declare_key COLON? <<bracket_free normal_statements delimiter>>
-  | declare_key COLON (if_statement|for_statement|while_statement|atoms)
+  | declare_key COLON normal_statements
   ;
 declare_key       ::= identifier|number|KW_IF
 pattern_item      ::= identifier* (DOT3|DOT2) identifier | identifier+;
@@ -177,7 +178,7 @@ ef_statement      ::= KW_ELSE_IF condition block;
 else_statement    ::= KW_ELSE block;
 condition         ::= case_pattern OP_SET expression | expression;
 case_pattern      ::= CASE [identifier* [namepath]] declare_item;
-private block     ::= <<brace_block expression SEMICOLON>>;
+block             ::= <<brace_free normal_statements SEMICOLON>>;
 // ---------------------------------------------------------------------------------------------------------------------
 for_statement     ::= KW_FOR (case_pattern|normal_pattern) KW_IF expression [if_guard] block [else_statement];
 if_guard          ::= KW_IF condition;
@@ -223,7 +224,7 @@ slice_item     ::=
 // ---------------------------------------------------------------------------------------------------------------------
 private atoms  ::= number | string | boolean | namepath;
 boolean        ::= "true" | "false";
-number         ::= (BYTE | INTEGER | DECIMAL) [identifier] {
+number         ::= (BYTE | INTEGER | DECIMAL) [NUMBER_SUFFIX] {
     mixin="restart.language.mixin.MixinNumber"
 }
 string         ::= [identifier] STRING_START STRING_TEXT STRING_END {

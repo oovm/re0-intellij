@@ -28,10 +28,4 @@ public class RestartNumberNode extends MixinNumber implements RestartNumber {
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public RestartIdentifier getIdentifier() {
-    return findChildByClass(RestartIdentifier.class);
-  }
-
 }

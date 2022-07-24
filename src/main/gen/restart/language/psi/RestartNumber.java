@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface RestartNumber extends PsiElement {
 
-  @Nullable
-  RestartIdentifier getIdentifier();
-
 }

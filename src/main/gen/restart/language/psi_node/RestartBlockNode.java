@@ -12,14 +12,14 @@ import restart.language.ast.RestartASTBase;
 import restart.language.psi.*;
 import restart.language.ast.ASTMethods;
 
-public class RestartEfStatementNode extends RestartASTBase implements RestartEfStatement {
+public class RestartBlockNode extends RestartASTBase implements RestartBlock {
 
-  public RestartEfStatementNode(@NotNull ASTNode node) {
+  public RestartBlockNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RestartVisitor visitor) {
-    visitor.visitEfStatement(this);
+    visitor.visitBlock(this);
   }
 
   @Override
@@ -30,14 +30,26 @@ public class RestartEfStatementNode extends RestartASTBase implements RestartEfS
 
   @Override
   @NotNull
-  public RestartBlock getBlock() {
-    return findNotNullChildByClass(RestartBlock.class);
+  public List<RestartExpression> getExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartExpression.class);
   }
 
   @Override
   @NotNull
-  public RestartCondition getCondition() {
-    return findNotNullChildByClass(RestartCondition.class);
+  public List<RestartForStatement> getForStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartForStatement.class);
+  }
+
+  @Override
+  @NotNull
+  public List<RestartIfStatement> getIfStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartIfStatement.class);
+  }
+
+  @Override
+  @NotNull
+  public List<RestartWhileStatement> getWhileStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartWhileStatement.class);
   }
 
 }

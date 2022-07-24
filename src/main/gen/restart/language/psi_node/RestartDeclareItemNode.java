@@ -30,26 +30,26 @@ public class RestartDeclareItemNode extends RestartASTBase implements RestartDec
 
   @Override
   @Nullable
-  public RestartBoolean getBoolean() {
-    return findChildByClass(RestartBoolean.class);
-  }
-
-  @Override
-  @Nullable
   public RestartBracketFree getBracketFree() {
     return findChildByClass(RestartBracketFree.class);
   }
 
   @Override
-  @NotNull
-  public List<RestartDeclareItem> getDeclareItemList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartDeclareItem.class);
+  @Nullable
+  public RestartDeclareBlock getDeclareBlock() {
+    return findChildByClass(RestartDeclareBlock.class);
   }
 
   @Override
   @NotNull
   public RestartDeclareKey getDeclareKey() {
     return findNotNullChildByClass(RestartDeclareKey.class);
+  }
+
+  @Override
+  @Nullable
+  public RestartExpression getExpression() {
+    return findChildByClass(RestartExpression.class);
   }
 
   @Override
@@ -62,24 +62,6 @@ public class RestartDeclareItemNode extends RestartASTBase implements RestartDec
   @Nullable
   public RestartIfStatement getIfStatement() {
     return findChildByClass(RestartIfStatement.class);
-  }
-
-  @Override
-  @Nullable
-  public RestartNamepath getNamepath() {
-    return findChildByClass(RestartNamepath.class);
-  }
-
-  @Override
-  @Nullable
-  public RestartNumber getNumber() {
-    return findChildByClass(RestartNumber.class);
-  }
-
-  @Override
-  @Nullable
-  public RestartString getString() {
-    return findChildByClass(RestartString.class);
   }
 
   @Override

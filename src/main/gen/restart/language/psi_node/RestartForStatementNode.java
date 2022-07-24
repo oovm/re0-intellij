@@ -30,8 +30,8 @@ public class RestartForStatementNode extends RestartASTBase implements RestartFo
 
   @Override
   @NotNull
-  public RestartBraceBlock getBraceBlock() {
-    return findNotNullChildByClass(RestartBraceBlock.class);
+  public RestartBlock getBlock() {
+    return findNotNullChildByClass(RestartBlock.class);
   }
 
   @Override

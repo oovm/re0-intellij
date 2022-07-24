@@ -11,6 +11,10 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitBlock(@NotNull RestartBlock o) {
+    visitPsiElement(o);
+  }
+
   public void visitBoolean(@NotNull RestartBoolean o) {
     visitPsiElement(o);
   }

@@ -61,7 +61,7 @@ class DocumentationProvider : DocumentationProvider {
             OP_ADD, OP_ADD_ASSIGN, OP_ARROW, OP_ARROW2 -> {
                 contextElement
             }
-            TokenType.WHITE_SPACE, RestartTypes.COMMENT -> {
+            TokenType.WHITE_SPACE, -> {
                 null
             }
             else -> {

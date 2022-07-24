@@ -29,8 +29,8 @@ enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String
     STRING_BAD(RestartBundle.messagePointer("color.token.text"), Default.INVALID_STRING_ESCAPE),
     // 标识符
     IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
-    SYM_HERO(RestartBundle.messagePointer("color.token.symbol.trait"), Default.CLASS_REFERENCE),
-    SYM_GENERIC(RestartBundle.messagePointer("color.token.symbol.trait"), Default.METADATA),
+    SYM_HERO(RestartBundle.messagePointer("color.token.symbol.trait"), Default.CONSTANT),
+    SYM_ACHIEVEMENT(RestartBundle.messagePointer("color.token.symbol.trait"), Default.METADATA),
     SYM_AWARD(RestartBundle.messagePointer("color.token.symbol.trait"), Default.INTERFACE_NAME),
     SYM_EVENT(RestartBundle.messagePointer("color.token.symbol.class"), Default.CLASS_NAME),
     SYM_VARIANT(RestartBundle.messagePointer("color.token.symbol.variant"), Default.STATIC_FIELD),

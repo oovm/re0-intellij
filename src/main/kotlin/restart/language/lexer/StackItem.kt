@@ -51,7 +51,11 @@ class StackItem {
      * @return true if this token is whitespace, newline or comment
      */
     fun canSkip(): Boolean {
-        return tokenIs(TokenType.WHITE_SPACE, RestartTypes.COMMENT)
+        return tokenIs(TokenType.WHITE_SPACE, RestartTypes.COMMENT_SL, RestartTypes.COMMENT_TEXT)
+    }
+
+    fun isNumber(): Boolean {
+        return tokenIs(RestartTypes.INTEGER, RestartTypes.DECIMAL, RestartTypes.BYTE)
     }
 
     companion object {

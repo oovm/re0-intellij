@@ -9,6 +9,7 @@ import restart.language.psi_node.*;
 public interface RestartTypes {
 
   IElementType AWARD_STATEMENT = new RestartTokenType("AWARD_STATEMENT");
+  IElementType BLOCK = new RestartTokenType("BLOCK");
   IElementType BOOLEAN = new RestartTokenType("BOOLEAN");
   IElementType BRACE_BLOCK = new RestartTokenType("BRACE_BLOCK");
   IElementType BRACKET_FREE = new RestartTokenType("BRACKET_FREE");
@@ -59,7 +60,8 @@ public interface RestartTypes {
   IElementType CASE = new RestartTokenType("CASE");
   IElementType COLON = new RestartTokenType(":");
   IElementType COMMA = new RestartTokenType("COMMA");
-  IElementType COMMENT = new RestartTokenType("Comment");
+  IElementType COMMENT_SL = new RestartTokenType("//");
+  IElementType COMMENT_TEXT = new RestartTokenType("Comment");
   IElementType DECIMAL = new RestartTokenType("DECIMAL");
   IElementType DOT = new RestartTokenType(".");
   IElementType DOT2 = new RestartTokenType("DOT2");
@@ -71,6 +73,7 @@ public interface RestartTypes {
   IElementType KW_ELSE_IF = new RestartTokenType("KW_ELSE_IF");
   IElementType KW_FOR = new RestartTokenType("KW_FOR");
   IElementType KW_IF = new RestartTokenType("KW_IF");
+  IElementType NUMBER_SUFFIX = new RestartTokenType("NUMBER_SUFFIX");
   IElementType OP_ADD = new RestartTokenType("+");
   IElementType OP_ADD_ASSIGN = new RestartTokenType("+=");
   IElementType OP_AND = new RestartTokenType("&");
@@ -139,6 +142,9 @@ public interface RestartTypes {
       IElementType type = node.getElementType();
       if (type == AWARD_STATEMENT) {
         return new RestartAwardStatementNode(node);
+      }
+      else if (type == BLOCK) {
+        return new RestartBlockNode(node);
       }
       else if (type == BOOLEAN) {
         return new RestartBooleanNode(node);

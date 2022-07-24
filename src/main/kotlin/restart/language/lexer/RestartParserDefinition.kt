@@ -30,7 +30,7 @@ object RestartParserDefinition : ParserDefinition {
         return super.getWhitespaceTokens()
     }
 
-    override fun getCommentTokens(): TokenSet = TokenSet.create(RestartTypes.COMMENT)
+    override fun getCommentTokens(): TokenSet = TokenSet.create(RestartTypes.COMMENT_SL, RestartTypes.COMMENT_TEXT)
 
     override fun getStringLiteralElements(): TokenSet {
         return TokenSet.create(RestartTypes.STRING_START, RestartTypes.STRING_TEXT, RestartTypes.STRING_END)

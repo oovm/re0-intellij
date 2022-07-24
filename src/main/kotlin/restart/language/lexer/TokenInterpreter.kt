@@ -8,15 +8,6 @@ import com.intellij.psi.TokenType.BAD_CHARACTER
 import com.intellij.psi.TokenType.WHITE_SPACE
 import com.intellij.psi.tree.IElementType
 
-/**
- * keywords in any case, except for macros
- */
-private val KEYWORDS_SP = """(?x)
-      \b(?<if>if|若|如果)\b
-    | \b(?<when>当)\b
-    | \b(?<elseif>ef|或者|又若)\b
-    | \b(?<else>else|否则)\b
-""".toRegex()
 private val PUNCTUATIONS = """(?x)
       [.]{1,3}
     | [{}\[\]()]
@@ -67,12 +58,6 @@ private val STRINGS = """(?x)
     | (?<s5>‘)(?<t5>[^’]*)(?<e5>’)
     | (?<s6>“)(?<t6>[^”]*)(?<e6>”)
     """.toRegex()
-private val NUMBERS = """(?x)
-      (?<s1>[1-9]\d*[.]\d+)
-    | (?<s2>0[.]\d+)
-    | (?<s3>0|[1-9]\d*)
-    | (?<s4>0[a-zA-Z][\da-zA-Z]+)
-""".toRegex()
 
 @Suppress("MemberVisibilityCanBePrivate")
 class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOffset: Int) {
@@ -105,8 +90,10 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
     }
 
     private fun codeComment(): Boolean {
-        val r = tryMatch(COMMENTS) ?: return false
-        pushToken(RestartTypes.COMMENT, r)
+        val comment = """(//)([^\r\n]*)""".toRegex()
+        val r = tryMatch(comment) ?: return false
+        pushToken(RestartTypes.COMMENT_SL, r.groups[1]!!)
+        pushToken(RestartTypes.COMMENT_TEXT, r.groups[2]!!)
         return true
     }
 
@@ -136,17 +123,26 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
     }
 
     private fun codeNumber(): Boolean {
-        val r = tryMatch(NUMBERS) ?: return false
+        val numbers = """(?x)
+              (?<s1>[1-9]\d*[.]\d+)
+            | (?<s2>0[.]\d+)
+            | (?<s3>0|[1-9]\d*)
+            | (?<s4>0[a-zA-Z][\da-zA-Z]+)
+        """.toRegex()
+        val r = tryMatch(numbers) ?: return false
         when {
             r.groups["s1"] != null -> {
                 pushToken(RestartTypes.DECIMAL, r)
             }
+
             r.groups["s2"] != null -> {
                 pushToken(RestartTypes.DECIMAL, r)
             }
+
             r.groups["s3"] != null -> {
                 pushToken(RestartTypes.INTEGER, r)
             }
+
             r.groups["s4"] != null -> {
                 pushToken(RestartTypes.BYTE, r)
             }
@@ -166,12 +162,15 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
             r.groups["if"] != null -> {
                 pushToken(RestartTypes.KW_IF, r)
             }
+
             r.groups["elseif"] != null -> {
                 pushToken(RestartTypes.KW_ELSE_IF, r)
             }
+
             r.groups["else"] != null -> {
                 pushToken(RestartTypes.KW_IF, r)
             }
+
             r.groups["when"] != null -> {
                 pushToken(RestartTypes.DECIMAL, r)
             }
@@ -186,13 +185,15 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
         """.toRegex()
         val r = tryMatch(xid) ?: return false
         when {
-            r.value == "not" && lastIs() -> {
-
-
+            lastIs(RestartTypes.DECIMAL, RestartTypes.INTEGER, RestartTypes.BYTE, skipWS = false) -> {
+                pushToken(RestartTypes.NUMBER_SUFFIX, r)
+            }
+            else -> {
+                pushToken(RestartTypes.SYMBOL_XID, r)
             }
         }
 
-        pushToken(RestartTypes.SYMBOL_XID, r)
+
         return true
     }
 
@@ -208,6 +209,7 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
             "." -> {
                 pushToken(RestartTypes.DOT, r)
             }
+
             ":", "∶" -> {
                 pushToken(RestartTypes.COLON, r)
             }
@@ -216,11 +218,13 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
                 pushToken(RestartTypes.OP_PROPORTION, r)
 
             }
+
             ".." -> pushToken(RestartTypes.DOT, r)
             "..." -> pushToken(RestartTypes.DOT, r)
             ";" -> {
                 pushToken(RestartTypes.SEMICOLON, r)
             }
+
             "," -> pushToken(RestartTypes.COMMA, r)
             // start with +
             "++" -> pushToken(RestartTypes.OP_INC, r)
@@ -252,18 +256,23 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
             "∈", "∊" -> {
                 pushToken(RestartTypes.OP_IN, r)
             }
+
             "∉" -> {
                 pushToken(RestartTypes.OP_NOT_IN, r)
             }
+
             "≻", "&>" -> {
                 pushToken(RestartTypes.OP_AND_THEN, r)
             }
+
             "⊁", "|>" -> {
                 pushToken(RestartTypes.OP_OR_ELSE, r)
             }
+
             "⟦" -> {
                 pushToken(RestartTypes.SLICE_L, r)
             }
+
             "⟧" -> {
                 pushToken(RestartTypes.SLICE_R, r)
             }
@@ -274,6 +283,7 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
             "/>" -> {
                 pushToken(RestartTypes.OP_GS, r)
             }
+
             ">" -> pushToken(RestartTypes.OP_GT, r)
             // start with <
             "<<<", "⋘" -> pushToken(RestartTypes.OP_LLL, r)
@@ -282,35 +292,45 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
             "</" -> {
                 pushToken(RestartTypes.OP_LS, r)
             }
+
             "<:", "⊑" -> {
                 pushToken(RestartTypes.OP_IS_A, r)
             }
+
             "<!", "⋢" -> {
                 pushToken(RestartTypes.OP_NOT_A, r)
             }
+
             "<" -> pushToken(RestartTypes.OP_LT, r)
             // surround with ( )
             "(" -> {
                 pushToken(RestartTypes.PARENTHESIS_L, r)
             }
+
             ")" -> {
                 pushToken(RestartTypes.PARENTHESIS_R, r)
             }
+
             "[" -> {
                 pushToken(RestartTypes.BRACKET_L, r)
             }
+
             "]" -> {
                 pushToken(RestartTypes.BRACKET_R, r)
             }
+
             "{" -> {
                 pushToken(RestartTypes.BRACE_L, r)
             }
+
             "}" -> {
                 pushToken(RestartTypes.BRACE_R, r)
             }
+
             "∅", "⤇", "|=>", "⤃", "!=>" -> {
                 pushToken(RestartTypes.OP_EMPTY, r)
             }
+
             else -> pushToken(BAD_CHARACTER, r)
         }
         return true
@@ -319,7 +339,7 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
 
     private fun checkRest() {
         if (startOffset < endOffset) {
-            pushToken(RestartTypes.COMMENT, startOffset, endOffset)
+            pushToken(RestartTypes.COMMENT_TEXT, startOffset, endOffset)
         }
     }
 
@@ -402,7 +422,7 @@ private fun TokenInterpreter.lastIs(vararg token: IElementType, skipWS: Boolean 
 
 private fun TokenInterpreter.lastNot(vararg token: IElementType, skipWS: Boolean = true): Boolean {
     for (item in stack.reversed()) {
-        if (item.tokenIs(WHITE_SPACE, RestartTypes.COMMENT)) {
+        if (item.tokenIs(WHITE_SPACE, RestartTypes.COMMENT_SL, RestartTypes.COMMENT_TEXT)) {
             when {
                 skipWS -> continue
                 else -> return false

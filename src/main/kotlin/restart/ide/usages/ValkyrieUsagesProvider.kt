@@ -14,7 +14,8 @@ class RestartUsagesProvider : FindUsagesProvider {
             RestartLexerAdapter(),
             TokenSet.create(RestartTypes.SYMBOL_XID),
             TokenSet.create(RestartTypes.SYMBOL_RAW),
-            TokenSet.create(RestartTypes.COMMENT),
+            TokenSet.create(RestartTypes.COMMENT_SL),
+            TokenSet.create(RestartTypes.COMMENT_TEXT),
             TokenSet.EMPTY
         )
     }

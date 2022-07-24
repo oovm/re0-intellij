@@ -1,6 +1,6 @@
 package restart.language.ast
 
-import restart.language.psi.RestartTypes.COMMENT
+import restart.language.psi.RestartTypes
 import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiDocCommentBase
 import com.intellij.psi.PsiElement
@@ -15,7 +15,7 @@ class DocumentNode(comment: PsiComment, rawText: String? = null) : RestartASTBas
         this.documentText = rawText?.trimIndent() ?: "[PARSE_FAILED]: ${comment.text}"
     }
 
-    override fun getTokenType(): IElementType = COMMENT
+    override fun getTokenType(): IElementType = RestartTypes.COMMENT_TEXT
     override fun getOwner(): PsiElement? {
         TODO("Not yet implemented")
     }

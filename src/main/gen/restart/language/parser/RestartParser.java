@@ -131,9 +131,15 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // <<brace_block expression SEMICOLON>>
-  static boolean block(PsiBuilder b, int l) {
-    return brace_block(b, l + 1, RestartParser::expression, SEMICOLON_parser_);
+  // <<brace_free normal_statements SEMICOLON>>
+  public static boolean block(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "block")) return false;
+    if (!nextTokenIs(b, BRACE_L)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = brace_free(b, l + 1, RestartParser::normal_statements, SEMICOLON_parser_);
+    exit_section_(b, m, BLOCK, r);
+    return r;
   }
 
   /* ********************************************************** */
@@ -381,9 +387,9 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // declare_key COLON? <<brace_free declare_item delimiter>>
+  // declare_key COLON? declare_block
   //   | declare_key COLON? <<bracket_free normal_statements delimiter>>
-  //   | declare_key COLON (if_statement|for_statement|while_statement|atoms)
+  //   | declare_key COLON normal_statements
   public static boolean declare_item(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declare_item")) return false;
     boolean r;
@@ -395,14 +401,14 @@ public class RestartParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // declare_key COLON? <<brace_free declare_item delimiter>>
+  // declare_key COLON? declare_block
   private static boolean declare_item_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declare_item_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = declare_key(b, l + 1);
     r = r && declare_item_0_1(b, l + 1);
-    r = r && brace_free(b, l + 1, RestartParser::declare_item, RestartParser::delimiter);
+    r = r && declare_block(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -433,26 +439,15 @@ public class RestartParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // declare_key COLON (if_statement|for_statement|while_statement|atoms)
+  // declare_key COLON normal_statements
   private static boolean declare_item_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declare_item_2")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = declare_key(b, l + 1);
     r = r && consumeToken(b, COLON);
-    r = r && declare_item_2_2(b, l + 1);
+    r = r && normal_statements(b, l + 1);
     exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // if_statement|for_statement|while_statement|atoms
-  private static boolean declare_item_2_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "declare_item_2_2")) return false;
-    boolean r;
-    r = if_statement(b, l + 1);
-    if (!r) r = for_statement(b, l + 1);
-    if (!r) r = while_statement(b, l + 1);
-    if (!r) r = atoms(b, l + 1);
     return r;
   }
 
@@ -1012,7 +1007,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (BYTE | INTEGER | DECIMAL) [identifier]
+  // (BYTE | INTEGER | DECIMAL) [NUMBER_SUFFIX]
   public static boolean number(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "number")) return false;
     boolean r;
@@ -1033,10 +1028,10 @@ public class RestartParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // [identifier]
+  // [NUMBER_SUFFIX]
   private static boolean number_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "number_1")) return false;
-    identifier(b, l + 1);
+    consumeToken(b, NUMBER_SUFFIX);
     return true;
   }
 
