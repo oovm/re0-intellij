@@ -9,6 +9,7 @@ import com.intellij.psi.util.PsiTreeUtil
 import restart.RestartBundle
 import restart.RestartLanguage
 import restart.ide.view.RestartViewElement
+import restart.language.psi_node.RestartPropertyStatementNode
 
 /// RestartFile 是个 PsiElement
 class RestartFileNode(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, RestartLanguage) {
@@ -27,4 +28,13 @@ class RestartFileNode(viewProvider: FileViewProvider) : PsiFileBase(viewProvider
     fun isIndexFile(): Boolean {
         return this.name == "index.vk"
     }
+
+    fun findProperty(dict: MutableMap<String, RestartPropertyStatementNode>) {
+         PsiTreeUtil
+            .getChildrenOfTypeAsList(this, RestartPropertyStatementNode::class.java)
+            .forEach {
+                dict[it.name] = it
+            }
+    }
+
 }

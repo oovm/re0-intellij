@@ -5,7 +5,9 @@ package restart.language.mixin
 import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNameIdentifierOwner
+import com.intellij.psi.PsiReference
 import restart.ide.file.RestartIconProvider
+import restart.ide.project.RestartProject
 import restart.ide.view.RestartViewElement
 import restart.language.ast.DeclareNode
 import restart.language.psi_node.RestartIdentifierNode
@@ -37,5 +39,11 @@ open class MixinProperty(node: ASTNode) : DeclareNode(node),
 //        }
         return views.toTypedArray()
     }
+
+    override fun getReference(): PsiReference? {
+        RestartProject.getFiles(project)
+        return super.getReference()
+    }
+
 }
 
