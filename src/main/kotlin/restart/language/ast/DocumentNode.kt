@@ -35,7 +35,6 @@ class DocumentNode(comment: PsiComment, rawText: String? = null) : RestartASTBas
                 "///" -> {
                     DocumentNode(node, node.text)
                 }
-
                 else -> {
                     null
                 }

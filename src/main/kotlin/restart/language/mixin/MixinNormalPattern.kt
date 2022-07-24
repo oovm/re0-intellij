@@ -17,52 +17,6 @@ import restart.language.psi.RestartNormalPattern
 abstract class MixinNormalPattern(node: ASTNode) : RestartASTBase(node),
     RestartNormalPattern {
 
-    override fun getReference(): PsiReference? {
-        return RestartReference(node.psi.parent)
-    }
 
-    override fun getReferences(): Array<PsiReference> {
-        val out = mutableListOf<PsiReference>()
-        for (child in identifierList) {
-            if (child is RestartIdentifier) {
-                out.add(RestartReference(child))
-            }
-        }
-        return out.toTypedArray()
-    }
-
-    override fun getOwnReferences(): MutableCollection<out PsiSymbolReference> {
-        val out = mutableListOf<PsiSymbolReference>()
-        for (child in identifierList) {
-            if (child is RestartIdentifier) {
-                out.add(Modifier(child))
-            }
-        }
-        return out
-    }
-
-    override fun getOwnDeclarations(): MutableCollection<out PsiSymbolDeclaration> {
-        val out = mutableListOf<PsiSymbolDeclaration>()
-//        for (child in patternItemList) {
-//            if (child is RestartPatternPair) {
-//                out.add(Pattern(child))
-//            }
-//        }
-        return out
-    }
-
-    class Modifier(private var target: RestartIdentifier) : PsiSymbolReference {
-        override fun getElement(): PsiElement {
-            return target
-        }
-
-        override fun getRangeInElement(): TextRange {
-            return element.textRange
-        }
-
-        override fun resolveReference(): MutableCollection<out Symbol> {
-            TODO("Not yet implemented")
-        }
-    }
 }
 

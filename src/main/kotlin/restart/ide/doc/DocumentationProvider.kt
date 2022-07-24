@@ -18,7 +18,6 @@ class DocumentationProvider : DocumentationProvider {
     }
 
     override fun findDocComment(file: PsiFile, range: TextRange): PsiDocCommentBase? {
-        println("findDocComment $file $range")
         return super.findDocComment(file, range)
     }
 
@@ -42,7 +41,6 @@ class DocumentationProvider : DocumentationProvider {
 
     // 按住 Ctrl 后悬浮
     override fun getQuickNavigateInfo(element: PsiElement?, originalElement: PsiElement?): String? {
-        print("getQuickNavigateInfo: $element, $originalElement")
         return originalElement?.let { this.generateHoverDoc(it, originalElement) }
     }
 

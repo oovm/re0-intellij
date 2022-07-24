@@ -36,7 +36,6 @@ class RestartInfoStorage(val project: Project?) : ContentIterator {
     fun analyzeProperty(): MutableMap<String, RestartPropertyStatementNode> {
         val map = mutableMapOf<String, RestartPropertyStatementNode>()
         for (file in files) {
-
             file.findProperty(map)
         }
         return map

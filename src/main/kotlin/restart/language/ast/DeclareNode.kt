@@ -4,6 +4,7 @@ package restart.language.ast
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.lang.ASTNode
 import com.intellij.navigation.ItemPresentation
+import com.intellij.navigation.NavigationRequest
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNameIdentifierOwner
 import javax.swing.Icon
@@ -21,6 +22,9 @@ abstract class DeclareNode(node: ASTNode) : RestartASTBase(node),
     override fun getTextOffset(): Int = this.nameIdentifier.textOffset
     override fun getPresentation(): ItemPresentation {
         return PresentationData(this.name, "", this.getIcon(0), null)
+    }
+    override fun canNavigate(): Boolean {
+        return true
     }
 }
 

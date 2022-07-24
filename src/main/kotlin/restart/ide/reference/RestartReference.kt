@@ -1,29 +1,26 @@
 package restart.ide.reference
 
-import com.intellij.navigation.ChooseByNameContributor
-import com.intellij.navigation.NavigationItem
-import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.TextRange
-import com.intellij.pom.PsiDeclaredTarget
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiReference
+import restart.ide.project.RestartProject
 
 
-class RestartReference(private val target: PsiElement) : PsiReference {
+class RestartReference(private val caller: PsiElement) : PsiReference {
     override fun getElement(): PsiElement {
-        return target
+        return caller
     }
 
     override fun getRangeInElement(): TextRange {
-        return element.textRange
+        return TextRange(0, caller.textLength)
     }
 
-    override fun resolve(): PsiElement {
-        return element
+    override fun resolve(): PsiElement? {
+        return RestartProject.getFiles(caller.project).analyzeProperty()[canonicalText]
     }
 
     override fun getCanonicalText(): String {
-        return element.text
+        return caller.text
     }
 
     override fun handleElementRename(newElementName: String): PsiElement {
@@ -31,11 +28,11 @@ class RestartReference(private val target: PsiElement) : PsiReference {
     }
 
     override fun bindToElement(element: PsiElement): PsiElement {
-        return target
+        return caller
     }
 
     override fun isReferenceTo(element: PsiElement): Boolean {
-        return target == element
+        return caller == element
     }
 
     override fun isSoft(): Boolean {

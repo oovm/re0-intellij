@@ -12,6 +12,10 @@ open class RestartASTBase(node: ASTNode) : ASTWrapperPsiElement(node) {
         return listOf()
     }
 
+    fun getKind(): String {
+        return this.javaClass.simpleName
+    }
+
     fun collectAnnotations(): List<PsiElement> {
         return listOf()
     }
