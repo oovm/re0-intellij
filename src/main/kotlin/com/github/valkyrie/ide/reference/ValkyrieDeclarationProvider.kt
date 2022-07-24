@@ -1,6 +1,6 @@
 package com.github.valkyrie.ide.reference
 
-import com.github.valkyrie.language.psi_node.ValkyrieClassStatementNode
+
 import com.github.valkyrie.language.symbol.ValkyrieClass
 import com.intellij.model.Symbol
 import com.intellij.model.psi.PsiSymbolDeclaration

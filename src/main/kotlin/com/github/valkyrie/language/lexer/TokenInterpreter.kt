@@ -1,9 +1,9 @@
-@file:OptIn(ExperimentalStdlibApi::class)
+@file:OptIn(ExperimentalStdlibApi::class, ExperimentalStdlibApi::class)
 
 package com.github.valkyrie.language.lexer
 
 import com.github.valkyrie.language.lexer.LexerContext.Coding
-import com.github.valkyrie.language.psi.ValkyrieTypes
+import com.github.valkyrie.language.psi.RestartTypes
 import com.intellij.psi.TokenType.BAD_CHARACTER
 import com.intellij.psi.TokenType.WHITE_SPACE
 import com.intellij.psi.tree.IElementType
@@ -109,7 +109,7 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
 
     private fun codeComment(): Boolean {
         val r = tryMatch(COMMENTS) ?: return false
-        pushToken(ValkyrieTypes.COMMENT, r)
+        pushToken(RestartTypes.COMMENT, r)
         return true
     }
 
@@ -128,9 +128,9 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
             val text = r.groups[slot[1]]
             val end = r.groups[slot[2]]
             if (text != null) {
-                pushToken(ValkyrieTypes.STRING_START, start!!)
-                pushToken(ValkyrieTypes.STRING_TEXT, text)
-                pushToken(ValkyrieTypes.STRING_END, end!!)
+                pushToken(RestartTypes.STRING_START, start!!)
+                pushToken(RestartTypes.STRING_TEXT, text)
+                pushToken(RestartTypes.STRING_END, end!!)
                 break
             }
 
@@ -142,16 +142,16 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
         val r = tryMatch(NUMBERS) ?: return false
         when {
             r.groups["s1"] != null -> {
-                pushToken(ValkyrieTypes.DECIMAL, r)
+                pushToken(RestartTypes.DECIMAL, r)
             }
             r.groups["s2"] != null -> {
-                pushToken(ValkyrieTypes.DECIMAL, r)
+                pushToken(RestartTypes.DECIMAL, r)
             }
             r.groups["s3"] != null -> {
-                pushToken(ValkyrieTypes.INTEGER, r)
+                pushToken(RestartTypes.INTEGER, r)
             }
             r.groups["s4"] != null -> {
-                pushToken(ValkyrieTypes.BYTE, r)
+                pushToken(RestartTypes.BYTE, r)
             }
         }
         return true
@@ -161,28 +161,25 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
         val r = tryMatch(KEYWORDS_SP) ?: return false
         when (r.value) {
             "namespace", "namespace!", "namespace*", "namespace?" -> {
-                pushToken(ValkyrieTypes.OP_NAMESAPCE, r)
-            }
-            "using", "using!", "using*", "using?" -> {
-                pushToken(ValkyrieTypes.OP_IMPORT, r)
+                pushToken(RestartTypes.OP_NAMESAPCE, r)
             }
             "as", "as?", "as!", "as*" -> {
-                pushToken(ValkyrieTypes.OP_AS, r)
+                pushToken(RestartTypes.OP_AS, r)
             }
             "is" -> {
-                pushToken(ValkyrieTypes.OP_IS_A, r)
+                pushToken(RestartTypes.OP_IS_A, r)
             }
             "in" -> {
-                pushToken(ValkyrieTypes.OP_IN, r)
+                pushToken(RestartTypes.OP_IN, r)
             }
             "not" -> {
-                pushToken(ValkyrieTypes.OP_NOT, r)
+                pushToken(RestartTypes.OP_NOT, r)
             }
             "if" -> {
-                pushToken(ValkyrieTypes.KW_IF, r)
+                pushToken(RestartTypes.KW_IF, r)
             }
             "for" -> {
-                pushToken(ValkyrieTypes.KW_FOR, r)
+                pushToken(RestartTypes.KW_FOR, r)
             }
             else -> {
                 pushToken(BAD_CHARACTER, r)
@@ -204,7 +201,7 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
             }
         }
 
-        pushToken(ValkyrieTypes.SYMBOL_XID, r)
+        pushToken(RestartTypes.SYMBOL_XID, r)
         return true
     }
 
@@ -212,135 +209,118 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
         val r = tryMatch(PUNCTUATIONS) ?: return false
         when (r.value) {
             // DOT
-            ":=", "≔" -> pushToken(ValkyrieTypes.OP_BIND, r)
-            "->", "⟶" -> pushToken(ValkyrieTypes.OP_ARROW, r)
-            "=>", "⇒" -> pushToken(ValkyrieTypes.OP_ARROW2, r)
-            "==", "≡" -> pushToken(ValkyrieTypes.OP_EQ, r)
-            "=" -> pushToken(ValkyrieTypes.OP_SET, r)
+            ":=", "≔" -> pushToken(RestartTypes.OP_BIND, r)
+            "->", "⟶" -> pushToken(RestartTypes.OP_ARROW, r)
+            "=>", "⇒" -> pushToken(RestartTypes.OP_ARROW2, r)
+            "==", "≡" -> pushToken(RestartTypes.OP_EQ, r)
+            "=" -> pushToken(RestartTypes.OP_SET, r)
             "." -> {
-                pushToken(ValkyrieTypes.DOT, r)
+                pushToken(RestartTypes.DOT, r)
             }
             ":", "∶" -> {
-                pushToken(ValkyrieTypes.COLON, r)
+                pushToken(RestartTypes.COLON, r)
             }
 
             "::", "∷" -> {
-                pushToken(ValkyrieTypes.OP_PROPORTION, r)
+                pushToken(RestartTypes.OP_PROPORTION, r)
 
             }
-            ".." -> pushToken(ValkyrieTypes.DOT, r)
-            "..." -> pushToken(ValkyrieTypes.DOT, r)
+            ".." -> pushToken(RestartTypes.DOT, r)
+            "..." -> pushToken(RestartTypes.DOT, r)
             ";" -> {
-                pushToken(ValkyrieTypes.SEMICOLON, r)
+                pushToken(RestartTypes.SEMICOLON, r)
             }
-            "@", "@@", "@!", "@?" -> pushToken(ValkyrieTypes.AT, r)
-            "," -> pushToken(ValkyrieTypes.COMMA, r)
+            "," -> pushToken(RestartTypes.COMMA, r)
             // start with +
-            "++" -> pushToken(ValkyrieTypes.OP_INC, r)
-            "+=" -> pushToken(ValkyrieTypes.OP_ADD_ASSIGN, r)
-            "+" -> pushToken(ValkyrieTypes.OP_ADD, r)
+            "++" -> pushToken(RestartTypes.OP_INC, r)
+            "+=" -> pushToken(RestartTypes.OP_ADD_ASSIGN, r)
+            "+" -> pushToken(RestartTypes.OP_ADD, r)
             // start with -
-            "--" -> pushToken(ValkyrieTypes.OP_DEC, r)
-            "-=" -> pushToken(ValkyrieTypes.OP_SUB_ASSIGN, r)
-            "-" -> pushToken(ValkyrieTypes.OP_SUB, r)
+            "--" -> pushToken(RestartTypes.OP_DEC, r)
+            "-=" -> pushToken(RestartTypes.OP_SUB_ASSIGN, r)
+            "-" -> pushToken(RestartTypes.OP_SUB, r)
             // start with *
-            "*=" -> pushToken(ValkyrieTypes.OP_MUL_ASSIGN, r)
-            "*" -> pushToken(ValkyrieTypes.OP_MUL, r)
+            "*=" -> pushToken(RestartTypes.OP_MUL_ASSIGN, r)
+            "*" -> pushToken(RestartTypes.OP_MUL, r)
             // start with /
-            "/=" -> pushToken(ValkyrieTypes.OP_DIV_ASSIGN, r)
-            "/" -> pushToken(ValkyrieTypes.OP_DIV, r)
+            "/=" -> pushToken(RestartTypes.OP_DIV_ASSIGN, r)
+            "/" -> pushToken(RestartTypes.OP_DIV, r)
             // start with &
-            "&&=" -> pushToken(ValkyrieTypes.OP_AND_ASSIGN, r)
-            "&&" -> pushToken(ValkyrieTypes.OP_AND, r)
-            "&=" -> pushToken(ValkyrieTypes.OP_AND_ASSIGN, r)
-            "&" -> pushToken(ValkyrieTypes.OP_AND, r)
+            "&&=" -> pushToken(RestartTypes.OP_AND_ASSIGN, r)
+            "&&" -> pushToken(RestartTypes.OP_AND, r)
+            "&=" -> pushToken(RestartTypes.OP_AND_ASSIGN, r)
+            "&" -> pushToken(RestartTypes.OP_AND, r)
             //
             // start with !
-            "!!" -> pushToken(ValkyrieTypes.OP_NE, r)
-            "!=" -> pushToken(ValkyrieTypes.OP_NE, r)
-            "!" -> pushToken(ValkyrieTypes.OP_NOT, r)
-            "|" -> pushToken(ValkyrieTypes.OP_OR, r)
-            "^" -> pushToken(ValkyrieTypes.OP_POW, r)
+            "!!" -> pushToken(RestartTypes.OP_NE, r)
+            "!=" -> pushToken(RestartTypes.OP_NE, r)
+            "!" -> pushToken(RestartTypes.OP_NOT, r)
+            "|" -> pushToken(RestartTypes.OP_OR, r)
+            "^" -> pushToken(RestartTypes.OP_POW, r)
             // start with =
             "∈", "∊" -> {
-                pushToken(ValkyrieTypes.OP_IN, r)
+                pushToken(RestartTypes.OP_IN, r)
             }
             "∉" -> {
-                pushToken(ValkyrieTypes.OP_NOT_IN, r)
+                pushToken(RestartTypes.OP_NOT_IN, r)
             }
             "≻", "&>" -> {
-                pushToken(ValkyrieTypes.OP_AND_THEN, r)
+                pushToken(RestartTypes.OP_AND_THEN, r)
             }
             "⊁", "|>" -> {
-                pushToken(ValkyrieTypes.OP_OR_ELSE, r)
+                pushToken(RestartTypes.OP_OR_ELSE, r)
             }
             "⟦" -> {
-                pushToken(ValkyrieTypes.SLICE_L, r)
+                pushToken(RestartTypes.SLICE_L, r)
             }
             "⟧" -> {
-                pushToken(ValkyrieTypes.SLICE_R, r)
+                pushToken(RestartTypes.SLICE_R, r)
             }
             // start with >
-            ">>>", "⋙" -> pushToken(ValkyrieTypes.OP_GGG, r)
-            ">>", "≫" -> pushToken(ValkyrieTypes.OP_GG, r)
-            ">=", "≥", "⩾" -> pushToken(ValkyrieTypes.OP_GEQ, r)
+            ">>>", "⋙" -> pushToken(RestartTypes.OP_GGG, r)
+            ">>", "≫" -> pushToken(RestartTypes.OP_GG, r)
+            ">=", "≥", "⩾" -> pushToken(RestartTypes.OP_GEQ, r)
             "/>" -> {
-                pushToken(ValkyrieTypes.OP_GS, r)
+                pushToken(RestartTypes.OP_GS, r)
             }
-            ">" -> pushToken(ValkyrieTypes.OP_GT, r)
+            ">" -> pushToken(RestartTypes.OP_GT, r)
             // start with <
-            "<<<", "⋘" -> pushToken(ValkyrieTypes.OP_LLL, r)
-            "<<", "≪" -> pushToken(ValkyrieTypes.OP_LL, r)
-            "<=", "≤", "⩽" -> pushToken(ValkyrieTypes.OP_LEQ, r)
+            "<<<", "⋘" -> pushToken(RestartTypes.OP_LLL, r)
+            "<<", "≪" -> pushToken(RestartTypes.OP_LL, r)
+            "<=", "≤", "⩽" -> pushToken(RestartTypes.OP_LEQ, r)
             "</" -> {
-                pushToken(ValkyrieTypes.OP_LS, r)
+                pushToken(RestartTypes.OP_LS, r)
             }
             "<:", "⊑" -> {
-                pushToken(ValkyrieTypes.OP_IS_A, r)
+                pushToken(RestartTypes.OP_IS_A, r)
             }
             "<!", "⋢" -> {
-                pushToken(ValkyrieTypes.OP_NOT_A, r)
+                pushToken(RestartTypes.OP_NOT_A, r)
             }
-            "<" -> pushToken(ValkyrieTypes.OP_LT, r)
+            "<" -> pushToken(RestartTypes.OP_LT, r)
             // surround with ( )
             "(" -> {
-                pushToken(ValkyrieTypes.PARENTHESIS_L, r)
+                pushToken(RestartTypes.PARENTHESIS_L, r)
             }
             ")" -> {
-                pushToken(ValkyrieTypes.PARENTHESIS_R, r)
+                pushToken(RestartTypes.PARENTHESIS_R, r)
             }
             "[" -> {
-                pushToken(ValkyrieTypes.BRACKET_L, r)
+                pushToken(RestartTypes.BRACKET_L, r)
             }
             "]" -> {
-                pushToken(ValkyrieTypes.BRACKET_R, r)
+                pushToken(RestartTypes.BRACKET_R, r)
             }
             "{" -> {
-                pushToken(ValkyrieTypes.BRACE_L, r)
+                pushToken(RestartTypes.BRACE_L, r)
             }
             "}" -> {
-                pushToken(ValkyrieTypes.BRACE_R, r)
+                pushToken(RestartTypes.BRACE_R, r)
             }
             "∅", "⤇", "|=>", "⤃", "!=>" -> {
-                pushToken(ValkyrieTypes.OP_EMPTY, r)
+                pushToken(RestartTypes.OP_EMPTY, r)
             }
             else -> pushToken(BAD_CHARACTER, r)
-        }
-        return true
-    }
-
-    private fun matchesK(): Boolean {
-
-        val patterns = """(?x)
-            | 
-            | ;
-        """.toRegex()
-        val r = patterns.matchAt(buffer, startOffset) ?: return false
-        when (r.value) {
-            "extension" -> pushToken(ValkyrieTypes.KW_EXTENSION, r)
-            "namespace*", "namespace" -> pushToken(ValkyrieTypes.KW_NAMESPACE, r)
-            "using!" -> pushToken(ValkyrieTypes.KW_IMPORT, r)
-            else -> TODO("unreachable ${r.value}")
         }
         return true
     }
@@ -348,7 +328,7 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
 
     private fun checkRest() {
         if (startOffset < endOffset) {
-            pushToken(ValkyrieTypes.COMMENT, startOffset, endOffset)
+            pushToken(RestartTypes.COMMENT, startOffset, endOffset)
         }
     }
 
@@ -430,7 +410,7 @@ private fun TokenInterpreter.lastIs(vararg token: IElementType, skipWS: Boolean 
 
 private fun TokenInterpreter.lastNot(vararg token: IElementType, skipWS: Boolean = true): Boolean {
     for (item in stack.reversed()) {
-        if (item.tokenIs(WHITE_SPACE, ValkyrieTypes.COMMENT)) {
+        if (item.tokenIs(WHITE_SPACE, RestartTypes.COMMENT)) {
             when {
                 skipWS -> continue
                 else -> return false

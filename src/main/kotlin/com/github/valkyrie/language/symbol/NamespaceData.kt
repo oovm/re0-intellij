@@ -2,7 +2,9 @@
 
 package com.github.valkyrie.language.symbol
 
-import com.github.valkyrie.language.psi_node.ValkyrieNamespaceStatementNode
+
+import com.github.valkyrie.language.psi.ValkyrieEventStatement
+import com.github.valkyrie.language.psi_node.ValkyrieEventStatementNode
 import com.intellij.codeInsight.lookup.LookupElement
 import com.intellij.lang.documentation.DocumentationTarget
 import com.intellij.model.Pointer
@@ -16,14 +18,14 @@ import com.intellij.psi.PsiDocCommentBase
 import com.intellij.psi.PsiElement
 
 
-class NamespaceData(val nav: ValkyrieNamespaceStatementNode) : Symbol, Pointer<NamespaceData>, PsiSymbolDeclaration {
+class NamespaceData(val nav: ValkyrieEventStatementNode) : Symbol, Pointer<NamespaceData>, PsiSymbolDeclaration {
 
     override fun createPointer(): Pointer<out NamespaceData> = this
     override fun dereference(): NamespaceData = this
     override fun getSymbol(): Symbol = this
-    override fun getDeclaringElement(): PsiElement = nav.nameIdentifier!!
+    override fun getDeclaringElement(): PsiElement = nav.nameIdentifier
 
-    override fun getRangeInDeclaringElement(): TextRange = nav.nameIdentifier!!.textRange
+    override fun getRangeInDeclaringElement(): TextRange = nav.nameIdentifier.textRange
     override fun getAbsoluteRange(): TextRange = nav.textRange
 
     companion object {

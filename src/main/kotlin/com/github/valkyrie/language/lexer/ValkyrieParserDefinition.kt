@@ -3,8 +3,8 @@ package com.github.valkyrie.language.lexer
 
 import com.github.valkyrie.ValkyrieLanguage
 import com.github.valkyrie.ide.file.ValkyrieFileNode
-import com.github.valkyrie.language.parser.ValkyrieParser
-import com.github.valkyrie.language.psi.ValkyrieTypes
+import com.github.valkyrie.language.parser.RestartParser
+import com.github.valkyrie.language.psi.RestartTypes
 
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
@@ -22,7 +22,7 @@ import com.intellij.psi.tree.TokenSet
 object ValkyrieParserDefinition : ParserDefinition {
     override fun createLexer(project: Project): Lexer = ValkyrieLexerAdapter()
 
-    override fun createParser(project: Project): PsiParser = ValkyrieParser()
+    override fun createParser(project: Project): PsiParser = RestartParser()
 
     override fun getFileNodeType(): IFileElementType = IFileElementType(ValkyrieLanguage)
 
@@ -30,13 +30,13 @@ object ValkyrieParserDefinition : ParserDefinition {
         return super.getWhitespaceTokens()
     }
 
-    override fun getCommentTokens(): TokenSet = TokenSet.create(ValkyrieTypes.COMMENT)
+    override fun getCommentTokens(): TokenSet = TokenSet.create(RestartTypes.COMMENT)
 
     override fun getStringLiteralElements(): TokenSet {
-        return TokenSet.create(ValkyrieTypes.STRING_START, ValkyrieTypes.STRING_TEXT, ValkyrieTypes.STRING_END)
+        return TokenSet.create(RestartTypes.STRING_START, RestartTypes.STRING_TEXT, RestartTypes.STRING_END)
     }
 
-    override fun createElement(node: ASTNode): PsiElement = ValkyrieTypes.Factory.createElement(node)
+    override fun createElement(node: ASTNode): PsiElement = RestartTypes.Factory.createElement(node)
 
     override fun createFile(viewProvider: FileViewProvider): PsiFile = ValkyrieFileNode(viewProvider)
 

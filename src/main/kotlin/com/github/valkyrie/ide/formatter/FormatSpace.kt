@@ -1,7 +1,7 @@
 package com.github.valkyrie.ide.formatter
 
 import com.github.valkyrie.ValkyrieLanguage
-import com.github.valkyrie.language.psi.ValkyrieTypes.*
+import com.github.valkyrie.language.psi.RestartTypes.*
 import com.intellij.formatting.SpacingBuilder
 import com.intellij.psi.codeStyle.CodeStyleSettings
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings
@@ -31,7 +31,6 @@ data class FormatSpace(val commonSettings: CommonCodeStyleSettings, val spacingB
             OP_MUL,
             OP_SUB,
             OP_PROPORTION,
-            AT,
         )
         private val remove_space_newline_before = TokenSet.create(
             BRACKET_R,

@@ -63,9 +63,6 @@
 		<symbolNavigation
 			forClass="com.github.valkyrie.language.symbol.ValkyrieSymbol"
 			implementationClass="com.github.valkyrie.ide.goto.VSymbolNavigationProvider"/>
-		<codeInsight.gotoSuper
-			language="Valkyrie"
-			implementationClass="com.github.valkyrie.ide.goto.VGotoSuperHandler"/>
 		<!-- Hint -->
 		<codeInsight.parameterNameHints
 			language="Valkyrie"
@@ -87,9 +84,6 @@
 		<!-- Declaration -->
 		<typeDeclarationProvider implementation="com.github.valkyrie.ide.reference.DeclarationProvider"/>
 		<psi.declarationProvider implementation="com.github.valkyrie.ide.reference.ValkyrieDeclarationProvider"/>
-		<declarationRangeHandler
-			key="org.rust.lang.core.psi.ValkyrieClass"
-			implementationClass="com.github.valkyrie.ide.reference.declaration_range.ClassDeclarationHandler"/>
 		<findUsagesHandlerFactory implementation="com.github.valkyrie.ide.usages.ValkyrieUsagesFactory"/>
 		<lang.findUsagesProvider
 			language="Valkyrie"

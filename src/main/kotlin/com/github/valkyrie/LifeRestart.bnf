@@ -1,17 +1,17 @@
 {
-    parserClass = "com.github.valkyrie.language.parser.ValkyrieParser"
-    parserUtilClass = "com.github.valkyrie.language.psi.ValkyrieParserExtension"
+    parserClass = "com.github.valkyrie.language.parser.RestartParser"
+    parserUtilClass = "com.github.valkyrie.language.psi.RestartParserExtension"
 
-    extends = "com.github.valkyrie.language.ast.ValkyrieASTBase"
+    extends = "com.github.valkyrie.language.ast.RestartASTBase"
 
-    psiClassPrefix = "Valkyrie"
+    psiClassPrefix = "Restart"
     psiImplClassSuffix = "Node"
     psiPackage = "com.github.valkyrie.language.psi"
     psiImplPackage = "com.github.valkyrie.language.psi_node"
 
-    elementTypeHolderClass = "com.github.valkyrie.language.psi.ValkyrieTypes"
-    elementTypeClass = "com.github.valkyrie.language.psi.ValkyrieTokenType"
-    tokenTypeClass = "com.github.valkyrie.language.psi.ValkyrieTokenType"
+    elementTypeHolderClass = "com.github.valkyrie.language.psi.RestartTypes"
+    elementTypeClass = "com.github.valkyrie.language.psi.RestartTokenType"
+    tokenTypeClass = "com.github.valkyrie.language.psi.RestartTokenType"
 
     psiImplUtilClass = "com.github.valkyrie.language.ast.ASTMethods"
     generateTokenAccessors = false
@@ -130,7 +130,6 @@ private normal_statements ::=
     if_statement
   | for_statement
   | while_statement
-  | new_statement
   | expression
   ;
 // ---------------------------------------------------------------------------------------------------------------------
@@ -140,26 +139,24 @@ declare_statement  ::= kw_declare identifier [modifiers] <<brace_block kw_declar
 kw_declare         ::= identifier
 // ---------------------------------------------------------------------------------------------------------------------
 variable_statement ::= kw_variable identifier [modifiers] <<brace_block kw_declare COMMA>> {
-    mixin="com.github.valkyrie.language.mixin.MixinNamespace"
+    mixin="com.github.valkyrie.language.mixin.MixinProperty"
 };
 kw_variable        ::= "variable" | "property" | "属性"
 // ---------------------------------------------------------------------------------------------------------------------
 event_statement    ::= kw_event identifier [modifiers] <<brace_block kw_declare COMMA>> {
-    mixin="com.github.valkyrie.language.mixin.MixinExtension"
+    mixin="com.github.valkyrie.language.mixin.MixinEvent"
 }
 kw_event           ::= "event" | "事件"
 // ---------------------------------------------------------------------------------------------------------------------
 hero_statement     ::= kw_hero identifier [modifiers] <<brace_block kw_declare COMMA>> {
-    mixin="com.github.valkyrie.language.mixin.MixinClass"
+    mixin="com.github.valkyrie.language.mixin.MixinHero"
 };
 kw_hero            ::= "character" | "hero" | "人物" | "英雄";
 // ---------------------------------------------------------------------------------------------------------------------
 award_statement    ::= kw_award identifier [modifiers] <<brace_block kw_declare COMMA>> {
-    mixin="com.github.valkyrie.language.mixin.MixinType"
+    mixin="com.github.valkyrie.language.mixin.MixinAward"
 }
-kw_award           ::= "award"|"成就";
-// ---------------------------------------------------------------------------------------------------------------------
-trait_block       ::= <<brace_free top_statements SEMICOLON>>;
+kw_award           ::= "award" | "成就";
 // ---------------------------------------------------------------------------------------------------------------------
 if_statement      ::= (KW_IF condition block) [ef_statement* [else_statement]]
 ef_statement      ::= kw_else_if condition block;
@@ -185,11 +182,9 @@ pattern_item      ::= identifier* (DOT3|DOT2) identifier | identifier+;
 pattern_value     ::= identifier | pattern;
 // ---------------------------------------------------------------------------------------------------------------------
 while_statement   ::= WHILE condition block;
-// -------------- -------------------------------------------------------------------------------------------------------
-new_statement     ::= NEW modifiers [type_generic] [COLON type_expression] trait_block;
 // ---------------------------------------------------------------------------------------------------------------------
 expression        ::= expr (op_binary expr)*;
-private expr      ::= op_prefix* term (op_suffix|call_suffix|type_generic|slice)*;
+private expr      ::= op_prefix* term (op_suffix|call_suffix|slice)*;
 private op_binary ::=
       OP_SET | OP_EQ | OP_NE
     | OP_ADD | OP_ADD_ASSIGN
@@ -208,10 +203,6 @@ private op_binary ::=
 private op_prefix ::= OP_ADD | OP_SUB | OP_NOT | BANG | AMP | DOT3 | DOT2;
 private op_suffix ::= BANG | QUESTION;
 call_suffix       ::= <<parenthesis expression COMMA>>;
-// ---------------------------------------------------------------------------------------------------------------------
-type_expression   ::= type_expr (op_binary type_expr)*;
-private type_expr ::= op_prefix* term (op_suffix|call_suffix|type_generic|slice)*;
-type_generic      ::= <<bracket_block ([identifier COLON] type_expression) COMMA>>;
 // ---------------------------------------------------------------------------------------------------------------------
 private term   ::= range | list | tuple | atoms;
 tuple          ::= <<parenthesis expression COMMA>>

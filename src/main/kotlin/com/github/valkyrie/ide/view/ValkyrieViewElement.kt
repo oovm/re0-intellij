@@ -1,7 +1,7 @@
 package com.github.valkyrie.ide.view
 
 import com.github.valkyrie.ide.file.ValkyrieFileNode
-import com.github.valkyrie.language.ast.ValkyrieASTBase
+import com.github.valkyrie.language.ast.RestartASTBase
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.ide.structureView.StructureViewTreeElement
 import com.intellij.ide.util.treeView.smartTree.SortableTreeElement
@@ -30,7 +30,7 @@ class ValkyrieViewElement(private val self: NavigatablePsiElement, var view: Ite
 
     override fun getChildren(): Array<out TreeElement> = when (self) {
         is ValkyrieFileNode -> self.getChildrenView()
-        is ValkyrieASTBase -> self.getChildrenView()
+        is RestartASTBase -> self.getChildrenView()
         else -> arrayOf()
     }
 

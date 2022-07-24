@@ -4,7 +4,7 @@ package com.github.valkyrie.language.symbol
 
 import com.github.valkyrie.ide.doc.DocumentationRenderer
 import com.github.valkyrie.ide.highlight.ValkyrieHighlightColor
-import com.github.valkyrie.language.psi.ValkyrieTypes
+import com.github.valkyrie.language.psi.RestartTypes
 import com.intellij.model.Pointer
 import com.intellij.model.Symbol
 import com.intellij.psi.PsiElement
@@ -29,13 +29,13 @@ class KeywordData : Symbol, Pointer<KeywordData> {
 
     companion object {
         fun builtinData(name: PsiElement): KeywordData? = when (name.elementType) {
-            ValkyrieTypes.KW_CLASS -> KeywordData(
+            RestartTypes.KW_ELSE_IF -> KeywordData(
                 "class",
                 """
                 class A()
                 """.trimIndent()
             )
-            ValkyrieTypes.KW_TRAIT -> KeywordData(
+            RestartTypes.KW_EVENT -> KeywordData(
                 "trait",
                 """
                 trait A()

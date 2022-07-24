@@ -1,7 +1,6 @@
 package com.github.valkyrie.ide.folding
 
 import com.github.valkyrie.ide.file.ValkyrieFileNode
-import com.github.valkyrie.language.psi.ValkyrieTypes
 import com.intellij.lang.ASTNode
 import com.intellij.lang.folding.CustomFoldingBuilder
 import com.intellij.lang.folding.FoldingDescriptor

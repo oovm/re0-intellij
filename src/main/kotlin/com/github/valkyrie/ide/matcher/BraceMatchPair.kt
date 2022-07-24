@@ -1,7 +1,7 @@
 package com.github.valkyrie.ide.matcher
 
 import com.github.valkyrie.language.lexer.ValkyrieParserDefinition
-import com.github.valkyrie.language.psi.ValkyrieTypes.*
+import com.github.valkyrie.language.psi.RestartTypes.*
 import com.intellij.lang.BracePair
 import com.intellij.lang.PairedBraceMatcher
 import com.intellij.psi.PsiFile

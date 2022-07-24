@@ -7,25 +7,10 @@ import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 
 class ValkyrieFoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : ValkyrieRecursiveVisitor() {
-//    override fun visitClassBrace(o: ValkyrieClassBrace) {
-//        fold(o.node, o.firstChild.endOffset, o.lastChild.startOffset)
-//    }
-//
-//    override fun visitClassTuple(o: ValkyrieClassTuple) {
-//        fold(o.node, o.firstChild.endOffset, o.lastChild.startOffset)
-//    }
-
     override fun visitBraceBlock(o: ValkyrieBraceBlock) {
         fold(o.node, o.firstChild.endOffset, o.lastChild.startOffset)
     }
 
-
-
-    override fun visitMatchStatement(o: ValkyrieMatchStatement) {
-        val block = o.matchBlock
-        fold(block.node, block.firstChild.endOffset, block.lastChild.startOffset)
-        super.visitMatchStatement(o)
-    }
 
 
     private fun fold(element: PsiElement) {

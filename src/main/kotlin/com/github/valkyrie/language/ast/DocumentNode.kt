@@ -1,12 +1,12 @@
 package com.github.valkyrie.language.ast
 
-import com.github.valkyrie.language.psi.ValkyrieTypes.COMMENT
+import com.github.valkyrie.language.psi.RestartTypes.COMMENT
 import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiDocCommentBase
 import com.intellij.psi.PsiElement
 import com.intellij.psi.tree.IElementType
 
-class DocumentNode(comment: PsiComment, rawText: String? = null) : ValkyrieASTBase(comment.node),
+class DocumentNode(comment: PsiComment, rawText: String? = null) : RestartASTBase(comment.node),
     PsiDocCommentBase {
 
     private val documentText: String

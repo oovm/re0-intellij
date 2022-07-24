@@ -1,5 +1,10 @@
 package com.github.valkyrie.ide.hint
 
+import com.github.valkyrie.language.psi.ValkyrieAwardStatement
+import com.github.valkyrie.language.psi.ValkyrieDeclareStatement
+import com.github.valkyrie.language.psi.ValkyrieEventStatement
+import com.github.valkyrie.language.psi.ValkyrieHeroStatement
+import com.github.valkyrie.language.psi.ValkyrieVariableStatement
 import com.github.valkyrie.language.psi_node.*
 import com.intellij.codeInsight.hints.VcsCodeVisionLanguageContext
 import com.intellij.openapi.editor.Editor
@@ -15,12 +20,13 @@ class ValkyrieInlayVSCProvider : VcsCodeVisionLanguageContext {
     }
 
     override fun isAccepted(element: PsiElement): Boolean = when (element) {
-        //  is ValkyrieLetStatementNode,
-        is ValkyrieTaggedStatementNode,
-        is ValkyrieClassStatementNode,
-        is ValkyrieTraitStatementNode,
-        is ValkyrieExtendsStatementNode,
+        is ValkyrieVariableStatement,
+        is ValkyrieEventStatement,
+        is ValkyrieAwardStatement,
+        is ValkyrieHeroStatement,
+        is ValkyrieDeclareStatement,
         -> true
+
         else -> false
     }
 }

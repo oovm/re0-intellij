@@ -2,7 +2,7 @@ package com.github.valkyrie.language.symbol
 
 import com.github.valkyrie.ide.doc.DocumentationRenderer
 import com.github.valkyrie.ide.highlight.ValkyrieHighlightColor
-import com.github.valkyrie.language.psi.ValkyrieTypes
+import com.github.valkyrie.language.psi.RestartTypes
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.elementType
 
@@ -31,14 +31,14 @@ class OperatorData(
 
     companion object {
         fun builtinData(name: PsiElement): OperatorData? = when (name.elementType) {
-            ValkyrieTypes.OP_ADD -> OperatorData(
+            RestartTypes.OP_ADD -> OperatorData(
                 "add",
                 "+",
                 """
                 a + b
                 """.trimIndent()
             )
-            ValkyrieTypes.OP_INC -> OperatorData(
+            RestartTypes.OP_INC -> OperatorData(
                 "++",
                 "increase",
                 """

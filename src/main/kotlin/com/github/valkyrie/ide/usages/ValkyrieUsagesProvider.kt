@@ -1,7 +1,7 @@
 package com.github.valkyrie.ide.usages
 
 import com.github.valkyrie.language.lexer.ValkyrieLexerAdapter
-import com.github.valkyrie.language.psi.ValkyrieTypes
+import com.github.valkyrie.language.psi.RestartTypes
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner
 import com.intellij.lang.cacheBuilder.WordsScanner
 import com.intellij.lang.findUsages.FindUsagesProvider
@@ -12,9 +12,9 @@ class ValkyrieUsagesProvider : FindUsagesProvider {
     override fun getWordsScanner(): WordsScanner {
         return DefaultWordsScanner(
             ValkyrieLexerAdapter(),
-            TokenSet.create(ValkyrieTypes.SYMBOL_XID),
-            TokenSet.create(ValkyrieTypes.SYMBOL_RAW),
-            TokenSet.create(ValkyrieTypes.COMMENT),
+            TokenSet.create(RestartTypes.SYMBOL_XID),
+            TokenSet.create(RestartTypes.SYMBOL_RAW),
+            TokenSet.create(RestartTypes.COMMENT),
             TokenSet.EMPTY
         )
     }

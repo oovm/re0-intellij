@@ -1,6 +1,6 @@
 package com.github.valkyrie.ide.completion
 
-import com.github.valkyrie.language.psi.ValkyrieTypes
+import com.github.valkyrie.language.psi.RestartTypes
 import com.intellij.codeInsight.completion.*
 import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.patterns.PlatformPatterns
@@ -10,7 +10,7 @@ class VCompletionContributor : CompletionContributor() {
     init {
         extend(
             CompletionType.BASIC,
-            PlatformPatterns.psiElement(ValkyrieTypes.IDENTIFIER),
+            PlatformPatterns.psiElement(RestartTypes.IDENTIFIER),
             SymbolCompletionProvider()
         )
 //        extend(

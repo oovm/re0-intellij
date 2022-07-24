@@ -2,8 +2,8 @@ package com.github.valkyrie.ide.doc
 
 import com.github.valkyrie.ide.file.ValkyrieFileNode
 import com.github.valkyrie.language.ast.DocumentNode
-import com.github.valkyrie.language.psi.ValkyrieTypes
-import com.github.valkyrie.language.psi.ValkyrieTypes.*
+import com.github.valkyrie.language.psi.RestartTypes
+import com.github.valkyrie.language.psi.RestartTypes.*
 import com.intellij.lang.documentation.DocumentationProvider
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.util.TextRange
@@ -61,7 +61,7 @@ class DocumentationProvider : DocumentationProvider {
             OP_ADD, OP_ADD_ASSIGN, OP_ARROW, OP_ARROW2 -> {
                 contextElement
             }
-            TokenType.WHITE_SPACE, ValkyrieTypes.COMMENT -> {
+            TokenType.WHITE_SPACE, RestartTypes.COMMENT -> {
                 null
             }
             else -> {

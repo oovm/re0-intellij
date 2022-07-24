@@ -1,6 +1,6 @@
 package com.github.valkyrie.language.lexer
 
-import com.github.valkyrie.language.psi.ValkyrieTypes
+import com.github.valkyrie.language.psi.RestartTypes
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
 
@@ -51,7 +51,7 @@ class StackItem {
      * @return true if this token is whitespace, newline or comment
      */
     fun canSkip(): Boolean {
-        return tokenIs(TokenType.WHITE_SPACE, ValkyrieTypes.COMMENT)
+        return tokenIs(TokenType.WHITE_SPACE, RestartTypes.COMMENT)
     }
 
     companion object {

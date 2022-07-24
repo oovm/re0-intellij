@@ -9,7 +9,7 @@ import com.intellij.psi.NavigatablePsiElement
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 
-open class ValkyrieASTBase(node: ASTNode) : ASTWrapperPsiElement(node) {
+open class RestartASTBase(node: ASTNode) : ASTWrapperPsiElement(node) {
     fun collectDocuments(): List<PsiElement> {
         return listOf()
     }

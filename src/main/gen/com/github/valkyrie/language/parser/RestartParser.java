@@ -3,16 +3,15 @@ package com.github.valkyrie.language.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-import static com.github.valkyrie.language.psi.ValkyrieTypes.*;
-import static com.github.valkyrie.language.psi.ValkyrieParserExtension.*;
+import static com.github.valkyrie.language.psi.RestartTypes.*;
+import static com.github.valkyrie.language.psi.RestartParserExtension.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.TokenSet;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.LightPsiParser;
 
 @SuppressWarnings({"SimplifiableIfStatement", "UnusedAssignment"})
-public class ValkyrieParser implements PsiParser, LightPsiParser {
+public class RestartParser implements PsiParser, LightPsiParser {
 
   public ASTNode parse(IElementType t, PsiBuilder b) {
     parseLight(t, b);
@@ -118,7 +117,7 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
     r = kw_award(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && award_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, ValkyrieParser::kw_declare, COMMA_parser_);
+    r = r && brace_block(b, l + 1, RestartParser::kw_declare, COMMA_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -133,7 +132,7 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
   /* ********************************************************** */
   // <<brace_block expression SEMICOLON>>
   static boolean block(PsiBuilder b, int l) {
-    return brace_block(b, l + 1, ValkyrieParser::expression, SEMICOLON_parser_);
+    return brace_block(b, l + 1, RestartParser::expression, SEMICOLON_parser_);
   }
 
   /* ********************************************************** */
@@ -315,7 +314,7 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, PARENTHESIS_L)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = parenthesis(b, l + 1, ValkyrieParser::expression, COMMA_parser_);
+    r = parenthesis(b, l + 1, RestartParser::expression, COMMA_parser_);
     exit_section_(b, m, CALL_SUFFIX, r);
     return r;
   }
@@ -404,7 +403,7 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
     r = kw_declare(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && declare_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, ValkyrieParser::kw_declare, COMMA_parser_);
+    r = r && brace_block(b, l + 1, RestartParser::kw_declare, COMMA_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -470,7 +469,7 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
     r = kw_event(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && event_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, ValkyrieParser::kw_declare, COMMA_parser_);
+    r = r && brace_block(b, l + 1, RestartParser::kw_declare, COMMA_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -612,7 +611,7 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
     r = kw_hero(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && hero_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, ValkyrieParser::kw_declare, COMMA_parser_);
+    r = r && brace_block(b, l + 1, RestartParser::kw_declare, COMMA_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -804,7 +803,7 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, BRACKET_L)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = bracket_block(b, l + 1, ValkyrieParser::expression, COMMA_parser_);
+    r = bracket_block(b, l + 1, RestartParser::expression, COMMA_parser_);
     exit_section_(b, m, LIST, r);
     return r;
   }
@@ -930,7 +929,7 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, NORMAL_PATTERN, "<normal pattern>");
     r = normal_pattern_0(b, l + 1);
-    if (!r) r = sequence(b, l + 1, ValkyrieParser::pattern_item, COMMA_parser_);
+    if (!r) r = sequence(b, l + 1, RestartParser::pattern_item, COMMA_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -1154,9 +1153,9 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "pattern")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = parenthesis(b, l + 1, ValkyrieParser::pattern_pair, COMMA_parser_);
-    if (!r) r = bracket_block(b, l + 1, ValkyrieParser::pattern_pair, COMMA_parser_);
-    if (!r) r = brace_block(b, l + 1, ValkyrieParser::pattern_pair, COMMA_parser_);
+    r = parenthesis(b, l + 1, RestartParser::pattern_pair, COMMA_parser_);
+    if (!r) r = bracket_block(b, l + 1, RestartParser::pattern_pair, COMMA_parser_);
+    if (!r) r = brace_block(b, l + 1, RestartParser::pattern_pair, COMMA_parser_);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1322,7 +1321,7 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, SLICE_L)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = slice_block(b, l + 1, ValkyrieParser::slice_item, COMMA_parser_);
+    r = slice_block(b, l + 1, RestartParser::slice_item, COMMA_parser_);
     exit_section_(b, m, RANGE, r);
     return r;
   }
@@ -1415,7 +1414,7 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, SLICE_L)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = slice_block(b, l + 1, ValkyrieParser::slice_item, COMMA_parser_);
+    r = slice_block(b, l + 1, RestartParser::slice_item, COMMA_parser_);
     exit_section_(b, m, SLICE, r);
     return r;
   }
@@ -1641,7 +1640,7 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, BRACE_L)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = brace_free(b, l + 1, ValkyrieParser::top_statements, SEMICOLON_parser_);
+    r = brace_free(b, l + 1, RestartParser::top_statements, SEMICOLON_parser_);
     exit_section_(b, m, TRAIT_BLOCK, r);
     return r;
   }
@@ -1653,7 +1652,7 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, PARENTHESIS_L)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = parenthesis(b, l + 1, ValkyrieParser::expression, COMMA_parser_);
+    r = parenthesis(b, l + 1, RestartParser::expression, COMMA_parser_);
     exit_section_(b, m, TUPLE, r);
     return r;
   }
@@ -1745,7 +1744,7 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
     if (!nextTokenIs(b, BRACKET_L)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = bracket_block(b, l + 1, ValkyrieParser::type_generic_0_0, COMMA_parser_);
+    r = bracket_block(b, l + 1, RestartParser::type_generic_0_0, COMMA_parser_);
     exit_section_(b, m, TYPE_GENERIC, r);
     return r;
   }
@@ -1788,7 +1787,7 @@ public class ValkyrieParser implements PsiParser, LightPsiParser {
     r = kw_variable(b, l + 1);
     r = r && identifier(b, l + 1);
     r = r && variable_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, ValkyrieParser::kw_declare, COMMA_parser_);
+    r = r && brace_block(b, l + 1, RestartParser::kw_declare, COMMA_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

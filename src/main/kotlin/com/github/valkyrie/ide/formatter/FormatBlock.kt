@@ -67,12 +67,7 @@ class FormatBlock(
         val lastLine = node.lastChildNode == child;
         val isCornerChild = firstLine || lastLine
         return when (node.psi) {
-            is ValkyrieImportBlock,
-            is ValkyrieTaggedBlock, is ValkyrieBitflagBlock,
-            is ValkyrieClassBlock,
-            is ValkyrieForallBlock, is ValkyrieTraitBlock,
-            is ValkyrieDefineBlock,
-            -> when {
+            is ValkyrieBraceBlock,   -> when {
                 isCornerChild -> Indent.getNoneIndent()
                 else -> Indent.getNormalIndent()
             }
@@ -82,7 +77,7 @@ class FormatBlock(
 
     private fun computeAlignment(child: ASTNode): Alignment? {
         return when (node.psi) {
-            is ValkyrieBitflagItem -> Alignment.createAlignment(true, Alignment.Anchor.LEFT)
+//            is ValkyrieBitflagItem -> Alignment.createAlignment(true, Alignment.Anchor.LEFT)
             else -> null
         }
     }
