@@ -1,6 +1,6 @@
 package restart.language.ast
 
-import restart.ide.view.ValkyrieViewElement
+import restart.ide.view.RestartViewElement
 import com.intellij.extapi.psi.ASTWrapperPsiElement
 import com.intellij.ide.util.treeView.smartTree.TreeElement
 import com.intellij.lang.ASTNode
@@ -16,10 +16,10 @@ open class RestartASTBase(node: ASTNode) : ASTWrapperPsiElement(node) {
     fun collectAnnotations(): List<PsiElement> {
         return listOf()
     }
-    open fun getChildrenView(): Array<ValkyrieViewElement> {
-        val childrenView: MutableList<ValkyrieViewElement> = mutableListOf()
+    open fun getChildrenView(): Array<RestartViewElement> {
+        val childrenView: MutableList<RestartViewElement> = mutableListOf()
         for (item in PsiTreeUtil.getChildrenOfTypeAsList(this, NavigatablePsiElement::class.java)) {
-            childrenView.add(ValkyrieViewElement(item))
+            childrenView.add(RestartViewElement(item))
         }
         return childrenView.toTypedArray()
     }

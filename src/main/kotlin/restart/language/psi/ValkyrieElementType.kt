@@ -1,6 +1,6 @@
 package restart.language.psi
 
-import restart.ValkyrieLanguage
+import restart.RestartLanguage
 import com.intellij.psi.tree.IElementType
 
-class ValkyrieElementType(debugName: String) : IElementType(debugName, ValkyrieLanguage)
+class RestartElementType(debugName: String) : IElementType(debugName, RestartLanguage)

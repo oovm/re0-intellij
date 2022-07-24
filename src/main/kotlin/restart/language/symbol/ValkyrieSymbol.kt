@@ -7,11 +7,11 @@ import com.intellij.navigation.NavigatableSymbol
 import com.intellij.navigation.NavigationTarget
 
 @Suppress("UnstableApiUsage")
-abstract class ValkyrieSymbol :
-    Pointer<ValkyrieSymbol>, NavigationTarget,
+abstract class RestartSymbol :
+    Pointer<RestartSymbol>, NavigationTarget,
     PresentableSymbol, NavigatableSymbol, DocumentationSymbol {
-    override fun createPointer(): Pointer<out ValkyrieSymbol> = this;
-    override fun dereference(): ValkyrieSymbol = this
+    override fun createPointer(): Pointer<out RestartSymbol> = this;
+    override fun dereference(): RestartSymbol = this
 
     open var fullName: List<String> = listOf("anonymous", "UNKNOWN");
     open fun getNamespace(): List<String> = fullName.subList(0, fullName.count() - 1)

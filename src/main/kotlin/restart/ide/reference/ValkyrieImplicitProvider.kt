@@ -5,7 +5,7 @@ import com.intellij.model.psi.ImplicitReferenceProvider
 import com.intellij.psi.PsiElement
 
 @Suppress("UnstableApiUsage")
-class ValkyrieImplicitProvider : ImplicitReferenceProvider {
+class RestartImplicitProvider : ImplicitReferenceProvider {
     override fun resolveAsReference(element: PsiElement): MutableCollection<out Symbol> {
         TODO("Not yet implemented $element")
     }

@@ -11,7 +11,7 @@ import com.intellij.ide.util.treeView.smartTree.Sorter
 import com.intellij.psi.PsiFile
 
 
-class StructureViewModel(psiFile: PsiFile?) : StructureViewModelBase(psiFile!!, ValkyrieViewElement(psiFile)),
+class StructureViewModel(psiFile: PsiFile?) : StructureViewModelBase(psiFile!!, RestartViewElement(psiFile)),
     ElementInfoProvider {
     override fun getSorters() = arrayOf(Sorter.ALPHA_SORTER)
 
@@ -24,7 +24,7 @@ class StructureViewModel(psiFile: PsiFile?) : StructureViewModelBase(psiFile!!, 
     }
 
     override fun isAlwaysLeaf(element: StructureViewTreeElement): Boolean {
-        // return element.value is ValkyrieBitflagStatement
+        // return element.value is RestartBitflagStatement
         return false
     }
 }

@@ -1,6 +1,6 @@
 package restart.ide.formatter
 
-import restart.ValkyrieLanguage
+import restart.RestartLanguage
 import restart.language.psi.RestartTypes.*
 import com.intellij.formatting.SpacingBuilder
 import com.intellij.psi.codeStyle.CodeStyleSettings
@@ -10,7 +10,7 @@ import com.intellij.psi.tree.TokenSet
 data class FormatSpace(val commonSettings: CommonCodeStyleSettings, val spacingBuilder: SpacingBuilder) {
     companion object {
         fun create(settings: CodeStyleSettings): FormatSpace {
-            val commonSettings = settings.getCommonSettings(ValkyrieLanguage)
+            val commonSettings = settings.getCommonSettings(RestartLanguage)
             return FormatSpace(commonSettings, createSpacingBuilder(commonSettings))
         }
 

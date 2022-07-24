@@ -1,8 +1,8 @@
 package restart.language.lexer
 
 
-import restart.ValkyrieLanguage
-import restart.ide.file.ValkyrieFileNode
+import restart.RestartLanguage
+import restart.ide.file.RestartFileNode
 import restart.language.parser.RestartParser
 import restart.language.psi.RestartTypes
 
@@ -19,12 +19,12 @@ import com.intellij.psi.tree.IFileElementType
 import com.intellij.psi.tree.TokenSet
 
 
-object ValkyrieParserDefinition : ParserDefinition {
-    override fun createLexer(project: Project): Lexer = ValkyrieLexerAdapter()
+object RestartParserDefinition : ParserDefinition {
+    override fun createLexer(project: Project): Lexer = RestartLexerAdapter()
 
-    override fun createParser(project: Project): PsiParser = _root_ide_package_.restart.language.parser.RestartParser()
+    override fun createParser(project: Project): PsiParser = RestartParser()
 
-    override fun getFileNodeType(): IFileElementType = IFileElementType(ValkyrieLanguage)
+    override fun getFileNodeType(): IFileElementType = IFileElementType(RestartLanguage)
 
     override fun getWhitespaceTokens(): TokenSet {
         return super.getWhitespaceTokens()
@@ -38,7 +38,7 @@ object ValkyrieParserDefinition : ParserDefinition {
 
     override fun createElement(node: ASTNode): PsiElement = RestartTypes.Factory.createElement(node)
 
-    override fun createFile(viewProvider: FileViewProvider): PsiFile = ValkyrieFileNode(viewProvider)
+    override fun createFile(viewProvider: FileViewProvider): PsiFile = RestartFileNode(viewProvider)
 
     override fun spaceExistenceTypeBetweenTokens(left: ASTNode, right: ASTNode): SpaceRequirements {
         return SpaceRequirements.MAY

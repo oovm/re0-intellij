@@ -1,1 +1,1 @@
-rootProject.name = "Valkyrie Intellij"
+rootProject.name = "Restart Intellij"

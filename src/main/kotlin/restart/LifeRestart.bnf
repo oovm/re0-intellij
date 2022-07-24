@@ -133,10 +133,17 @@ private normal_statements ::=
   | expression
   ;
 // ---------------------------------------------------------------------------------------------------------------------
-declare_statement  ::= kw_declare identifier [modifiers] <<brace_block kw_declare COMMA>> {
+declare_statement  ::= kw_declare identifier [modifiers] <<brace_block declare_item COMMA>> {
     mixin="restart.language.mixin.MixinDeclare"
 }
 kw_declare         ::= identifier
+declare_item       ::=
+    declare_key COLON expression
+  | declare_key COLON? <<bracket_block expression delimiter>>
+  | declare_key COLON? <<brace_block declare_item delimiter>>
+  ;
+declare_key       ::= identifier|number
+pattern_item      ::= identifier* (DOT3|DOT2) identifier | identifier+;
 // ---------------------------------------------------------------------------------------------------------------------
 variable_statement ::= kw_variable identifier [modifiers] <<brace_block kw_declare COMMA>> {
     mixin="restart.language.mixin.MixinProperty"
@@ -163,23 +170,15 @@ ef_statement      ::= kw_else_if condition block;
 kw_else_if        ::= "else" KW_IF | "ef"
 else_statement    ::= "else" block;
 condition         ::= case_pattern OP_SET expression | expression;
-case_pattern      ::= CASE [identifier* [namepath]] pattern;
+case_pattern      ::= CASE [identifier* [namepath]] declare_item;
 private block     ::= <<brace_block expression SEMICOLON>>;
 // ---------------------------------------------------------------------------------------------------------------------
 for_statement     ::= KW_FOR (case_pattern|normal_pattern) KW_IF expression [if_guard] block [else_statement];
 if_guard          ::= KW_IF condition;
-normal_pattern    ::= identifier* pattern | <<sequence pattern_item COMMA>> {
+normal_pattern    ::= identifier* declare_item | <<sequence pattern_item COMMA>> {
     mixin="restart.language.mixin.MixinNormalPattern"
 };
 // ---------------------------------------------------------------------------------------------------------------------
-private pattern   ::=
-    <<parenthesis   pattern_pair COMMA>>
-  | <<bracket_block pattern_pair COMMA>>
-  | <<brace_block   pattern_pair COMMA>>
-  ;
-pattern_pair      ::= identifier* COLON pattern_value | identifier* (DOT3|DOT2) identifier | identifier+;
-pattern_item      ::= identifier* (DOT3|DOT2) identifier | identifier+;
-pattern_value     ::= identifier | pattern;
 // ---------------------------------------------------------------------------------------------------------------------
 while_statement   ::= WHILE condition block;
 // ---------------------------------------------------------------------------------------------------------------------
@@ -203,6 +202,7 @@ private op_binary ::=
 private op_prefix ::= OP_ADD | OP_SUB | OP_NOT | BANG | AMP | DOT3 | DOT2;
 private op_suffix ::= BANG | QUESTION;
 call_suffix       ::= <<parenthesis expression COMMA>>;
+private delimiter ::= COMMA|SEMICOLON
 // ---------------------------------------------------------------------------------------------------------------------
 private term   ::= range | list | tuple | atoms;
 tuple          ::= <<parenthesis expression COMMA>>

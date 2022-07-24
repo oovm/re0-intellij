@@ -1,6 +1,6 @@
 package restart.ide.matcher
 
-import restart.language.lexer.ValkyrieParserDefinition
+import restart.language.lexer.RestartParserDefinition
 import restart.language.psi.RestartTypes.*
 import com.intellij.lang.BracePair
 import com.intellij.lang.PairedBraceMatcher
@@ -26,7 +26,7 @@ class BraceMatchPair : PairedBraceMatcher {
 
     companion object {
         private val InsertPairBraceBefore = TokenSet.orSet(
-            ValkyrieParserDefinition.commentTokens,
+            RestartParserDefinition.commentTokens,
             TokenSet.create(
                 TokenType.WHITE_SPACE,
                 COMMA,

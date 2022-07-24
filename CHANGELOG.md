@@ -1,11 +1,11 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# Valkyrie Intellij Changelog
+# Restart Intellij Changelog
 
 
 ## [0.0.2] Initial Version
 ### FIX
-- Fix ValkyrieFileReference endpoint
+- Fix RestartFileReference endpoint
 
 ## [0.0.0] Initial Version
 

@@ -1,6 +1,6 @@
 package restart.ide.formatter
 
-import restart.ide.file.ValkyrieFileNode
+import restart.ide.file.RestartFileNode
 import com.intellij.lang.SmartEnterProcessorWithFixers
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
@@ -27,7 +27,7 @@ class SmartEnter : SmartEnterProcessorWithFixers() {
 
     private class PlainEnterProcessor : FixEnterProcessor() {
         override fun doEnter(atCaret: PsiElement, file: PsiFile, editor: Editor, modified: Boolean): Boolean {
-            if (file !is ValkyrieFileNode) return false
+            if (file !is RestartFileNode) return false
             plainEnter(editor)
             return true
         }

@@ -1,17 +1,17 @@
 package restart.ide.file
 
-import restart.ValkyrieBundle
-import restart.ValkyrieLanguage
+import restart.RestartBundle
+import restart.RestartLanguage
 import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.Icon
 
-object ValkyrieFileType : LanguageFileType(ValkyrieLanguage) {
-    override fun getName(): String = ValkyrieLanguage.id
+object RestartFileType : LanguageFileType(RestartLanguage) {
+    override fun getName(): String = RestartLanguage.id
 
-    override fun getDescription(): String = ValkyrieBundle.message("filetype.description")
+    override fun getDescription(): String = RestartBundle.message("filetype.description")
 
-    override fun getDefaultExtension(): String = "vk;valkyrie;"
+    override fun getDefaultExtension(): String = "re0;restart;"
 
-    override fun getIcon(): Icon = ValkyrieIconProvider.FILE
+    override fun getIcon(): Icon = RestartIconProvider.FILE
 
 }

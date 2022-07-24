@@ -1,10 +1,10 @@
 package restart.language.mixin
 
-import restart.ide.reference.ValkyrieReference
+import restart.ide.reference.RestartReference
 import restart.language.ast.RestartASTBase
-import restart.language.psi.ValkyrieIdentifier
-import restart.language.psi.ValkyrieNormalPattern
-import restart.language.psi.ValkyriePatternPair
+import restart.language.psi.RestartIdentifier
+import restart.language.psi.RestartNormalPattern
+import restart.language.psi.RestartPatternPair
 import com.intellij.lang.ASTNode
 import com.intellij.model.Symbol
 import com.intellij.model.psi.PsiSymbolDeclaration
@@ -16,17 +16,17 @@ import com.intellij.psi.PsiReference
 
 @Suppress("UnstableApiUsage")
 abstract class MixinNormalPattern(node: ASTNode) : RestartASTBase(node),
-    ValkyrieNormalPattern {
+    RestartNormalPattern {
 
     override fun getReference(): PsiReference? {
-        return ValkyrieReference(node.psi.parent)
+        return RestartReference(node.psi.parent)
     }
 
     override fun getReferences(): Array<PsiReference> {
         val out = mutableListOf<PsiReference>()
         for (child in identifierList) {
-            if (child is ValkyrieIdentifier) {
-                out.add(ValkyrieReference(child))
+            if (child is RestartIdentifier) {
+                out.add(RestartReference(child))
             }
         }
         return out.toTypedArray()
@@ -35,7 +35,7 @@ abstract class MixinNormalPattern(node: ASTNode) : RestartASTBase(node),
     override fun getOwnReferences(): MutableCollection<out PsiSymbolReference> {
         val out = mutableListOf<PsiSymbolReference>()
         for (child in identifierList) {
-            if (child is ValkyrieIdentifier) {
+            if (child is RestartIdentifier) {
                 out.add(Modifier(child))
             }
         }
@@ -45,14 +45,14 @@ abstract class MixinNormalPattern(node: ASTNode) : RestartASTBase(node),
     override fun getOwnDeclarations(): MutableCollection<out PsiSymbolDeclaration> {
         val out = mutableListOf<PsiSymbolDeclaration>()
 //        for (child in patternItemList) {
-//            if (child is ValkyriePatternPair) {
+//            if (child is RestartPatternPair) {
 //                out.add(Pattern(child))
 //            }
 //        }
         return out
     }
 
-    class Modifier(private var target: ValkyrieIdentifier) : PsiSymbolReference {
+    class Modifier(private var target: RestartIdentifier) : PsiSymbolReference {
         override fun getElement(): PsiElement {
             return target
         }
@@ -66,7 +66,7 @@ abstract class MixinNormalPattern(node: ASTNode) : RestartASTBase(node),
         }
     }
 
-    class Pattern(private var target: ValkyriePatternPair) : PsiSymbolDeclaration {
+    class Pattern(private var target: RestartPatternPair) : PsiSymbolDeclaration {
         override fun getDeclaringElement(): PsiElement {
             return target
         }

@@ -4,8 +4,8 @@ import com.intellij.application.options.CodeStyleAbstractConfigurable
 import com.intellij.application.options.SmartIndentOptionsEditor
 import com.intellij.psi.codeStyle.*
 
-class ValkyrieCodeStyleSetting : LanguageCodeStyleSettingsProvider() {
-    override fun getLanguage() = restart.ValkyrieLanguage
+class RestartCodeStyleSetting : LanguageCodeStyleSettingsProvider() {
+    override fun getLanguage() = restart.RestartLanguage
 
     override fun getIndentOptionsEditor() = SmartIndentOptionsEditor()
 
@@ -19,7 +19,7 @@ class ValkyrieCodeStyleSetting : LanguageCodeStyleSettingsProvider() {
             configurableDisplayName
         ) {
             override fun createPanel(settings: CodeStyleSettings?) = settings?.let {
-                ValkyrieCodeStyleMainPanel(currentSettings, it)
+                RestartCodeStyleMainPanel(currentSettings, it)
             }
         }
     }

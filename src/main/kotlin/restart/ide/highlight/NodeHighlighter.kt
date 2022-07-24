@@ -1,7 +1,7 @@
 package restart.ide.highlight
 
 
-import restart.ide.file.ValkyrieFileNode
+import restart.ide.file.RestartFileNode
 import restart.language.ast.isMutable
 import restart.language.psi.*
 import com.intellij.codeInsight.daemon.impl.HighlightInfo
@@ -10,35 +10,35 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import restart.ide.highlight.ValkyrieHighlightColor as Color
+import restart.ide.highlight.RestartHighlightColor as Color
 
-class NodeHighlighter : ValkyrieVisitor(), HighlightVisitor {
+class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null
 
-    override fun visitDeclareStatement(o: ValkyrieDeclareStatement) {
+    override fun visitDeclareStatement(o: RestartDeclareStatement) {
         highlight(o.kwDeclare, Color.KEYWORD)
     }
 
-    override fun visitVariableStatement(o: ValkyrieVariableStatement) {
+    override fun visitVariableStatement(o: RestartVariableStatement) {
         highlight(o.kwVariable, Color.KEYWORD)
     }
 
-    override fun visitHeroStatement(o: ValkyrieHeroStatement) {
+    override fun visitHeroStatement(o: RestartHeroStatement) {
         highlight(o.kwHero, Color.KEYWORD)
     }
 
-    override fun visitAwardStatement(o: ValkyrieAwardStatement) {
+    override fun visitAwardStatement(o: RestartAwardStatement) {
         highlight(o.kwAward, Color.KEYWORD)
     }
 
 
-    override fun visitEventStatement(o: ValkyrieEventStatement) {
+    override fun visitEventStatement(o: RestartEventStatement) {
         highlight(o.kwEvent, Color.KEYWORD)
     }
 
-    override fun visitNormalPattern(o: ValkyrieNormalPattern) {
+    override fun visitNormalPattern(o: RestartNormalPattern) {
         val mut = o.isMutable();
-        val mode = ValkyrieVariableHighlightMode.Local;
+        val mode = RestartVariableHighlightMode.Local;
         highlightSymbolList(o.identifierList, Color.KEYWORD)
 //        o.patternItemList.forEach {
 //            mode.highlightPatternItem(this, it, mut)
@@ -48,11 +48,11 @@ class NodeHighlighter : ValkyrieVisitor(), HighlightVisitor {
 //        }
     }
 
-    override fun visitCasePattern(o: ValkyrieCasePattern) {
-        visitCasePattern(o, ValkyrieVariableHighlightMode.Local, false)
+    override fun visitCasePattern(o: RestartCasePattern) {
+        visitCasePattern(o, RestartVariableHighlightMode.Local, false)
     }
 
-    private fun visitCasePattern(o: ValkyrieCasePattern, mode: ValkyrieVariableHighlightMode, force_mut: Boolean) {
+    private fun visitCasePattern(o: RestartCasePattern, mode: RestartVariableHighlightMode, force_mut: Boolean) {
         o.namepath?.let {
             highlight(it.lastChild, Color.SYM_CLASS)
         }
@@ -64,38 +64,38 @@ class NodeHighlighter : ValkyrieVisitor(), HighlightVisitor {
 
 
 
-    override fun visitModifiers(o: ValkyrieModifiers) {
+    override fun visitModifiers(o: RestartModifiers) {
         o.identifierList.forEach {
             highlight(it, Color.MODIFIER)
         }
     }
 
     // TODO: real syntax resolve
-    override fun visitIdentifier(o: ValkyrieIdentifier) {
+    override fun visitIdentifier(o: RestartIdentifier) {
         highlightWithText(o)
     }
 
 
-    override fun visitNumber(o: ValkyrieNumber) {
+    override fun visitNumber(o: RestartNumber) {
         o.identifier?.let {
             highlight(it, Color.OP_NUMBER)
         }
     }
 
-    override fun visitString(o: ValkyrieString) {
+    override fun visitString(o: RestartString) {
         o.identifier?.let {
             highlight(it, Color.OP_STRING)
         }
     }
 
-    override fun visitBoolean(o: ValkyrieBoolean) {
+    override fun visitBoolean(o: RestartBoolean) {
         highlight(o, Color.KEYWORD)
     }
 
     // =================================================================================================================
 
     private fun highlightSymbolList(
-        symbols: List<ValkyrieIdentifier>,
+        symbols: List<RestartIdentifier>,
         last: Color,
         rest: Color = Color.KEYWORD,
     ) {
@@ -135,7 +135,7 @@ class NodeHighlighter : ValkyrieVisitor(), HighlightVisitor {
 
     override fun clone(): HighlightVisitor = NodeHighlighter()
 
-    override fun suitableForFile(file: PsiFile): Boolean = file is ValkyrieFileNode
+    override fun suitableForFile(file: PsiFile): Boolean = file is RestartFileNode
 
     override fun visit(element: PsiElement) = element.accept(this)
 }

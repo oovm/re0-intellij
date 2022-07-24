@@ -9,7 +9,7 @@ import com.intellij.navigation.TargetPresentation
 import com.intellij.openapi.project.Project
 
 @Suppress("UnstableApiUsage")
-class ValkyrieClass(namespace: String) : ValkyrieSymbol() {
+class RestartClass(namespace: String) : RestartSymbol() {
     init {
         this.fullName = namespace.split(".")
     }

@@ -8,7 +8,7 @@ import com.intellij.util.indexing.FindSymbolParameters
 import com.intellij.util.indexing.IdFilter
 
 
-class ValkyrieGoToContributor : ChooseByNameContributorEx {
+class RestartGoToContributor : ChooseByNameContributorEx {
     override fun processNames(processor: Processor<in String>, scope: GlobalSearchScope, filter: IdFilter?) {
         TODO("Not yet implemented")
     }

@@ -1,8 +1,8 @@
 package restart.ide.doc
 
-import restart.ValkyrieLanguage
-import restart.ide.highlight.ValkyrieHighlightColor
-import restart.ide.highlight.ValkyrieHighlightColor.*
+import restart.RestartLanguage
+import restart.ide.highlight.RestartHighlightColor
+import restart.ide.highlight.RestartHighlightColor.*
 import restart.language.symbol.KeywordData
 import restart.language.symbol.ModifierData
 import restart.language.symbol.OperatorData
@@ -21,8 +21,8 @@ class DocumentationRenderer(var element: PsiElement, private var original: PsiEl
             }
             else -> {
                 when (element) {
-//                    is ValkyrieTraitStatementNode -> buildShort(element as ValkyrieTraitStatementNode)
-//                    is ValkyrieClassStatementNode -> buildShort(element as ValkyrieClassStatementNode)
+//                    is RestartTraitStatementNode -> buildShort(element as RestartTraitStatementNode)
+//                    is RestartClassStatementNode -> buildShort(element as RestartClassStatementNode)
                     else -> doc.append("onHover: ${element.text}")
                 }
             }
@@ -54,8 +54,8 @@ class DocumentationRenderer(var element: PsiElement, private var original: PsiEl
         }
 
         when (element) {
-//            is ValkyrieTraitStatementNode -> buildDetail(element as ValkyrieTraitStatementNode)
-//            is ValkyrieClassStatementNode -> buildShort(element as ValkyrieClassStatementNode)
+//            is RestartTraitStatementNode -> buildDetail(element as RestartTraitStatementNode)
+//            is RestartClassStatementNode -> buildShort(element as RestartClassStatementNode)
             else -> {
                 doc.append(element)
                 doc.append("<br/>")
@@ -67,7 +67,7 @@ class DocumentationRenderer(var element: PsiElement, private var original: PsiEl
         return doc.toString()
     }
 
-//    private fun buildShort(element: ValkyrieTraitStatementNode) {
+//    private fun buildShort(element: RestartTraitStatementNode) {
 //        append(KEYWORD, "crate ")
 //        appendNamespace()
 //        doc.append("<br/>")
@@ -77,11 +77,11 @@ class DocumentationRenderer(var element: PsiElement, private var original: PsiEl
 //        append(SYM_TRAIT, element.name)
 //    }
 
-//    private fun buildDetail(element: ValkyrieTraitStatementNode) {
+//    private fun buildDetail(element: RestartTraitStatementNode) {
 //        this.buildShort(element)
 //    }
 //
-//    private fun buildShort(element: ValkyrieClassStatementNode) {
+//    private fun buildShort(element: RestartClassStatementNode) {
 //        append(KEYWORD, "crate ")
 //        appendNamespace()
 //        doc.append("<br/>")
@@ -110,7 +110,7 @@ class DocumentationRenderer(var element: PsiElement, private var original: PsiEl
         doc.append("<span>${text}</span>")
     }
 
-    fun append(key: ValkyrieHighlightColor, text: String) {
+    fun append(key: RestartHighlightColor, text: String) {
         // HtmlSyntaxInfoUtil.getStyledSpan(key.textAttributesKey, text, 1.0f)
         val attr = EditorColorsManager.getInstance().globalScheme.getAttributes(key.textAttributesKey)
         val color = ColorUtil.toHtmlColor(attr.foregroundColor)
@@ -121,7 +121,7 @@ class DocumentationRenderer(var element: PsiElement, private var original: PsiEl
         HtmlSyntaxInfoUtil.appendHighlightedByLexerAndEncodedAsHtmlCodeSnippet(
             doc,
             element.project,
-            ValkyrieLanguage,
+            RestartLanguage,
             code.trimIndent(),
             1.0f,
         )

@@ -6,8 +6,8 @@ import com.intellij.lang.folding.FoldingDescriptor
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 
-class ValkyrieFoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : ValkyrieRecursiveVisitor() {
-    override fun visitBraceBlock(o: ValkyrieBraceBlock) {
+class RestartFoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : RestartRecursiveVisitor() {
+    override fun visitBraceBlock(o: RestartBraceBlock) {
         fold(o.node, o.firstChild.endOffset, o.lastChild.startOffset)
     }
 

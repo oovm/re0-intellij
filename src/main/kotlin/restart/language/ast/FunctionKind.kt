@@ -1,6 +1,6 @@
 package restart.language.ast
 
-import restart.ide.highlight.ValkyrieHighlightColor
+import restart.ide.highlight.RestartHighlightColor
 
 class FunctionKind(
     val isMethod: Boolean = false,
@@ -8,13 +8,13 @@ class FunctionKind(
     val isConstructor: Boolean = false,
     val isMutable: Boolean = false
 ) {
-    val color: ValkyrieHighlightColor
+    val color: RestartHighlightColor
         get() = when {
             isMethod -> {
-                ValkyrieHighlightColor.SYM_FUNCTION_SELF
+                RestartHighlightColor.SYM_FUNCTION_SELF
             }
             else -> {
-                ValkyrieHighlightColor.SYM_FUNCTION_FREE
+                RestartHighlightColor.SYM_FUNCTION_FREE
             }
         }
 

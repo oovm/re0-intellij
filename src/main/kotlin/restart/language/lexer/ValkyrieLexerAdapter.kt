@@ -4,7 +4,7 @@ package restart.language.lexer
 import com.intellij.lexer.LexerBase
 import com.intellij.psi.tree.IElementType
 
-class ValkyrieLexerAdapter : LexerBase() {
+class RestartLexerAdapter : LexerBase() {
     private var buffer: CharSequence = ""
     private var startOffset: Int = 0
     private var endOffset: Int = 0

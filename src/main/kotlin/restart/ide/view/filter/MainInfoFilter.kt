@@ -1,8 +1,8 @@
 package restart.ide.view.filter
 
 
-import restart.ValkyrieBundle
-import restart.ide.view.ValkyrieViewElement
+import restart.RestartBundle
+import restart.ide.view.RestartViewElement
 import com.intellij.icons.AllIcons
 import com.intellij.ide.util.treeView.smartTree.ActionPresentation
 import com.intellij.ide.util.treeView.smartTree.ActionPresentationData
@@ -16,12 +16,12 @@ object MainInfoFilter : Filter {
 
     override fun isReverted() = true
     override fun getPresentation(): ActionPresentation = ActionPresentationData(
-        ValkyrieBundle.message(this.name),
+        RestartBundle.message(this.name),
         null,
         AllIcons.Nodes.Favorite
     )
 
     override fun isVisible(node: TreeElement): Boolean {
-        return (node as? ValkyrieViewElement)?.getVisibility() ?: true
+        return (node as? RestartViewElement)?.getVisibility() ?: true
     }
 }

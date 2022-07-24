@@ -1,6 +1,6 @@
 package restart.ide.doc
 
-import restart.ide.file.ValkyrieFileNode
+import restart.ide.file.RestartFileNode
 import restart.language.ast.DocumentNode
 import restart.language.psi.RestartTypes
 import restart.language.psi.RestartTypes.*
@@ -28,7 +28,7 @@ class DocumentationProvider : DocumentationProvider {
     }
 
     override fun collectDocComments(file: PsiFile, sink: Consumer<in PsiDocCommentBase>) {
-        if (file !is ValkyrieFileNode) return
+        if (file !is RestartFileNode) return
         for (leaf in PsiTreeUtil.findChildrenOfType(file, PsiComment::class.java)) {
             DocumentNode.tryBuild(leaf).let {
                 if (it != null) {

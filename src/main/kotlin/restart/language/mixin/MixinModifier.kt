@@ -1,9 +1,9 @@
 package restart.language.mixin
 
-import restart.ide.file.ValkyrieIconProvider
-import restart.ide.view.ValkyrieViewElement
+import restart.ide.file.RestartIconProvider
+import restart.ide.view.RestartViewElement
 import restart.language.ast.ViewableNode
-import restart.language.psi.ValkyrieModifiers
+import restart.language.psi.RestartModifiers
 import restart.language.psi_node.RestartModifiersNode
 import com.intellij.icons.AllIcons
 import com.intellij.ide.projectView.PresentationData
@@ -18,7 +18,7 @@ open class MixinModifier(node: ASTNode) : ViewableNode(node) {
     override fun getOriginalElement(): RestartModifiersNode {
         return this as RestartModifiersNode
     }
-    override fun getIcon(flags: Int): Icon = ValkyrieIconProvider.MODIFIER
+    override fun getIcon(flags: Int): Icon = RestartIconProvider.MODIFIER
     override fun getNavigationElement(): PsiElement = this
     fun hasMutable(): Boolean {
         for (i in originalElement.children) {
@@ -33,7 +33,7 @@ open class MixinModifier(node: ASTNode) : ViewableNode(node) {
         return PresentationData("[MODIFIERS]", "", this.getIcon(0), null)
     }
 
-    override fun getChildrenView(): Array<ValkyrieViewElement> {
+    override fun getChildrenView(): Array<RestartViewElement> {
         return arrayOf()
     }
 }

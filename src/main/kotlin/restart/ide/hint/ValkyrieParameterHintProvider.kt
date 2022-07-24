@@ -1,6 +1,6 @@
 package restart.ide.hint
 
-import restart.ValkyrieBundle
+import restart.RestartBundle
 import restart.language.psi.startOffset
 import restart.language.psi_node.RestartCallSuffixNode
 import com.intellij.codeInsight.hints.HintInfo
@@ -10,7 +10,7 @@ import com.intellij.codeInsight.hints.Option
 import com.intellij.psi.PsiElement
 
 @Suppress("UnstableApiUsage")
-class ValkyrieParameterHintProvider : InlayParameterHintsProvider {
+class RestartParameterHintProvider : InlayParameterHintsProvider {
     var context = ""
 
     override fun getHintInfo(element: PsiElement): HintInfo? {
@@ -48,11 +48,11 @@ class ValkyrieParameterHintProvider : InlayParameterHintsProvider {
         "org.gradle.api.Project.findProperty(propertyName)",
     )
     /// 显示在
-    /// Editor > Inlay Hints > Parameter Names > Valkyrie
+    /// Editor > Inlay Hints > Parameter Names > Restart
     override fun getSupportedOptions(): MutableList<Option> {
         return mutableListOf(
-            Option("getSupportedOptions1", ValkyrieBundle.messagePointer("color.token.null"), true),
-            Option("getSupportedOptions2", ValkyrieBundle.messagePointer("color.token.boolean"), true)
+            Option("getSupportedOptions1", RestartBundle.messagePointer("color.token.null"), true),
+            Option("getSupportedOptions2", RestartBundle.messagePointer("color.token.boolean"), true)
         )
     }
 

@@ -1,6 +1,6 @@
 package restart.language.mixin
 
-import restart.ide.view.ValkyrieViewElement
+import restart.ide.view.RestartViewElement
 import restart.language.ast.DeclareNode
 import restart.language.psi_node.RestartAwardStatementNode
 

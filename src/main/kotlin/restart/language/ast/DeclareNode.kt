@@ -1,7 +1,7 @@
 package restart.language.ast
 
 
-import restart.ide.view.ValkyrieViewElement
+import restart.ide.view.RestartViewElement
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.ide.util.treeView.smartTree.TreeElement
 import com.intellij.lang.ASTNode

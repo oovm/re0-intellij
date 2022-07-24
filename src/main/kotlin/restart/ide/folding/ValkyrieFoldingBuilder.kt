@@ -1,6 +1,6 @@
 package restart.ide.folding
 
-import restart.ide.file.ValkyrieFileNode
+import restart.ide.file.RestartFileNode
 import com.intellij.lang.ASTNode
 import com.intellij.lang.folding.CustomFoldingBuilder
 import com.intellij.lang.folding.FoldingDescriptor
@@ -10,15 +10,15 @@ import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 
-class ValkyrieFoldingBuilder : CustomFoldingBuilder(), DumbAware {
+class RestartFoldingBuilder : CustomFoldingBuilder(), DumbAware {
     override fun buildLanguageFoldRegions(
         descriptors: MutableList<FoldingDescriptor>,
         root: PsiElement,
         document: Document,
         quick: Boolean
     ) {
-        if (root !is ValkyrieFileNode) return
-        val visitor = ValkyrieFoldingVisitor(descriptors)
+        if (root !is RestartFileNode) return
+        val visitor = RestartFoldingVisitor(descriptors)
         PsiTreeUtil.processElements(root) {
             it.accept(visitor);
             true

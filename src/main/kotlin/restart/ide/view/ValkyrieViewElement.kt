@@ -1,6 +1,6 @@
 package restart.ide.view
 
-import restart.ide.file.ValkyrieFileNode
+import restart.ide.file.RestartFileNode
 import restart.language.ast.RestartASTBase
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.ide.structureView.StructureViewTreeElement
@@ -9,7 +9,7 @@ import com.intellij.ide.util.treeView.smartTree.TreeElement
 import com.intellij.navigation.ItemPresentation
 import com.intellij.psi.NavigatablePsiElement
 
-class ValkyrieViewElement(private val self: NavigatablePsiElement, var view: ItemPresentation? = null) :
+class RestartViewElement(private val self: NavigatablePsiElement, var view: ItemPresentation? = null) :
     StructureViewTreeElement,
     SortableTreeElement {
     override fun getValue(): Any = self
@@ -29,7 +29,7 @@ class ValkyrieViewElement(private val self: NavigatablePsiElement, var view: Ite
     }
 
     override fun getChildren(): Array<out TreeElement> = when (self) {
-        is ValkyrieFileNode -> self.getChildrenView()
+        is RestartFileNode -> self.getChildrenView()
         is RestartASTBase -> self.getChildrenView()
         else -> arrayOf()
     }

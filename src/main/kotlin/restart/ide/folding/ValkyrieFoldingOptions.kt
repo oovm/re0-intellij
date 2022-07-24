@@ -3,7 +3,7 @@ package restart.ide.folding
 import com.intellij.application.options.editor.CodeFoldingOptionsProvider
 import javax.swing.JComponent
 
-class ValkyrieFoldingOptions : CodeFoldingOptionsProvider {
+class RestartFoldingOptions : CodeFoldingOptionsProvider {
     override fun createComponent(): JComponent? {
         TODO("Not yet implemented")
     }

@@ -1,7 +1,7 @@
 package restart.language.symbol
 
 import restart.ide.doc.DocumentationRenderer
-import restart.ide.highlight.ValkyrieHighlightColor
+import restart.ide.highlight.RestartHighlightColor
 import restart.language.psi.RestartTypes
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.elementType
@@ -15,16 +15,16 @@ class OperatorData(
     val priority: Int = 100
 ) {
     fun documentation(doc: DocumentationRenderer) {
-        doc.append(ValkyrieHighlightColor.KEYWORD, "operator ")
-        doc.append(ValkyrieHighlightColor.SYM_MACRO , symbol)
-        doc.append(ValkyrieHighlightColor.KEYWORD, " de-sugars ")
-        doc.append(ValkyrieHighlightColor.SYM_FUNCTION_FREE, name)
+        doc.append(RestartHighlightColor.KEYWORD, "operator ")
+        doc.append(RestartHighlightColor.SYM_MACRO , symbol)
+        doc.append(RestartHighlightColor.KEYWORD, " de-sugars ")
+        doc.append(RestartHighlightColor.SYM_FUNCTION_FREE, name)
         doc.append("<br/>")
-        doc.append(ValkyrieHighlightColor.KEYWORD, "associative ")
-        doc.append(ValkyrieHighlightColor.SYM_MACRO , associative.toString())
+        doc.append(RestartHighlightColor.KEYWORD, "associative ")
+        doc.append(RestartHighlightColor.SYM_MACRO , associative.toString())
         doc.append("<br/>")
-        doc.append(ValkyrieHighlightColor.KEYWORD, "priority ")
-        doc.append(ValkyrieHighlightColor.SYM_CONSTANT , priority.toString())
+        doc.append(RestartHighlightColor.KEYWORD, "priority ")
+        doc.append(RestartHighlightColor.SYM_CONSTANT , priority.toString())
         doc.append("<hr/>")
         doc.append(detail)
     }

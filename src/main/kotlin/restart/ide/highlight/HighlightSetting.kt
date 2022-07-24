@@ -1,28 +1,26 @@
-package restart.settings
+package restart.ide.highlight
 
-import restart.ValkyrieBundle
-import restart.ide.file.ValkyrieIconProvider
-import restart.ide.highlight.ValkyrieHighlightColor
-import restart.ide.highlight.TokenHighlight
+import restart.RestartBundle
+import restart.ide.file.RestartIconProvider
 
 import com.intellij.openapi.options.colors.ColorDescriptor
 import com.intellij.openapi.options.colors.ColorSettingsPage
 
-class VHighlightSetting : ColorSettingsPage {
-    private val annotatorTags = ValkyrieHighlightColor
+class HighlightSetting : ColorSettingsPage {
+    private val annotatorTags = RestartHighlightColor
         .values()
         .associateBy({ it.name }, { it.textAttributesKey })
 
-    override fun getAttributeDescriptors() = ValkyrieHighlightColor
+    override fun getAttributeDescriptors() = RestartHighlightColor
         .values()
         .map { it.attributesDescriptor }
         .toTypedArray()
 
     override fun getColorDescriptors(): Array<ColorDescriptor> = ColorDescriptor.EMPTY_ARRAY
 
-    override fun getDisplayName() = ValkyrieBundle.message("filetype.name")
+    override fun getDisplayName() = RestartBundle.message("filetype.name")
 
-    override fun getIcon() = ValkyrieIconProvider.FILE
+    override fun getIcon() = RestartIconProvider.FILE
 
     override fun getHighlighter() = TokenHighlight()
 

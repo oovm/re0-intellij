@@ -7,7 +7,7 @@ import com.intellij.openapi.project.Project
 
 
 @Suppress("UnstableApiUsage")
-class ValkyrieSymbolNavigationProvider : SymbolNavigationProvider {
+class RestartSymbolNavigationProvider : SymbolNavigationProvider {
     override fun getNavigationTargets(project: Project, symbol: Symbol): MutableCollection<out NavigationTarget> {
         TODO("Not yet implemented")
     }

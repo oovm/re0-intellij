@@ -1,7 +1,7 @@
 package restart.ide.view
 
 
-import restart.ide.file.ValkyrieFileNode
+import restart.ide.file.RestartFileNode
 import com.intellij.ide.projectView.SelectableTreeStructureProvider
 import com.intellij.ide.projectView.ViewSettings
 import com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode
@@ -33,7 +33,7 @@ class VStructureProvider : SelectableTreeStructureProvider, DumbAware {
         is PsiWhiteSpaceImpl, is PsiWhiteSpace, is LeafPsiElement -> {
             null
         }
-        is ValkyrieFileNode -> {
+        is RestartFileNode -> {
             null
         }
         else -> null
@@ -47,7 +47,7 @@ class VStructureProvider : SelectableTreeStructureProvider, DumbAware {
                 file.name == "readme.md" -> {
                     -9
                 }
-                file is ValkyrieFileNode && file.isIndexFile() -> {
+                file is RestartFileNode && file.isIndexFile() -> {
                     -8
                 }
                 else -> 0;

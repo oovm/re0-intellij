@@ -1,9 +1,9 @@
-# Valkyrie Intellij
+# Restart Intellij
 
 ![](./src/main/design/SVG/title.svg)
 
 <!-- Plugin description -->
-### [Valkyrie Language](https://github.com/nyar-vm/valkyrie-language) Support
+### [Restart Language](https://github.com/nyar-vm/Restart-language) Support
 
 - Syntax highlighting
 - Semantic highlighting

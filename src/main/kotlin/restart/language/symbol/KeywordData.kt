@@ -3,7 +3,7 @@
 package restart.language.symbol
 
 import restart.ide.doc.DocumentationRenderer
-import restart.ide.highlight.ValkyrieHighlightColor
+import restart.ide.highlight.RestartHighlightColor
 import restart.language.psi.RestartTypes
 import com.intellij.model.Pointer
 import com.intellij.model.Symbol
@@ -20,8 +20,8 @@ class KeywordData : Symbol, Pointer<KeywordData> {
     override fun createPointer(): Pointer<out KeywordData> = this
     override fun dereference(): KeywordData = this
     fun documentation(doc: DocumentationRenderer) {
-        doc.append(ValkyrieHighlightColor.KEYWORD, "keyword ")
-        doc.append(ValkyrieHighlightColor.SYM_MACRO, name)
+        doc.append(RestartHighlightColor.KEYWORD, "keyword ")
+        doc.append(RestartHighlightColor.SYM_MACRO, name)
         doc.append("<hr/>")
         doc.append(detail)
     }

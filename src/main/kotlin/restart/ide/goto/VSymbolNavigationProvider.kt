@@ -1,6 +1,6 @@
 package restart.ide.goto
 
-import restart.language.symbol.ValkyrieSymbol
+import restart.language.symbol.RestartSymbol
 import com.intellij.model.Symbol
 import com.intellij.navigation.NavigationTarget
 import com.intellij.navigation.SymbolNavigationProvider
@@ -9,7 +9,7 @@ import com.intellij.openapi.project.Project
 @Suppress("UnstableApiUsage")
 class VSymbolNavigationProvider : SymbolNavigationProvider {
     override fun getNavigationTargets(project: Project, symbol: Symbol): MutableCollection<out NavigationTarget> {
-        val sym = symbol as? ValkyrieSymbol ?: return mutableSetOf()
+        val sym = symbol as? RestartSymbol ?: return mutableSetOf()
         TODO("Not yet implemented $project, $sym")
     }
 }

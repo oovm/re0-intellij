@@ -6,7 +6,7 @@ import com.intellij.psi.PsiFileSystemItem
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.FileReferenceHelper
 
-class ValkyrieFileReference : FileReferenceHelper() {
+class RestartFileReference : FileReferenceHelper() {
     override fun getContexts(project: Project, file: VirtualFile): MutableCollection<PsiFileSystemItem> {
         TODO("Not yet implemented $project $file")
     }

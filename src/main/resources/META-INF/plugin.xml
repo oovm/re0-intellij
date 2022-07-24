@@ -1,111 +1,111 @@
 <idea-plugin>
-	<id>Valkyrie</id>
-	<name>Valkyrie Language</name>
+	<id>Restart</id>
+	<name>Restart Language</name>
 	<vendor>voml</vendor>
 	<depends>com.intellij.modules.platform</depends>
 	<!--  <depends optional="true" config-file="plugin-with-rust.xml">org.rust.lang</depends>-->
-	<resource-bundle>messages.ValkyrieBundle</resource-bundle>
+	<resource-bundle>messages.RestartBundle</resource-bundle>
 	<extensions defaultExtensionNs="com.intellij">
 		<fileType
-			name="Valkyrie"
-			language="Valkyrie"
-			extensions="vk;"
-			implementationClass="restart.ide.file.ValkyrieFileType"
+			name="Restart"
+			language="Restart"
+			extensions="re0;restart;"
+			implementationClass="restart.ide.file.RestartFileType"
 			fieldName="INSTANCE"
 		/>
 		<lang.parserDefinition
-			language="Valkyrie"
-			implementationClass="restart.language.lexer.ValkyrieParserDefinition"
+			language="Restart"
+			implementationClass="restart.language.lexer.RestartParserDefinition"
 		/>
 		<!-- Project -->
 		<indexedRootsProvider implementation="restart.ide.project.ExtraIndexContributor"/>
 		<additionalLibraryRootsProvider implementation="restart.ide.project.LibraryRootsProvider"/>
 		<!-- StructureView -->
-		<iconProvider implementation="restart.ide.file.ValkyrieIconProvider"/>
-		<projectViewNestingRulesProvider implementation="restart.ide.file.ValkyrieFileGroup"/>
+		<iconProvider implementation="restart.ide.file.RestartIconProvider"/>
+		<projectViewNestingRulesProvider implementation="restart.ide.file.RestartFileGroup"/>
 		<treeStructureProvider implementation="restart.ide.view.VStructureProvider"/>
 		<lang.structureViewExtension implementation="restart.ide.view.VStructureViewExtension"/>
 		<lang.psiStructureViewFactory
-			language="Valkyrie"
+			language="Restart"
 			implementationClass="restart.ide.view.StructureViewFactory"/>
 		<typeHierarchyProvider
-			language="Valkyrie"
+			language="Restart"
 			implementationClass="restart.ide.reference.hierarchy.TypeHierarchyProvider"/>
 		<methodHierarchyProvider
-			language="Valkyrie"
+			language="Restart"
 			implementationClass="restart.ide.reference.hierarchy.MethodHierarchyProvider"/>
 		<callHierarchyProvider
-			language="Valkyrie"
+			language="Restart"
 			implementationClass="restart.ide.reference.hierarchy.CallHierarchyProvider"/>
 		<!-- Highlight -->
-		<colorSettingsPage implementation="restart.settings.VHighlightSetting"/>
+		<colorSettingsPage implementation="restart.ide.highlight.HighlightSetting"/>
 		<highlightVisitor implementation="restart.ide.highlight.NodeHighlighter"/>
 		<lang.syntaxHighlighter
-			language="Valkyrie"
+			language="Restart"
 			implementationClass="restart.ide.highlight.TokenHighlight"
 		/>
 		<!-- Formatter -->
 		<lang.formatter
-			language="Valkyrie"
+			language="Restart"
 			implementationClass="restart.ide.formatter.FormatBuilder"
 		/>
 		<lang.commenter
-			language="Valkyrie"
+			language="Restart"
 			implementationClass="restart.ide.formatter.Commenter"
 		/>
 		<lang.smartEnterProcessor
-			language="Valkyrie"
+			language="Restart"
 			implementationClass="restart.ide.formatter.SmartEnter"
 		/>
 		<!-- Goto -->
 		<navbar implementation="restart.ide.goto.VNavigationBarExtension"/>
 		<lang.directNavigationProvider implementation="restart.ide.goto.VDirectNavigationProvider"/>
 		<symbolNavigation
-			forClass="restart.language.symbol.ValkyrieSymbol"
+			forClass="restart.language.symbol.RestartSymbol"
 			implementationClass="restart.ide.goto.VSymbolNavigationProvider"/>
 		<!-- Hint -->
 		<codeInsight.parameterNameHints
-			language="Valkyrie"
-			implementationClass="restart.ide.hint.ValkyrieParameterHintProvider"/>
+			language="Restart"
+			implementationClass="restart.ide.hint.RestartParameterHintProvider"/>
 		<codeInsight.inlayProvider
-			language="Valkyrie"
+			language="Restart"
 			implementationClass="restart.ide.hint.InlayHintProvider"/>
 		<vcs.codeVisionLanguageContext
-			language="Valkyrie"
-			implementationClass="restart.ide.hint.ValkyrieInlayVSCProvider"/>
-		<!--		<psi.fileReferenceHelper implementation="restart.ide.reference.ValkyrieFileReference"/>-->
-		<psi.referenceContributor implementation="restart.ide.reference.ValkyrieReferenceContributor"/>
+			language="Restart"
+			implementationClass="restart.ide.hint.RestartInlayVSCProvider"/>
+		<!--		<psi.fileReferenceHelper implementation="restart.ide.reference.RestartFileReference"/>-->
+		<psi.referenceContributor implementation="restart.ide.reference.RestartReferenceContributor"/>
 		<psi.symbolReferenceProvider
 			anyReferenceClass="true"
-			implementationClass="restart.ide.reference.ValkyrieReferenceProvider"
-			hostLanguage="Valkyrie"
+			implementationClass="restart.ide.reference.RestartReferenceProvider"
+			hostLanguage="Restart"
 			hostElementClass="com.intellij.psi.xml.XmlAttributeValue"
-			targetClass="restart.language.symbol.ValkyrieSymbol"/>
+			targetClass="restart.language.symbol.RestartSymbol"/>
 		<!-- Declaration -->
 		<typeDeclarationProvider implementation="restart.ide.reference.DeclarationProvider"/>
-		<psi.declarationProvider implementation="restart.ide.reference.ValkyrieDeclarationProvider"/>
-		<findUsagesHandlerFactory implementation="restart.ide.usages.ValkyrieUsagesFactory"/>
+		<psi.declarationProvider implementation="restart.ide.reference.RestartDeclarationProvider"/>
+		<findUsagesHandlerFactory implementation="restart.ide.usages.RestartUsagesFactory"/>
 		<lang.findUsagesProvider
-			language="Valkyrie"
-			implementationClass="restart.ide.usages.ValkyrieUsagesProvider"/>
+			language="Restart"
+			implementationClass="restart.ide.usages.RestartUsagesProvider"/>
 		<!-- Completion -->
 		<codeCompletionConfigurable instance="restart.ide.completion.VCompletionConfigurable"/>
 		<completion.contributor
-			language="Valkyrie"
+			language="Restart"
 			implementationClass="restart.ide.completion.VCompletionContributor"/>
 		<lang.braceMatcher
-			language="Valkyrie"
+			language="Restart"
 			implementationClass="restart.ide.matcher.BraceMatchAdapter"/>
 		<lang.quoteHandler
-			language="Valkyrie"
+			language="Restart"
 			implementationClass="restart.ide.matcher.QuoteHandler"/>
 		<lang.foldingBuilder
-			language="Valkyrie"
-			implementationClass="restart.ide.folding.ValkyrieFoldingBuilder"/>
-		<codeFoldingOptionsProvider instance="restart.ide.folding.ValkyrieFoldingOptions"/>
+			language="Restart"
+			implementationClass="restart.ide.folding.RestartFoldingBuilder"/>
+		<codeFoldingOptionsProvider instance="restart.ide.folding.RestartFoldingOptions"/>
 		<!-- Document -->
 		<lang.documentationProvider
-			language="Valkyrie"
+			language="Restart"
 			implementationClass="restart.ide.doc.DocumentationProvider"
 		/>
 		<!--		<indexPatternBuilder-->
@@ -115,13 +115,13 @@
 		<!--				filetype="Fluent"-->
 		<!--				implementationClass="restart.ide.todo.VomlTodoIndexer"-->
 		<!--		/>-->
-		<annotator language="Valkyrie" implementationClass="restart.ide.annotator.LiteralChecker"/>
+		<annotator language="Restart" implementationClass="restart.ide.annotator.LiteralChecker"/>
 		<langCodeStyleSettingsProvider
-			implementation="restart.ide.codeStyle.ValkyrieCodeStyleSetting"
+			implementation="restart.ide.codeStyle.RestartCodeStyleSetting"
 		/>
 	</extensions>
 	<actions>
-		<action id="NewFluentFile" class="restart.ide.actions.ValkyrieCreateFile">
+		<action id="NewFluentFile" class="restart.ide.actions.RestartCreateFile">
 			<add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewHtmlFile"/>
 		</action>
 		<!--		<action id="jss.JssConvertJson" class="restart.ide.actions.FluentConvertMo"/>-->

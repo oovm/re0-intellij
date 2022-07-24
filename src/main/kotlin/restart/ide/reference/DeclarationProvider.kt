@@ -10,8 +10,8 @@ import com.intellij.psi.PsiElement
 class DeclarationProvider : TypeDeclarationProvider {
     override fun getSymbolTypeDeclarations(element: PsiElement): Array<PsiElement>? {
         return when (element) {
-//            is ValkyrieTypeStatementNode -> arrayOf(element.identifier)
-//            is ValkyrieClassStatementNode -> findDeclarations(element)
+//            is RestartTypeStatementNode -> arrayOf(element.identifier)
+//            is RestartClassStatementNode -> findDeclarations(element)
             else -> null
         }
     }

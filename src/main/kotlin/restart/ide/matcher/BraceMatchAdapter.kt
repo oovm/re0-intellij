@@ -1,13 +1,13 @@
 package restart.ide.matcher
 
-import restart.ValkyrieLanguage
-import restart.ide.file.ValkyrieFileType
+import restart.RestartLanguage
+import restart.ide.file.RestartFileType
 
 import com.intellij.codeInsight.highlighting.PairedBraceMatcherAdapter
 import com.intellij.openapi.editor.highlighter.HighlighterIterator
 import com.intellij.openapi.fileTypes.FileType
 
-class BraceMatchAdapter : PairedBraceMatcherAdapter(BraceMatchPair(), ValkyrieLanguage) {
+class BraceMatchAdapter : PairedBraceMatcherAdapter(BraceMatchPair(), RestartLanguage) {
     override fun isLBraceToken(iterator: HighlighterIterator, fileText: CharSequence, fileType: FileType): Boolean {
         return isBrace(iterator, fileText, fileType, true)
     }
@@ -17,7 +17,7 @@ class BraceMatchAdapter : PairedBraceMatcherAdapter(BraceMatchPair(), ValkyrieLa
     }
 
     private fun isBrace(iterator: HighlighterIterator, fileText: CharSequence, fileType: FileType, left: Boolean): Boolean {
-        if (fileType != ValkyrieFileType) return false
+        if (fileType != RestartFileType) return false
         val pair = findPair(left, iterator, fileText, fileType)
         return pair != null
     }

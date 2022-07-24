@@ -2,8 +2,8 @@
 
 package restart.language.mixin
 
-import restart.ide.file.ValkyrieIconProvider
-import restart.ide.view.ValkyrieViewElement
+import restart.ide.file.RestartIconProvider
+import restart.ide.view.RestartViewElement
 import restart.language.ast.DeclareNode
 import restart.language.ast.ViewableNode
 import restart.language.ast.addChildrenView
@@ -36,9 +36,9 @@ open class MixinProperty(node: ASTNode) : DeclareNode(node),
     }
 
 
-    override fun getChildrenView(): Array<ValkyrieViewElement> {
-        val views: MutableList<ValkyrieViewElement> = mutableListOf()
-//        for (item in PsiTreeUtil.getChildrenOfTypeAsList(containingFile, ValkyrieImportStatementNode::class.java)) {
+    override fun getChildrenView(): Array<RestartViewElement> {
+        val views: MutableList<RestartViewElement> = mutableListOf()
+//        for (item in PsiTreeUtil.getChildrenOfTypeAsList(containingFile, RestartImportStatementNode::class.java)) {
 //            item.addChildrenView(views)
 //        }
         return views.toTypedArray()

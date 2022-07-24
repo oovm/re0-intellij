@@ -5,7 +5,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiReference
 
 
-class ValkyrieReference(private val target: PsiElement) : PsiReference {
+class RestartReference(private val target: PsiElement) : PsiReference {
     override fun getElement(): PsiElement {
         return target
     }

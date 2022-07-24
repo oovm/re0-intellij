@@ -1,6 +1,6 @@
 package restart.ide.hint
 
-import restart.ValkyrieBundle
+import restart.RestartBundle
 import com.intellij.codeInsight.hints.*
 import com.intellij.openapi.editor.Editor
 import com.intellij.psi.PsiElement
@@ -23,7 +23,7 @@ class InlayHintProvider : InlayHintsProvider<InlayHintProvider.Settings> {
     )
 
     override val key: SettingsKey<Settings> get() = KEY
-    override val name: String = ValkyrieBundle.message("view.PropertiesGrouper")
+    override val name: String = RestartBundle.message("view.PropertiesGrouper")
     override val group: InlayGroup = InlayGroup.TYPES_GROUP
     override fun createSettings(): Settings = Settings()
     /// 显示在

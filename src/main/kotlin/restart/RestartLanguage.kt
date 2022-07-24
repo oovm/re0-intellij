@@ -2,13 +2,13 @@ package restart
 
 import com.intellij.lang.Language
 
-private const val LanguageID = "Valkyrie"
+private const val LanguageID = "Restart"
 
-object ValkyrieLanguage: Language(LanguageID) {
+object RestartLanguage: Language(LanguageID) {
     override fun getDisplayName(): String {
         return super.getDisplayName()
     }
     override fun getMimeTypes(): Array<String> {
-        return arrayOf("text/x-valkyrie")
+        return arrayOf("text/x-Restart")
     }
 }

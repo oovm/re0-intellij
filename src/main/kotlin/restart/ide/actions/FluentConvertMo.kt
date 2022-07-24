@@ -1,7 +1,7 @@
 package restart.ide.actions
 
-import restart.ValkyrieBundle
-import restart.ide.file.ValkyrieIconProvider.Companion.FILE
+import restart.RestartBundle
+import restart.ide.file.RestartIconProvider.Companion.FILE
 import com.intellij.ide.actions.CreateFileAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.LangDataKeys
@@ -11,8 +11,8 @@ import com.intellij.psi.PsiFile
 
 class FluentConvertMo : CreateFileAction(name, description, FILE) {
     companion object {
-        private val name = ValkyrieBundle.message("action.convert_prop")
-        private val description = ValkyrieBundle.message("action.convert_prop.description")
+        private val name = RestartBundle.message("action.convert_prop")
+        private val description = RestartBundle.message("action.convert_prop.description")
 
     }
 

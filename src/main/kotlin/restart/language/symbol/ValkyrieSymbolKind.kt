@@ -3,11 +3,11 @@ package restart.language.symbol
 import com.intellij.model.Pointer
 import com.intellij.model.Symbol
 
-enum class ValkyrieSymbolKind {
-    ValkyrieClass {
+enum class RestartSymbolKind {
+    RestartClass {
 
     },
-    ValkyrieTrait {
+    RestartTrait {
         override fun isTrait(): Boolean {
             return true
         }

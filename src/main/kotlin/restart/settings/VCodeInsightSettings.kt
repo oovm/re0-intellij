@@ -6,7 +6,7 @@ import com.intellij.openapi.components.Storage
 import com.intellij.openapi.components.service
 import com.intellij.util.xmlb.XmlSerializerUtil
 
-@State(name = "ValkyrieCodeInsightSettings", storages = [Storage("valkyrie.xml")])
+@State(name = "RestartCodeInsightSettings", storages = [Storage("Restart.xml")])
 class VCodeInsightSettings : PersistentStateComponent<VCodeInsightSettings> {
 
     var showImportPopup: Boolean = false

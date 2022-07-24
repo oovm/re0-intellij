@@ -1,12 +1,12 @@
 package restart.ide.highlight
 
 import restart.language.ast.hasModifier
-import restart.language.psi.ValkyriePatternItem
-import restart.language.psi.ValkyriePatternPair
-import restart.language.psi.ValkyrieIdentifier
-import restart.ide.highlight.ValkyrieHighlightColor as Color
+import restart.language.psi.RestartPatternItem
+import restart.language.psi.RestartPatternPair
+import restart.language.psi.RestartIdentifier
+import restart.ide.highlight.RestartHighlightColor as Color
 
-enum class ValkyrieVariableHighlightMode {
+enum class RestartVariableHighlightMode {
     Local,
     Global,
     Argument,
@@ -21,7 +21,7 @@ enum class ValkyrieVariableHighlightMode {
 
     fun highlightPatternItem(
         visitor: NodeHighlighter,
-        o: ValkyriePatternItem,
+        o: RestartPatternItem,
         force_mut: Boolean = false,
     ) {
         this.highlightMaybeMutable(visitor, o.identifierList, force_mut,true)
@@ -30,16 +30,16 @@ enum class ValkyrieVariableHighlightMode {
 
     fun highlightPatternPair(
         visitor: NodeHighlighter,
-        o: ValkyriePatternPair,
+        o: RestartPatternPair,
         force_mut: Boolean = false,
     ) {
         this.highlightMaybeMutable(visitor, o.identifierList, force_mut,true)
-        visitor.visitPatternPair(o)
+//        visitor.visitPatternPair(o)
     }
 
     fun highlightMaybeMutable(
         visitor: NodeHighlighter,
-        symbols: List<ValkyrieIdentifier>,
+        symbols: List<RestartIdentifier>,
         force_mut: Boolean,
         skip_last: Boolean,
     ) {

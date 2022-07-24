@@ -2,8 +2,8 @@
 
 package restart.language.mixin
 
-import restart.ide.file.ValkyrieIconProvider
-import restart.ide.view.ValkyrieViewElement
+import restart.ide.file.RestartIconProvider
+import restart.ide.view.RestartViewElement
 import restart.language.ast.RestartASTBase
 import restart.language.psi_node.RestartDeclareStatementNode
 import restart.language.symbol.ImportData
@@ -17,13 +17,13 @@ open class MixinDeclare(node: ASTNode) : RestartASTBase(node) {
     override fun getOriginalElement(): RestartDeclareStatementNode {
         return this as RestartDeclareStatementNode
     }
-    override fun getIcon(flags: Int): Icon = ValkyrieIconProvider.IMPORT
+    override fun getIcon(flags: Int): Icon = RestartIconProvider.IMPORT
 
     override fun getPresentation(): ItemPresentation? {
         return null
     }
 
-    override fun getChildrenView(): Array<ValkyrieViewElement> {
+    override fun getChildrenView(): Array<RestartViewElement> {
         return arrayOf()
     }
 

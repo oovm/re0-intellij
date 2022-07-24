@@ -9,7 +9,7 @@ import com.intellij.model.search.SearchRequest
 import com.intellij.openapi.project.Project
 
 @Suppress("UnstableApiUsage")
-class ValkyrieReferenceProvider : PsiSymbolReferenceProvider {
+class RestartReferenceProvider : PsiSymbolReferenceProvider {
     override fun getReferences(element: PsiExternalReferenceHost, hints: PsiSymbolReferenceHints): MutableCollection<out PsiSymbolReference> {
         return element.ownReferences
     }
