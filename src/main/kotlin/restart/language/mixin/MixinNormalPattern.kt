@@ -4,7 +4,6 @@ import restart.ide.reference.RestartReference
 import restart.language.ast.RestartASTBase
 import restart.language.psi.RestartIdentifier
 import restart.language.psi.RestartNormalPattern
-import restart.language.psi.RestartPatternPair
 import com.intellij.lang.ASTNode
 import com.intellij.model.Symbol
 import com.intellij.model.psi.PsiSymbolDeclaration
@@ -62,20 +61,6 @@ abstract class MixinNormalPattern(node: ASTNode) : RestartASTBase(node),
         }
 
         override fun resolveReference(): MutableCollection<out Symbol> {
-            TODO("Not yet implemented")
-        }
-    }
-
-    class Pattern(private var target: RestartPatternPair) : PsiSymbolDeclaration {
-        override fun getDeclaringElement(): PsiElement {
-            return target
-        }
-
-        override fun getRangeInDeclaringElement(): TextRange {
-            return declaringElement.textRange
-        }
-
-        override fun getSymbol(): Symbol {
             TODO("Not yet implemented")
         }
     }

@@ -20,11 +20,12 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
         highlight(o.kwDeclare, Color.KEYWORD)
     }
 
-    override fun visitVariableStatement(o: RestartVariableStatement) {
-        highlight(o.kwVariable, Color.KEYWORD)
+    override fun visitPropertyStatement(o: RestartPropertyStatement) {
+        highlight(o.kwProperty, Color.KEYWORD)
         highlight(o.identifier, Color.SYM_PROPERTY)
         highlightBraceKey(o.declareBlock, Color.MODIFIER)
     }
+
 
     override fun visitHeroStatement(o: RestartHeroStatement) {
         highlight(o.kwHero, Color.KEYWORD)
@@ -38,8 +39,8 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
         highlightBraceKey(o.declareBlock, Color.MODIFIER)
     }
 
-    override fun visitAwardStatement(o: RestartAwardStatement) {
-        highlight(o.kwAward, Color.KEYWORD)
+    override fun visitArchiveStatement(o: RestartArchiveStatement) {
+        highlight(o.kwArchive, Color.KEYWORD)
         highlight(o.identifier, Color.SYM_AWARD)
         highlightBraceKey(o.declareBlock, Color.MODIFIER)
     }

@@ -2,7 +2,6 @@ package restart.ide.highlight
 
 import restart.language.ast.hasModifier
 import restart.language.psi.RestartPatternItem
-import restart.language.psi.RestartPatternPair
 import restart.language.psi.RestartIdentifier
 import restart.ide.highlight.RestartHighlightColor as Color
 
@@ -26,15 +25,6 @@ enum class RestartVariableHighlightMode {
     ) {
         this.highlightMaybeMutable(visitor, o.identifierList, force_mut,true)
         visitor.visitPatternItem(o)
-    }
-
-    fun highlightPatternPair(
-        visitor: NodeHighlighter,
-        o: RestartPatternPair,
-        force_mut: Boolean = false,
-    ) {
-        this.highlightMaybeMutable(visitor, o.identifierList, force_mut,true)
-//        visitor.visitPatternPair(o)
     }
 
     fun highlightMaybeMutable(

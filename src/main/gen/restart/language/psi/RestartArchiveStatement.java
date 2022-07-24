@@ -5,15 +5,18 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface RestartPatternValue extends PsiElement {
+public interface RestartArchiveStatement extends PsiElement {
 
-  @Nullable
-  RestartBraceBlock getBraceBlock();
+  @NotNull
+  RestartDeclareBlock getDeclareBlock();
 
-  @Nullable
+  @NotNull
   RestartIdentifier getIdentifier();
 
   @NotNull
-  List<RestartPatternPair> getPatternPairList();
+  RestartKwArchive getKwArchive();
+
+  @Nullable
+  RestartModifiers getModifiers();
 
 }

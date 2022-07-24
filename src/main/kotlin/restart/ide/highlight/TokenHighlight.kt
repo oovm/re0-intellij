@@ -32,7 +32,7 @@ class TokenHighlight : SyntaxHighlighterBase() {
             COLON, OP_SET -> Color.SET
             // STAR -> Color.STAR
             COMMA -> Color.COMMA
-            OP_IS_A, OP_NOT_A, OP_IN, OP_NOT_IN -> Color.OPERATION_SIGN
+            OP_ADD, OP_OR -> Color.OPERATION_SIGN
             OP_LT, OP_LEQ, OP_LL, OP_LLL -> Color.OPERATION_SIGN
             OP_GT, OP_GEQ, OP_GG, OP_GGG -> Color.OPERATION_SIGN
             DOT3, DOT2, OP_SUB, OP_ADD, DOT_LESS, DOT_EQ -> Color.OPERATION_SIGN

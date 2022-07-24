@@ -1,14 +1,10 @@
 package restart.ide.hint
 
-import restart.language.psi.RestartAwardStatement
-import restart.language.psi.RestartDeclareStatement
-import restart.language.psi.RestartEventStatement
-import restart.language.psi.RestartHeroStatement
-import restart.language.psi.RestartVariableStatement
 import restart.language.psi_node.*
 import com.intellij.codeInsight.hints.VcsCodeVisionLanguageContext
 import com.intellij.openapi.editor.Editor
 import com.intellij.psi.PsiElement
+import restart.language.psi.*
 import java.awt.event.MouseEvent
 
 @Suppress("UnstableApiUsage")
@@ -20,9 +16,10 @@ class RestartInlayVSCProvider : VcsCodeVisionLanguageContext {
     }
 
     override fun isAccepted(element: PsiElement): Boolean = when (element) {
-        is RestartVariableStatement,
+        is RestartPropertyStatement,
+        is RestartArchiveStatement,
         is RestartEventStatement,
-        is RestartAwardStatement,
+        is RestartTalentStatement,
         is RestartHeroStatement,
         is RestartDeclareStatement,
         -> true

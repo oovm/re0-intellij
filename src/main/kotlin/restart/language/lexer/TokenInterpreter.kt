@@ -236,51 +236,30 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
             "/=" -> pushToken(RestartTypes.OP_DIV_ASSIGN, r)
             "/" -> pushToken(RestartTypes.OP_DIV, r)
             // start with &
-            "&&=" -> pushToken(RestartTypes.OP_AND_ASSIGN, r)
             "&", "&&", "且" -> pushToken(RestartTypes.OP_AND, r)
-            "&=" -> pushToken(RestartTypes.OP_AND_ASSIGN, r)
+            "|", "||", "或" -> pushToken(RestartTypes.OP_OR, r)
             //
             // start with !
             "!!" -> pushToken(RestartTypes.OP_NE, r)
             "!=" -> pushToken(RestartTypes.OP_NE, r)
             "!" -> pushToken(RestartTypes.OP_NOT, r)
-            "|", "||", "或" -> pushToken(RestartTypes.OP_OR, r)
             "^" -> pushToken(RestartTypes.OP_POW, r)
             // start with >
             ">=", "≥", "⩾", "大于等于" -> pushToken(RestartTypes.OP_GEQ, r)
-            ">", "大于" -> pushToken(RestartTypes.OP_GT, r)
-            // start with <
             "<=", "≤", "⩽", "小于等于" -> pushToken(RestartTypes.OP_LEQ, r)
+            ">", "大于" -> pushToken(RestartTypes.OP_GT, r)
             "<", "小于" -> pushToken(RestartTypes.OP_LT, r)
             // surround with ( )
-            "(" -> {
-                pushToken(RestartTypes.PARENTHESIS_L, r)
-            }
-
-            ")" -> {
-                pushToken(RestartTypes.PARENTHESIS_R, r)
-            }
-
-            "[" -> {
-                pushToken(RestartTypes.BRACKET_L, r)
-            }
-
-            "]" -> {
-                pushToken(RestartTypes.BRACKET_R, r)
-            }
-
-            "{" -> {
-                pushToken(RestartTypes.BRACE_L, r)
-            }
-
-            "}" -> {
-                pushToken(RestartTypes.BRACE_R, r)
-            }
+            "(" -> pushToken(RestartTypes.PARENTHESIS_L, r)
+            ")" -> pushToken(RestartTypes.PARENTHESIS_R, r)
+            "[" -> pushToken(RestartTypes.BRACKET_L, r)
+            "]" -> pushToken(RestartTypes.BRACKET_R, r)
+            "{" -> pushToken(RestartTypes.BRACE_L, r)
+            "}" -> pushToken(RestartTypes.BRACE_R, r)
 
             "∅", "⤇", "|=>", "⤃", "!=>" -> {
                 pushToken(RestartTypes.OP_EMPTY, r)
             }
-
             else -> pushToken(BAD_CHARACTER, r)
         }
         return true

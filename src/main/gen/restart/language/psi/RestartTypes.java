@@ -8,7 +8,7 @@ import restart.language.psi_node.*;
 
 public interface RestartTypes {
 
-  IElementType AWARD_STATEMENT = new RestartTokenType("AWARD_STATEMENT");
+  IElementType ARCHIVE_STATEMENT = new RestartTokenType("ARCHIVE_STATEMENT");
   IElementType BLOCK = new RestartTokenType("BLOCK");
   IElementType BOOLEAN = new RestartTokenType("BOOLEAN");
   IElementType BRACE_BLOCK = new RestartTokenType("BRACE_BLOCK");
@@ -29,25 +29,23 @@ public interface RestartTypes {
   IElementType IDENTIFIER = new RestartTokenType("IDENTIFIER");
   IElementType IF_GUARD = new RestartTokenType("IF_GUARD");
   IElementType IF_STATEMENT = new RestartTokenType("IF_STATEMENT");
-  IElementType KW_AWARD = new RestartTokenType("KW_AWARD");
+  IElementType KW_ARCHIVE = new RestartTokenType("KW_ARCHIVE");
   IElementType KW_DECLARE = new RestartTokenType("KW_DECLARE");
   IElementType KW_EVENT = new RestartTokenType("KW_EVENT");
   IElementType KW_HERO = new RestartTokenType("KW_HERO");
+  IElementType KW_PROPERTY = new RestartTokenType("KW_PROPERTY");
   IElementType KW_TALENT = new RestartTokenType("KW_TALENT");
-  IElementType KW_VARIABLE = new RestartTokenType("KW_VARIABLE");
   IElementType LIST = new RestartTokenType("LIST");
   IElementType MODIFIERS = new RestartTokenType("MODIFIERS");
   IElementType NAMEPATH = new RestartTokenType("NAMEPATH");
   IElementType NORMAL_PATTERN = new RestartTokenType("NORMAL_PATTERN");
   IElementType NUMBER = new RestartTokenType("NUMBER");
   IElementType PATTERN_ITEM = new RestartTokenType("PATTERN_ITEM");
-  IElementType RANGE = new RestartTokenType("RANGE");
-  IElementType SLICE = new RestartTokenType("SLICE");
+  IElementType PROPERTY_STATEMENT = new RestartTokenType("PROPERTY_STATEMENT");
   IElementType SLICE_ITEM = new RestartTokenType("SLICE_ITEM");
   IElementType STRING = new RestartTokenType("STRING");
   IElementType TALENT_STATEMENT = new RestartTokenType("TALENT_STATEMENT");
   IElementType TUPLE = new RestartTokenType("TUPLE");
-  IElementType VARIABLE_STATEMENT = new RestartTokenType("VARIABLE_STATEMENT");
   IElementType WHILE_STATEMENT = new RestartTokenType("WHILE_STATEMENT");
 
   IElementType AMP = new RestartTokenType("AMP");
@@ -77,8 +75,6 @@ public interface RestartTypes {
   IElementType OP_ADD = new RestartTokenType("+");
   IElementType OP_ADD_ASSIGN = new RestartTokenType("+=");
   IElementType OP_AND = new RestartTokenType("&");
-  IElementType OP_AND2 = new RestartTokenType("&&");
-  IElementType OP_AND_ASSIGN = new RestartTokenType("&=");
   IElementType OP_AND_THEN = new RestartTokenType("and_then");
   IElementType OP_ARROW = new RestartTokenType("->");
   IElementType OP_ARROW2 = new RestartTokenType("=>");
@@ -108,14 +104,11 @@ public interface RestartTypes {
   IElementType OP_MOD_ASSIGN = new RestartTokenType("%=");
   IElementType OP_MUL = new RestartTokenType("*");
   IElementType OP_MUL_ASSIGN = new RestartTokenType("*=");
-  IElementType OP_NAMESAPCE = new RestartTokenType("namespace");
   IElementType OP_NE = new RestartTokenType("!=");
   IElementType OP_NOT = new RestartTokenType("!");
   IElementType OP_NOT_A = new RestartTokenType("is not");
   IElementType OP_NOT_IN = new RestartTokenType("not_in");
   IElementType OP_OR = new RestartTokenType("|");
-  IElementType OP_OR2 = new RestartTokenType("||");
-  IElementType OP_OR_ASSIGN = new RestartTokenType("|=");
   IElementType OP_OR_ELSE = new RestartTokenType("or_else");
   IElementType OP_POW = new RestartTokenType("^");
   IElementType OP_POW_ASSIGN = new RestartTokenType("OP_POW_ASSIGN");
@@ -128,8 +121,7 @@ public interface RestartTypes {
   IElementType PARENTHESIS_R = new RestartTokenType(")");
   IElementType QUESTION = new RestartTokenType("QUESTION");
   IElementType SEMICOLON = new RestartTokenType(";");
-  IElementType SLICE_L = new RestartTokenType("[[");
-  IElementType SLICE_R = new RestartTokenType("]]");
+  IElementType SLICE = new RestartTokenType("slice");
   IElementType STRING_END = new RestartTokenType("StringEnd");
   IElementType STRING_START = new RestartTokenType("StringStart");
   IElementType STRING_TEXT = new RestartTokenType("StringText");
@@ -140,8 +132,8 @@ public interface RestartTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == AWARD_STATEMENT) {
-        return new RestartAwardStatementNode(node);
+      if (type == ARCHIVE_STATEMENT) {
+        return new RestartArchiveStatementNode(node);
       }
       else if (type == BLOCK) {
         return new RestartBlockNode(node);
@@ -203,8 +195,8 @@ public interface RestartTypes {
       else if (type == IF_STATEMENT) {
         return new RestartIfStatementNode(node);
       }
-      else if (type == KW_AWARD) {
-        return new RestartKwAwardNode(node);
+      else if (type == KW_ARCHIVE) {
+        return new RestartKwArchiveNode(node);
       }
       else if (type == KW_DECLARE) {
         return new RestartKwDeclareNode(node);
@@ -215,11 +207,11 @@ public interface RestartTypes {
       else if (type == KW_HERO) {
         return new RestartKwHeroNode(node);
       }
+      else if (type == KW_PROPERTY) {
+        return new RestartKwPropertyNode(node);
+      }
       else if (type == KW_TALENT) {
         return new RestartKwTalentNode(node);
-      }
-      else if (type == KW_VARIABLE) {
-        return new RestartKwVariableNode(node);
       }
       else if (type == LIST) {
         return new RestartListNode(node);
@@ -239,11 +231,8 @@ public interface RestartTypes {
       else if (type == PATTERN_ITEM) {
         return new RestartPatternItemNode(node);
       }
-      else if (type == RANGE) {
-        return new RestartRangeNode(node);
-      }
-      else if (type == SLICE) {
-        return new RestartSliceNode(node);
+      else if (type == PROPERTY_STATEMENT) {
+        return new RestartPropertyStatementNode(node);
       }
       else if (type == SLICE_ITEM) {
         return new RestartSliceItemNode(node);
@@ -256,9 +245,6 @@ public interface RestartTypes {
       }
       else if (type == TUPLE) {
         return new RestartTupleNode(node);
-      }
-      else if (type == VARIABLE_STATEMENT) {
-        return new RestartVariableStatementNode(node);
       }
       else if (type == WHILE_STATEMENT) {
         return new RestartWhileStatementNode(node);

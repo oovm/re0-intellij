@@ -12,26 +12,20 @@ import restart.language.ast.RestartASTBase;
 import restart.language.psi.*;
 import restart.language.ast.ASTMethods;
 
-public class RestartSliceNode extends RestartASTBase implements RestartSlice {
+public class RestartKwArchiveNode extends RestartASTBase implements RestartKwArchive {
 
-  public RestartSliceNode(@NotNull ASTNode node) {
+  public RestartKwArchiveNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RestartVisitor visitor) {
-    visitor.visitSlice(this);
+    visitor.visitKwArchive(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof RestartVisitor) accept((RestartVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public List<RestartSliceItem> getSliceItemList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartSliceItem.class);
   }
 
 }

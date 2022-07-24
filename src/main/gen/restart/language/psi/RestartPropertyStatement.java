@@ -5,16 +5,16 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface RestartEnumStatement extends PsiElement {
+public interface RestartPropertyStatement extends PsiElement {
 
   @NotNull
-  RestartBracketFree getBracketFree();
+  RestartDeclareBlock getDeclareBlock();
 
   @NotNull
   RestartIdentifier getIdentifier();
 
   @NotNull
-  RestartKwEnum getKwEnum();
+  RestartKwProperty getKwProperty();
 
   @Nullable
   RestartModifiers getModifiers();

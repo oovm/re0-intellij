@@ -12,14 +12,14 @@ import restart.language.ast.RestartASTBase;
 import restart.language.psi.*;
 import restart.language.ast.ASTMethods;
 
-public class RestartKwAwardNode extends RestartASTBase implements RestartKwAward {
+public class RestartKwPropertyNode extends RestartASTBase implements RestartKwProperty {
 
-  public RestartKwAwardNode(@NotNull ASTNode node) {
+  public RestartKwPropertyNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RestartVisitor visitor) {
-    visitor.visitKwAward(this);
+    visitor.visitKwProperty(this);
   }
 
   @Override

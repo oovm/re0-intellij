@@ -12,14 +12,14 @@ import restart.language.mixin.MixinAward;
 import restart.language.psi.*;
 import restart.language.ast.ASTMethods;
 
-public class RestartAwardStatementNode extends MixinAward implements RestartAwardStatement {
+public class RestartArchiveStatementNode extends MixinAward implements RestartArchiveStatement {
 
-  public RestartAwardStatementNode(@NotNull ASTNode node) {
+  public RestartArchiveStatementNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RestartVisitor visitor) {
-    visitor.visitAwardStatement(this);
+    visitor.visitArchiveStatement(this);
   }
 
   @Override
@@ -42,8 +42,8 @@ public class RestartAwardStatementNode extends MixinAward implements RestartAwar
 
   @Override
   @NotNull
-  public RestartKwAward getKwAward() {
-    return findNotNullChildByClass(RestartKwAward.class);
+  public RestartKwArchive getKwArchive() {
+    return findNotNullChildByClass(RestartKwArchive.class);
   }
 
   @Override

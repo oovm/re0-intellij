@@ -12,14 +12,14 @@ import restart.language.mixin.MixinProperty;
 import restart.language.psi.*;
 import restart.language.ast.ASTMethods;
 
-public class RestartVariableStatementNode extends MixinProperty implements RestartVariableStatement {
+public class RestartPropertyStatementNode extends MixinProperty implements RestartPropertyStatement {
 
-  public RestartVariableStatementNode(@NotNull ASTNode node) {
+  public RestartPropertyStatementNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RestartVisitor visitor) {
-    visitor.visitVariableStatement(this);
+    visitor.visitPropertyStatement(this);
   }
 
   @Override
@@ -42,8 +42,8 @@ public class RestartVariableStatementNode extends MixinProperty implements Resta
 
   @Override
   @NotNull
-  public RestartKwVariable getKwVariable() {
-    return findNotNullChildByClass(RestartKwVariable.class);
+  public RestartKwProperty getKwProperty() {
+    return findNotNullChildByClass(RestartKwProperty.class);
   }
 
   @Override

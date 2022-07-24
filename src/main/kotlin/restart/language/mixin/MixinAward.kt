@@ -1,16 +1,15 @@
 package restart.language.mixin
 
 import restart.language.ast.DeclareNode
-import restart.language.psi_node.RestartAwardStatementNode
-
 import com.intellij.icons.AllIcons
 import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiElement
+import restart.language.psi_node.RestartArchiveStatementNode
 import javax.swing.Icon
 
 open class MixinAward(node: ASTNode) : DeclareNode(node) {
-    override fun getOriginalElement(): RestartAwardStatementNode {
-        return this as RestartAwardStatementNode
+    override fun getOriginalElement(): RestartArchiveStatementNode {
+        return this as RestartArchiveStatementNode
     }
 
     override fun getNameIdentifier(): PsiElement = originalElement

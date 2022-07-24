@@ -23,12 +23,6 @@ public interface RestartExpression extends PsiElement {
   List<RestartNumber> getNumberList();
 
   @NotNull
-  List<RestartRange> getRangeList();
-
-  @NotNull
-  List<RestartSlice> getSliceList();
-
-  @NotNull
   List<RestartString> getStringList();
 
   @NotNull

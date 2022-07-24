@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public class RestartVisitor extends PsiElementVisitor {
 
-  public void visitAwardStatement(@NotNull RestartAwardStatement o) {
+  public void visitArchiveStatement(@NotNull RestartArchiveStatement o) {
     visitPsiElement(o);
   }
 
@@ -91,7 +91,7 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitKwAward(@NotNull RestartKwAward o) {
+  public void visitKwArchive(@NotNull RestartKwArchive o) {
     visitPsiElement(o);
   }
 
@@ -107,11 +107,11 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitKwTalent(@NotNull RestartKwTalent o) {
+  public void visitKwProperty(@NotNull RestartKwProperty o) {
     visitPsiElement(o);
   }
 
-  public void visitKwVariable(@NotNull RestartKwVariable o) {
+  public void visitKwTalent(@NotNull RestartKwTalent o) {
     visitPsiElement(o);
   }
 
@@ -139,11 +139,7 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitRange(@NotNull RestartRange o) {
-    visitPsiElement(o);
-  }
-
-  public void visitSlice(@NotNull RestartSlice o) {
+  public void visitPropertyStatement(@NotNull RestartPropertyStatement o) {
     visitPsiElement(o);
   }
 
@@ -160,10 +156,6 @@ public class RestartVisitor extends PsiElementVisitor {
   }
 
   public void visitTuple(@NotNull RestartTuple o) {
-    visitPsiElement(o);
-  }
-
-  public void visitVariableStatement(@NotNull RestartVariableStatement o) {
     visitPsiElement(o);
   }
 
