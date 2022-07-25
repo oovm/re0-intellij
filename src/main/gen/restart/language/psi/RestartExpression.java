@@ -17,15 +17,9 @@ public interface RestartExpression extends PsiElement {
   List<RestartIdentifier> getIdentifierList();
 
   @NotNull
-  List<RestartList> getListList();
-
-  @NotNull
   List<RestartNumber> getNumberList();
 
   @NotNull
   List<RestartString> getStringList();
-
-  @NotNull
-  List<RestartTuple> getTupleList();
 
 }

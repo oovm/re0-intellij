@@ -31,16 +31,12 @@ public interface RestartTypes {
   IElementType KW_HERO = new RestartTokenType("KW_HERO");
   IElementType KW_PROPERTY = new RestartTokenType("KW_PROPERTY");
   IElementType KW_TALENT = new RestartTokenType("KW_TALENT");
-  IElementType LIST = new RestartTokenType("LIST");
   IElementType MODIFIERS = new RestartTokenType("MODIFIERS");
   IElementType NUMBER = new RestartTokenType("NUMBER");
   IElementType PROPERTY_STATEMENT = new RestartTokenType("PROPERTY_STATEMENT");
-  IElementType SLICE_ITEM = new RestartTokenType("SLICE_ITEM");
   IElementType STRING = new RestartTokenType("STRING");
   IElementType TALENT_STATEMENT = new RestartTokenType("TALENT_STATEMENT");
-  IElementType TUPLE = new RestartTokenType("TUPLE");
 
-  IElementType AMP = new RestartTokenType("AMP");
   IElementType BANG = new RestartTokenType("BANG");
   IElementType BRACE_L = new RestartTokenType("{");
   IElementType BRACE_R = new RestartTokenType("}");
@@ -53,10 +49,6 @@ public interface RestartTypes {
   IElementType COMMENT_TEXT = new RestartTokenType("Comment");
   IElementType DECIMAL = new RestartTokenType("DECIMAL");
   IElementType DOT = new RestartTokenType(".");
-  IElementType DOT2 = new RestartTokenType("DOT2");
-  IElementType DOT3 = new RestartTokenType("DOT3");
-  IElementType DOT_EQ = new RestartTokenType("DOT_EQ");
-  IElementType DOT_LESS = new RestartTokenType("DOT_LESS");
   IElementType INTEGER = new RestartTokenType("INTEGER");
   IElementType KW_ELSE = new RestartTokenType("KW_ELSE");
   IElementType KW_ELSE_IF = new RestartTokenType("KW_ELSE_IF");
@@ -106,7 +98,6 @@ public interface RestartTypes {
   IElementType OP_SET = new RestartTokenType("OP_SET");
   IElementType OP_SUB = new RestartTokenType("-");
   IElementType OP_SUB_ASSIGN = new RestartTokenType("-=");
-  IElementType OP_TO = new RestartTokenType("OP_TO");
   IElementType PARENTHESIS_L = new RestartTokenType("(");
   IElementType PARENTHESIS_R = new RestartTokenType(")");
   IElementType QUESTION = new RestartTokenType("QUESTION");
@@ -190,9 +181,6 @@ public interface RestartTypes {
       else if (type == KW_TALENT) {
         return new RestartKwTalentNode(node);
       }
-      else if (type == LIST) {
-        return new RestartListNode(node);
-      }
       else if (type == MODIFIERS) {
         return new RestartModifiersNode(node);
       }
@@ -202,17 +190,11 @@ public interface RestartTypes {
       else if (type == PROPERTY_STATEMENT) {
         return new RestartPropertyStatementNode(node);
       }
-      else if (type == SLICE_ITEM) {
-        return new RestartSliceItemNode(node);
-      }
       else if (type == STRING) {
         return new RestartStringNode(node);
       }
       else if (type == TALENT_STATEMENT) {
         return new RestartTalentStatementNode(node);
-      }
-      else if (type == TUPLE) {
-        return new RestartTupleNode(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

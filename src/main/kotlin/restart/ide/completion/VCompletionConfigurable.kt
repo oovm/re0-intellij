@@ -3,7 +3,7 @@ package restart.ide.completion
 import com.intellij.application.options.CodeCompletionOptionsCustomSection
 import com.intellij.openapi.options.ConfigurableBuilder
 import restart.RestartBundle
-import restart.settings.VCodeInsightSettings
+import restart.ide.codeStyle.VCodeInsightSettings
 
 class VCompletionConfigurable : ConfigurableBuilder(RestartBundle.message("settings.completion.title")),
     CodeCompletionOptionsCustomSection {

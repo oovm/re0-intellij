@@ -7,12 +7,12 @@ import restart.ide.project.RestartProject
 
 class GotoNameContributor : ChooseByNameContributor {
     override fun getNames(project: Project?, includeNonProjectItems: Boolean): Array<String> {
-        return RestartProject.getFiles(project)
-            .analyzeProperty().keys.toTypedArray()
+        return RestartProject.getStorage(project)
+            .analyzeFile().keys.toTypedArray()
     }
 
     override fun getItemsByName(name: String?, pattern: String?, project: Project?, includeNonProjectItems: Boolean): Array<NavigationItem> {
-        val items = RestartProject.getFiles(project).analyzeProperty()[name]
+        val items = RestartProject.getStorage(project).analyzeFile()[name]
         return items?.let { arrayOf(it) } ?: arrayOf()
     }
 }

@@ -7,6 +7,8 @@ import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNamedElement
 import com.intellij.psi.PsiReference
+import com.intellij.psi.stubs.IStubElementType
+import com.intellij.psi.stubs.StubElement
 import restart.ide.file.RestartIconProvider
 import restart.ide.view.RestartViewElement
 import restart.language.ast.ASTFactory
@@ -18,7 +20,8 @@ import restart.language.symbol.RestartSymbolKind
 import javax.swing.Icon
 
 open class MixinProperty(node: ASTNode) : DeclareNode(node),
-    PsiNamedElement {
+    PsiNamedElement
+     {
     override fun getOriginalElement(): RestartPropertyStatementNode {
         return this as RestartPropertyStatementNode
     }

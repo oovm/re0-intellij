@@ -16,7 +16,7 @@ class RestartReference(private val caller: PsiElement) : PsiReference {
     }
 
     override fun resolve(): PsiElement? {
-        return RestartProject.getFiles(caller.project).analyzeProperty()[canonicalText]
+        return RestartProject.getStorage(caller.project).analyzeFile()[canonicalText]
     }
 
     override fun getCanonicalText(): String {

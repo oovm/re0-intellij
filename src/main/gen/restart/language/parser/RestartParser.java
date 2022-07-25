@@ -430,13 +430,13 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // op_prefix* term (op_suffix|call_suffix|slice)*
+  // op_prefix* atoms (op_suffix|call_suffix|slice)*
   static boolean expr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = expr_0(b, l + 1);
-    r = r && term(b, l + 1);
+    r = r && atoms(b, l + 1);
     r = r && expr_2(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -685,18 +685,6 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // <<bracket_free expression COMMA>>
-  public static boolean list(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "list")) return false;
-    if (!nextTokenIs(b, BRACKET_L)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = bracket_free(b, l + 1, RestartParser::expression, COMMA_parser_);
-    exit_section_(b, m, LIST, r);
-    return r;
-  }
-
-  /* ********************************************************** */
   // (identifier !end_m1)+
   public static boolean modifiers(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "modifiers")) return false;
@@ -776,14 +764,14 @@ public class RestartParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // OP_SET | OP_EQ | OP_NE
+  //     | OP_GT | OP_LT | OP_GEQ | OP_LEQ
   //     | OP_ADD | OP_ADD_ASSIGN
   //     | OP_SUB | OP_SUB_ASSIGN
   //     | OP_MUL | OP_MUL_ASSIGN
-  //     | OP_DIV | OP_DIV_ASSIGN | OP_MOD | OP_MOD_ASSIGN
+  //     | OP_DIV | OP_DIV_ASSIGN
+  //     | OP_MOD | OP_MOD_ASSIGN
   //     | OP_POW | OP_POW_ASSIGN
-  //     | OP_GT | OP_LT | DOT_LESS | DOT_EQ | DOT2 | DOT
-  //     | OP_TO | OP_OR | OP_AND
-  //     | OP_AND_THEN | OP_OR_ELSE
+  //     | OP_AND | OP_OR
   //     // is | is not
   //     | OP_NOT_A | OP_IS_A OP_NOT | OP_IS_A | OP_NOT OP_IS_A
   //     | OP_AS
@@ -796,6 +784,10 @@ public class RestartParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, OP_SET);
     if (!r) r = consumeToken(b, OP_EQ);
     if (!r) r = consumeToken(b, OP_NE);
+    if (!r) r = consumeToken(b, OP_GT);
+    if (!r) r = consumeToken(b, OP_LT);
+    if (!r) r = consumeToken(b, OP_GEQ);
+    if (!r) r = consumeToken(b, OP_LEQ);
     if (!r) r = consumeToken(b, OP_ADD);
     if (!r) r = consumeToken(b, OP_ADD_ASSIGN);
     if (!r) r = consumeToken(b, OP_SUB);
@@ -808,17 +800,8 @@ public class RestartParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, OP_MOD_ASSIGN);
     if (!r) r = consumeToken(b, OP_POW);
     if (!r) r = consumeToken(b, OP_POW_ASSIGN);
-    if (!r) r = consumeToken(b, OP_GT);
-    if (!r) r = consumeToken(b, OP_LT);
-    if (!r) r = consumeToken(b, DOT_LESS);
-    if (!r) r = consumeToken(b, DOT_EQ);
-    if (!r) r = consumeToken(b, DOT2);
-    if (!r) r = consumeToken(b, DOT);
-    if (!r) r = consumeToken(b, OP_TO);
-    if (!r) r = consumeToken(b, OP_OR);
     if (!r) r = consumeToken(b, OP_AND);
-    if (!r) r = consumeToken(b, OP_AND_THEN);
-    if (!r) r = consumeToken(b, OP_OR_ELSE);
+    if (!r) r = consumeToken(b, OP_OR);
     if (!r) r = consumeToken(b, OP_NOT_A);
     if (!r) r = parseTokens(b, 0, OP_IS_A, OP_NOT);
     if (!r) r = consumeToken(b, OP_IS_A);
@@ -832,7 +815,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // OP_ADD | OP_SUB | OP_NOT | BANG | AMP | DOT3 | DOT2
+  // OP_ADD | OP_SUB | OP_NOT | BANG
   static boolean op_prefix(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op_prefix")) return false;
     boolean r;
@@ -840,9 +823,6 @@ public class RestartParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, OP_SUB);
     if (!r) r = consumeToken(b, OP_NOT);
     if (!r) r = consumeToken(b, BANG);
-    if (!r) r = consumeToken(b, AMP);
-    if (!r) r = consumeToken(b, DOT3);
-    if (!r) r = consumeToken(b, DOT2);
     return r;
   }
 
@@ -1022,110 +1002,6 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // [expression] COLON [expression] COLON [expression]
-  //   | [expression] COLON [expression]
-  //   | [expression] OP_PROPORTION [expression]
-  //   | expression
-  public static boolean slice_item(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "slice_item")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, SLICE_ITEM, "<slice item>");
-    r = slice_item_0(b, l + 1);
-    if (!r) r = slice_item_1(b, l + 1);
-    if (!r) r = slice_item_2(b, l + 1);
-    if (!r) r = expression(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // [expression] COLON [expression] COLON [expression]
-  private static boolean slice_item_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "slice_item_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = slice_item_0_0(b, l + 1);
-    r = r && consumeToken(b, COLON);
-    r = r && slice_item_0_2(b, l + 1);
-    r = r && consumeToken(b, COLON);
-    r = r && slice_item_0_4(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // [expression]
-  private static boolean slice_item_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "slice_item_0_0")) return false;
-    expression(b, l + 1);
-    return true;
-  }
-
-  // [expression]
-  private static boolean slice_item_0_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "slice_item_0_2")) return false;
-    expression(b, l + 1);
-    return true;
-  }
-
-  // [expression]
-  private static boolean slice_item_0_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "slice_item_0_4")) return false;
-    expression(b, l + 1);
-    return true;
-  }
-
-  // [expression] COLON [expression]
-  private static boolean slice_item_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "slice_item_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = slice_item_1_0(b, l + 1);
-    r = r && consumeToken(b, COLON);
-    r = r && slice_item_1_2(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // [expression]
-  private static boolean slice_item_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "slice_item_1_0")) return false;
-    expression(b, l + 1);
-    return true;
-  }
-
-  // [expression]
-  private static boolean slice_item_1_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "slice_item_1_2")) return false;
-    expression(b, l + 1);
-    return true;
-  }
-
-  // [expression] OP_PROPORTION [expression]
-  private static boolean slice_item_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "slice_item_2")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = slice_item_2_0(b, l + 1);
-    r = r && consumeToken(b, OP_PROPORTION);
-    r = r && slice_item_2_2(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // [expression]
-  private static boolean slice_item_2_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "slice_item_2_0")) return false;
-    expression(b, l + 1);
-    return true;
-  }
-
-  // [expression]
-  private static boolean slice_item_2_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "slice_item_2_2")) return false;
-    expression(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
   // [identifier] STRING_START STRING_TEXT STRING_END
   public static boolean string(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "string")) return false;
@@ -1166,17 +1042,6 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // list | tuple | atoms
-  static boolean term(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "term")) return false;
-    boolean r;
-    r = list(b, l + 1);
-    if (!r) r = tuple(b, l + 1);
-    if (!r) r = atoms(b, l + 1);
-    return r;
-  }
-
-  /* ********************************************************** */
   // property_statement
   //   | event_statement
   //   | hero_statement
@@ -1190,18 +1055,6 @@ public class RestartParser implements PsiParser, LightPsiParser {
     if (!r) r = hero_statement(b, l + 1);
     if (!r) r = archive_statement(b, l + 1);
     if (!r) r = talent_statement(b, l + 1);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // <<parenthesis expression COMMA>>
-  public static boolean tuple(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "tuple")) return false;
-    if (!nextTokenIs(b, PARENTHESIS_L)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = parenthesis(b, l + 1, RestartParser::expression, COMMA_parser_);
-    exit_section_(b, m, TUPLE, r);
     return r;
   }
 

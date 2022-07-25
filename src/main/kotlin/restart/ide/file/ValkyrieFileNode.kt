@@ -28,13 +28,4 @@ class RestartFileNode(viewProvider: FileViewProvider) : PsiFileBase(viewProvider
     fun isIndexFile(): Boolean {
         return this.name == "index.vk"
     }
-
-    fun findProperty(dict: MutableMap<String, RestartPropertyStatementNode>) {
-         PsiTreeUtil
-            .getChildrenOfTypeAsList(this, RestartPropertyStatementNode::class.java)
-            .forEach {
-                dict[it.name] = it
-            }
-    }
-
 }

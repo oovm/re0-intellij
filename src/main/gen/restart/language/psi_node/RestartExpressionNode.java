@@ -48,12 +48,6 @@ public class RestartExpressionNode extends RestartASTBase implements RestartExpr
 
   @Override
   @NotNull
-  public List<RestartList> getListList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartList.class);
-  }
-
-  @Override
-  @NotNull
   public List<RestartNumber> getNumberList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartNumber.class);
   }
@@ -62,12 +56,6 @@ public class RestartExpressionNode extends RestartASTBase implements RestartExpr
   @NotNull
   public List<RestartString> getStringList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartString.class);
-  }
-
-  @Override
-  @NotNull
-  public List<RestartTuple> getTupleList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartTuple.class);
   }
 
 }

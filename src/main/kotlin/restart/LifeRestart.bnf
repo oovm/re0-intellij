@@ -148,35 +148,26 @@ else_statement    ::= KW_ELSE block;
 block             ::= <<brace_free normal_statements SEMICOLON>>;
 // ---------------------------------------------------------------------------------------------------------------------
 expression        ::= expr (op_binary expr)*;
-private expr      ::= op_prefix* term (op_suffix|call_suffix|slice)*;
+private expr      ::= op_prefix* atoms (op_suffix|call_suffix|slice)*;
 private op_binary ::=
       OP_SET | OP_EQ | OP_NE
+    | OP_GT | OP_LT | OP_GEQ | OP_LEQ
     | OP_ADD | OP_ADD_ASSIGN
     | OP_SUB | OP_SUB_ASSIGN
     | OP_MUL | OP_MUL_ASSIGN
-    | OP_DIV | OP_DIV_ASSIGN | OP_MOD | OP_MOD_ASSIGN
+    | OP_DIV | OP_DIV_ASSIGN
+    | OP_MOD | OP_MOD_ASSIGN
     | OP_POW | OP_POW_ASSIGN
-    | OP_GT | OP_LT | DOT_LESS | DOT_EQ | DOT2 | DOT
-    | OP_TO | OP_OR | OP_AND
-    | OP_AND_THEN | OP_OR_ELSE
+    | OP_AND | OP_OR
     // is | is not
     | OP_NOT_A | OP_IS_A OP_NOT | OP_IS_A | OP_NOT OP_IS_A
     | OP_AS
     // in | not in
     | OP_IN | OP_NOT_IN | OP_NOT OP_IN
-private op_prefix ::= OP_ADD | OP_SUB | OP_NOT | BANG | AMP | DOT3 | DOT2;
+private op_prefix ::= OP_ADD | OP_SUB | OP_NOT | BANG;
 private op_suffix ::= BANG | QUESTION;
 call_suffix       ::= <<parenthesis expression COMMA>>;
 private delimiter ::= COMMA|SEMICOLON
-// ---------------------------------------------------------------------------------------------------------------------
-private term   ::= list | tuple | atoms;
-tuple          ::= <<parenthesis expression COMMA>>
-list           ::= <<bracket_free expression COMMA>>
-slice_item     ::=
-    [expression] COLON [expression] COLON [expression]
-  | [expression] COLON [expression]
-  | [expression] OP_PROPORTION [expression]
-  | expression;
 // ---------------------------------------------------------------------------------------------------------------------
 private atoms  ::= number | string | boolean | identifier;
 boolean        ::= "true" | "false";

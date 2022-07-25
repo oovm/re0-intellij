@@ -99,10 +99,6 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitList(@NotNull RestartList o) {
-    visitPsiElement(o);
-  }
-
   public void visitModifiers(@NotNull RestartModifiers o) {
     visitPsiElement(o);
   }
@@ -115,19 +111,11 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitSliceItem(@NotNull RestartSliceItem o) {
-    visitPsiElement(o);
-  }
-
   public void visitString(@NotNull RestartString o) {
     visitPsiElement(o);
   }
 
   public void visitTalentStatement(@NotNull RestartTalentStatement o) {
-    visitPsiElement(o);
-  }
-
-  public void visitTuple(@NotNull RestartTuple o) {
     visitPsiElement(o);
   }
 

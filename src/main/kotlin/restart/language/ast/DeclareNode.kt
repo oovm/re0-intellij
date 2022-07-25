@@ -4,11 +4,17 @@ package restart.language.ast
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.lang.ASTNode
 import com.intellij.navigation.ItemPresentation
-import com.intellij.navigation.NavigationRequest
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNameIdentifierOwner
 import com.intellij.psi.PsiReference
+import com.intellij.psi.StubBasedPsiElement
+import com.intellij.psi.stubs.StubElement
+import restart.language.mixin.IdentifierData
+import restart.language.psi_node.RestartIdentifierNode
 import javax.swing.Icon
+
+
+
 
 /// 一定是可以 view 的节点
 /// PsiSymbolDeclarationProvider,

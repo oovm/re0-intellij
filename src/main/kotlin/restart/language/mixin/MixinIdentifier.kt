@@ -2,6 +2,7 @@ package restart.language.mixin
 
 import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiNamedElement
+import com.intellij.psi.stubs.StubElement
 import restart.ide.reference.RestartReference
 import restart.language.ast.RestartASTBase
 import restart.language.psi.RestartModifiers
@@ -44,3 +45,6 @@ open class MixinIdentifier(node: ASTNode) : RestartASTBase(node), PsiNamedElemen
 
 }
 
+interface IdentifierData : StubElement<RestartIdentifierNode> {
+
+}
