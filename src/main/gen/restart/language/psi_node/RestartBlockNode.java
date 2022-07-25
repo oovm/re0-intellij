@@ -36,20 +36,8 @@ public class RestartBlockNode extends RestartASTBase implements RestartBlock {
 
   @Override
   @NotNull
-  public List<RestartForStatement> getForStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartForStatement.class);
-  }
-
-  @Override
-  @NotNull
   public List<RestartIfStatement> getIfStatementList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartIfStatement.class);
-  }
-
-  @Override
-  @NotNull
-  public List<RestartWhileStatement> getWhileStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartWhileStatement.class);
   }
 
 }

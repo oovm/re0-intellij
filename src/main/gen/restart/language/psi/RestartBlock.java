@@ -11,12 +11,6 @@ public interface RestartBlock extends PsiElement {
   List<RestartExpression> getExpressionList();
 
   @NotNull
-  List<RestartForStatement> getForStatementList();
-
-  @NotNull
   List<RestartIfStatement> getIfStatementList();
-
-  @NotNull
-  List<RestartWhileStatement> getWhileStatementList();
 
 }

@@ -42,14 +42,14 @@ public class RestartExpressionNode extends RestartASTBase implements RestartExpr
 
   @Override
   @NotNull
-  public List<RestartList> getListList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartList.class);
+  public List<RestartIdentifier> getIdentifierList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartIdentifier.class);
   }
 
   @Override
   @NotNull
-  public List<RestartNamepath> getNamepathList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartNamepath.class);
+  public List<RestartList> getListList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartList.class);
   }
 
   @Override

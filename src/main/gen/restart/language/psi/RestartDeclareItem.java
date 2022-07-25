@@ -20,12 +20,6 @@ public interface RestartDeclareItem extends PsiElement {
   RestartExpression getExpression();
 
   @Nullable
-  RestartForStatement getForStatement();
-
-  @Nullable
   RestartIfStatement getIfStatement();
-
-  @Nullable
-  RestartWhileStatement getWhileStatement();
 
 }

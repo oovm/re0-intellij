@@ -9,8 +9,9 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import restart.ide.file.RestartFileNode
 import restart.language.ast.RestartASTBase
-import restart.language.ast.identifier
 import restart.language.psi.*
+import restart.language.psi_node.RestartIdentifierNode
+import restart.language.psi_node.RestartNumberNode
 import restart.ide.highlight.RestartHighlightColor as Color
 
 class NodeHighlighter : RestartVisitor(), HighlightVisitor {
@@ -59,7 +60,8 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     }
 
     override fun visitNumber(o: RestartNumber) {
-        o.identifier?.let {
+        val node = o as RestartNumberNode
+        node.identifier?.let {
             highlight(it, Color.MODIFIER)
         }
     }
@@ -75,8 +77,9 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     }
 
     override fun visitIdentifier(o: RestartIdentifier) {
-        val node = o.reference?.resolve() as RestartASTBase
-        highlight(o, node.getKind().color)
+        val ref = o.reference?.resolve() as? RestartASTBase
+        ref?.getKind()?.color?.let { highlight(o, it) }
+
     }
 
     // =================================================================================================================

@@ -14,10 +14,10 @@ public interface RestartExpression extends PsiElement {
   List<RestartCallSuffix> getCallSuffixList();
 
   @NotNull
-  List<RestartList> getListList();
+  List<RestartIdentifier> getIdentifierList();
 
   @NotNull
-  List<RestartNamepath> getNamepathList();
+  List<RestartList> getListList();
 
   @NotNull
   List<RestartNumber> getNumberList();

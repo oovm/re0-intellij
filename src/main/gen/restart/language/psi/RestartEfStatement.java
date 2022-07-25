@@ -11,6 +11,6 @@ public interface RestartEfStatement extends PsiElement {
   RestartBlock getBlock();
 
   @NotNull
-  RestartCondition getCondition();
+  RestartExpression getExpression();
 
 }

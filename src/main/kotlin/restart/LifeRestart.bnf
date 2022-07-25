@@ -116,12 +116,11 @@ declare_item       ::=
 declare_key        ::= identifier|number|KW_IF {
     mixin="restart.language.mixin.MixinKey"
 }
-pattern_item       ::= identifier* (DOT3|DOT2) identifier | identifier+;
 // ---------------------------------------------------------------------------------------------------------------------
 property_statement ::= kw_property identifier [modifiers] declare_block {
     mixin="restart.language.mixin.MixinProperty"
 };
-kw_property        ::= "variable" | "property" | "属性"
+kw_property        ::= "variable" | "property" | "属性";
 // ---------------------------------------------------------------------------------------------------------------------
 event_statement    ::= kw_event identifier [modifiers] declare_block {
     mixin="restart.language.mixin.MixinEvent"
@@ -179,7 +178,7 @@ slice_item     ::=
   | [expression] OP_PROPORTION [expression]
   | expression;
 // ---------------------------------------------------------------------------------------------------------------------
-private atoms  ::= number | string | boolean;
+private atoms  ::= number | string | boolean | identifier;
 boolean        ::= "true" | "false";
 number         ::= (BYTE | INTEGER | DECIMAL) [NUMBER_SUFFIX] {
     mixin="restart.language.mixin.MixinNumber"

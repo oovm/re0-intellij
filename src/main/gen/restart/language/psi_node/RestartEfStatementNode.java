@@ -36,8 +36,8 @@ public class RestartEfStatementNode extends RestartASTBase implements RestartEfS
 
   @Override
   @NotNull
-  public RestartCondition getCondition() {
-    return findNotNullChildByClass(RestartCondition.class);
+  public RestartExpression getExpression() {
+    return findNotNullChildByClass(RestartExpression.class);
   }
 
 }

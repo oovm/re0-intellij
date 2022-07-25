@@ -14,8 +14,6 @@ public interface RestartTypes {
   IElementType BRACE_BLOCK = new RestartTokenType("BRACE_BLOCK");
   IElementType BRACKET_FREE = new RestartTokenType("BRACKET_FREE");
   IElementType CALL_SUFFIX = new RestartTokenType("CALL_SUFFIX");
-  IElementType CASE_PATTERN = new RestartTokenType("CASE_PATTERN");
-  IElementType CONDITION = new RestartTokenType("CONDITION");
   IElementType DECLARE_BLOCK = new RestartTokenType("DECLARE_BLOCK");
   IElementType DECLARE_ITEM = new RestartTokenType("DECLARE_ITEM");
   IElementType DECLARE_KEY = new RestartTokenType("DECLARE_KEY");
@@ -24,10 +22,8 @@ public interface RestartTypes {
   IElementType ELSE_STATEMENT = new RestartTokenType("ELSE_STATEMENT");
   IElementType EVENT_STATEMENT = new RestartTokenType("EVENT_STATEMENT");
   IElementType EXPRESSION = new RestartTokenType("EXPRESSION");
-  IElementType FOR_STATEMENT = new RestartTokenType("FOR_STATEMENT");
   IElementType HERO_STATEMENT = new RestartTokenType("HERO_STATEMENT");
   IElementType IDENTIFIER = new RestartTokenType("IDENTIFIER");
-  IElementType IF_GUARD = new RestartTokenType("IF_GUARD");
   IElementType IF_STATEMENT = new RestartTokenType("IF_STATEMENT");
   IElementType KW_ARCHIVE = new RestartTokenType("KW_ARCHIVE");
   IElementType KW_DECLARE = new RestartTokenType("KW_DECLARE");
@@ -37,16 +33,12 @@ public interface RestartTypes {
   IElementType KW_TALENT = new RestartTokenType("KW_TALENT");
   IElementType LIST = new RestartTokenType("LIST");
   IElementType MODIFIERS = new RestartTokenType("MODIFIERS");
-  IElementType NAMEPATH = new RestartTokenType("NAMEPATH");
-  IElementType NORMAL_PATTERN = new RestartTokenType("NORMAL_PATTERN");
   IElementType NUMBER = new RestartTokenType("NUMBER");
-  IElementType PATTERN_ITEM = new RestartTokenType("PATTERN_ITEM");
   IElementType PROPERTY_STATEMENT = new RestartTokenType("PROPERTY_STATEMENT");
   IElementType SLICE_ITEM = new RestartTokenType("SLICE_ITEM");
   IElementType STRING = new RestartTokenType("STRING");
   IElementType TALENT_STATEMENT = new RestartTokenType("TALENT_STATEMENT");
   IElementType TUPLE = new RestartTokenType("TUPLE");
-  IElementType WHILE_STATEMENT = new RestartTokenType("WHILE_STATEMENT");
 
   IElementType AMP = new RestartTokenType("AMP");
   IElementType BANG = new RestartTokenType("BANG");
@@ -55,7 +47,6 @@ public interface RestartTypes {
   IElementType BRACKET_L = new RestartTokenType("[");
   IElementType BRACKET_R = new RestartTokenType("]");
   IElementType BYTE = new RestartTokenType("Byte");
-  IElementType CASE = new RestartTokenType("CASE");
   IElementType COLON = new RestartTokenType(":");
   IElementType COMMA = new RestartTokenType("COMMA");
   IElementType COMMENT_SL = new RestartTokenType("//");
@@ -69,7 +60,6 @@ public interface RestartTypes {
   IElementType INTEGER = new RestartTokenType("INTEGER");
   IElementType KW_ELSE = new RestartTokenType("KW_ELSE");
   IElementType KW_ELSE_IF = new RestartTokenType("KW_ELSE_IF");
-  IElementType KW_FOR = new RestartTokenType("KW_FOR");
   IElementType KW_IF = new RestartTokenType("KW_IF");
   IElementType NUMBER_SUFFIX = new RestartTokenType("NUMBER_SUFFIX");
   IElementType OP_ADD = new RestartTokenType("+");
@@ -127,7 +117,6 @@ public interface RestartTypes {
   IElementType STRING_TEXT = new RestartTokenType("StringText");
   IElementType SYMBOL_RAW = new RestartTokenType("Symbol");
   IElementType SYMBOL_XID = new RestartTokenType("SYMBOL_XID");
-  IElementType WHILE = new RestartTokenType("WHILE");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
@@ -149,12 +138,6 @@ public interface RestartTypes {
       }
       else if (type == CALL_SUFFIX) {
         return new RestartCallSuffixNode(node);
-      }
-      else if (type == CASE_PATTERN) {
-        return new RestartCasePatternNode(node);
-      }
-      else if (type == CONDITION) {
-        return new RestartConditionNode(node);
       }
       else if (type == DECLARE_BLOCK) {
         return new RestartDeclareBlockNode(node);
@@ -180,17 +163,11 @@ public interface RestartTypes {
       else if (type == EXPRESSION) {
         return new RestartExpressionNode(node);
       }
-      else if (type == FOR_STATEMENT) {
-        return new RestartForStatementNode(node);
-      }
       else if (type == HERO_STATEMENT) {
         return new RestartHeroStatementNode(node);
       }
       else if (type == IDENTIFIER) {
         return new RestartIdentifierNode(node);
-      }
-      else if (type == IF_GUARD) {
-        return new RestartIfGuardNode(node);
       }
       else if (type == IF_STATEMENT) {
         return new RestartIfStatementNode(node);
@@ -219,17 +196,8 @@ public interface RestartTypes {
       else if (type == MODIFIERS) {
         return new RestartModifiersNode(node);
       }
-      else if (type == NAMEPATH) {
-        return new RestartNamepathNode(node);
-      }
-      else if (type == NORMAL_PATTERN) {
-        return new RestartNormalPatternNode(node);
-      }
       else if (type == NUMBER) {
         return new RestartNumberNode(node);
-      }
-      else if (type == PATTERN_ITEM) {
-        return new RestartPatternItemNode(node);
       }
       else if (type == PROPERTY_STATEMENT) {
         return new RestartPropertyStatementNode(node);
@@ -245,9 +213,6 @@ public interface RestartTypes {
       }
       else if (type == TUPLE) {
         return new RestartTupleNode(node);
-      }
-      else if (type == WHILE_STATEMENT) {
-        return new RestartWhileStatementNode(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

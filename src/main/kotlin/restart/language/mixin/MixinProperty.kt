@@ -6,6 +6,7 @@ import com.intellij.lang.ASTNode
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNamedElement
+import com.intellij.psi.PsiReference
 import restart.ide.file.RestartIconProvider
 import restart.ide.view.RestartViewElement
 import restart.language.ast.ASTFactory
@@ -35,6 +36,7 @@ open class MixinProperty(node: ASTNode) : DeclareNode(node),
 //        }
         return views.toTypedArray()
     }
+
 
 
 }

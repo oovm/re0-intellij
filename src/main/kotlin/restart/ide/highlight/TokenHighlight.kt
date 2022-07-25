@@ -23,7 +23,7 @@ class TokenHighlight : SyntaxHighlighterBase() {
         return when (tokenType) {
             // Keywords
             OP_AS -> Color.KEYWORD
-            KW_IF, KW_FOR, WHILE -> Color.KEYWORD
+            KW_IF,-> Color.KEYWORD
             // ANNOTATION -> JssColor.ANNOTATION
             //
             PARENTHESIS_L, PARENTHESIS_R -> Color.PARENTHESES

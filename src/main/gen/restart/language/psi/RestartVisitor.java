@@ -31,14 +31,6 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitCasePattern(@NotNull RestartCasePattern o) {
-    visitPsiElement(o);
-  }
-
-  public void visitCondition(@NotNull RestartCondition o) {
-    visitPsiElement(o);
-  }
-
   public void visitDeclareBlock(@NotNull RestartDeclareBlock o) {
     visitPsiElement(o);
   }
@@ -71,19 +63,11 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitForStatement(@NotNull RestartForStatement o) {
-    visitPsiElement(o);
-  }
-
   public void visitHeroStatement(@NotNull RestartHeroStatement o) {
     visitPsiElement(o);
   }
 
   public void visitIdentifier(@NotNull RestartIdentifier o) {
-    visitPsiElement(o);
-  }
-
-  public void visitIfGuard(@NotNull RestartIfGuard o) {
     visitPsiElement(o);
   }
 
@@ -123,19 +107,7 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitNamepath(@NotNull RestartNamepath o) {
-    visitPsiElement(o);
-  }
-
-  public void visitNormalPattern(@NotNull RestartNormalPattern o) {
-    visitPsiElement(o);
-  }
-
   public void visitNumber(@NotNull RestartNumber o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPatternItem(@NotNull RestartPatternItem o) {
     visitPsiElement(o);
   }
 
@@ -156,10 +128,6 @@ public class RestartVisitor extends PsiElementVisitor {
   }
 
   public void visitTuple(@NotNull RestartTuple o) {
-    visitPsiElement(o);
-  }
-
-  public void visitWhileStatement(@NotNull RestartWhileStatement o) {
     visitPsiElement(o);
   }
 

@@ -54,20 +54,8 @@ public class RestartDeclareItemNode extends RestartASTBase implements RestartDec
 
   @Override
   @Nullable
-  public RestartForStatement getForStatement() {
-    return findChildByClass(RestartForStatement.class);
-  }
-
-  @Override
-  @Nullable
   public RestartIfStatement getIfStatement() {
     return findChildByClass(RestartIfStatement.class);
-  }
-
-  @Override
-  @Nullable
-  public RestartWhileStatement getWhileStatement() {
-    return findChildByClass(RestartWhileStatement.class);
   }
 
 }

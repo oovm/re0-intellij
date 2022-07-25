@@ -12,5 +12,9 @@ open class MixinKeyword(node: ASTNode) : RestartASTBase(node) {
 //    override fun setName(name: String): PsiElement {
 //        return this
 //    }
+
+    override fun canNavigate(): Boolean {
+        return false
+    }
 }
 

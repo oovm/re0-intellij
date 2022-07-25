@@ -36,12 +36,6 @@ public class RestartIfStatementNode extends RestartASTBase implements RestartIfS
 
   @Override
   @NotNull
-  public RestartCondition getCondition() {
-    return findNotNullChildByClass(RestartCondition.class);
-  }
-
-  @Override
-  @NotNull
   public List<RestartEfStatement> getEfStatementList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartEfStatement.class);
   }
@@ -50,6 +44,12 @@ public class RestartIfStatementNode extends RestartASTBase implements RestartIfS
   @Nullable
   public RestartElseStatement getElseStatement() {
     return findChildByClass(RestartElseStatement.class);
+  }
+
+  @Override
+  @NotNull
+  public RestartExpression getExpression() {
+    return findNotNullChildByClass(RestartExpression.class);
   }
 
 }

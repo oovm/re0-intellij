@@ -7,6 +7,7 @@ import com.intellij.navigation.ItemPresentation
 import com.intellij.navigation.NavigationRequest
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNameIdentifierOwner
+import com.intellij.psi.PsiReference
 import javax.swing.Icon
 
 /// 一定是可以 view 的节点
@@ -25,6 +26,13 @@ abstract class DeclareNode(node: ASTNode) : RestartASTBase(node),
     }
     override fun canNavigate(): Boolean {
         return true
+    }
+    override fun getReference(): PsiReference? {
+        return null
+    }
+
+    override fun getReferences(): Array<PsiReference> {
+        return arrayOf()
     }
 }
 
