@@ -654,7 +654,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "variable" | "property" | "属性" | "内置"
+  // "variable" | "property" | "属性" | "内置" | "设定"
   public static boolean kw_property(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "kw_property")) return false;
     boolean r;
@@ -663,6 +663,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, "property");
     if (!r) r = consumeToken(b, "属性");
     if (!r) r = consumeToken(b, "内置");
+    if (!r) r = consumeToken(b, "设定");
     exit_section_(b, l, m, r, false, null);
     return r;
   }

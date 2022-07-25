@@ -3,16 +3,16 @@
 SetDirectory@NotebookDirectory[]
 
 
-translateEffect[t_Association]:=Block[
-{},
-"{\n"<>StringRiffle[{
-If[MissingQ[t["SPR"]],Nothing, "\:5feb\:4e50:"<>ToString@t["SPR"]],
-If[MissingQ[t["MNY"]],Nothing, "\:8d22\:5bcc:"<>ToString@t["MNY"]],
-If[MissingQ[t["CHR"]],Nothing, "\:9b45\:529b:"<>ToString@t["CHR"]],
-If[MissingQ[t["STR"]],Nothing, "\:4f53\:8d28:"<>ToString@t["STR"]],
-If[MissingQ[t["INT"]],Nothing, "\:667a\:529b:"<>ToString@t["INT"]]
-},", "]<>"\n}"
-]
+translateEffect[t_Association] := Block[
+    {},
+    "{\n" <> StringRiffle[{
+        If[MissingQ[t["SPR"]], Nothing, "\:5feb\:4e50:" <> ToString@t["SPR"]],
+        If[MissingQ[t["MNY"]], Nothing, "\:8d22\:5bcc:" <> ToString@t["MNY"]],
+        If[MissingQ[t["CHR"]], Nothing, "\:9b45\:529b:" <> ToString@t["CHR"]],
+        If[MissingQ[t["STR"]], Nothing, "\:4f53\:8d28:" <> ToString@t["STR"]],
+        If[MissingQ[t["INT"]], Nothing, "\:667a\:529b:" <> ToString@t["INT"]]
+    }, ", "] <> "\n}"
+];
 
 
 translateTalents[t_Association] := Block[
@@ -33,7 +33,7 @@ translateTalents[t_Association] := Block[
         "description" -> "/// " <> ToString[t["description"]],
         "name" -> t["name"],
         "exclude" -> exclude,
-        "effect"-> effect
+        "effect" -> effect
     |>
 ];
 

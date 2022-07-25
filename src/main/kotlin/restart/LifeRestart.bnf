@@ -121,7 +121,7 @@ declare_key        ::= identifier | number | KW_IF {
 property_statement ::= kw_property identifier [modifiers] declare_block {
     mixin="restart.language.mixin.MixinProperty"
 };
-kw_property        ::= "variable" | "property" | "属性" | "内置";
+kw_property        ::= "variable" | "property" | "属性" | "内置" | "设定";
 // ---------------------------------------------------------------------------------------------------------------------
 event_statement    ::= kw_event identifier [modifiers] declare_block {
     mixin="restart.language.mixin.MixinEvent"
