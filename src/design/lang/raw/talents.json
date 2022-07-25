@@ -170,7 +170,7 @@
     "1020": {
         "id": "1020",
         "name": "父母美貌",
-        "description": "颜值+2",
+        "description": "魅力+2",
         "grade": 1,
         "effect": {
             "CHR": 2
@@ -179,7 +179,7 @@
     "1021": {
         "id": "1021",
         "name": "红颜薄命",
-        "description": "颜值+2，体质-2",
+        "description": "魅力+2，体质-2",
         "grade": 0,
         "effect": {
             "CHR": 2,
@@ -298,7 +298,7 @@
     "1034": {
         "id": "1034",
         "name": "家运不顺",
-        "description": "家境-2",
+        "description": "财富-2",
         "grade": 0,
         "effect": {
             "MNY": -2
@@ -403,7 +403,7 @@
     "1049": {
         "id": "1049",
         "name": "三十而立",
-        "description": "30岁时家境+2",
+        "description": "30岁时财富+2",
         "condition": "AGE?[30]",
         "grade": 0,
         "effect": {
@@ -464,7 +464,7 @@
     "1055": {
         "id": "1055",
         "name": "鹤发童颜",
-        "description": "70岁时颜值+3",
+        "description": "70岁时魅力+3",
         "condition": "AGE?[70]",
         "grade": 0,
         "effect": {
@@ -484,7 +484,7 @@
     "1057": {
         "id": "1057",
         "name": "十八变",
-        "description": "18岁时颜值+2",
+        "description": "18岁时魅力+2",
         "condition": "AGE?[18]",
         "grade": 1,
         "effect": {
@@ -494,7 +494,7 @@
     "1058": {
         "id": "1058",
         "name": "迟来之财",
-        "description": "90岁时家境+4",
+        "description": "90岁时财富+4",
         "condition": "AGE?[90]",
         "grade": 0,
         "effect": {
@@ -504,7 +504,7 @@
     "1059": {
         "id": "1059",
         "name": "理财达人",
-        "description": "40岁时家境+3",
+        "description": "40岁时财富+3",
         "condition": "AGE?[40]",
         "grade": 0,
         "effect": {
@@ -524,7 +524,7 @@
     "1061": {
         "id": "1061",
         "name": "形象管理",
-        "description": "24岁时颜值+2",
+        "description": "24岁时魅力+2",
         "condition": "AGE?[24]",
         "grade": 1,
         "effect": {
@@ -564,7 +564,7 @@
     "1066": {
         "id": "1066",
         "name": "精准扶贫",
-        "description": "家境为0时家境+1",
+        "description": "财富为0时财富+1",
         "condition": "(MNY<1)&(MNY>-1)",
         "grade": 0,
         "effect": {
@@ -594,7 +594,7 @@
     "1069": {
         "id": "1069",
         "name": "智可生财",
-        "description": "若20岁时智力>8，家境+2",
+        "description": "若20岁时智力>8，财富+2",
         "condition": "(AGE?[20])&(INT>8)",
         "grade": 0,
         "effect": {
@@ -604,7 +604,7 @@
     "1070": {
         "id": "1070",
         "name": "舔狗甚多",
-        "description": "若20岁时颜值>8，快乐+2",
+        "description": "若20岁时魅力>8，快乐+2",
         "condition": "(AGE?[20])&(CHR>8)",
         "grade": 0,
         "effect": {
@@ -642,7 +642,7 @@
     "1075": {
         "id": "1075",
         "name": "驻颜",
-        "description": "体质>10时颜值+3",
+        "description": "体质>10时魅力+3",
         "condition": "STR>10",
         "grade": 0,
         "effect": {
@@ -662,7 +662,7 @@
     "1077": {
         "id": "1077",
         "name": "倾城",
-        "description": "颜值>10时快乐+3",
+        "description": "魅力>10时快乐+3",
         "condition": "CHR>10",
         "grade": 1,
         "effect": {
@@ -682,7 +682,7 @@
     "1079": {
         "id": "1079",
         "name": "相由心生",
-        "description": "智力>10时颜值+3",
+        "description": "智力>10时魅力+3",
         "condition": "INT>10",
         "grade": 0,
         "effect": {
@@ -692,7 +692,7 @@
     "1080": {
         "id": "1080",
         "name": "智多鑫",
-        "description": "智力>10时家境+3",
+        "description": "智力>10时财富+3",
         "condition": "INT>10",
         "grade": 0,
         "effect": {
@@ -777,7 +777,7 @@
     "1087": {
         "id": "1087",
         "name": "你不懂",
-        "description": "家境>10时快乐+3",
+        "description": "财富>10时快乐+3",
         "condition": "MNY>10",
         "grade": 1,
         "effect": {
@@ -787,7 +787,7 @@
     "1088": {
         "id": "1088",
         "name": "整容",
-        "description": "家境>10时颜值+3",
+        "description": "财富>10时魅力+3",
         "condition": "MNY>10",
         "grade": 0,
         "effect": {
@@ -797,7 +797,7 @@
     "1089": {
         "id": "1089",
         "name": "钻石健身卡",
-        "description": "家境>10时体质+3",
+        "description": "财富>10时体质+3",
         "condition": "MNY>10",
         "grade": 0,
         "effect": {
@@ -833,7 +833,7 @@
     "1092": {
         "id": "1092",
         "name": "开一扇窗",
-        "description": "颜值<0时其他属性+1",
+        "description": "魅力<0时其他属性+1",
         "condition": "CHR<0",
         "grade": 0,
         "effect": {
@@ -846,7 +846,7 @@
     "1093": {
         "id": "1093",
         "name": "大额头",
-        "description": "颜值-2，智力+2",
+        "description": "魅力-2，智力+2",
         "grade": 0,
         "effect": {
             "CHR": -2,
@@ -856,7 +856,7 @@
     "1094": {
         "id": "1094",
         "name": "痘痘脸",
-        "description": "颜值-1",
+        "description": "魅力-1",
         "grade": 0,
         "effect": {
             "CHR": -1
@@ -865,7 +865,7 @@
     "1095": {
         "id": "1095",
         "name": "潜能",
-        "description": "家境<0时其他属性+1",
+        "description": "财富<0时其他属性+1",
         "condition": "MNY<0",
         "grade": 0,
         "effect": {
@@ -904,7 +904,7 @@
     "1098": {
         "id": "1098",
         "name": "艰苦奋斗",
-        "description": "家境<-1时其他属性+2",
+        "description": "财富<-1时其他属性+2",
         "condition": "MNY<-1",
         "grade": 1,
         "effect": {
@@ -917,7 +917,7 @@
     "1099": {
         "id": "1099",
         "name": "抖M",
-        "description": "家境-2，快乐+2",
+        "description": "财富-2，快乐+2",
         "grade": 0,
         "effect": {
             "SPR": 2,
@@ -927,7 +927,7 @@
     "1100": {
         "id": "1100",
         "name": "海的女儿",
-        "description": "颜值-2，初始可用属性点+1",
+        "description": "魅力-2，初始可用属性点+1",
         "grade": 0,
         "status": 1,
         "effect": {
@@ -1115,7 +1115,7 @@
     "1125": {
         "id": "1125",
         "name": "易胖体质",
-        "description": "颜值更容易降低",
+        "description": "魅力更容易降低",
         "grade": 0
     },
     "1126": {
@@ -1181,7 +1181,7 @@
     "1136": {
         "id": 1136,
         "name": "贪婪",
-        "description": "家境+10",
+        "description": "财富+10",
         "grade": 0,
         "effect": {
             "INT": -5
@@ -1365,7 +1365,7 @@
     "2002": {
         "id": 2002,
         "name": "国色",
-        "description": "颜值+4",
+        "description": "魅力+4",
         "grade": 2,
         "exclusive": 1,
         "effect": {
@@ -1627,7 +1627,7 @@
     "2020": {
         "id": 2020,
         "name": "物理",
-        "description": "30岁时颜值-2",
+        "description": "30岁时魅力-2",
         "condition": "AGE?[30]",
         "grade": 0,
         "exclusive": 1,

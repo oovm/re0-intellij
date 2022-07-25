@@ -137,7 +137,7 @@
     "116": {
         "id": 116,
         "name": "倾城",
-        "description": "颜值大于10",
+        "description": "魅力大于10",
         "grade": 0,
         "condition": "HCHR>10",
         "hide": 0,
@@ -164,7 +164,7 @@
     "119": {
         "id": 119,
         "name": "资本家",
-        "description": "家境大于10",
+        "description": "财富大于10",
         "grade": 0,
         "condition": "HMNY>10",
         "hide": 0,
@@ -182,7 +182,7 @@
     "121": {
         "id": 121,
         "name": "倾国",
-        "description": "颜值大于12",
+        "description": "魅力大于12",
         "grade": 1,
         "condition": "HCHR>12",
         "hide": 0,
@@ -209,7 +209,7 @@
     "124": {
         "id": 124,
         "name": "首富",
-        "description": "家境大于12",
+        "description": "财富大于12",
         "grade": 1,
         "condition": "HMNY>12",
         "hide": 0,
@@ -245,7 +245,7 @@
     "128": {
         "id": 128,
         "name": "下凡",
-        "description": "颜值大于20",
+        "description": "魅力大于20",
         "grade": 2,
         "condition": "HCHR>20",
         "hide": 0,
@@ -1190,7 +1190,7 @@
     "233": {
         "id": 233,
         "name": "家徒四壁",
-        "description": "家境小于0",
+        "description": "财富小于0",
         "grade": 0,
         "condition": "LMNY<0",
         "hide": 0,
@@ -1208,7 +1208,7 @@
     "235": {
         "id": 235,
         "name": "回头率拉满",
-        "description": "颜值小于0",
+        "description": "魅力小于0",
         "grade": 0,
         "condition": "LCHR<0",
         "hide": 0,
@@ -1235,7 +1235,7 @@
     "238": {
         "id": 238,
         "name": "一无所有",
-        "description": "家境小于-2",
+        "description": "财富小于-2",
         "grade": 1,
         "condition": "LMNY<-2",
         "hide": 0,
@@ -1253,7 +1253,7 @@
     "240": {
         "id": 240,
         "name": "上新闻",
-        "description": "颜值小于-2",
+        "description": "魅力小于-2",
         "grade": 1,
         "condition": "LCHR<-2",
         "hide": 0,
