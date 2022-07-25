@@ -194,8 +194,8 @@ private meta sequence      ::= <<item>> (<<sp>> <<item>>)* [<<sp>>];
 // parenthesis ( )
 private meta parenthesis   ::= PARENTHESIS_L [<<item>> (<<sp>> <<item>>)* [<<sp>>]] PARENTHESIS_R;
 // bracket [ ]
-meta bracket_free          ::= BRACKET_L (<<item>>|<<sp>>)* BRACKET_R;
+private meta bracket_free  ::= BRACKET_L (<<item>>|<<sp>>)* BRACKET_R;
 // brace { }
-meta brace_block           ::= BRACE_L [<<item>> (<<sp>> <<item>>)* [<<sp>>]] BRACE_R;
+private meta brace_block   ::= BRACE_L [<<item>> (<<sp>> <<item>>)* [<<sp>>]] BRACE_R;
 // brace { }
 private meta brace_free    ::= BRACE_L (<<item>>|<<sp>>)* BRACE_R;

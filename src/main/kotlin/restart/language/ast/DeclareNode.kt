@@ -22,7 +22,7 @@ abstract class DeclareNode(node: ASTNode) : RestartASTBase(node),
     PsiNameIdentifierOwner {
     abstract override fun getOriginalElement(): PsiElement
     abstract override fun getNameIdentifier(): PsiElement
-    override fun getIcon(flags: Int): Icon = getKind().icon
+    abstract override fun getIcon(flags: Int): Icon;
     override fun getElementIcon(flags: Int): Icon = this.getIcon(flags)
     override fun getName(): String = this.nameIdentifier.text
     override fun getNavigationElement(): PsiElement = this.nameIdentifier

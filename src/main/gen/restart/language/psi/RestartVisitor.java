@@ -19,14 +19,6 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitBraceBlock(@NotNull RestartBraceBlock o) {
-    visitPsiElement(o);
-  }
-
-  public void visitBracketFree(@NotNull RestartBracketFree o) {
-    visitPsiElement(o);
-  }
-
   public void visitCallSuffix(@NotNull RestartCallSuffix o) {
     visitPsiElement(o);
   }

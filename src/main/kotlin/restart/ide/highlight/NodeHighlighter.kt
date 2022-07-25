@@ -26,6 +26,14 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
         highlight(o.kwProperty, Color.KEYWORD)
         highlight(o.identifier, Color.SYM_PROPERTY)
         highlightBraceKey(o.declareBlock, Color.MODIFIER)
+
+        for (item in o.declareBlock.declareItemList) {
+            when (item.declareKey.text) {
+                "别称", "alias" -> item.expressionList.forEach { highlight(it, Color.SYM_PROPERTY) }
+                "枚举", "enum" -> item.expressionList.forEach { highlight(it, Color.SYM_VARIANT) }
+            }
+        }
+
     }
 
 
@@ -37,13 +45,13 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
 
     override fun visitTalentStatement(o: RestartTalentStatement) {
         highlight(o.kwTalent, Color.KEYWORD)
-        highlight(o.identifier, Color.SYM_AWARD)
+        highlight(o.identifier, Color.SYM_TALENT)
         highlightBraceKey(o.declareBlock, Color.MODIFIER)
     }
 
     override fun visitArchiveStatement(o: RestartArchiveStatement) {
         highlight(o.kwArchive, Color.KEYWORD)
-        highlight(o.identifier, Color.SYM_AWARD)
+        highlight(o.identifier, Color.SYM_ACHIEVEMENT)
         highlightBraceKey(o.declareBlock, Color.MODIFIER)
     }
 

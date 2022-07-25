@@ -30,27 +30,13 @@ enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String
 
     // 标识符
     IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
-    SYM_HERO(RestartBundle.messagePointer("color.token.symbol.trait"), Default.CONSTANT),
-    SYM_ACHIEVEMENT(RestartBundle.messagePointer("color.token.symbol.trait"), Default.METADATA),
-    SYM_AWARD(RestartBundle.messagePointer("color.token.symbol.trait"), Default.INTERFACE_NAME),
-    SYM_EVENT(RestartBundle.messagePointer("color.token.symbol.class"), Default.CLASS_NAME),
-    SYM_VARIANT(RestartBundle.messagePointer("color.token.symbol.variant"), Default.STATIC_FIELD),
-    SYM_MACRO(RestartBundle.messagePointer("color.token.symbol.macro"), Default.METADATA),
-    SYM_TALENT(RestartBundle.messagePointer("color.token.symbol.local"), Default.LOCAL_VARIABLE),
-    SYM_LOCAL_MUT(RestartBundle.messagePointer("color.token.symbol.local.mutable"), Default.REASSIGNED_LOCAL_VARIABLE),
-    SYM_GLOBAL(RestartBundle.messagePointer("color.token.symbol.global"), Default.GLOBAL_VARIABLE),
-    SYM_GLOBAL_MUT(RestartBundle.messagePointer("color.token.symbol.global.mut"), Default.GLOBAL_VARIABLE),
-    SYM_ARG(RestartBundle.messagePointer("color.token.symbol.parameter"), Default.PARAMETER),
-    SYM_ARG_MUT(RestartBundle.messagePointer("color.token.symbol.parameter.mutable"), Default.REASSIGNED_PARAMETER),
-    SYM_ARG_SELF(RestartBundle.messagePointer("color.token.symbol.self"), Default.KEYWORD),
-    SYM_ARG_SELF_MUT(RestartBundle.messagePointer("color.token.symbol.self.mutable"), Default.KEYWORD),
     SYM_PROPERTY(RestartBundle.messagePointer("color.token.symbol.field"), Default.INSTANCE_FIELD),
+    SYM_VARIANT(RestartBundle.messagePointer("color.token.symbol.variant"), Default.LOCAL_VARIABLE),
+    SYM_HERO(RestartBundle.messagePointer("color.token.symbol.trait"), Default.CONSTANT),
+    SYM_ACHIEVEMENT(RestartBundle.messagePointer("color.token.symbol.trait"), Default.CLASS_NAME),
+    SYM_EVENT(RestartBundle.messagePointer("color.token.symbol.class"), Default.INTERFACE_NAME),
+    SYM_TALENT(RestartBundle.messagePointer("color.token.symbol.local"), Default.CLASS_NAME),
     SYM_CONSTANT(RestartBundle.messagePointer("color.token.symbol.constant"), Default.CONSTANT),
-    SYM_FUNCTION_SELF(RestartBundle.messagePointer("color.token.symbol.function.self"), Default.INSTANCE_METHOD),
-    SYM_FUNCTION_FREE(RestartBundle.messagePointer("color.token.symbol.function.free"), Default.STATIC_METHOD),
-
-    //
-    TYPE_HINT(RestartBundle.messagePointer("color.token.symbol.type"), Default.CLASS_NAME),
 
     // 标点符号
     OPERATION_SIGN(OptionsBundle.messagePointer("options.language.defaults.operation"), Default.OPERATION_SIGN),
@@ -78,9 +64,6 @@ enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String
         OptionsBundle.messagePointer("options.java.attribute.descriptor.bad.character"),
         HighlighterColors.BAD_CHARACTER
     ),
-
-    // 废弃
-    EXTENSION(OptionsBundle.messagePointer("options.language.defaults.metadata"), Default.METADATA),
     ;
 
     val textAttributesKey: TextAttributesKey = TextAttributesKey.createTextAttributesKey("voml.lang.$name", default)

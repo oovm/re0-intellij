@@ -11,8 +11,6 @@ public interface RestartTypes {
   IElementType ARCHIVE_STATEMENT = new RestartTokenType("ARCHIVE_STATEMENT");
   IElementType BLOCK = new RestartTokenType("BLOCK");
   IElementType BOOLEAN = new RestartTokenType("BOOLEAN");
-  IElementType BRACE_BLOCK = new RestartTokenType("BRACE_BLOCK");
-  IElementType BRACKET_FREE = new RestartTokenType("BRACKET_FREE");
   IElementType CALL_SUFFIX = new RestartTokenType("CALL_SUFFIX");
   IElementType DECLARE_BLOCK = new RestartTokenType("DECLARE_BLOCK");
   IElementType DECLARE_ITEM = new RestartTokenType("DECLARE_ITEM");
@@ -120,12 +118,6 @@ public interface RestartTypes {
       }
       else if (type == BOOLEAN) {
         return new RestartBooleanNode(node);
-      }
-      else if (type == BRACE_BLOCK) {
-        return new RestartBraceBlockNode(node);
-      }
-      else if (type == BRACKET_FREE) {
-        return new RestartBracketFreeNode(node);
       }
       else if (type == CALL_SUFFIX) {
         return new RestartCallSuffixNode(node);
