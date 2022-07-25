@@ -8,11 +8,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static restart.language.psi.RestartTypes.*;
-import restart.language.ast.RestartASTBase;
+import restart.language.mixin.MixinDeclareItem;
 import restart.language.psi.*;
 import restart.language.ast.ASTMethods;
 
-public class RestartDeclareItemNode extends RestartASTBase implements RestartDeclareItem {
+public class RestartDeclareItemNode extends MixinDeclareItem implements RestartDeclareItem {
 
   public RestartDeclareItemNode(@NotNull ASTNode node) {
     super(node);

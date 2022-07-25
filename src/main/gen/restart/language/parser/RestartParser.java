@@ -252,8 +252,8 @@ public class RestartParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // declare_key COLON? declare_block
-  //   | declare_key COLON? <<bracket_free normal_statements delimiter>>
-  //   | declare_key COLON normal_statements
+  //     | declare_key COLON? <<bracket_free normal_statements delimiter>>
+  //     | declare_key COLON normal_statements
   public static boolean declare_item(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declare_item")) return false;
     boolean r;
@@ -316,7 +316,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // identifier|number|KW_IF
+  // identifier | number | KW_IF
   public static boolean declare_key(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declare_key")) return false;
     boolean r;
@@ -764,7 +764,7 @@ public class RestartParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // OP_SET | OP_EQ | OP_NE
-  //     | OP_GT | OP_LT | OP_GEQ | OP_LEQ
+  //     | OP_GT  | OP_LT | OP_GEQ | OP_LEQ
   //     | OP_ADD | OP_ADD_ASSIGN
   //     | OP_SUB | OP_SUB_ASSIGN
   //     | OP_MUL | OP_MUL_ASSIGN

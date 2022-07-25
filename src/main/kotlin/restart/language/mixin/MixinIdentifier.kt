@@ -11,26 +11,36 @@ open class MixinIdentifier(node: ASTNode) : RestartASTBase(node) {
         return this.text.trim('`')
     }
 
-    override fun getReference(): RestartReference? {
-        when (val parent = this.parent) {
-            is RestartModifiers, is RestartPropertyStatement -> {
-                return null
-            }
-            is RestartTalentStatement, is RestartEventStatement, is RestartHeroStatement, is RestartArchiveStatement -> {
-                return null
-            }
-            is RestartDeclareKeyNode -> {
-                if (parent.underDeclareStatement()) {
-                    return null
-                }
-            }
-        }
-        return RestartReference(this)
+    override fun getReference(): RestartReference? = when {
+        shouldResolve() -> RestartReference(this)
+        else -> null
     }
 
     override fun getReferences(): Array<RestartReference> = when (val r = reference) {
         null -> arrayOf()
         else -> arrayOf(r)
+    }
+
+    fun shouldResolve(): Boolean {
+        return when (val parent = this.parent) {
+            is RestartModifiers, is RestartPropertyStatement -> {
+                false
+            }
+            is RestartTalentStatement, is RestartEventStatement, is RestartHeroStatement, is RestartArchiveStatement -> {
+                false
+            }
+            is RestartDeclareKeyNode -> {
+                when {
+                    parent.underDeclareStatement() -> {
+                        false
+                    }
+                    else -> {
+                        true
+                    }
+                }
+            }
+            else -> true
+        }
     }
 }
 

@@ -1,8 +1,0 @@
-crate boolean;
-
-using {
-    nullable,
-    nullable.{null, Nullable},
-    boolean,
-    boolean.{bool, true, false}
-}

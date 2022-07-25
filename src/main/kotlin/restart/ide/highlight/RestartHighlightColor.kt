@@ -33,7 +33,7 @@ enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String
     SYM_PROPERTY(RestartBundle.messagePointer("color.token.symbol.property"), Default.INSTANCE_FIELD),
     SYM_VARIANT(RestartBundle.messagePointer("color.token.symbol.variant"), Default.LOCAL_VARIABLE),
     SYM_HERO(RestartBundle.messagePointer("color.token.symbol.hero"), Default.CONSTANT),
-    SYM_ARCHIVE(RestartBundle.messagePointer("color.token.symbol.achievement"), Default.CLASS_NAME),
+    SYM_ARCHIVE(RestartBundle.messagePointer("color.token.symbol.achievement"), Default.CONSTANT),
     SYM_EVENT(RestartBundle.messagePointer("color.token.symbol.event"), Default.INTERFACE_NAME),
     SYM_TALENT(RestartBundle.messagePointer("color.token.symbol.talent"), Default.CLASS_NAME),
     SYM_CONSTANT(RestartBundle.messagePointer("color.token.symbol.constant"), Default.CONSTANT),

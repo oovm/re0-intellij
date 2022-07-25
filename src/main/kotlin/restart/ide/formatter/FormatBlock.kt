@@ -7,9 +7,9 @@ import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.formatter.FormatterUtil
 import restart.language.ast.computeSpacing
 import restart.language.ast.isWhitespaceOrEmpty
-import restart.language.psi.RestartBraceBlock
-import restart.language.psi.RestartBracketFree
+import restart.language.psi.RestartBlock
 import restart.language.psi.RestartDeclareBlock
+import restart.language.psi_node.RestartDeclareItemNode
 
 class FormatBlock(
     private val node: ASTNode,
@@ -68,14 +68,15 @@ class FormatBlock(
         val firstLine = node.firstChildNode == child
         val lastLine = node.lastChildNode == child
         val isCornerChild = firstLine || lastLine
-        return when (node.psi) {
-            is RestartBracketFree,
-            is RestartDeclareBlock, is RestartBraceBlock,
-            -> when {
+        return when (val node = node.psi) {
+            is RestartBlock, is RestartDeclareBlock -> when {
                 isCornerChild -> Indent.getNoneIndent()
                 else -> Indent.getNormalIndent()
             }
-
+            is RestartDeclareItemNode -> when (node.canIndent(child)) {
+                true -> Indent.getNormalIndent()
+                false -> Indent.getNoneIndent()
+            }
             else -> Indent.getNoneIndent()
         }
     }

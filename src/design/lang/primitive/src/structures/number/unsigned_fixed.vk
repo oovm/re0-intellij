@@ -1,7 +1,0 @@
-#allow(non_camel_case_types)
-
-#primitive class u8 {}
-#primitive class u16 {}
-#primitive class u32 {}
-#primitive class u64 {}
-#primitive class u128 {}

@@ -12,6 +12,7 @@ import restart.ide.project.IdentifierInfo
 import restart.ide.project.IdentifierStorage
 import restart.ide.project.RestartProject
 import restart.language.psi.*
+import restart.language.psi_node.RestartIdentifierNode
 import restart.language.psi_node.RestartNumberNode
 import restart.ide.highlight.RestartHighlightColor as Color
 
@@ -87,9 +88,15 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     }
 
     override fun visitIdentifier(o: RestartIdentifier) {
+        o as RestartIdentifierNode;
+        if (!o.shouldResolve()) {
+            return
+        }
         val ref = store[o.text]
-        ref ?: return
-        highlight(o, ref.kind.color)
+        when {
+            ref != null -> highlight(o, ref.kind.color)
+            else -> return
+        }
     }
 
     // =================================================================================================================

@@ -109,11 +109,12 @@ declare_statement  ::= kw_declare identifier [modifiers] declare_block {
 kw_declare         ::= identifier
 declare_block      ::= <<brace_free declare_item delimiter>>
 declare_item       ::=
-    declare_key COLON? declare_block
-  | declare_key COLON? <<bracket_free normal_statements delimiter>>
-  | declare_key COLON normal_statements
-  ;
-declare_key        ::= identifier|number|KW_IF {
+      declare_key COLON? declare_block
+    | declare_key COLON? <<bracket_free normal_statements delimiter>>
+    | declare_key COLON normal_statements {
+    mixin="restart.language.mixin.MixinDeclareItem"
+}
+declare_key        ::= identifier | number | KW_IF {
     mixin="restart.language.mixin.MixinKey"
 }
 // ---------------------------------------------------------------------------------------------------------------------
@@ -151,7 +152,7 @@ expression        ::= expr (op_binary expr)*;
 private expr      ::= op_prefix* atoms (op_suffix|call_suffix|slice)*;
 private op_binary ::=
       OP_SET | OP_EQ | OP_NE
-    | OP_GT | OP_LT | OP_GEQ | OP_LEQ
+    | OP_GT  | OP_LT | OP_GEQ | OP_LEQ
     | OP_ADD | OP_ADD_ASSIGN
     | OP_SUB | OP_SUB_ASSIGN
     | OP_MUL | OP_MUL_ASSIGN
