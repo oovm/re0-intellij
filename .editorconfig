@@ -7,9 +7,10 @@ indent_style = space
 indent_size = 4
 max_line_length = 144
 
-[*.{json, json5}]
+[*.java]
 indent_style = space
 indent_size = 4
+# charset = gbk
 
 [*.{bnf, flex, toml}]
 indent_style = space

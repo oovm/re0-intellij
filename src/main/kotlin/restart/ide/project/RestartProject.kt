@@ -7,12 +7,12 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiManager
 import restart.ide.file.RestartFileNode
 import restart.ide.project.IdentifierStorage.IdentifierInfo
-import restart.language.ast.RestartASTBase
 import restart.language.psi_node.RestartIdentifierNode
 import restart.language.psi_node.RestartPropertyStatementNode
+import restart.language.psi_node.RestartTalentStatementNode
 import restart.language.symbol.RestartSymbolKind
 
-class RestartProject() {
+class RestartProject {
     companion object {
         fun getStorage(project: Project?): MutableMap<String, IdentifierInfo> {
             project ?: return mutableMapOf();
@@ -43,12 +43,15 @@ class IdentifierStorage(val project: Project?) : ContentIterator {
         for (item in file.children) {
             when (item) {
                 is RestartPropertyStatementNode -> analyzeDeclare(item)
-
+                is RestartTalentStatementNode -> analyzeDeclare(item)
             }
         }
     }
 
     private fun analyzeDeclare(node: RestartPropertyStatementNode) {
-        dict[node.name] = IdentifierInfo(node, RestartSymbolKind.Property)
+        dict[node.name] = IdentifierInfo(node.nameIdentifier, RestartSymbolKind.Property)
+    }
+    private fun analyzeDeclare(node: RestartTalentStatementNode) {
+        dict[node.name] = IdentifierInfo(node.nameIdentifier, RestartSymbolKind.Talent)
     }
 }

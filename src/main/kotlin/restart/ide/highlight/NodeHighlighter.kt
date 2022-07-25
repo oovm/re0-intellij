@@ -8,14 +8,15 @@ import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import restart.ide.file.RestartFileNode
-import restart.language.ast.RestartASTBase
+import restart.ide.project.IdentifierStorage
+import restart.ide.project.RestartProject
 import restart.language.psi.*
-import restart.language.psi_node.RestartIdentifierNode
 import restart.language.psi_node.RestartNumberNode
 import restart.ide.highlight.RestartHighlightColor as Color
 
 class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null
+    private var store: MutableMap<String, IdentifierStorage.IdentifierInfo> = mutableMapOf()
 
     override fun visitDeclareStatement(o: RestartDeclareStatement) {
         highlight(o.kwDeclare, Color.KEYWORD)
@@ -77,48 +78,26 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     }
 
     override fun visitIdentifier(o: RestartIdentifier) {
-        val ref = o.reference?.resolve() as? RestartASTBase
-        ref?.getKind()?.color?.let { highlight(o, it) }
-
+        val ref = store[o.text]
+        ref ?: return
+        highlight(o, ref.kind.color)
     }
 
     // =================================================================================================================
-
-    private fun highlightSymbolList(
-        symbols: List<RestartIdentifier>,
-        last: Color,
-        rest: Color = Color.KEYWORD,
-    ) {
-        var first = true
-        for (symbol in symbols.reversed()) {
-            if (first) {
-                first = false
-                highlight(symbol, last)
-            } else {
-                highlight(symbol, rest)
-            }
-        }
-    }
 
     fun highlight(element: PsiElement?, color: Color) {
         if (element == null) return
         val builder = HighlightInfo.newHighlightInfo(HighlightInfoType.INFORMATION)
         builder.textAttributes(color.textAttributesKey)
         builder.range(element)
-
         infoHolder?.add(builder.create())
     }
 
 
-    override fun analyze(
-        file: PsiFile,
-        updateWholeFile: Boolean,
-        holder: HighlightInfoHolder,
-        action: Runnable,
-    ): Boolean {
+    override fun analyze(file: PsiFile, updateWholeFile: Boolean, holder: HighlightInfoHolder, action: Runnable): Boolean {
+        store = RestartProject.getStorage(file.project)
         infoHolder = holder
         action.run()
-
         return true
     }
 

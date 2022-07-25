@@ -35,9 +35,9 @@ class TokenHighlight : SyntaxHighlighterBase() {
             OP_ADD, OP_OR -> Color.OPERATION_SIGN
             OP_LT, OP_LEQ, OP_LL, OP_LLL -> Color.OPERATION_SIGN
             OP_GT, OP_GEQ, OP_GG, OP_GGG -> Color.OPERATION_SIGN
-            DOT3, DOT2, OP_SUB, OP_ADD, DOT_LESS, DOT_EQ -> Color.OPERATION_SIGN
+             OP_SUB, OP_ADD, -> Color.OPERATION_SIGN
             OP_EQ, OP_NE -> Color.OPERATION_SIGN
-            OP_NOT, BANG, AMP, QUESTION -> Color.OPERATION_SIGN
+            OP_NOT, BANG, QUESTION -> Color.OPERATION_SIGN
             OP_ARROW, OP_ARROW2 -> Color.OPERATION_SIGN
             // 原子类型
             INTEGER -> Color.INTEGER
