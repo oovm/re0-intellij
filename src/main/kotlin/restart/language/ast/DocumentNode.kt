@@ -31,8 +31,11 @@ class DocumentNode(comment: PsiComment, rawText: String? = null) : RestartASTBas
         }
 
         fun tryBuild(node: PsiComment): DocumentNode? {
-            return when (node.prevSibling.text) {
-                "///" -> {
+            return when  {
+                node.prevSibling == null -> {
+                    null
+                }
+                node.prevSibling.text == "///" -> {
                     DocumentNode(node, node.text)
                 }
                 else -> {

@@ -16,12 +16,12 @@ class OperatorData(
 ) {
     fun documentation(doc: DocumentationRenderer) {
         doc.append(RestartHighlightColor.KEYWORD, "operator ")
-        doc.append(RestartHighlightColor.SYM_MACRO, symbol)
+        doc.append(RestartHighlightColor.METADATA, symbol)
         doc.append(RestartHighlightColor.KEYWORD, " de-sugars ")
-        doc.append(RestartHighlightColor.SYM_FUNCTION_FREE, name)
+        doc.append(RestartHighlightColor.SYM_FUNCTION, name)
         doc.append("<br/>")
         doc.append(RestartHighlightColor.KEYWORD, "associative ")
-        doc.append(RestartHighlightColor.SYM_MACRO, associative.toString())
+        doc.append(RestartHighlightColor.METADATA, associative.toString())
         doc.append("<br/>")
         doc.append(RestartHighlightColor.KEYWORD, "priority ")
         doc.append(RestartHighlightColor.SYM_CONSTANT, priority.toString())

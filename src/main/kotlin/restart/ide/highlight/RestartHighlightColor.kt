@@ -15,7 +15,7 @@ enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String
     // 特殊关键词
     KEYWORD(OptionsBundle.messagePointer("options.language.defaults.keyword"), Default.KEYWORD),
     METADATA(OptionsBundle.messagePointer("options.language.defaults.metadata"), Default.METADATA),
-    MODIFIER(RestartBundle.messagePointer("Restart.highlight.modifier"), Default.METADATA),
+    MODIFIER(RestartBundle.messagePointer("color.token.symbol.modifier"), Default.METADATA),
 
     // 字面量
     NULL(RestartBundle.messagePointer("color.token.null"), Default.KEYWORD),
@@ -30,13 +30,14 @@ enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String
 
     // 标识符
     IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
-    SYM_PROPERTY(RestartBundle.messagePointer("color.token.symbol.field"), Default.INSTANCE_FIELD),
+    SYM_PROPERTY(RestartBundle.messagePointer("color.token.symbol.property"), Default.INSTANCE_FIELD),
     SYM_VARIANT(RestartBundle.messagePointer("color.token.symbol.variant"), Default.LOCAL_VARIABLE),
-    SYM_HERO(RestartBundle.messagePointer("color.token.symbol.trait"), Default.CONSTANT),
-    SYM_ACHIEVEMENT(RestartBundle.messagePointer("color.token.symbol.trait"), Default.CLASS_NAME),
-    SYM_EVENT(RestartBundle.messagePointer("color.token.symbol.class"), Default.INTERFACE_NAME),
-    SYM_TALENT(RestartBundle.messagePointer("color.token.symbol.local"), Default.CLASS_NAME),
+    SYM_HERO(RestartBundle.messagePointer("color.token.symbol.hero"), Default.CONSTANT),
+    SYM_ARCHIVE(RestartBundle.messagePointer("color.token.symbol.achievement"), Default.CLASS_NAME),
+    SYM_EVENT(RestartBundle.messagePointer("color.token.symbol.event"), Default.INTERFACE_NAME),
+    SYM_TALENT(RestartBundle.messagePointer("color.token.symbol.talent"), Default.CLASS_NAME),
     SYM_CONSTANT(RestartBundle.messagePointer("color.token.symbol.constant"), Default.CONSTANT),
+    SYM_FUNCTION(RestartBundle.messagePointer("color.token.symbol.function"), Default.CONSTANT),
 
     // 标点符号
     OPERATION_SIGN(OptionsBundle.messagePointer("options.language.defaults.operation"), Default.OPERATION_SIGN),

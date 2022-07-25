@@ -23,7 +23,7 @@ class KeywordData : Symbol, Pointer<KeywordData> {
     override fun dereference(): KeywordData = this
     fun documentation(doc: DocumentationRenderer) {
         doc.append(RestartHighlightColor.KEYWORD, "keyword ")
-        doc.append(RestartHighlightColor.SYM_MACRO, name)
+        doc.append(RestartHighlightColor.METADATA, name)
         doc.append("<hr/>")
         doc.append(detail)
     }

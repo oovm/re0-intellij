@@ -19,7 +19,7 @@ class ModifierData(
             doc.append(item)
             doc.append("::")
         }
-        doc.append(RestartHighlightColor.SYM_MACRO, name)
+        doc.append(RestartHighlightColor.METADATA, name)
         doc.append("<hr/>")
         doc.append(detail)
     }

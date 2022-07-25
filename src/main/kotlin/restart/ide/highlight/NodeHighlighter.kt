@@ -8,6 +8,7 @@ import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import restart.ide.file.RestartFileNode
+import restart.ide.project.IdentifierInfo
 import restart.ide.project.IdentifierStorage
 import restart.ide.project.RestartProject
 import restart.language.psi.*
@@ -16,7 +17,7 @@ import restart.ide.highlight.RestartHighlightColor as Color
 
 class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null
-    private var store: MutableMap<String, IdentifierStorage.IdentifierInfo> = mutableMapOf()
+    private var store: MutableMap<String, IdentifierInfo> = mutableMapOf()
 
     override fun visitDeclareStatement(o: RestartDeclareStatement) {
         highlight(o.kwDeclare, Color.KEYWORD)
@@ -51,7 +52,7 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
 
     override fun visitArchiveStatement(o: RestartArchiveStatement) {
         highlight(o.kwArchive, Color.KEYWORD)
-        highlight(o.identifier, Color.SYM_ACHIEVEMENT)
+        highlight(o.identifier, Color.SYM_ARCHIVE)
         highlightBraceKey(o.declareBlock, Color.MODIFIER)
     }
 

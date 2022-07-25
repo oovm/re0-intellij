@@ -4,13 +4,10 @@ import com.intellij.lang.ASTNode
 import com.intellij.lang.folding.FoldingDescriptor
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
-import restart.language.psi.RestartBraceBlock
-import restart.language.psi.RestartRecursiveVisitor
-import restart.language.psi.endOffset
-import restart.language.psi.startOffset
+import restart.language.psi.*
 
 class RestartFoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : RestartRecursiveVisitor() {
-    override fun visitBraceBlock(o: RestartBraceBlock) {
+    override fun visitDeclareBlock(o: RestartDeclareBlock) {
         fold(o.node, o.firstChild.endOffset, o.lastChild.startOffset)
     }
 

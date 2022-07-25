@@ -604,13 +604,13 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "award" | "æˆå°±"
+  // "award" | "³É¾Í"
   public static boolean kw_archive(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "kw_archive")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, KW_ARCHIVE, "<kw archive>");
     r = consumeToken(b, "award");
-    if (!r) r = consumeToken(b, "æˆå°±");
+    if (!r) r = consumeToken(b, "³É¾Í");
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -628,58 +628,58 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "event" | "äº‹ä»¶"
+  // "event" | "ÊÂ¼ş"
   public static boolean kw_event(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "kw_event")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, KW_EVENT, "<kw event>");
     r = consumeToken(b, "event");
-    if (!r) r = consumeToken(b, "äº‹ä»¶");
+    if (!r) r = consumeToken(b, "ÊÂ¼ş");
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // "character" | "hero" | "äººç‰©" | "è‹±é›„"
+  // "character" | "hero" | "ÈËÎï" | "Ó¢ĞÛ"
   public static boolean kw_hero(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "kw_hero")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, KW_HERO, "<kw hero>");
     r = consumeToken(b, "character");
     if (!r) r = consumeToken(b, "hero");
-    if (!r) r = consumeToken(b, "äººç‰©");
-    if (!r) r = consumeToken(b, "è‹±é›„");
+    if (!r) r = consumeToken(b, "ÈËÎï");
+    if (!r) r = consumeToken(b, "Ó¢ĞÛ");
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // "variable" | "property" | "å±æ€§"
+  // "variable" | "property" | "ÊôĞÔ"
   public static boolean kw_property(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "kw_property")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, KW_PROPERTY, "<kw property>");
     r = consumeToken(b, "variable");
     if (!r) r = consumeToken(b, "property");
-    if (!r) r = consumeToken(b, "å±æ€§");
+    if (!r) r = consumeToken(b, "ÊôĞÔ");
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // "talent" | "skill" | "è£…å¤‡" | "ç‰©å“" | "é“å…·" | "å¤©èµ‹" | "æŠ€èƒ½" | "ç‰¹è´¨"
+  // "talent" | "skill" | "×°±¸" | "ÎïÆ·" | "µÀ¾ß" | "Ìì¸³" | "¼¼ÄÜ" | "ÌØÖÊ"
   public static boolean kw_talent(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "kw_talent")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, KW_TALENT, "<kw talent>");
     r = consumeToken(b, "talent");
     if (!r) r = consumeToken(b, "skill");
-    if (!r) r = consumeToken(b, "è£…å¤‡");
-    if (!r) r = consumeToken(b, "ç‰©å“");
-    if (!r) r = consumeToken(b, "é“å…·");
-    if (!r) r = consumeToken(b, "å¤©èµ‹");
-    if (!r) r = consumeToken(b, "æŠ€èƒ½");
-    if (!r) r = consumeToken(b, "ç‰¹è´¨");
+    if (!r) r = consumeToken(b, "×°±¸");
+    if (!r) r = consumeToken(b, "ÎïÆ·");
+    if (!r) r = consumeToken(b, "µÀ¾ß");
+    if (!r) r = consumeToken(b, "Ìì¸³");
+    if (!r) r = consumeToken(b, "¼¼ÄÜ");
+    if (!r) r = consumeToken(b, "ÌØÖÊ");
     exit_section_(b, l, m, r, false, null);
     return r;
   }

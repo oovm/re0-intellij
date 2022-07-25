@@ -7,10 +7,6 @@ import com.intellij.navigation.ItemPresentation
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNameIdentifierOwner
 import com.intellij.psi.PsiReference
-import com.intellij.psi.StubBasedPsiElement
-import com.intellij.psi.stubs.StubElement
-import restart.language.mixin.IdentifierData
-import restart.language.psi_node.RestartIdentifierNode
 import javax.swing.Icon
 
 

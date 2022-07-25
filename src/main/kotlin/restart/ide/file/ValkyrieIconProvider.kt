@@ -25,7 +25,7 @@ class RestartIconProvider : IconProvider() {
         val NAMESPACE = AllIcons.Nodes.Artifact
         val PROPERTY = AllIcons.Nodes.Property
         val MODIFIER = AllIcons.Nodes.MethodReference
-        val CLASS = AllIcons.Nodes.Class
+        val TALENT = AllIcons.Nodes.Class
         val EVENT = AllIcons.Nodes.Interface
     }
 }
