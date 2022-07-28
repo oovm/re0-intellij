@@ -7,8 +7,8 @@ import com.intellij.psi.PsiElement;
 
 public interface RestartDeclareItem extends PsiElement {
 
-  @Nullable
-  RestartDeclareBlock getDeclareBlock();
+  @NotNull
+  List<RestartDeclareBlock> getDeclareBlockList();
 
   @NotNull
   RestartDeclareKey getDeclareKey();

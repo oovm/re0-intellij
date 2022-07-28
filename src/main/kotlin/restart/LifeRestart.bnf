@@ -93,6 +93,7 @@ re0 ::= ((declare_statement|normal_statements) [SEMICOLON])*
 private normal_statements ::=
     if_statement
   | expression
+  | declare_block
   ;
 // ---------------------------------------------------------------------------------------------------------------------
 declare_statement  ::= kw_declare declare_key [modifiers] declare_block {

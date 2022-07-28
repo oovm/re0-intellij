@@ -29,7 +29,7 @@ class IdentifierStorage(val project: Project?) : ContentIterator {
 
     private fun analyzeDeclare(node: RestartDeclareStatementNode) {
         // dict[node.name] = IdentifierInfo(node.nameIdentifier, RestartSymbolKind.Property)
-        for (item in node.declareBlock.declareItemList) {
+        for (item in node.declareItemList) {
             when (item.declareKey.text) {
                 "别称", "alias" -> {
                     item.expressionList.forEach {

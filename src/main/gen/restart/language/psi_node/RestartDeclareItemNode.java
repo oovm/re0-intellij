@@ -29,9 +29,9 @@ public class RestartDeclareItemNode extends MixinDeclareItem implements RestartD
   }
 
   @Override
-  @Nullable
-  public RestartDeclareBlock getDeclareBlock() {
-    return findChildByClass(RestartDeclareBlock.class);
+  @NotNull
+  public List<RestartDeclareBlock> getDeclareBlockList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, RestartDeclareBlock.class);
   }
 
   @Override

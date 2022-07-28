@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface RestartBlock extends PsiElement {
 
   @NotNull
+  List<RestartDeclareBlock> getDeclareBlockList();
+
+  @NotNull
   List<RestartExpression> getExpressionList();
 
   @NotNull

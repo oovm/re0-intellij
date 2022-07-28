@@ -308,14 +308,14 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // kw_declare identifier [modifiers] declare_block
+  // kw_declare declare_key [modifiers] declare_block
   public static boolean declare_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declare_statement")) return false;
     if (!nextTokenIs(b, "<declare statement>", SYMBOL_RAW, SYMBOL_XID)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, DECLARE_STATEMENT, "<declare statement>");
     r = kw_declare(b, l + 1);
-    r = r && identifier(b, l + 1);
+    r = r && declare_key(b, l + 1);
     r = r && declare_statement_2(b, l + 1);
     r = r && declare_block(b, l + 1);
     exit_section_(b, l, m, r, false, null);
@@ -541,18 +541,6 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "award" | "成就"
-  public static boolean kw_archive(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "kw_archive")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, KW_ARCHIVE, "<kw archive>");
-    r = consumeToken(b, "award");
-    if (!r) r = consumeToken(b, "成就");
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // identifier
   public static boolean kw_declare(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "kw_declare")) return false;
@@ -560,65 +548,6 @@ public class RestartParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, KW_DECLARE, "<kw declare>");
     r = identifier(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // "event" | "事件"
-  public static boolean kw_event(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "kw_event")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, KW_EVENT, "<kw event>");
-    r = consumeToken(b, "event");
-    if (!r) r = consumeToken(b, "事件");
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // "character" | "hero" | "人物" | "英雄"
-  public static boolean kw_hero(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "kw_hero")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, KW_HERO, "<kw hero>");
-    r = consumeToken(b, "character");
-    if (!r) r = consumeToken(b, "hero");
-    if (!r) r = consumeToken(b, "人物");
-    if (!r) r = consumeToken(b, "英雄");
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // "variable" | "property" | "属性" | "内置" | "设定"
-  public static boolean kw_property(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "kw_property")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, KW_PROPERTY, "<kw property>");
-    r = consumeToken(b, "variable");
-    if (!r) r = consumeToken(b, "property");
-    if (!r) r = consumeToken(b, "属性");
-    if (!r) r = consumeToken(b, "内置");
-    if (!r) r = consumeToken(b, "设定");
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // "talent" | "skill" | "装备" | "物品" | "道具" | "天赋" | "技能" | "特质"
-  public static boolean kw_talent(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "kw_talent")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, KW_TALENT, "<kw talent>");
-    r = consumeToken(b, "talent");
-    if (!r) r = consumeToken(b, "skill");
-    if (!r) r = consumeToken(b, "装备");
-    if (!r) r = consumeToken(b, "物品");
-    if (!r) r = consumeToken(b, "道具");
-    if (!r) r = consumeToken(b, "天赋");
-    if (!r) r = consumeToken(b, "技能");
-    if (!r) r = consumeToken(b, "特质");
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -664,11 +593,13 @@ public class RestartParser implements PsiParser, LightPsiParser {
   /* ********************************************************** */
   // if_statement
   //   | expression
+  //   | declare_block
   static boolean normal_statements(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "normal_statements")) return false;
     boolean r;
     r = if_statement(b, l + 1);
     if (!r) r = expression(b, l + 1);
+    if (!r) r = declare_block(b, l + 1);
     return r;
   }
 

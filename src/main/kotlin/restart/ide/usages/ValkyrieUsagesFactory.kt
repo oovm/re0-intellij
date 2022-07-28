@@ -15,7 +15,7 @@ class RestartUsagesFactory : FindUsagesHandlerFactory() {
 
     override fun createFindUsagesHandler(element: PsiElement, forHighlightUsages: Boolean): FindUsagesHandler? {
         return when (element) {
-            is RestartDeclareStatement -> RestartUsagesHandler(element)
+            is RestartDeclareStatement -> UsagesHandler(element)
             else -> null
         }
     }

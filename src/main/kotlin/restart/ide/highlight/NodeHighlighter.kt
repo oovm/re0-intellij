@@ -9,9 +9,9 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import restart.ide.file.RestartFileNode
 import restart.ide.project.IdentifierInfo
-import restart.ide.project.IdentifierStorage
 import restart.ide.project.RestartProject
 import restart.language.psi.*
+import restart.language.psi_node.RestartDeclareStatementNode
 import restart.language.psi_node.RestartIdentifierNode
 import restart.language.psi_node.RestartNumberNode
 import restart.ide.highlight.RestartHighlightColor as Color
@@ -21,16 +21,16 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     private var store: MutableMap<String, IdentifierInfo> = mutableMapOf()
 
     override fun visitDeclareStatement(o: RestartDeclareStatement) {
+        o as RestartDeclareStatementNode;
         highlight(o.kwDeclare, Color.KEYWORD)
-        highlight(o.kwDeclare, Color.SYM_PROPERTY)
+        highlight(o.declareKey, o.getKind().color)
+        highlightMaybeEnum(o)
         highlightBraceKey(o.declareBlock, Color.MODIFIER)
+    }
 
-        for (item in o.declareBlock.declareItemList) {
-            when (item.declareKey.text) {
-                "别称", "alias" -> item.expressionList.forEach { highlight(it, Color.SYM_PROPERTY) }
-                "枚举", "enum" -> item.expressionList.forEach { highlight(it, Color.SYM_VARIANT) }
-            }
-        }
+    private fun highlightMaybeEnum(o: RestartDeclareStatementNode) {
+        o.getAlias().forEach { highlight(it, Color.SYM_PROPERTY) }
+        o.getEnumerationVariant().forEach { highlight(it, Color.SYM_VARIANT) }
     }
 
     override fun visitModifiers(o: RestartModifiers) {

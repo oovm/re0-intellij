@@ -4,6 +4,7 @@ import com.intellij.lang.ASTNode
 import com.intellij.lang.folding.FoldingDescriptor
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
+import com.intellij.psi.util.elementType
 import restart.language.psi.*
 
 class FoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : RestartRecursiveVisitor() {
@@ -11,6 +12,17 @@ class FoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : 
         fold(o.node, o.firstChild.endOffset, o.lastChild.startOffset)
     }
 
+    override fun visitDeclareItem(o: RestartDeclareItem) {
+        var start = o.firstChild.endOffset
+        val end = o.lastChild.startOffset
+        for (item in o.childrenWithLeaves) {
+            when (item.elementType) {
+                RestartTypes.BRACKET_L -> start = item.endOffset
+                RestartTypes.BRACKET_R -> fold(o.node, start, end)
+                else -> {}
+            }
+        }
+    }
 
     private fun fold(element: PsiElement) {
         descriptors += FoldingDescriptor(element.node, element.textRange)

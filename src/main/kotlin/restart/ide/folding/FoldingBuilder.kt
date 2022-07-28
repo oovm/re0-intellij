@@ -11,12 +11,7 @@ import com.intellij.psi.util.PsiTreeUtil
 import restart.ide.file.RestartFileNode
 
 class FoldingBuilder : CustomFoldingBuilder(), DumbAware {
-    override fun buildLanguageFoldRegions(
-        descriptors: MutableList<FoldingDescriptor>,
-        root: PsiElement,
-        document: Document,
-        quick: Boolean,
-    ) {
+    override fun buildLanguageFoldRegions(descriptors: MutableList<FoldingDescriptor>, root: PsiElement, document: Document, quick: Boolean) {
         if (root !is RestartFileNode) return
         val visitor = FoldingVisitor(descriptors)
         PsiTreeUtil.processElements(root) {
@@ -25,11 +20,7 @@ class FoldingBuilder : CustomFoldingBuilder(), DumbAware {
         }
     }
 
-    override fun getLanguagePlaceholderText(node: ASTNode, range: TextRange) =
-        when (node.elementType) {
-//            BRACKET_BLOCK -> "[...]"
-            else -> "..."
-        }
+    override fun getLanguagePlaceholderText(node: ASTNode, range: TextRange) = "..."
 
     override fun isRegionCollapsedByDefault(node: ASTNode) = false
 }
