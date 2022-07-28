@@ -10,10 +10,7 @@ import com.intellij.psi.PsiFile
 import restart.ide.file.RestartFileNode
 import restart.ide.project.IdentifierInfo
 import restart.ide.project.RestartProject
-import restart.language.psi.*
-import restart.language.psi_node.RestartDeclareStatementNode
-import restart.language.psi_node.RestartIdentifierNode
-import restart.language.psi_node.RestartNumberNode
+import restart.language.psi_node.*
 import restart.ide.highlight.RestartHighlightColor as Color
 
 class NodeHighlighter : RestartVisitor(), HighlightVisitor {
@@ -22,15 +19,15 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
 
     override fun visitDeclareStatement(o: RestartDeclareStatement) {
         o as RestartDeclareStatementNode;
-        highlight(o.getDeclareKeyword(), Color.KEYWORD)
-        highlight(o.getDeclareKey(), o.getKind().color)
+        highlight(o.declareKeyword, Color.KEYWORD)
+        highlight(o.declareKey, o.kind.color)
         highlightMaybeEnum(o)
-        highlightBraceKey(o.getDeclareBlock(), Color.MODIFIER)
+        highlightBraceKey(o.declareBlock, Color.MODIFIER)
     }
 
     private fun highlightMaybeEnum(o: RestartDeclareStatementNode) {
-        o.getAlias().forEach { highlight(it, Color.SYM_PROPERTY) }
-        o.getEnumerationVariant().forEach { highlight(it, Color.SYM_VARIANT) }
+        o.aliases.forEach { highlight(it, Color.SYM_PROPERTY) }
+        o.enumerationVariant.forEach { highlight(it, Color.SYM_VARIANT) }
     }
 
     override fun visitModifiers(o: RestartModifiers) {

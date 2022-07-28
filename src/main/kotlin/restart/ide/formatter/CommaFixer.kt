@@ -6,7 +6,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.impl.source.tree.LeafPsiElement
-import restart.language.psi.endOffset
+import com.intellij.refactoring.suggested.endOffset
 import restart.language.psi.getNextNonCommentSibling
 import restart.language.psi.getPrevNonCommentSibling
 import restart.language.psi.getPrevNonWhitespaceSibling

@@ -22,22 +22,18 @@ open class MixinDeclare(node: ASTNode) : RestartASTBase(node), PsiNameIdentifier
     override fun getOriginalElement(): RestartDeclareStatementNode {
         return this as RestartDeclareStatementNode
     }
-
     override fun getNameIdentifier(): RestartDeclareKeyNode {
         return originalElement.declareKey as RestartDeclareKeyNode
     }
-
     override fun getTextOffset(): Int = nameIdentifier.textOffset
-    override fun getName(): String? = nameIdentifier.name
+    override fun getName(): String = nameIdentifier.name
     override fun setName(name: String): PsiElement {
         return ASTFactory(this).replaceKey(nameIdentifier, name)
     }
-
-    override fun getIcon(flags: Int): Icon = getKind().icon
+    override fun getIcon(flags: Int): Icon = originalElement.kind.icon
     override fun getPresentation(): ItemPresentation {
-        return PresentationData(name, null, getKind().icon, null)
+        return PresentationData(name, null, originalElement.kind.icon, null)
     }
-
     override fun getChildrenView(): Array<RestartViewElement> {
         val out = mutableListOf<RestartViewElement>()
         for (item in originalElement.declareItemList) {
@@ -45,14 +41,14 @@ open class MixinDeclare(node: ASTNode) : RestartASTBase(node), PsiNameIdentifier
         }
         return out.toTypedArray()
     }
-
     override fun getReference(): PsiReference? = null
-
     override fun getReferences(): Array<PsiReference> {
         val out = mutableListOf<RestartReference>()
-        originalElement.getModifiers().forEach {
+        originalElement.modifiers.forEach {
             out.add(RestartReference(it))
         }
+
+
         return out.toTypedArray()
     }
 

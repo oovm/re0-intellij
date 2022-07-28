@@ -1,5 +1,5 @@
 // This is a generated file. Not intended for manual editing.
-package restart.language.psi;
+package restart.language.psi_node;
 
 import java.util.List;
 import org.jetbrains.annotations.*;

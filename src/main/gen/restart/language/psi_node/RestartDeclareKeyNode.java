@@ -9,7 +9,6 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static restart.language.psi.RestartTypes.*;
 import restart.language.mixin.MixinKey;
-import restart.language.psi.*;
 import restart.language.ast.ASTMethods;
 
 public class RestartDeclareKeyNode extends MixinKey implements RestartDeclareKey {

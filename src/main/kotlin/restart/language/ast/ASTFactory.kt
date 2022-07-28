@@ -5,7 +5,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFileFactory
 import restart.ide.file.RestartFileNode
 import restart.ide.file.RestartFileType
-import restart.language.psi.RestartDeclareKey
+import restart.language.psi_node.RestartDeclareKey
 import restart.language.psi_node.RestartDeclareKeyNode
 import restart.language.psi_node.RestartDeclareStatementNode
 
@@ -26,6 +26,6 @@ class ASTFactory {
     }
     fun replaceKey(target: RestartDeclareKey, name: String): RestartDeclareKeyNode {
         val node =  createFile("属性 $name {}").firstChild as RestartDeclareStatementNode;
-        return target.replace(node.getDeclareKey()) as RestartDeclareKeyNode
+        return target.replace(node.declareKey) as RestartDeclareKeyNode
     }
 }

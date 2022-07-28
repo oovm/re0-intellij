@@ -6,7 +6,7 @@
 
     psiClassPrefix = "Restart"
     psiImplClassSuffix = "Node"
-    psiPackage = "restart.language.psi"
+    psiPackage = "restart.language.psi_node"
     psiImplPackage = "restart.language.psi_node"
 
     elementTypeHolderClass = "restart.language.psi.RestartTypes"

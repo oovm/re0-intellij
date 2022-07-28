@@ -3,6 +3,7 @@ package restart.ide.usages
 import com.intellij.find.findUsages.FindUsagesHandler
 import com.intellij.find.findUsages.FindUsagesHandlerFactory
 import com.intellij.psi.PsiElement
+import restart.language.psi_node.RestartDeclareStatement
 
 class RestartUsagesFactory : FindUsagesHandlerFactory() {
     override fun canFindUsages(element: PsiElement): Boolean {

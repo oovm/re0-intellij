@@ -7,8 +7,8 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.TokenType
 import com.intellij.psi.util.elementType
 import restart.ide.formatter.FormatSpace
-import restart.language.psi.RestartIdentifier
-import restart.language.psi.RestartNumber
+import restart.language.psi_node.RestartIdentifier
+import restart.language.psi_node.RestartNumber
 import restart.language.psi.RestartTypes
 
 

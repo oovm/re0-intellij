@@ -7,8 +7,8 @@ import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.formatter.FormatterUtil
 import restart.language.ast.computeSpacing
 import restart.language.ast.isWhitespaceOrEmpty
-import restart.language.psi.RestartBlock
-import restart.language.psi.RestartDeclareBlock
+import restart.language.psi_node.RestartBlock
+import restart.language.psi_node.RestartDeclareBlock
 import restart.language.psi_node.RestartDeclareItemNode
 
 class FormatBlock(

@@ -9,7 +9,6 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static restart.language.psi.RestartTypes.*;
 import restart.language.ast.RestartASTBase;
-import restart.language.psi.*;
 import restart.language.ast.ASTMethods;
 
 public class RestartBlockNode extends RestartASTBase implements RestartBlock {

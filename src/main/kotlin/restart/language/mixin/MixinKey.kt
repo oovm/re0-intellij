@@ -10,7 +10,7 @@ open class MixinKey(node: ASTNode) : RestartASTBase(node) {
     override fun getOriginalElement(): RestartDeclareKeyNode {
         return this as RestartDeclareKeyNode
     }
-    override fun getName(): String? {
+    override fun getName(): String {
         return this.text.trim('`')
     }
     fun underDeclareStatement(): Boolean {

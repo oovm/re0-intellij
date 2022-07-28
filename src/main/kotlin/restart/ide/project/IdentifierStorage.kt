@@ -28,28 +28,13 @@ class IdentifierStorage(val project: Project?) : ContentIterator {
     }
 
     private fun analyzeDeclare(node: RestartDeclareStatementNode) {
-        // dict[node.name] = IdentifierInfo(node.nameIdentifier, RestartSymbolKind.Property)
-        for (item in node.getDeclareItemList()) {
-            when (item.declareKey.text) {
-                "别称", "alias" -> {
-                    item.expressionList.forEach {
-                        val out = IdentifierInfo.tryFrom(it, RestartSymbolKind.Property);
-                        if (out != null) {
-                            dict[it.text] = out
-                        }
-                    }
-                }
-                "枚举", "enum" -> {
-                    item.expressionList.forEach {
-                        val out = IdentifierInfo.tryFrom(it, RestartSymbolKind.Enumerate);
-                        if (out != null) {
-                            dict[it.text] = out
-                        }
-                    }
-                }
-            }
+        dict[node.name] = IdentifierInfo(node.nameIdentifier, RestartSymbolKind.Property)
+        node.aliases.forEach {
+            dict[it.text] = IdentifierInfo(it, node.kind)
         }
-
+        node.enumerationVariant.forEach {
+            dict[it.text] = IdentifierInfo(it, RestartSymbolKind.Enumerate)
+        }
     }
 
 

@@ -3,8 +3,9 @@ package restart.language.mixin
 import com.intellij.lang.ASTNode
 import restart.ide.reference.RestartReference
 import restart.language.ast.RestartASTBase
-import restart.language.psi.*
+import restart.language.psi_node.*
 import restart.language.psi_node.RestartDeclareKeyNode
+import restart.language.psi_node.RestartDeclareStatement
 
 open class MixinIdentifier(node: ASTNode) : RestartASTBase(node) {
     override fun getName(): String {

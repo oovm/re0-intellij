@@ -9,7 +9,6 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static restart.language.psi.RestartTypes.*;
 import restart.language.mixin.MixinString;
-import restart.language.psi.*;
 import restart.language.ast.ASTMethods;
 
 public class RestartStringNode extends MixinString implements RestartString {

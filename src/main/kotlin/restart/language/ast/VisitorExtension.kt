@@ -4,7 +4,7 @@ import com.intellij.ide.projectView.PresentationData
 import com.intellij.psi.NavigatablePsiElement
 import com.intellij.psi.util.PsiTreeUtil
 import restart.ide.view.RestartViewElement
-import restart.language.psi.RestartModifiers
+import restart.language.psi_node.RestartModifiers
 
 
 fun RestartModifiers?.addChildrenView(list: MutableList<RestartViewElement>) {

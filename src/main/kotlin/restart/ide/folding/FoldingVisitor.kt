@@ -5,7 +5,12 @@ import com.intellij.lang.folding.FoldingDescriptor
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.elementType
-import restart.language.psi.*
+import com.intellij.refactoring.suggested.endOffset
+import com.intellij.refactoring.suggested.startOffset
+import restart.language.psi.RestartRecursiveVisitor
+import restart.language.psi.RestartTypes
+import restart.language.psi.childrenWithLeaves
+import restart.language.psi_node.*
 
 class FoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : RestartRecursiveVisitor() {
     override fun visitDeclareBlock(o: RestartDeclareBlock) {

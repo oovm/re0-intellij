@@ -19,9 +19,7 @@ class RestartReference(private val caller: PsiElement) : PsiReference {
         return RestartProject.getStorage(caller.project)[canonicalText]?.node
     }
 
-    override fun getCanonicalText(): String {
-        return caller.text
-    }
+    override fun getCanonicalText(): String = caller.text
 
     override fun handleElementRename(newElementName: String): PsiElement {
         TODO("Not yet implemented")
