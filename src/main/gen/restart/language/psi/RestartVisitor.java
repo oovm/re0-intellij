@@ -7,10 +7,6 @@ import com.intellij.psi.PsiElement;
 
 public class RestartVisitor extends PsiElementVisitor {
 
-  public void visitArchiveStatement(@NotNull RestartArchiveStatement o) {
-    visitPsiElement(o);
-  }
-
   public void visitBlock(@NotNull RestartBlock o) {
     visitPsiElement(o);
   }
@@ -47,15 +43,7 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitEventStatement(@NotNull RestartEventStatement o) {
-    visitPsiElement(o);
-  }
-
   public void visitExpression(@NotNull RestartExpression o) {
-    visitPsiElement(o);
-  }
-
-  public void visitHeroStatement(@NotNull RestartHeroStatement o) {
     visitPsiElement(o);
   }
 
@@ -99,15 +87,7 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitPropertyStatement(@NotNull RestartPropertyStatement o) {
-    visitPsiElement(o);
-  }
-
   public void visitString(@NotNull RestartString o) {
-    visitPsiElement(o);
-  }
-
-  public void visitTalentStatement(@NotNull RestartTalentStatement o) {
     visitPsiElement(o);
   }
 

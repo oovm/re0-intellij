@@ -89,15 +89,7 @@
     ]
 }
 
-re0 ::= ((top_statements|normal_statements) [SEMICOLON])*
-private top_statements ::=
-    property_statement
-  | event_statement
-  | hero_statement
-  | archive_statement
-  | talent_statement
-//  | declare_statement
-  ;
+re0 ::= ((declare_statement|normal_statements) [SEMICOLON])*
 private normal_statements ::=
     if_statement
   | expression
@@ -117,31 +109,11 @@ declare_item       ::=
 declare_key        ::= identifier | number | KW_IF {
     mixin="restart.language.mixin.MixinKey"
 }
-// ---------------------------------------------------------------------------------------------------------------------
-property_statement ::= kw_property identifier [modifiers] declare_block {
-    mixin="restart.language.mixin.MixinProperty"
-};
 kw_property        ::= "variable" | "property" | "属性" | "内置" | "设定";
-// ---------------------------------------------------------------------------------------------------------------------
-event_statement    ::= kw_event identifier [modifiers] declare_block {
-    mixin="restart.language.mixin.MixinEvent"
-}
 kw_event           ::= "event" | "事件"
-// ---------------------------------------------------------------------------------------------------------------------
-hero_statement     ::= kw_hero identifier [modifiers] declare_block {
-    mixin="restart.language.mixin.MixinHero"
-};
 kw_hero            ::= "character" | "hero" | "人物" | "英雄";
-// ---------------------------------------------------------------------------------------------------------------------
-talent_statement   ::= kw_talent identifier [modifiers] declare_block {
-    mixin="restart.language.mixin.MixinTalent"
-};
 kw_talent          ::= "talent" | "skill" | "装备" | "物品" | "道具" | "天赋" | "技能" | "特质";
-// ---------------------------------------------------------------------------------------------------------------------
-archive_statement  ::= kw_archive identifier [modifiers] declare_block {
-    mixin="restart.language.mixin.MixinAward"
-}
-kw_archive       ::= "award" | "成就";
+kw_archive         ::= "award" | "成就";
 // ---------------------------------------------------------------------------------------------------------------------
 if_statement      ::= (KW_IF expression block) [ef_statement* [else_statement]]
 ef_statement      ::= KW_ELSE_IF expression block;

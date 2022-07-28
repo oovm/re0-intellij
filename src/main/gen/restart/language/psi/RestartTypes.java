@@ -8,7 +8,6 @@ import restart.language.psi_node.*;
 
 public interface RestartTypes {
 
-  IElementType ARCHIVE_STATEMENT = new RestartTokenType("ARCHIVE_STATEMENT");
   IElementType BLOCK = new RestartTokenType("BLOCK");
   IElementType BOOLEAN = new RestartTokenType("BOOLEAN");
   IElementType CALL_SUFFIX = new RestartTokenType("CALL_SUFFIX");
@@ -18,9 +17,7 @@ public interface RestartTypes {
   IElementType DECLARE_STATEMENT = new RestartTokenType("DECLARE_STATEMENT");
   IElementType EF_STATEMENT = new RestartTokenType("EF_STATEMENT");
   IElementType ELSE_STATEMENT = new RestartTokenType("ELSE_STATEMENT");
-  IElementType EVENT_STATEMENT = new RestartTokenType("EVENT_STATEMENT");
   IElementType EXPRESSION = new RestartTokenType("EXPRESSION");
-  IElementType HERO_STATEMENT = new RestartTokenType("HERO_STATEMENT");
   IElementType IDENTIFIER = new RestartTokenType("IDENTIFIER");
   IElementType IF_STATEMENT = new RestartTokenType("IF_STATEMENT");
   IElementType KW_ARCHIVE = new RestartTokenType("KW_ARCHIVE");
@@ -31,9 +28,7 @@ public interface RestartTypes {
   IElementType KW_TALENT = new RestartTokenType("KW_TALENT");
   IElementType MODIFIERS = new RestartTokenType("MODIFIERS");
   IElementType NUMBER = new RestartTokenType("NUMBER");
-  IElementType PROPERTY_STATEMENT = new RestartTokenType("PROPERTY_STATEMENT");
   IElementType STRING = new RestartTokenType("STRING");
-  IElementType TALENT_STATEMENT = new RestartTokenType("TALENT_STATEMENT");
 
   IElementType BANG = new RestartTokenType("BANG");
   IElementType BRACE_L = new RestartTokenType("{");
@@ -110,10 +105,7 @@ public interface RestartTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == ARCHIVE_STATEMENT) {
-        return new RestartArchiveStatementNode(node);
-      }
-      else if (type == BLOCK) {
+      if (type == BLOCK) {
         return new RestartBlockNode(node);
       }
       else if (type == BOOLEAN) {
@@ -140,14 +132,8 @@ public interface RestartTypes {
       else if (type == ELSE_STATEMENT) {
         return new RestartElseStatementNode(node);
       }
-      else if (type == EVENT_STATEMENT) {
-        return new RestartEventStatementNode(node);
-      }
       else if (type == EXPRESSION) {
         return new RestartExpressionNode(node);
-      }
-      else if (type == HERO_STATEMENT) {
-        return new RestartHeroStatementNode(node);
       }
       else if (type == IDENTIFIER) {
         return new RestartIdentifierNode(node);
@@ -179,14 +165,8 @@ public interface RestartTypes {
       else if (type == NUMBER) {
         return new RestartNumberNode(node);
       }
-      else if (type == PROPERTY_STATEMENT) {
-        return new RestartPropertyStatementNode(node);
-      }
       else if (type == STRING) {
         return new RestartStringNode(node);
-      }
-      else if (type == TALENT_STATEMENT) {
-        return new RestartTalentStatementNode(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }
