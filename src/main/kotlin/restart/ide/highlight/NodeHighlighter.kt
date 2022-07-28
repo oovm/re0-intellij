@@ -22,10 +22,10 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
 
     override fun visitDeclareStatement(o: RestartDeclareStatement) {
         o as RestartDeclareStatementNode;
-        highlight(o.kwDeclare, Color.KEYWORD)
-        highlight(o.declareKey, o.getKind().color)
+        highlight(o.getDeclareKeyword(), Color.KEYWORD)
+        highlight(o.getDeclareKey(), o.getKind().color)
         highlightMaybeEnum(o)
-        highlightBraceKey(o.declareBlock, Color.MODIFIER)
+        highlightBraceKey(o.getDeclareBlock(), Color.MODIFIER)
     }
 
     private fun highlightMaybeEnum(o: RestartDeclareStatementNode) {

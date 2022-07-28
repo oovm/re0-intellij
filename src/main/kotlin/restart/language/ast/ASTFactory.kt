@@ -8,7 +8,6 @@ import restart.ide.file.RestartFileType
 import restart.language.psi.RestartDeclareKey
 import restart.language.psi_node.RestartDeclareKeyNode
 import restart.language.psi_node.RestartDeclareStatementNode
-import restart.language.psi_node.RestartIdentifierNode
 
 
 class ASTFactory {
@@ -27,6 +26,6 @@ class ASTFactory {
     }
     fun replaceKey(target: RestartDeclareKey, name: String): RestartDeclareKeyNode {
         val node =  createFile("属性 $name {}").firstChild as RestartDeclareStatementNode;
-        return target.replace(node.declareKey) as RestartDeclareKeyNode
+        return target.replace(node.getDeclareKey()) as RestartDeclareKeyNode
     }
 }

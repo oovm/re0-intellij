@@ -1,55 +1,98 @@
 // This is a generated file. Not intended for manual editing.
-package restart.language.psi_node;
+package restart.language.psi_node
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
-import static restart.language.psi.RestartTypes.*;
-import restart.language.mixin.MixinDeclare;
-import restart.language.psi.*;
-import restart.language.ast.ASTMethods;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElementVisitor
+import restart.language.mixin.MixinDeclare
+import restart.language.psi.*
+import restart.language.symbol.RestartSymbolKind
 
-public class RestartDeclareStatementNode extends MixinDeclare implements RestartDeclareStatement {
+class RestartDeclareStatementNode(node: ASTNode) : MixinDeclare(node), RestartDeclareStatement {
+    fun accept(visitor: RestartVisitor) {
+        visitor.visitDeclareStatement(this)
+    }
 
-  public RestartDeclareStatementNode(@NotNull ASTNode node) {
-    super(node);
-  }
+    override fun accept(visitor: PsiElementVisitor) {
+        if (visitor is RestartVisitor) accept(visitor) else super.accept(visitor)
+    }
 
-  public void accept(@NotNull RestartVisitor visitor) {
-    visitor.visitDeclareStatement(this);
-  }
+    override fun getDeclareBlock() = findNotNullChildByClass(RestartDeclareBlock::class.java)
 
-  @Override
-  public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof RestartVisitor) accept((RestartVisitor)visitor);
-    else super.accept(visitor);
-  }
+    override fun getDeclareKey() = findNotNullChildByClass(RestartDeclareKey::class.java)
 
-  @Override
-  @NotNull
-  public RestartDeclareBlock getDeclareBlock() {
-    return findNotNullChildByClass(RestartDeclareBlock.class);
-  }
+    override fun getDeclareKeyword() = findNotNullChildByClass(RestartKwDeclare::class.java).identifier as RestartIdentifierNode
 
-  @Override
-  @NotNull
-  public RestartDeclareKey getDeclareKey() {
-    return findNotNullChildByClass(RestartDeclareKey.class);
-  }
+    override fun getModifiers() = when (val raw = findChildByClass(RestartModifiers::class.java)) {
+        null -> emptyArray()
+        else -> raw.identifierList
+            .map { it as RestartIdentifierNode }
+            .toTypedArray()
+    }
 
-  @Override
-  @NotNull
-  public RestartKwDeclare getKwDeclare() {
-    return findNotNullChildByClass(RestartKwDeclare.class);
-  }
+    override fun getDeclareItemList() = declareBlock.declareItemList
+        .map { it as RestartDeclareItemNode }
+        .toTypedArray()
 
-  @Override
-  @Nullable
-  public RestartModifiers getModifiers() {
-    return findChildByClass(RestartModifiers.class);
-  }
 
+
+
+    fun getKind(): RestartSymbolKind = when (originalElement.declareKeyword.text) {
+        "award", "成就" -> {
+            RestartSymbolKind.Achievement
+        }
+
+        "variable", "属性", "内置", "设定" -> {
+            RestartSymbolKind.Property
+        }
+
+        "event", "事件" -> {
+            RestartSymbolKind.Event
+        }
+
+        "character", "人物", "英雄" -> {
+            RestartSymbolKind.Achievement
+        }
+
+        "talent", "skill", "装备", "物品", "道具", "天赋", "技能", "特质" -> {
+            RestartSymbolKind.Talent
+        }
+
+        else -> {
+            RestartSymbolKind.Unknown
+        }
+    }
+
+    fun getAlias(): Array<RestartIdentifierNode> {
+        val out = mutableListOf<RestartIdentifierNode>()
+        for (item in originalElement.getDeclareItemList()) {
+            when (item.declareKey.text) {
+                "别称", "alias" -> {
+                    item.expressionList.forEach {
+                        if (it.identifierList.size == 1) {
+                            out.add(it.identifierList.first() as RestartIdentifierNode)
+                        }
+                    }
+                    break
+                }
+            }
+        }
+        return out.toTypedArray()
+    }
+
+    fun getEnumerationVariant(): Array<RestartIdentifierNode> {
+        val out = mutableListOf<RestartIdentifierNode>()
+        for (item in originalElement.getDeclareItemList()) {
+            when (item.declareKey.text) {
+                "枚举", "enum" -> {
+                    item.expressionList.forEach {
+                        if (it.identifierList.size == 1) {
+                            out.add(it.identifierList.first() as RestartIdentifierNode)
+                        }
+                    }
+                    break
+                }
+            }
+        }
+        return out.toTypedArray()
+    }
 }
