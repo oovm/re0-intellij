@@ -55,27 +55,7 @@ public class RestartVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitKwArchive(@NotNull RestartKwArchive o) {
-    visitPsiElement(o);
-  }
-
   public void visitKwDeclare(@NotNull RestartKwDeclare o) {
-    visitPsiElement(o);
-  }
-
-  public void visitKwEvent(@NotNull RestartKwEvent o) {
-    visitPsiElement(o);
-  }
-
-  public void visitKwHero(@NotNull RestartKwHero o) {
-    visitPsiElement(o);
-  }
-
-  public void visitKwProperty(@NotNull RestartKwProperty o) {
-    visitPsiElement(o);
-  }
-
-  public void visitKwTalent(@NotNull RestartKwTalent o) {
     visitPsiElement(o);
   }
 

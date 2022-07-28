@@ -20,12 +20,7 @@ public interface RestartTypes {
   IElementType EXPRESSION = new RestartTokenType("EXPRESSION");
   IElementType IDENTIFIER = new RestartTokenType("IDENTIFIER");
   IElementType IF_STATEMENT = new RestartTokenType("IF_STATEMENT");
-  IElementType KW_ARCHIVE = new RestartTokenType("KW_ARCHIVE");
   IElementType KW_DECLARE = new RestartTokenType("KW_DECLARE");
-  IElementType KW_EVENT = new RestartTokenType("KW_EVENT");
-  IElementType KW_HERO = new RestartTokenType("KW_HERO");
-  IElementType KW_PROPERTY = new RestartTokenType("KW_PROPERTY");
-  IElementType KW_TALENT = new RestartTokenType("KW_TALENT");
   IElementType MODIFIERS = new RestartTokenType("MODIFIERS");
   IElementType NUMBER = new RestartTokenType("NUMBER");
   IElementType STRING = new RestartTokenType("STRING");
@@ -141,23 +136,8 @@ public interface RestartTypes {
       else if (type == IF_STATEMENT) {
         return new RestartIfStatementNode(node);
       }
-      else if (type == KW_ARCHIVE) {
-        return new RestartKwArchiveNode(node);
-      }
       else if (type == KW_DECLARE) {
         return new RestartKwDeclareNode(node);
-      }
-      else if (type == KW_EVENT) {
-        return new RestartKwEventNode(node);
-      }
-      else if (type == KW_HERO) {
-        return new RestartKwHeroNode(node);
-      }
-      else if (type == KW_PROPERTY) {
-        return new RestartKwPropertyNode(node);
-      }
-      else if (type == KW_TALENT) {
-        return new RestartKwTalentNode(node);
       }
       else if (type == MODIFIERS) {
         return new RestartModifiersNode(node);

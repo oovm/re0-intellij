@@ -22,11 +22,7 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
 
     override fun visitDeclareStatement(o: RestartDeclareStatement) {
         highlight(o.kwDeclare, Color.KEYWORD)
-    }
-
-    override fun visitPropertyStatement(o: RestartPropertyStatement) {
-        highlight(o.kwProperty, Color.KEYWORD)
-        highlight(o.identifier, Color.SYM_PROPERTY)
+        highlight(o.kwDeclare, Color.SYM_PROPERTY)
         highlightBraceKey(o.declareBlock, Color.MODIFIER)
 
         for (item in o.declareBlock.declareItemList) {
@@ -35,33 +31,6 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
                 "枚举", "enum" -> item.expressionList.forEach { highlight(it, Color.SYM_VARIANT) }
             }
         }
-
-    }
-
-
-    override fun visitHeroStatement(o: RestartHeroStatement) {
-        highlight(o.kwHero, Color.KEYWORD)
-        highlight(o.identifier, Color.SYM_HERO)
-        highlightBraceKey(o.declareBlock, Color.MODIFIER)
-    }
-
-    override fun visitTalentStatement(o: RestartTalentStatement) {
-        highlight(o.kwTalent, Color.KEYWORD)
-        highlight(o.identifier, Color.SYM_TALENT)
-        highlightBraceKey(o.declareBlock, Color.MODIFIER)
-    }
-
-    override fun visitArchiveStatement(o: RestartArchiveStatement) {
-        highlight(o.kwArchive, Color.KEYWORD)
-        highlight(o.identifier, Color.SYM_ARCHIVE)
-        highlightBraceKey(o.declareBlock, Color.MODIFIER)
-    }
-
-
-    override fun visitEventStatement(o: RestartEventStatement) {
-        highlight(o.kwEvent, Color.KEYWORD)
-        highlight(o.identifier, Color.SYM_EVENT)
-        highlightBraceKey(o.declareBlock, Color.MODIFIER)
     }
 
     override fun visitModifiers(o: RestartModifiers) {

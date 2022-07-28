@@ -7,7 +7,6 @@ import com.intellij.psi.PsiElement
 import restart.RestartLanguage
 import restart.ide.file.RestartFileNode
 import restart.language.ast.RestartASTBase
-import restart.language.psi_node.RestartPropertyStatementNode
 import javax.swing.Icon
 
 /// 重写导航栏

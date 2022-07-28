@@ -6,7 +6,7 @@ import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import restart.language.psi.*
 
-class RestartFoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : RestartRecursiveVisitor() {
+class FoldingVisitor(private val descriptors: MutableList<FoldingDescriptor>) : RestartRecursiveVisitor() {
     override fun visitDeclareBlock(o: RestartDeclareBlock) {
         fold(o.node, o.firstChild.endOffset, o.lastChild.startOffset)
     }

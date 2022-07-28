@@ -38,7 +38,7 @@ class KeywordData : Symbol, Pointer<KeywordData> {
                 """.trimIndent()
             )
 
-            RestartTypes.KW_EVENT -> KeywordData(
+            RestartTypes.KW_IF -> KeywordData(
                 "trait",
                 """
                 trait A()

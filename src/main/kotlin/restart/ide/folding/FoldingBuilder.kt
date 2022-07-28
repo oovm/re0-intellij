@@ -10,7 +10,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 import restart.ide.file.RestartFileNode
 
-class RestartFoldingBuilder : CustomFoldingBuilder(), DumbAware {
+class FoldingBuilder : CustomFoldingBuilder(), DumbAware {
     override fun buildLanguageFoldRegions(
         descriptors: MutableList<FoldingDescriptor>,
         root: PsiElement,
@@ -18,7 +18,7 @@ class RestartFoldingBuilder : CustomFoldingBuilder(), DumbAware {
         quick: Boolean,
     ) {
         if (root !is RestartFileNode) return
-        val visitor = RestartFoldingVisitor(descriptors)
+        val visitor = FoldingVisitor(descriptors)
         PsiTreeUtil.processElements(root) {
             it.accept(visitor)
             true

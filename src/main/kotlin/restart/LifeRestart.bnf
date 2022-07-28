@@ -95,7 +95,7 @@ private normal_statements ::=
   | expression
   ;
 // ---------------------------------------------------------------------------------------------------------------------
-declare_statement  ::= kw_declare identifier [modifiers] declare_block {
+declare_statement  ::= kw_declare declare_key [modifiers] declare_block {
     mixin="restart.language.mixin.MixinDeclare"
 }
 kw_declare         ::= identifier
@@ -109,11 +109,6 @@ declare_item       ::=
 declare_key        ::= identifier | number | KW_IF {
     mixin="restart.language.mixin.MixinKey"
 }
-kw_property        ::= "variable" | "property" | "属性" | "内置" | "设定";
-kw_event           ::= "event" | "事件"
-kw_hero            ::= "character" | "hero" | "人物" | "英雄";
-kw_talent          ::= "talent" | "skill" | "装备" | "物品" | "道具" | "天赋" | "技能" | "特质";
-kw_archive         ::= "award" | "成就";
 // ---------------------------------------------------------------------------------------------------------------------
 if_statement      ::= (KW_IF expression block) [ef_statement* [else_statement]]
 ef_statement      ::= KW_ELSE_IF expression block;

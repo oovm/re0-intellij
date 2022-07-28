@@ -7,6 +7,9 @@ import restart.language.ast.RestartASTBase
 
 open class MixinKey(node: ASTNode) : RestartASTBase(node) {
 
+    override fun getName(): String? {
+        return super.getName()
+    }
 
     override fun getOriginalElement(): PsiElement {
         return super.getOriginalElement()

@@ -15,14 +15,7 @@ class RestartInlayVSCProvider : VcsCodeVisionLanguageContext {
     }
 
     override fun isAccepted(element: PsiElement): Boolean = when (element) {
-        is RestartPropertyStatement,
-        is RestartArchiveStatement,
-        is RestartEventStatement,
-        is RestartTalentStatement,
-        is RestartHeroStatement,
-        is RestartDeclareStatement,
-        -> true
-
+        is RestartDeclareStatement -> true
         else -> false
     }
 }

@@ -4,15 +4,11 @@ import com.intellij.find.findUsages.FindUsagesHandler
 import com.intellij.find.findUsages.FindUsagesHandlerFactory
 import com.intellij.psi.PsiElement
 import restart.language.psi.RestartDeclareStatement
-import restart.language.psi.RestartTalentStatement
 
 class RestartUsagesFactory : FindUsagesHandlerFactory() {
     override fun canFindUsages(element: PsiElement): Boolean {
         return when (element) {
-            is RestartDeclareStatement,
-            is RestartTalentStatement,
-            -> true
-
+            is RestartDeclareStatement -> true
             else -> false
         }
     }

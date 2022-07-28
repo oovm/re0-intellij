@@ -102,8 +102,8 @@
 			implementationClass="restart.ide.matcher.QuoteHandler"/>
 		<lang.foldingBuilder
 			language="Restart"
-			implementationClass="restart.ide.folding.RestartFoldingBuilder"/>
-		<codeFoldingOptionsProvider instance="restart.ide.folding.RestartFoldingOptions"/>
+			implementationClass="restart.ide.folding.FoldingBuilder"/>
+		<codeFoldingOptionsProvider instance="restart.ide.folding.FoldingOptions"/>
 		<!-- Document -->
 		<lang.documentationProvider
 			language="Restart"

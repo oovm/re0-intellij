@@ -23,10 +23,7 @@ open class MixinIdentifier(node: ASTNode) : RestartASTBase(node) {
 
     fun shouldResolve(): Boolean {
         return when (val parent = this.parent) {
-            is RestartModifiers, is RestartPropertyStatement -> {
-                false
-            }
-            is RestartTalentStatement, is RestartEventStatement, is RestartHeroStatement, is RestartArchiveStatement -> {
+            is RestartModifiers, is RestartDeclareStatement -> {
                 false
             }
             is RestartDeclareKeyNode -> {

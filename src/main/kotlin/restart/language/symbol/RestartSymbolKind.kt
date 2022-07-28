@@ -8,7 +8,8 @@ enum class RestartSymbolKind {
     Property,
     Enumerate,
     Talent,
-    Event
+    Event,
+    Achievement
     ;
 
     val color
@@ -18,6 +19,7 @@ enum class RestartSymbolKind {
             Talent -> RestartHighlightColor.SYM_TALENT
             Event -> RestartHighlightColor.SYM_EVENT
             Enumerate -> RestartHighlightColor.SYM_VARIANT
+            Achievement ->  RestartHighlightColor.SYM_ARCHIVE
         }
 
     val icon
@@ -27,5 +29,6 @@ enum class RestartSymbolKind {
             Talent -> RestartIconProvider.EVENT
             Event -> RestartIconProvider.EVENT
             Enumerate -> RestartIconProvider.EVENT
+            Achievement -> RestartIconProvider.NAMESPACE
         }
 }

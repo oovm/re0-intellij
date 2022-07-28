@@ -5,8 +5,7 @@ import com.intellij.openapi.roots.ContentIterator
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiManager
 import restart.ide.file.RestartFileNode
-import restart.language.psi_node.RestartPropertyStatementNode
-import restart.language.psi_node.RestartTalentStatementNode
+import restart.language.psi_node.RestartDeclareStatementNode
 import restart.language.symbol.RestartSymbolKind
 
 // TODO: cache
@@ -22,42 +21,37 @@ class IdentifierStorage(val project: Project?) : ContentIterator {
     private fun analyzeFile(file: RestartFileNode?) {
         file ?: return
         for (item in file.children) {
-            when (item) {
-                is RestartPropertyStatementNode -> analyzeDeclare(item)
-                is RestartTalentStatementNode -> analyzeDeclare(item)
+            if (item is RestartDeclareStatementNode) {
+                analyzeDeclare(item)
             }
         }
     }
 
-    private fun analyzeDeclare(node: RestartPropertyStatementNode) {
-        dict[node.name] = IdentifierInfo(node.nameIdentifier, RestartSymbolKind.Property)
+    private fun analyzeDeclare(node: RestartDeclareStatementNode) {
+        // dict[node.name] = IdentifierInfo(node.nameIdentifier, RestartSymbolKind.Property)
         for (item in node.declareBlock.declareItemList) {
             when (item.declareKey.text) {
                 "别称", "alias" -> {
-                    item.expressionList.forEach { expr ->
-                        val out = IdentifierInfo.tryFrom(expr, RestartSymbolKind.Property);
+                    item.expressionList.forEach {
+                        val out = IdentifierInfo.tryFrom(it, RestartSymbolKind.Property);
                         if (out != null) {
-                            dict[expr.text] = out
+                            dict[it.text] = out
                         }
                     }
                 }
                 "枚举", "enum" -> {
-                    item.expressionList.forEach { expr ->
-                        val out = IdentifierInfo.tryFrom(expr, RestartSymbolKind.Enumerate);
+                    item.expressionList.forEach {
+                        val out = IdentifierInfo.tryFrom(it, RestartSymbolKind.Enumerate);
                         if (out != null) {
-                            dict[expr.text] = out
+                            dict[it.text] = out
                         }
                     }
-
                 }
             }
         }
 
     }
 
-    private fun analyzeDeclare(node: RestartTalentStatementNode) {
-        dict[node.name] = IdentifierInfo(node.nameIdentifier, RestartSymbolKind.Talent)
-    }
 
     companion object {
 

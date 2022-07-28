@@ -9,7 +9,6 @@ import com.intellij.psi.util.PsiTreeUtil
 import restart.RestartBundle
 import restart.RestartLanguage
 import restart.ide.view.RestartViewElement
-import restart.language.psi_node.RestartPropertyStatementNode
 
 /// RestartFile 是个 PsiElement
 class RestartFileNode(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, RestartLanguage) {

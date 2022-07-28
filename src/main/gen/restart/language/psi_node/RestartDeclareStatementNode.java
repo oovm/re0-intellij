@@ -36,8 +36,8 @@ public class RestartDeclareStatementNode extends MixinDeclare implements Restart
 
   @Override
   @NotNull
-  public RestartIdentifier getIdentifier() {
-    return findNotNullChildByClass(RestartIdentifier.class);
+  public RestartDeclareKey getDeclareKey() {
+    return findNotNullChildByClass(RestartDeclareKey.class);
   }
 
   @Override

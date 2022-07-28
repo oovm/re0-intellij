@@ -11,7 +11,7 @@ public interface RestartDeclareStatement extends PsiElement {
   RestartDeclareBlock getDeclareBlock();
 
   @NotNull
-  RestartIdentifier getIdentifier();
+  RestartDeclareKey getDeclareKey();
 
   @NotNull
   RestartKwDeclare getKwDeclare();
