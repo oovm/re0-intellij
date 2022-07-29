@@ -6,15 +6,31 @@ import com.intellij.openapi.util.TextRange
 import com.intellij.psi.*
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.util.elementType
+import com.intellij.psi.util.parents
 import restart.ide.file.RestartFileNode
 import restart.language.ast.DocumentNode
+import restart.language.ast.RestartASTBase
+import restart.language.psi.RestartTypes
 import restart.language.psi.RestartTypes.*
+import restart.language.psi_node.RestartDeclareKeyNode
+import restart.language.psi_node.RestartDeclareStatementNode
+import restart.language.psi_node.RestartKwDeclare
+import restart.language.psi_node.RestartKwDeclareNode
 import java.util.function.Consumer
 
 
 class DocumentationProvider : DocumentationProvider {
     override fun generateDoc(element: PsiElement?, originalElement: PsiElement?): String? {
-        return element?.let { DocumentationRenderer(it, originalElement).onDetail() }
+        when (originalElement.elementType) {
+            RestartTypes.INTEGER -> return null
+            RestartTypes.SYMBOL_XID -> return resolveSymbolContext(originalElement)?.onDetail()
+        }
+        return when (element) {
+            is RestartASTBase -> {
+                DocumentationRenderer(element).onHover()
+            }
+            else -> null
+        }
     }
 
     override fun findDocComment(file: PsiFile, range: TextRange): PsiDocCommentBase? {
@@ -45,8 +61,17 @@ class DocumentationProvider : DocumentationProvider {
     }
 
     // 悬浮
-    override fun generateHoverDoc(element: PsiElement, originalElement: PsiElement?): String {
-        return DocumentationRenderer(element, originalElement).onHover()
+    override fun generateHoverDoc(element: PsiElement, originalElement: PsiElement?): String? {
+        when (originalElement.elementType) {
+            RestartTypes.INTEGER -> return null
+            RestartTypes.SYMBOL_XID -> return resolveSymbolContext(originalElement)?.onHover()
+        }
+        return when (element) {
+            is RestartASTBase -> {
+                DocumentationRenderer(element).onHover()
+            }
+            else -> null
+        }
     }
 
     override fun getCustomDocumentationElement(editor: Editor, file: PsiFile, contextElement: PsiElement?, targetOffset: Int): PsiElement? {
@@ -64,4 +89,23 @@ class DocumentationProvider : DocumentationProvider {
             }
         }
     }
+}
+
+private fun resolveSymbolContext(element: PsiElement?): DocumentationRenderer? {
+    element ?: return null
+    for (node in element.parents(false)) {
+        when (node) {
+            is RestartDeclareKeyNode -> {
+                when (val parent = node.parent) {
+                    is RestartDeclareStatementNode -> {
+                        return DocumentationRenderer(parent)
+                    }
+                }
+            }
+            is RestartKwDeclareNode -> {
+                return DocumentationRenderer(node)
+            }
+        }
+    }
+    return null
 }

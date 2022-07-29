@@ -2,10 +2,12 @@ package restart.ide.highlight
 
 import com.intellij.lang.annotation.HighlightSeverity
 import com.intellij.openapi.editor.HighlighterColors
+import com.intellij.openapi.editor.colors.EditorColorsManager
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.options.OptionsBundle
 import com.intellij.openapi.options.colors.AttributesDescriptor
 import com.intellij.openapi.util.NlsContexts.AttributeDescriptor
+import com.intellij.ui.ColorUtil
 import restart.RestartBundle
 import java.util.function.Supplier
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors as Default
@@ -37,7 +39,7 @@ enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String
     SYM_EVENT(RestartBundle.messagePointer("color.token.symbol.event"), Default.INTERFACE_NAME),
     SYM_TALENT(RestartBundle.messagePointer("color.token.symbol.talent"), Default.CLASS_NAME),
     SYM_CONSTANT(RestartBundle.messagePointer("color.token.symbol.constant"), Default.CONSTANT),
-    SYM_FUNCTION(RestartBundle.messagePointer("color.token.symbol.function"), Default.CONSTANT),
+    SYM_FUNCTION(RestartBundle.messagePointer("color.token.symbol.function"), Default.FUNCTION_CALL),
 
     // 标点符号
     OPERATION_SIGN(OptionsBundle.messagePointer("options.language.defaults.operation"), Default.OPERATION_SIGN),
@@ -67,7 +69,12 @@ enum class RestartHighlightColor(humanName: Supplier<@AttributeDescriptor String
     ),
     ;
 
-    val textAttributesKey: TextAttributesKey = TextAttributesKey.createTextAttributesKey("voml.lang.$name", default)
+    val textAttributesKey: TextAttributesKey = TextAttributesKey.createTextAttributesKey("lang.re0.$name", default)
     val attributesDescriptor: AttributesDescriptor = AttributesDescriptor(humanName, textAttributesKey)
     val testSeverity: HighlightSeverity = HighlightSeverity(name, HighlightSeverity.INFORMATION.myVal)
+
+    override fun toString(): String {
+        val attr = EditorColorsManager.getInstance().globalScheme.getAttributes(this.textAttributesKey)
+        return ColorUtil.toHtmlColor(attr.foregroundColor)
+    }
 }

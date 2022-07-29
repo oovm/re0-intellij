@@ -4,7 +4,6 @@ package restart.language.symbol
 
 import com.intellij.model.Pointer
 import com.intellij.model.Symbol
-import com.intellij.psi.PsiElement
 import com.intellij.psi.util.elementType
 import restart.ide.doc.DocumentationRenderer
 import restart.ide.highlight.RestartHighlightColor
@@ -30,24 +29,26 @@ class KeywordData : Symbol, Pointer<KeywordData> {
 
 
     companion object {
-        fun builtinData(name: PsiElement): KeywordData? = when (name.elementType) {
-            RestartTypes.KW_ELSE_IF -> KeywordData(
-                "class",
-                """
+        private fun getAll(): MutableSet<KeywordData> {
+            return mutableSetOf(
+                KeywordData(
+                    "class",
+                    """
                 class A()
                 """.trimIndent()
+                ),
             )
-
-            RestartTypes.KW_IF -> KeywordData(
-                "trait",
-                """
-                trait A()
-                """.trimIndent()
-            )
-
-            else -> null
         }
+
+        val DATABASE: Map<String, KeywordData>
+            get() {
+                val db = mutableMapOf<String, KeywordData>()
+                for (data in getAll()) {
+                    db[data.name] = data
+                }
+                return db
+            }
+
+        fun builtinData(name: String): KeywordData? = DATABASE[name]
     }
-
-
 }

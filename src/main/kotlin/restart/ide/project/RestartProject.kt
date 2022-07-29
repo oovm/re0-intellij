@@ -9,9 +9,8 @@ class RestartProject {
         fun getStorage(project: Project?): MutableMap<String, IdentifierInfo> {
             project ?: return mutableMapOf();
             val store = IdentifierStorage(project);
-            ProjectFileIndex.getInstance(project).iterateContent {
-                store.processFile(it)
-            }
+            ProjectFileIndex.getInstance(project)
+                .iterateContent { store.processFile(it) }
             return store.dict
         }
     }

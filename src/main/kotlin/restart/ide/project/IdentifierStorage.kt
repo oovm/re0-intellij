@@ -28,7 +28,7 @@ class IdentifierStorage(val project: Project?) : ContentIterator {
     }
 
     private fun analyzeDeclare(node: RestartDeclareStatementNode) {
-        dict[node.name] = IdentifierInfo(node.nameIdentifier, RestartSymbolKind.Property)
+        dict[node.name] = IdentifierInfo(node.nameIdentifier, node.kind)
         node.aliases.forEach {
             dict[it.text] = IdentifierInfo(it, node.kind)
         }

@@ -18,14 +18,13 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     private var store: MutableMap<String, IdentifierInfo> = mutableMapOf()
 
     override fun visitDeclareStatement(o: RestartDeclareStatement) {
-        o as RestartDeclareStatementNode;
         highlight(o.declareKeyword, Color.KEYWORD)
         highlight(o.declareKey, o.kind.color)
         highlightMaybeEnum(o)
         highlightBraceKey(o.declareBlock, Color.MODIFIER)
     }
 
-    private fun highlightMaybeEnum(o: RestartDeclareStatementNode) {
+    private fun highlightMaybeEnum(o: RestartDeclareStatement) {
         o.aliases.forEach { highlight(it, Color.SYM_PROPERTY) }
         o.enumerationVariant.forEach { highlight(it, Color.SYM_VARIANT) }
     }
@@ -56,6 +55,10 @@ class NodeHighlighter : RestartVisitor(), HighlightVisitor {
     override fun visitIdentifier(o: RestartIdentifier) {
         o as RestartIdentifierNode;
         if (!o.shouldResolve()) {
+            return
+        }
+        if (o.isKeywordName()) {
+            highlight(o, Color.KEYWORD);
             return
         }
         val ref = store[o.text]

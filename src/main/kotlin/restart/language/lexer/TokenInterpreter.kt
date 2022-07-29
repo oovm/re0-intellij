@@ -31,8 +31,8 @@ private val OPERATORS = """(?x)
     | ÷=?
     | %=?
     # start with &
-    | &{1,2} | \b且\b
-    | [|]{1,2} | \b或\b
+    | &{1,2} | 且
+    | [|]{1,2} | 或者 |或
     | ⊻=? | ⊼=? | ⊽=?
     # start with !
     | != | ≠ | !
@@ -148,10 +148,10 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
 
     private fun codeKeywords(): Boolean {
         val keywords = """(?x)
-              \b(?<if>if|若|如果)\b
-            | \b(?<when>当)\b
-            | \b(?<else>else|否则)\b
-            | \b(?<elseif>ef|或者|又若)\b
+              (?<if>\bif\b|若|如果)
+            | (?<when>当)
+            | (?<else>否则)
+            | (?<elseif>ef|或者|又若)
         """.toRegex()
         val r = tryMatch(keywords) ?: return false
         when {
