@@ -21,7 +21,7 @@ class RestartIconProvider : IconProvider() {
     }
 
     companion object {
-        val FILE = IconLoader.getIcon("/icons/vk.svg", RestartIconProvider::class.java)
+        val FILE = IconLoader.getIcon("/icons/re0.svg", RestartIconProvider::class.java)
         val NAMESPACE = AllIcons.Nodes.Artifact
         val PROPERTY = AllIcons.Nodes.Property
         val MODIFIER = AllIcons.Nodes.MethodReference

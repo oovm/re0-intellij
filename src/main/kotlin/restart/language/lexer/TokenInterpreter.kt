@@ -14,8 +14,8 @@ private val OPERATORS = """(?x)
     | [,;$^]
     | @[*!?@]?
     # start with < >
-    | >= | ≥ | ⩾ | > | \b大于\b | \b大于等于\b
-    | <= | ≤ | ⩽ | < | \b小于\b | \b小于等于\b
+    | >= | ≥ | ⩾ | > | 大于 | 大于等于
+    | <= | ≤ | ⩽ | < | 小于 | 小于等于
     # start with :
     | ∷ | :: | :> | :
     # start with -
@@ -31,7 +31,7 @@ private val OPERATORS = """(?x)
     | ÷=?
     | %=?
     # start with &
-    | &{1,2} | 且
+    | &{1,2} | 且 | 是 | 非 | 否 | 真 | 假 
     | [|]{1,2} | 或者 |或
     | ⊻=? | ⊼=? | ⊽=?
     # start with !
@@ -256,11 +256,6 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
             "]" -> pushToken(RestartTypes.BRACKET_R, r)
             "{" -> pushToken(RestartTypes.BRACE_L, r)
             "}" -> pushToken(RestartTypes.BRACE_R, r)
-
-            "∅", "⤇", "|=>", "⤃", "!=>" -> {
-                pushToken(RestartTypes.OP_EMPTY, r)
-            }
-
             else -> pushToken(BAD_CHARACTER, r)
         }
         return true
