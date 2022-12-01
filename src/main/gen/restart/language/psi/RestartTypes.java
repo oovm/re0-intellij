@@ -40,7 +40,10 @@ public interface RestartTypes {
   IElementType INTEGER = new RestartTokenType("INTEGER");
   IElementType KW_ELSE = new RestartTokenType("KW_ELSE");
   IElementType KW_ELSE_IF = new RestartTokenType("KW_ELSE_IF");
+  IElementType KW_FALSE = new RestartTokenType("KW_FALSE");
   IElementType KW_IF = new RestartTokenType("KW_IF");
+  IElementType KW_TRUE = new RestartTokenType("KW_TRUE");
+  IElementType KW_WHEN = new RestartTokenType("when");
   IElementType NUMBER_SUFFIX = new RestartTokenType("NUMBER_SUFFIX");
   IElementType OP_ADD = new RestartTokenType("+");
   IElementType OP_ADD_ASSIGN = new RestartTokenType("+=");

@@ -75,10 +75,6 @@
 
         OP_IN = "in"
         OP_NOT_IN = "not_in"
-        OP_AND_THEN = "and_then"
-        OP_OR_ELSE = "or_else"
-        OP_FORALL = "forall"
-        OP_EXISTS = "exists"
 
         PARENTHESIS_L = '('
         PARENTHESIS_R = ')'
@@ -139,7 +135,7 @@ call_suffix       ::= <<parenthesis expression COMMA>>;
 private delimiter ::= COMMA|SEMICOLON
 // ---------------------------------------------------------------------------------------------------------------------
 private atoms  ::= number | string | boolean | identifier;
-boolean        ::= "true" | "false";
+boolean        ::= "true" | "false" | KW_TRUE | KW_FALSE;
 number         ::= (BYTE | INTEGER | DECIMAL) [NUMBER_SUFFIX] {
     mixin="restart.language.mixin.MixinNumber"
 }
@@ -159,7 +155,6 @@ private end_m1 ::= (
     COMMA|OP_EQ|DOT
 );
 // ---------------------------------------------------------------------------------------------------------------------
-private meta sequence      ::= <<item>> (<<sp>> <<item>>)* [<<sp>>];
 // parenthesis ( )
 private meta parenthesis   ::= PARENTHESIS_L [<<item>> (<<sp>> <<item>>)* [<<sp>>]] PARENTHESIS_R;
 // bracket [ ]

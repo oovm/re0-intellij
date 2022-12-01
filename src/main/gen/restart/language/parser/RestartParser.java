@@ -60,13 +60,15 @@ public class RestartParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "true" | "false"
+  // "true" | "false" | KW_TRUE | KW_FALSE
   public static boolean boolean_$(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "boolean_$")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, BOOLEAN, "<boolean $>");
     r = consumeToken(b, "true");
     if (!r) r = consumeToken(b, "false");
+    if (!r) r = consumeToken(b, KW_TRUE);
+    if (!r) r = consumeToken(b, KW_FALSE);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

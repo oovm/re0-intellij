@@ -32,7 +32,7 @@ private val OPERATORS = """(?x)
     | %=?
     # start with &
     | &{1,2} | 且 | 是 | 非 | 否 | 真 | 假 
-    | [|]{1,2} | 或者 |或
+    | [|]{1,2} 
     | ⊻=? | ⊼=? | ⊽=?
     # start with !
     | != | ≠ | !
@@ -44,6 +44,12 @@ private val OPERATORS = """(?x)
     # unicode
     | [∈∊∉⊑⋢⨳∀∁∂∃∄¬±√∛∜⊹⋗]
     | [⟦⟧⁅⁆⟬⟭]
+    # if elseif else
+    | 如果 | 否则
+    | 又若 | 若
+    | 又或 | 或者 | 或
+    # when
+    | 当
     #
     """.toRegex()
 private val STRINGS = """(?x)
@@ -71,7 +77,6 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
             if (codeString()) continue
             if (codeNumber()) continue
             if (codePunctuations()) continue
-            if (codeKeywords()) continue
             if (codeIdentifier()) continue
             break
         }
@@ -146,34 +151,6 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
         return true
     }
 
-    private fun codeKeywords(): Boolean {
-        val keywords = """(?x)
-              (?<if>\bif\b|若|如果)
-            | (?<when>当)
-            | (?<else>否则)
-            | (?<elseif>ef|或者|又若)
-        """.toRegex()
-        val r = tryMatch(keywords) ?: return false
-        when {
-            r.groups["if"] != null -> {
-                pushToken(RestartTypes.KW_IF, r)
-            }
-
-            r.groups["elseif"] != null -> {
-                pushToken(RestartTypes.KW_ELSE_IF, r)
-            }
-
-            r.groups["else"] != null -> {
-                pushToken(RestartTypes.KW_IF, r)
-            }
-
-            r.groups["when"] != null -> {
-                pushToken(RestartTypes.DECIMAL, r)
-            }
-        }
-        return true
-    }
-
     private fun codeIdentifier(): Boolean {
         val xid = """(?x)
             [\p{L}_][\p{L}_\d]*
@@ -195,6 +172,14 @@ class TokenInterpreter(val buffer: CharSequence, var startOffset: Int, val endOf
     private fun codePunctuations(): Boolean {
         val r = tryMatch(OPERATORS) ?: return false
         when (r.value) {
+            "真" -> pushToken(RestartTypes.KW_TRUE, r)
+            "假" -> pushToken(RestartTypes.KW_FALSE, r)
+
+            "若", "如果" -> pushToken(RestartTypes.KW_IF, r)
+            "当" -> pushToken(RestartTypes.KW_WHEN, r)
+            "否则" -> pushToken(RestartTypes.KW_ELSE, r)
+            "又若", "又或" -> pushToken(RestartTypes.KW_ELSE_IF, r)
+
             // DOT
             ":=", "≔" -> pushToken(RestartTypes.OP_BIND, r)
             "->", "⟶" -> pushToken(RestartTypes.OP_ARROW, r)

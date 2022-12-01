@@ -1,4 +1,5 @@
 @file:JvmName("RestartDeclareStatement")
+@file:JvmMultifileClass
 
 package restart.language.psi_node
 

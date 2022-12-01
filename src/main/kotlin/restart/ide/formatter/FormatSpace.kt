@@ -39,7 +39,12 @@ data class FormatSpace(val commonSettings: CommonCodeStyleSettings, val spacingB
         )
 
         private val newline_indent_after = TokenSet.create()
-        private val binary_operator = TokenSet.create(OP_EQ)
+        private val binary_operator = TokenSet.create(
+            OP_EQ, OP_NE,
+            OP_GT, OP_GEQ,
+            OP_LT, OP_LEQ,
+            OP_MUL, OP_DIV, OP_MOD,
+        )
 
         private fun createSpacingBuilder(commonSettings: CommonCodeStyleSettings): SpacingBuilder {
             val custom = SpacingBuilder(commonSettings)
